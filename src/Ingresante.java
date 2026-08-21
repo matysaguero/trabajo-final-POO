@@ -37,8 +37,14 @@ public abstract class Ingresante {
         return this.ciudad_origen;
     }
 
+ // Métodos abstractos para la interacción
+    public abstract String darPresentacion();
+    public abstract String responderInterrogatorio();
 
-    public void Dialogo(){
+    public Ingresante (){
+    }
+
+    public void Coartada(){
 
     }
 }
