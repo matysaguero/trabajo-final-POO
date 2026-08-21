@@ -1,20 +1,20 @@
 import java.util.ArrayList;
 
-public class Ingresante {
+public abstract class Ingresante {
     protected String nombre_declarado;
     protected int altura_visual;
     protected int peso_en_balanza;
     protected String clan;
     protected String ciudad_origen;
-    public ArrayList<Ingresante> ingresantes;    
+    protected ArrayList<Documento> documentos;    
 
-    public Ingresante(String nombre_declarado, int altura_visual, int peso_en_balanza, String clan, String ciudad_origen, ArrayList<Ingresante> ingresantes){
+    public Ingresante(String nombre_declarado, int altura_visual, int peso_en_balanza, String clan, String ciudad_origen, ArrayList<Documento> documentos){
         this.nombre_declarado = nombre_declarado;
         this.altura_visual = altura_visual;
         this.peso_en_balanza = peso_en_balanza;
         this.clan = clan;
         this.ciudad_origen = ciudad_origen;
-        this.ingresantes = ingresantes;
+        this.documentos = documentos;
     }
     
     public String getNombre_declarado(){
@@ -37,11 +37,9 @@ public class Ingresante {
         return this.ciudad_origen;
     }
 
+ // Métodos abstractos para la interacción
+    public abstract String darPresentacion();
+    public abstract String responderInterrogatorio();
 
-    public Ingresante (){
-    }
-
-    public void Coartada(){
-
-    }
 }
+
