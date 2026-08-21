@@ -41,10 +41,4 @@ public abstract class Ingresante {
     public abstract String darPresentacion();
     public abstract String responderInterrogatorio();
 
-    public Ingresante (){
-    }
-
-    public void Coartada(){
-
-    }
 }
