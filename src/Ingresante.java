@@ -1,55 +1,55 @@
 import java.util.ArrayList;
 
 public abstract class Ingresante {
-    protected String nombre_declarado;
-    protected int altura_visual;
-    protected int peso_en_balanza;
+    protected String nombreDeclarado;
+    protected int alturaVisual;
+    protected int pesoEnBalanza;
     protected String clan;
-    protected String ciudad_origen;
+    protected String ciudadOrigen;
     protected ArrayList<Documento> documentos;    
 
-    public Ingresante(String nombre_declarado, int altura_visual, int peso_en_balanza, String clan, String ciudad_origen, ArrayList<Documento> documentos){
-        if (nombre_declarado == null || nombre_declarado.isEmpty()){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos){
+        if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("el nombre declarado no puede ser nulo ni vacio");
         }
-        if (altura_visual <= 0){
+        if (alturaVisual <= 0){
             throw new IllegalArgumentException("la altura declarada no puede ser cero ni negativa");
         }
-        if (peso_en_balanza <= 0){
+        if (pesoEnBalanza <= 0){
             throw new IllegalArgumentException("el peso no puede ser cero ni negativo");
         }
         if (clan == null || clan.isEmpty()){
             throw new IllegalArgumentException("el clan no puede ser nulo ni vacio");
         }
-        if (ciudad_origen == null || ciudad_origen.isEmpty()){
-            throw new IllegalArgumentException("ciudad_origen no puede ser nulo ni vacio");
+        if (ciudadOrigen == null || ciudadOrigen.isEmpty()){
+            throw new IllegalArgumentException("ciudadOrigen no puede ser nulo ni vacio");
         }
-        this.nombre_declarado = nombre_declarado;
-        this.altura_visual = altura_visual;
-        this.peso_en_balanza = peso_en_balanza;
+        this.nombreDeclarado = nombreDeclarado;
+        this.alturaVisual = alturaVisual;
+        this.pesoEnBalanza = pesoEnBalanza;
         this.clan = clan;
-        this.ciudad_origen = ciudad_origen;
+        this.ciudadOrigen = ciudadOrigen;
         this.documentos = documentos;
     }
     
-    public String getNombre_declarado(){
-        return this.nombre_declarado;
+    public String getNombreDeclarado(){
+        return this.nombreDeclarado;
     }
 
-    public int getAltura_visual(){
-        return this.altura_visual;
+    public int getAlturaVisual(){
+        return this.alturaVisual;
     }
 
-    public int getPeso_en_balanza(){
-        return this.peso_en_balanza;
+    public int getPesoEnBalanza(){
+        return this.pesoEnBalanza;
     }
 
     public String getClan(){
         return this.clan;
     }
 
-    public String getCiudad_Origen(){
-        return this.ciudad_origen;
+    public String getCiudadOrigen(){
+        return this.ciudadOrigen;
     }
 
  // Métodos abstractos para la interacción

@@ -1,11 +1,11 @@
 public abstract class Documento {
-    protected int fecha_vencimiento;
+    protected String fechaVencimiento;
     protected String emisor;
     protected String foto;
-    protected int num_id;
+    protected int numId;
     
-    public Documento(int fecha_vencimiento, String emisor, String foto, int num_id){
-        if (fecha_vencimiento <= 0) {
+    public Documento(String fechaVencimiento, String emisor, String foto, int numId){
+        if (fechaVencimiento == null || fechaVencimiento.isBlank()) {
             throw new IllegalArgumentException("La fecha de vencimiento no puede ser negativa ni igual a cero");
         }
         if (emisor == null || emisor.isEmpty()){
@@ -14,7 +14,7 @@ public abstract class Documento {
         if (foto == null || foto.isEmpty()){
             throw new IllegalArgumentException("la foto no puede ser nula ni vacia");
         }  
-        if (num_id <= 0 ){
+        if (numId <= 0 ){
             throw new IllegalArgumentException("el numero de id no puede ser negativo ni igual a cero");
         }
     }

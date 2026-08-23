@@ -4,8 +4,8 @@ public class Pasaporte extends Documento {
     protected String pais;
     protected String ciudad;
 
-    public Pasaporte(int fecha_vencimiento, String emisor, String foto, int num_id, int peso, int altura, String pais, String ciudad, String fechaVencimiento){
-        super(fecha_vencimiento, emisor, foto, num_id);
+    public Pasaporte(String fechaVencimiento, String emisor, String foto, int numId, int peso, int altura, String pais, String ciudad){
+        super(fechaVencimiento, emisor, foto, numId);
         if (peso <= 0) {
             throw new IllegalArgumentException("Peso no valido");
         }
