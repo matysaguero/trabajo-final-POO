@@ -44,9 +44,9 @@ public class Pasaporte extends Documento {
 
     public void mostrarDetalle(){
         super.mostrarDetalle();
-        System.out.println("El peso declarado es: "+ peso + "kg.");
-        System.out.println("El altura es: "+ altura+ "cm");
-        System.out.println("El pais es: "+ pais);
-        System.out.println("El ciudad es: "+ ciudad);
+        System.out.println("Peso: "+ peso + "kg.");
+        System.out.println("Altura: "+ altura+ "cm");
+        System.out.println("Pais: "+ pais);
+        System.out.println("Ciudad: "+ ciudad);
     }
 }

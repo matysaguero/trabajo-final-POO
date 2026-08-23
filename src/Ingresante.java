@@ -52,6 +52,18 @@ public abstract class Ingresante {
         return this.ciudadOrigen;
     }
 
+    public void mostrarDetalle(){
+        System.out.println("Mi nombre es: "+ nombreDeclarado);
+        System.out.println("Mi altura es: "+ alturaVisual);
+        System.out.println("El peso muestra: "+ pesoEnBalanza );
+        System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
+        
+        for (int i = 0; i < documentos.size(); i++) {
+            Documento documento = documentos.get(i);
+            System.out.println(documento); 
+        }
+
+    }
     
  // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
 /*public abstract String darPresentacion();
