@@ -52,9 +52,10 @@ public abstract class Ingresante {
         return this.ciudadOrigen;
     }
 
- // Métodos abstractos para la interacción
-    public abstract String darPresentacion();
-    public abstract String responderInterrogatorio();
+    
+ // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
+/*public abstract String darPresentacion();
+public abstract String responderInterrogatorio();*/
 
 }
 

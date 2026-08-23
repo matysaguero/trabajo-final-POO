@@ -39,4 +39,11 @@ public abstract class Documento {
     public int getNumId(){
         return this.numId;
     }
+
+    public void mostrarDetalle(){
+        System.out.println("La fecha de vencimiento es:"+ fechaVencimiento);
+        System.out.println("El emisor es:"+ emisor);
+        System.out.println("La foto es: (agregar descripcion)"+ foto);
+        System.out.println("El numero de id es:"+ numId);
+    }
 }
