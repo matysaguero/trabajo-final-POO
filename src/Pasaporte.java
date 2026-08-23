@@ -18,6 +18,27 @@ public class Pasaporte extends Documento {
         if (ciudad == null || ciudad.isBlank()){
             throw new IllegalArgumentException("Ciudad no valida");
         }
+        
+        this.peso = peso;
+        this.altura = altura;
+        this.pais = pais;
+        this.ciudad = ciudad;
     }
 
+
+    public int getPeso(){
+        return this.peso;
+    }
+
+    public int getAltura(){
+        return this.altura;
+    }
+
+    public String getPais(){
+        return this.pais;
+    }
+
+    public String getCiudad(){
+        return this.ciudad;
+    }
 }

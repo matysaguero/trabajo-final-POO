@@ -17,5 +17,26 @@ public abstract class Documento {
         if (numId <= 0 ){
             throw new IllegalArgumentException("el numero de id no puede ser negativo ni igual a cero");
         }
+    
+    this.fechaVencimiento = fechaVencimiento;
+    this.emisor = emisor;
+    this.foto = foto;
+    this.numId = numId;
+    }
+
+    public String getFechaVencimiento(){
+    return this.fechaVencimiento;
+    } 
+
+    public String getEmisor(){
+        return this.emisor;
+    }
+
+    public String getFoto(){
+        return this.foto;
+    }
+
+    public int getNumId(){
+        return this.numId;
     }
 }
