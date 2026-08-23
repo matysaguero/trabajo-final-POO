@@ -54,13 +54,13 @@ public abstract class Ingresante {
 
     public void mostrarDetalle(){
         System.out.println("Mi nombre es: "+ nombreDeclarado);
-        System.out.println("Mi altura es: "+ alturaVisual);
-        System.out.println("El peso muestra: "+ pesoEnBalanza );
+        System.out.println("Mi altura es: "+ alturaVisual+"cm");
+        System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
         System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
         
         for (int i = 0; i < documentos.size(); i++) {
             Documento documento = documentos.get(i);
-            System.out.println(documento); 
+            documento.mostrarDetalle();
         }
 
     }
