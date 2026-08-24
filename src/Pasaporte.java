@@ -4,8 +4,8 @@ public class Pasaporte extends Documento {
     protected String pais;
     protected String ciudad;
 
-    public Pasaporte(int fecha_vencimiento, String emisor, String foto, int num_id, int peso, int altura, String pais, String ciudad, String fechaVencimiento){
-        super(fecha_vencimiento, emisor, foto, num_id);
+    public Pasaporte(String fechaVencimiento, String emisor, String foto, int numId, int peso, int altura, String pais, String ciudad, boolean trucho){
+        super(fechaVencimiento, emisor, foto, numId, trucho);
         if (peso <= 0) {
             throw new IllegalArgumentException("Peso no valido");
         }
@@ -18,6 +18,35 @@ public class Pasaporte extends Documento {
         if (ciudad == null || ciudad.isBlank()){
             throw new IllegalArgumentException("Ciudad no valida");
         }
+        
+        this.peso = peso;
+        this.altura = altura;
+        this.pais = pais;
+        this.ciudad = ciudad;
     }
 
+
+    public int getPeso(){
+        return this.peso;
+    }
+
+    public int getAltura(){
+        return this.altura;
+    }
+
+    public String getPais(){
+        return this.pais;
+    }
+
+    public String getCiudad(){
+        return this.ciudad;
+    }
+
+    public void mostrarDetalle(){
+        super.mostrarDetalle();
+        System.out.println("Peso: "+ peso + "kg.");
+        System.out.println("Altura: "+ altura+ "cm");
+        System.out.println("Pais: "+ pais);
+        System.out.println("Ciudad: "+ ciudad);
+    }
 }
