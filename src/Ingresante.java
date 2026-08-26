@@ -2,13 +2,15 @@ import java.util.ArrayList;
 
 public abstract class Ingresante {
     protected String nombreDeclarado;
+    private TipoIngresante tipo; 
     protected int alturaVisual;
     protected int pesoEnBalanza;
     protected String clan;
     protected String ciudadOrigen;
+    protected Double reputacion;
     protected ArrayList<Documento> documentos;    
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, Double reputacion , ArrayList<Documento> documentos){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("el nombre declarado no puede ser nulo ni vacio");
         }
@@ -30,6 +32,7 @@ public abstract class Ingresante {
         this.clan = clan;
         this.ciudadOrigen = ciudadOrigen;
         this.documentos = documentos;
+        
     }
     
     public String getNombreDeclarado(){
@@ -52,9 +55,14 @@ public abstract class Ingresante {
         return this.ciudadOrigen;
     }
 
+    public TipoIngresante getTipoIngresante(){
+        return this.tipo;
+    }
+
     public void mostrarDetalle(){
         System.out.println("Mi nombre es: "+ nombreDeclarado);
         System.out.println("Mi altura es: "+ alturaVisual+"cm");
+        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
         System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
         
@@ -64,9 +72,13 @@ public abstract class Ingresante {
         }
 
     }
+    //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
     
  // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
-/*public abstract String darPresentacion();
+
+//COMO APLICAR METODOS EN ESTE TIPO DE JUEGO?
+
+ /*public abstract String darPresentacion();
 public abstract String responderInterrogatorio();*/
 
 }
