@@ -1,4 +1,4 @@
 public class Jugador{
-    private int vidas;
+    private int reputacionJugador;
 
 }

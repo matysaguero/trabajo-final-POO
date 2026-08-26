@@ -6,9 +6,10 @@ public abstract class Ingresante {
     protected int pesoEnBalanza;
     protected String clan;
     protected String ciudadOrigen;
+    protected Double reputacion;
     protected ArrayList<Documento> documentos;    
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, Double reputacion , ArrayList<Documento> documentos){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("el nombre declarado no puede ser nulo ni vacio");
         }
@@ -24,12 +25,17 @@ public abstract class Ingresante {
         if (ciudadOrigen == null || ciudadOrigen.isEmpty()){
             throw new IllegalArgumentException("ciudadOrigen no puede ser nulo ni vacio");
         }
+        if (reputacion > 100) {
+            throw new IllegalArgumentException("reputacion no puede ser mayor a 100");
+        }
         this.nombreDeclarado = nombreDeclarado;
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
         this.clan = clan;
         this.ciudadOrigen = ciudadOrigen;
+        this.reputacion = reputacion;
         this.documentos = documentos;
+        
     }
     
     public String getNombreDeclarado(){
@@ -66,7 +72,10 @@ public abstract class Ingresante {
     }
     
  // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
-/*public abstract String darPresentacion();
+
+//COMO APLICAR METODOS EN ESTE TIPO DE JUEGO?
+
+ /*public abstract String darPresentacion();
 public abstract String responderInterrogatorio();*/
 
 }
