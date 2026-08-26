@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public abstract class Ingresante {
     protected String nombreDeclarado;
+    private TipoIngresante tipo; 
     protected int alturaVisual;
     protected int pesoEnBalanza;
     protected String clan;
@@ -25,15 +26,11 @@ public abstract class Ingresante {
         if (ciudadOrigen == null || ciudadOrigen.isEmpty()){
             throw new IllegalArgumentException("ciudadOrigen no puede ser nulo ni vacio");
         }
-        if (reputacion > 100) {
-            throw new IllegalArgumentException("reputacion no puede ser mayor a 100");
-        }
         this.nombreDeclarado = nombreDeclarado;
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
         this.clan = clan;
         this.ciudadOrigen = ciudadOrigen;
-        this.reputacion = reputacion;
         this.documentos = documentos;
         
     }
@@ -58,9 +55,14 @@ public abstract class Ingresante {
         return this.ciudadOrigen;
     }
 
+    public TipoIngresante getTipoIngresante(){
+        return this.tipo;
+    }
+
     public void mostrarDetalle(){
         System.out.println("Mi nombre es: "+ nombreDeclarado);
         System.out.println("Mi altura es: "+ alturaVisual+"cm");
+        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
         System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
         
@@ -70,6 +72,7 @@ public abstract class Ingresante {
         }
 
     }
+    //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
     
  // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
 
