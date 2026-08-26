@@ -1,4 +1,6 @@
 public class Jugador{
-    private int vidas;
+    private String nombre; 
+    private int reputacion;
+
 
 }
