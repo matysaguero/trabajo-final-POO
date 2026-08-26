@@ -14,7 +14,7 @@ public abstract class Documento {
         }
         if (foto == null || foto.isEmpty()){
             throw new IllegalArgumentException("la foto no puede ser nula ni vacia");
-        }  
+        }
         if (numId <= 0 ){
             throw new IllegalArgumentException("el numero de id no puede ser negativo ni igual a cero");
         }
