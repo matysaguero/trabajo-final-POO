@@ -6,7 +6,7 @@ public class Dia {
         System.out.println("Dia 1");
         
         Pasaporte pasaportePrueba = new Pasaporte("07/30", "AFA", "Mujer Rubia", 3, 60, 170, "Argentina", "Comodoro Rivadavia", false);
-        ArrayList<D6ocumento> documentos = new ArrayList<>();
+        ArrayList<Documento> documentos = new ArrayList<>();
         documentos.add(pasaportePrueba); // en teoria aca tengo una lista de Documentos (clase padre), con un solo elemento que es pasaportePrueba (clase hija Pasaporte).
 
         //clase Ciudadano a construir todavia - 23/8/26 00:47am.
