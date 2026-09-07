@@ -1,3 +1,5 @@
+package modelo;
+
 public abstract class Documento {
     protected String fechaVencimiento;
     protected String emisor;

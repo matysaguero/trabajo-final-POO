@@ -1,3 +1,5 @@
+package modelo;
+
 import java.util.ArrayList;
 
 public abstract class Ingresante {
@@ -10,7 +12,7 @@ public abstract class Ingresante {
     protected Double reputacion;
     protected ArrayList<Documento> documentos;    
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, Double reputacion , ArrayList<Documento> documentos){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("el nombre declarado no puede ser nulo ni vacio");
         }

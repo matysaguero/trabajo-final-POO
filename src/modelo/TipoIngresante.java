@@ -1,3 +1,5 @@
+package modelo;
+
 public enum TipoIngresante {
     CIUDADANO,
     TURISTA,
