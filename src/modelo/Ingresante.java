@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 
-public abstract class Ingresante {
+public class Ingresante {
     protected String nombreDeclarado;
     private TipoIngresante tipo; 
     protected int alturaVisual;
