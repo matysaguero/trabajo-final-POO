@@ -1,3 +1,7 @@
+package modelo;
+
+import modelo.Documento;
+
 public class Pasaporte extends Documento {
     protected int peso;
     protected int altura;
