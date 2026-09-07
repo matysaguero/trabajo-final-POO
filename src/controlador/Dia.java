@@ -13,5 +13,6 @@ public class Dia {
         ArrayList<Documento> documentos = new ArrayList<>();
         documentos.add(pasaportePrueba); // en teoria aca tengo una lista de Documentos (clase padre), con un solo elemento que es pasaportePrueba (clase hija Pasaporte).
 
+
     }
 }
