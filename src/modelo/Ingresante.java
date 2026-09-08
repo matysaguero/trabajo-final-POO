@@ -12,27 +12,31 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     protected Double reputacion;
     protected ArrayList<Documento> documentos;    
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, double reputacion, ArrayList<Documento> documentos){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
-            throw new IllegalArgumentException("el nombre declarado no puede ser nulo ni vacio");
+            throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
         if (alturaVisual <= 0){
-            throw new IllegalArgumentException("la altura declarada no puede ser cero ni negativa");
+            throw new IllegalArgumentException("La altura declarada no puede ser cero ni negativa.");
         }
         if (pesoEnBalanza <= 0){
-            throw new IllegalArgumentException("el peso no puede ser cero ni negativo");
+            throw new IllegalArgumentException("El peso no puede ser cero ni negativo.");
         }
         if (clan == null || clan.isEmpty()){
-            throw new IllegalArgumentException("el clan no puede ser nulo ni vacio");
+            throw new IllegalArgumentException("El clan no puede ser nulo ni vacio.");
         }
         if (ciudadOrigen == null || ciudadOrigen.isEmpty()){
-            throw new IllegalArgumentException("ciudadOrigen no puede ser nulo ni vacio");
+            throw new IllegalArgumentException("La Ciudad de Origen no puede ser nula ni vacia (Ingresar con formato CiudadOrigen).");
+        }
+        if (reputacion <= 0) {
+            throw new IllegalArgumentException("La reputacion debe ser mayor a 0 para poder manejar de manera mas sencilla la gestion de esta.");
         }
         this.nombreDeclarado = nombreDeclarado;
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
         this.clan = clan;
         this.ciudadOrigen = ciudadOrigen;
+        this.reputacion = reputacion;
         this.documentos = documentos;
         
     }

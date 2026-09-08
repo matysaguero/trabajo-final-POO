@@ -13,4 +13,10 @@ public class IngresanteRegular extends Ingresante{ // se necesita escribir esto 
     public void mostrarDetalle(){
         super.mostrarDetalle();
     }
+
+@Override 
+    public String responderInterrogatorio(){
+        return "Vengo de turismo.";
+    }
+
 }

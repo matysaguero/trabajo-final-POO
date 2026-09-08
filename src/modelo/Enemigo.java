@@ -6,8 +6,8 @@ public class Enemigo extends Ingresante{
 
     protected boolean portaBomba;
 
-    public Enemigo(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos, boolean portaBomba){
-    super(nombreDeclarado, alturaVisual, pesoEnBalanza, clan, ciudadOrigen, documentos);
+    public Enemigo(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, double reputacion, ArrayList<Documento> documentos, boolean portaBomba){
+    super(nombreDeclarado, alturaVisual, pesoEnBalanza, clan, ciudadOrigen, reputacion, documentos);
     this.portaBomba = portaBomba;
 }
 
