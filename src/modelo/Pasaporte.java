@@ -1,5 +1,4 @@
 package modelo;
-import modelo.Documento;
 
 public class Pasaporte extends Documento {
     private String ciudad;
@@ -46,10 +45,14 @@ public class Pasaporte extends Documento {
     }
 
     public void mostrarDetalle(){
-        super.mostrarDetalle();
+        
+        System.out.println("======== PASAPORTE ========:");
         System.out.println("Peso: "+ peso + "kg.");
         System.out.println("Altura: "+ altura+ "cm");
         System.out.println("Pais: "+ pais);
         System.out.println("Ciudad: "+ ciudad);
+        System.out.println("");
+        
+        super.mostrarDetalle();
     }
 }
