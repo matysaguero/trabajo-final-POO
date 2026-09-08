@@ -43,7 +43,7 @@ public class Pasaporte extends Documento {
     public String getCiudad(){
         return this.ciudad;
     }
-
+    
     public void mostrarDetalle(){
         
         System.out.println("======== PASAPORTE ========:");

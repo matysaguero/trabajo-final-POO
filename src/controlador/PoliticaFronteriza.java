@@ -1,33 +1,34 @@
 package controlador;
 
-import modelo.CiudadesPermitidas;
-import modelo.ClanesProhibidos;
+import modelo.TipoCiudad;
+import modelo.TipoClan;
 
 public abstract class PoliticaFronteriza{ // Principalmente seran las pautas que regularan la dificultad del juego
     private final String fecha;
-    private final CiudadesPermitidas ciudadesPermitidas;
-    private final ClanesProhibidos clanesProhibidos;
+    private final TipoCiudad ciudadPermitida;
+    private final TipoClan clanProhibido;
  
-    public PoliticaFronteriza(String fecha, CiudadesPermitidas ciudadesPermitidas, ClanesProhibidos clanesProhibidos){
+    public PoliticaFronteriza(String fecha, TipoCiudad ciudadPermitida, TipoClan clanProhibido){
         if (fecha == null || fecha.isBlank()) {
             throw new IllegalArgumentException("Ingrese una fecha valida.");
         }
         this.fecha = fecha;
-        this.ciudadesPermitidas = ciudadesPermitidas;
-        this.clanesProhibidos = clanesProhibidos; 
+        this.ciudadPermitida = ciudadPermitida;
+        this.clanProhibido = clanProhibido; 
     }
 
-public String getFecha(){
-    return this.fecha;
-}
+    public String getFecha(){
+        return this.fecha;
+    }
 
-public CiudadesPermitidas getCiudadesPermitidas(){
-    return this.ciudadesPermitidas;
-}
+    public TipoCiudad getCiudadPermitida(){
+        return this.ciudadPermitida;
+    }
 
-public ClanesProhibidos getClanesProhibidos(){
-    return this.clanesProhibidos;
-}
+    public TipoClan getClanProhibido(){
+        return this.clanProhibido;
+    }
 
+    public abstract void mostrarDetalle();
 
 }

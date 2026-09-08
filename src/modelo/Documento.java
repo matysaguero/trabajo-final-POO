@@ -30,8 +30,8 @@ public abstract class Documento {
     }
 
     public void mostrarDetalle(){
-        System.out.println("La fecha de vencimiento es:"+ fechaVencimiento);
-        System.out.println("El numero de id es:"+ numId);
+        System.out.println("La fecha de vencimiento es: "+ fechaVencimiento);
+        System.out.println("El numero de id es: "+ numId);
         System.out.println("");
 
     }

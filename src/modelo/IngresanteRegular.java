@@ -5,7 +5,7 @@ public class IngresanteRegular extends Ingresante{ // se necesita escribir esto 
     private int ramdom;
     
     public IngresanteRegular(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, int ramdom){
-        super(nombreDeclarado,  alturaVisual,  pesoEnBalanza,  clan,  ciudadOrigen, reputacion, documentos);
+        super(nombreDeclarado,  alturaVisual,  pesoEnBalanza,  clan,  ciudadOrigen, reputacion, documentos, tipo);
         this.ramdom = ramdom;
     }
     //Se cambia la clase ciudadano por IngresanteRegular y se agrega al constructore el atributo tipo 25/8/26 21:17pm. 

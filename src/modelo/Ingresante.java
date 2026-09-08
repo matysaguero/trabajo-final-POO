@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public abstract class Ingresante { // Añadi abstract porque al usar el metodo "public abstract String responderInterrogatorio()" y colocarlo en "Enemigo.java" es una condicion obligatoria aclarar que ahora la clase "ingreante.java" es abstracta. --07/09/26 , 20:48hs
     protected String nombreDeclarado;
-    private TipoIngresante tipo; 
     protected int alturaVisual;
     protected int pesoEnBalanza;
     protected String clan;
     protected String ciudadOrigen;
     protected Double reputacion;
     protected ArrayList<Documento> documentos;    
+    private TipoIngresante tipo; 
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, double reputacion, ArrayList<Documento> documentos){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
@@ -38,7 +38,7 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         this.ciudadOrigen = ciudadOrigen;
         this.reputacion = reputacion;
         this.documentos = documentos;
-        
+        this.tipo = tipo;
     }
     
     public String getNombreDeclarado(){
@@ -69,9 +69,9 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         System.out.println("======== DECLARACIÓN ========");
         System.out.println("Mi nombre es: "+ nombreDeclarado);
         System.out.println("Mi altura es: "+ alturaVisual+"cm");
-        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
-        System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
+        System.out.println("Soy de: "+ clan +", y vengo de: " + ciudadOrigen);
+        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("");
         System.out.println("");
 
