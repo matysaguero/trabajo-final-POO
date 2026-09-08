@@ -1,3 +1,4 @@
+package modelo;
 import java.util.ArrayList;
 
 public class IngresanteRegular extends Ingresante{ // se necesita escribir esto para poder crear un objeto de Ingresante.
