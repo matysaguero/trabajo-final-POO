@@ -24,4 +24,8 @@ public class Enemigo extends Ingresante{
     return "¡No tengo por que darte explicaciones, oficial!";
 }
 
+    @Override 
+    public String darPresentacion(){
+        return "Hola, quiero ingresar al planeta";
+    }
 }

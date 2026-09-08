@@ -76,6 +76,7 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     }
 
     public abstract String responderInterrogatorio();
+    public abstract String darPresentacion();
 
     //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
     
