@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Ingresante {
+public abstract class Ingresante { // Añadi abstract porque al usar el metodo "public abstract String responderInterrogatorio()" y colocarlo en "Enemigo.java" es una condicion obligatoria aclarar que ahora la clase "ingreante.java" es abstracta. --07/09/26 , 20:48hs
     protected String nombreDeclarado;
     private TipoIngresante tipo; 
     protected int alturaVisual;
@@ -74,6 +74,9 @@ public class Ingresante {
         }
 
     }
+
+    public abstract String responderInterrogatorio();
+
     //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
     
  // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
@@ -81,7 +84,7 @@ public class Ingresante {
 //COMO APLICAR METODOS EN ESTE TIPO DE JUEGO?
 
  /*public abstract String darPresentacion();
-public abstract String responderInterrogatorio();*/
+*/
 
 }
 

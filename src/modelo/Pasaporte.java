@@ -1,15 +1,14 @@
 package modelo;
-
 import modelo.Documento;
 
 public class Pasaporte extends Documento {
-    protected int peso;
-    protected int altura;
-    protected String pais;
-    protected String ciudad;
+    private String ciudad;
+    private int peso;
+    private int altura;
+    private String pais;
 
-    public Pasaporte(String fechaVencimiento, String emisor, String foto, int numId, int peso, int altura, String pais, String ciudad, boolean trucho){
-        super(fechaVencimiento, emisor, foto, numId, trucho);
+    public Pasaporte(String fechaVencimiento, int numId, int peso, int altura, String pais, String ciudad, boolean trucho){
+        super(fechaVencimiento,numId, trucho);
         if (peso <= 0) {
             throw new IllegalArgumentException("Peso no valido");
         }
