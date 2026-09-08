@@ -62,12 +62,15 @@ public class Ingresante {
     }
 
     public void mostrarDetalle(){
+        System.out.println("======== DECLARACIÓN ========");
         System.out.println("Mi nombre es: "+ nombreDeclarado);
         System.out.println("Mi altura es: "+ alturaVisual+"cm");
         System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
         System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
-        
+        System.out.println("");
+        System.out.println("");
+
         for (int i = 0; i < documentos.size(); i++) {
             Documento documento = documentos.get(i);
             documento.mostrarDetalle();

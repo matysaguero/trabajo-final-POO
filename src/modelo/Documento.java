@@ -52,5 +52,7 @@ public abstract class Documento {
         System.out.println("El emisor es:"+ emisor);
         System.out.println("La foto es: (agregar descripcion)"+ foto);
         System.out.println("El numero de id es:"+ numId);
+        System.out.println("");
+
     }
 }

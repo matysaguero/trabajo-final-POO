@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.ArrayList;
 import modelo.Documento;
+import modelo.Ingresante;
 import modelo.Pasaporte;
 
 public class Dia {
@@ -13,5 +14,8 @@ public class Dia {
         ArrayList<Documento> documentos = new ArrayList<>();
         documentos.add(pasaportePrueba); // en teoria aca tengo una lista de Documentos (clase padre), con un solo elemento que es pasaportePrueba (clase hija Pasaporte).
 
+        //clase Ciudadano a construir todavia - 23/8/26 00:47am.
+        Ingresante ingresantePrueba = new Ingresante("Andrea Gonzales", 170, 63, "LLA", "Comodoro Rivadavia", documentos);
+        ingresantePrueba.mostrarDetalle();
     }
 }
