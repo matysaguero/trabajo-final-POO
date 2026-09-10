@@ -6,13 +6,16 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     protected String nombreDeclarado;
     protected int alturaVisual;
     protected int pesoEnBalanza;
-    protected String clan;
-    protected String ciudadOrigen;
+    //protected String clan;
+    //protected String ciudadOrigen;
     protected Double reputacion;
     protected ArrayList<Documento> documentos;    
     private TipoIngresante tipo; 
+    private TipoRaza raza;
+    private TipoClan clan;
+    private TipoCiudad ciudad;
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
@@ -22,23 +25,20 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         if (pesoEnBalanza <= 0){
             throw new IllegalArgumentException("El peso no puede ser cero ni negativo.");
         }
-        if (clan == null || clan.isEmpty()){
-            throw new IllegalArgumentException("El clan no puede ser nulo ni vacio.");
-        }
-        if (ciudadOrigen == null || ciudadOrigen.isEmpty()){
-            throw new IllegalArgumentException("La Ciudad de Origen no puede ser nula ni vacia (Ingresar con formato CiudadOrigen).");
-        }
         if (reputacion <= 0) {
             throw new IllegalArgumentException("La reputacion debe ser mayor a 0 para poder manejar de manera mas sencilla la gestion de esta.");
         }
         this.nombreDeclarado = nombreDeclarado;
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
-        this.clan = clan;
-        this.ciudadOrigen = ciudadOrigen;
+        //his.clan = clan;
+        //this.ciudadOrigen = ciudadOrigen;
         this.reputacion = reputacion;
         this.documentos = documentos;
         this.tipo = tipo;
+        this.raza= raza;
+        this.clan = clan;
+        this.ciudad = ciudad;
     }
     
     public String getNombreDeclarado(){
@@ -53,16 +53,29 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return this.pesoEnBalanza;
     }
 
+    /*
     public String getClan(){
         return this.clan;
     }
 
     public String getCiudadOrigen(){
         return this.ciudadOrigen;
-    }
+    }*/
 
     public TipoIngresante getTipoIngresante(){
         return this.tipo;
+    }
+
+    public TipoRaza getRaza(){
+        return this.raza;
+    }
+
+    public TipoClan getClan(){
+        return this.clan;
+    }
+
+    public TipoCiudad getCiudadOrigen(){
+        return this.ciudad;
     }
 
     public void mostrarDetalle(){
@@ -70,7 +83,9 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         System.out.println("Mi nombre es: "+ nombreDeclarado);
         System.out.println("Mi altura es: "+ alturaVisual+"cm");
         System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
-        System.out.println("Soy de: "+ clan +", y vengo de: " + ciudadOrigen);
+        System.out.println("Soy de: "+ clan +", y vengo de: " + ciudad);
+        System.out.println("Tipo de ingresante: "+ tipo);
+        System.out.println("Mi raza es: "+ raza);
         System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("");
         System.out.println("");
