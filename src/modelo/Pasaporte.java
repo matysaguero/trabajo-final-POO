@@ -44,9 +44,10 @@ public class Pasaporte extends Documento {
         return this.ciudad;
     }
     
+@Override
     public void mostrarDetalle(){
         
-        System.out.println("======== PASAPORTE ========:");
+        System.out.println("======== PASAPORTE ========");
         System.out.println("Peso: "+ peso + "kg.");
         System.out.println("Altura: "+ altura+ "cm");
         System.out.println("Pais: "+ pais);

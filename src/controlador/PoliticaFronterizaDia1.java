@@ -23,7 +23,7 @@ public class PoliticaFronterizaDia1 extends PoliticaFronteriza{
 
 @Override 
     public void mostrarDetalle(){
-        System.out.println("======== REGLAS DEL DIA 1========");
+        System.out.println("======== REGLAS DEL DIA 1 ========");
         System.out.println("SOLO PASAN: " + raza+"S!!!");
         System.out.println("SIN EXCEPCION");
         System.out.println("AL QUE NO SEA HUMANO SE LE PROHIBE LA ENTRADA!");

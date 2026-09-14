@@ -86,7 +86,6 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         System.out.println("Soy de: "+ clan +", y vengo de: " + ciudad);
         System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("Mi raza es: "+ raza);
-        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("");
         System.out.println("");
 

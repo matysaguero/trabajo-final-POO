@@ -3,6 +3,7 @@ package controlador;
 public class Jugador{
     private String nombre;
     private int reputacionJugador;
+    
 
     public Jugador (String nombre, int reputacionInicial){
         if (nombre == null || nombre.isBlank()) {
