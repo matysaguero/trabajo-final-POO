@@ -4,37 +4,41 @@ import java.util.ArrayList;
 
 public abstract class Ingresante { // Añadi abstract porque al usar el metodo "public abstract String responderInterrogatorio()" y colocarlo en "Enemigo.java" es una condicion obligatoria aclarar que ahora la clase "ingreante.java" es abstracta. --07/09/26 , 20:48hs
     protected String nombreDeclarado;
-    private TipoIngresante tipo; 
     protected int alturaVisual;
     protected int pesoEnBalanza;
-    protected String clan;
-    protected String ciudadOrigen;
+    //protected String clan;
+    //protected String ciudadOrigen;
     protected Double reputacion;
     protected ArrayList<Documento> documentos;    
+    private TipoIngresante tipo; 
+    private TipoRaza raza;
+    private TipoClan clan;
+    private TipoCiudad ciudad;
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, String clan, String ciudadOrigen, ArrayList<Documento> documentos){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
-            throw new IllegalArgumentException("el nombre declarado no puede ser nulo ni vacio");
+            throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
         if (alturaVisual <= 0){
-            throw new IllegalArgumentException("la altura declarada no puede ser cero ni negativa");
+            throw new IllegalArgumentException("La altura declarada no puede ser cero ni negativa.");
         }
         if (pesoEnBalanza <= 0){
-            throw new IllegalArgumentException("el peso no puede ser cero ni negativo");
+            throw new IllegalArgumentException("El peso no puede ser cero ni negativo.");
         }
-        if (clan == null || clan.isEmpty()){
-            throw new IllegalArgumentException("el clan no puede ser nulo ni vacio");
-        }
-        if (ciudadOrigen == null || ciudadOrigen.isEmpty()){
-            throw new IllegalArgumentException("ciudadOrigen no puede ser nulo ni vacio");
+        if (reputacion <= 0) {
+            throw new IllegalArgumentException("La reputacion debe ser mayor a 0 para poder manejar de manera mas sencilla la gestion de esta.");
         }
         this.nombreDeclarado = nombreDeclarado;
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
-        this.clan = clan;
-        this.ciudadOrigen = ciudadOrigen;
+        //his.clan = clan;
+        //this.ciudadOrigen = ciudadOrigen;
+        this.reputacion = reputacion;
         this.documentos = documentos;
-        
+        this.tipo = tipo;
+        this.raza= raza;
+        this.clan = clan;
+        this.ciudad = ciudad;
     }
     
     public String getNombreDeclarado(){
@@ -49,25 +53,40 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return this.pesoEnBalanza;
     }
 
+    /*
     public String getClan(){
         return this.clan;
     }
 
     public String getCiudadOrigen(){
         return this.ciudadOrigen;
-    }
+    }*/
 
     public TipoIngresante getTipoIngresante(){
         return this.tipo;
+    }
+
+    public TipoRaza getRaza(){
+        return this.raza;
+    }
+
+    public TipoClan getClan(){
+        return this.clan;
+    }
+
+    public TipoCiudad getCiudadOrigen(){
+        return this.ciudad;
     }
 
     public void mostrarDetalle(){
         System.out.println("======== DECLARACIÓN ========");
         System.out.println("Mi nombre es: "+ nombreDeclarado);
         System.out.println("Mi altura es: "+ alturaVisual+"cm");
-        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
-        System.out.println("Soy de: "+ clan +", y vengo de:" + ciudadOrigen);
+        System.out.println("Soy de: "+ clan +", y vengo de: " + ciudad);
+        System.out.println("Tipo de ingresante: "+ tipo);
+        System.out.println("Mi raza es: "+ raza);
+        System.out.println("Tipo de ingresante: "+ tipo);
         System.out.println("");
         System.out.println("");
 

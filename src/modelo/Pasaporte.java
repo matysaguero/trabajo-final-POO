@@ -7,7 +7,7 @@ public class Pasaporte extends Documento {
     private String pais;
 
     public Pasaporte(String fechaVencimiento, int numId, int peso, int altura, String pais, String ciudad, boolean trucho){
-        super(fechaVencimiento,numId, trucho);
+        super(fechaVencimiento, numId, trucho);
         if (peso <= 0) {
             throw new IllegalArgumentException("Peso no valido");
         }
@@ -43,7 +43,7 @@ public class Pasaporte extends Documento {
     public String getCiudad(){
         return this.ciudad;
     }
-
+    
     public void mostrarDetalle(){
         
         System.out.println("======== PASAPORTE ========:");
