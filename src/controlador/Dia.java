@@ -25,7 +25,6 @@ public class Dia {
     
         PoliticaFronterizaDia1 pruebaPoliticaDia1 = new PoliticaFronterizaDia1("07/09/2026", TipoCiudad.COMODORO_RIVADAVIA, TipoClan.JUSTICIALISTA, TipoRaza.HUMANO);
         pruebaPoliticaDia1.mostrarDetalle();
-
         
     }
 }

@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Ingresante;
 import modelo.TipoCiudad;
 import modelo.TipoClan;
 import modelo.TipoRaza;
@@ -18,8 +19,12 @@ public class PoliticaFronterizaDia1 extends PoliticaFronteriza{
 
     public TipoRaza getRaza(){
         return this.raza;
+    }   
+    @Override
+    public boolean esValido(Ingresante ingresante) {
+        // En el Día 1, solo es válido si la raza coincide con la permitida.
+        return ingresante.getRaza() == this.getRaza(); 
     }
-
 
 @Override 
     public void mostrarDetalle(){

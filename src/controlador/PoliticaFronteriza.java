@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Ingresante;
 import modelo.TipoCiudad;
 import modelo.TipoClan;
 
@@ -31,4 +32,6 @@ public abstract class PoliticaFronteriza{ // Principalmente seran las pautas que
 
     public abstract void mostrarDetalle();
 
+    // NUEVA LÍNEA: Declarar el método abstracto
+    public abstract boolean esValido(Ingresante ingresante); 
 }
