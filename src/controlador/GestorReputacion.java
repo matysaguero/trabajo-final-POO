@@ -24,7 +24,8 @@ public class GestorReputacion {
         return false;
         }
     }
-
-
+    public Jugador getJugador() {
+        return this.jugador;
+    }
 
 }
