@@ -1,91 +1,87 @@
 package controlador;
-import vista.Escenario;
-import modelo.Ingresante;
-import modelo.IngresanteRegular;
-import modelo.TipoCiudad;
-import modelo.TipoClan;
-import modelo.TipoIngresante;
-import modelo.TipoRaza;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import vista.Escenario;
+import modelo.*;
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
-// 1. Implementar la interfaz ActionListener
-public class ControladorJuego implements ActionListener {
+// Ya no necesita "implements ActionListener"[cite: 30]
+public class ControladorJuego {
     
     private Escenario vista;
     private GestorReputacion gestor;
     private PoliticaFronteriza politicaActual;
-    private Ingresante ingresanteActual; // El ingresante que está en la puerta
+    private Ingresante ingresanteActual; 
 
-    // 2. El constructor recibe la vista y los modelos para conectarlos[cite: 26]
     public ControladorJuego(Escenario vista, GestorReputacion gestor, PoliticaFronteriza politicaActual) {
         this.vista = vista;
         this.gestor = gestor;
         this.politicaActual = politicaActual;
 
-        // 3. Suscribir el controlador a los botones de la vista[cite: 25, 29]
-        // La vista expone los botones mediante getters solo para esto[cite: 26, 29].
-        this.vista.getBtnAceptar().addActionListener(this);
-        this.vista.getBtnRechazar().addActionListener(this);
+        // Delegación de eventos usando Lambdas: Un receptor por evento, escrito donde se registra[cite: 30].
+        this.vista.getBtnRequisitos().addActionListener(evento -> this.leerRequisitos());
+        this.vista.getBtnRevisar().addActionListener(evento -> this.revisarPapeles());
+        this.vista.getBtnDecidir().addActionListener(evento -> this.tomarDecision());
     }
 
-    // Método para cargar al siguiente ingresante en el juego
     public void setIngresanteActual(Ingresante ingresante) {
         this.ingresanteActual = ingresante;
-        // Aquí le diríamos a la vista que actualice el panel de texto
-        // this.vista.actualizarDatosIngresante(ingresante.getNombreDeclarado() + "..."); 
+        System.out.println("Un nuevo ingresante se acerca a la ventanilla...");
     }
 
-    // 4. El método que reacciona a los clics
-@Override
-    public void actionPerformed(ActionEvent evento) {
+    // --- MÉTODOS PRIVADOS PARA CADA BOTÓN (Como sugiere la Clase 10)[cite: 30] ---
+
+    private void leerRequisitos() {
+        System.out.println("\n--- LEYENDO REQUISITOS DEL DÍA ---");
+        politicaActual.mostrarDetalle();
+    }
+
+    private void revisarPapeles() {
+        if (ingresanteActual != null) {
+            System.out.println("\n--- REVISANDO PAPELES ---");
+            ingresanteActual.mostrarDetalle();
+        }
+    }
+
+    private void tomarDecision() {
+        if (ingresanteActual == null) return;
+
+        Object[] opciones = {"Aceptar (Sello Verde)", "Rechazar (Sello Rojo)"};
+        int eleccion = JOptionPane.showOptionDialog(vista,
+                "¿Cuál es el veredicto para " + ingresanteActual.getNombreDeclarado() + "?",
+                "Decisión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, opciones, opciones[0]);
+
+        if (eleccion == JOptionPane.CLOSED_OPTION) return; 
         
-        // Si no hay nadie en la puerta, no hacemos nada
-        if (ingresanteActual == null) {
-            System.out.println("No hay ingresantes en este momento.");
-            return;
-        }
-
-        boolean decisionJugador = false;
-
-        if (evento.getSource() == this.vista.getBtnAceptar()) {
-            decisionJugador = true;
-            System.out.println("Jugador decidió: ACEPTAR");
-        } else if (evento.getSource() == this.vista.getBtnRechazar()) {
-            decisionJugador = false;
-            System.out.println("Jugador decidió: RECHAZAR");
-        }
-
-        // --- LÓGICA DEL JUEGO ---
+        boolean decisionJugador = (eleccion == JOptionPane.YES_OPTION);
+        
+        // El controlador modifica el modelo[cite: 36]
         boolean esValido = politicaActual.esValido(ingresanteActual); 
         boolean acierto = gestor.evaluarDecision(decisionJugador, esValido);
 
         if (acierto) {
-            System.out.println("¡Decisión correcta! Reputación actual: " + gestor.getJugador().getReputacion());
+            JOptionPane.showMessageDialog(vista, "¡Decisión correcta! Reputación: " + gestor.getJugador().getReputacion());
         } else {
-            System.out.println("¡Penalización! Reputación actual: " + gestor.getJugador().getReputacion());
+            JOptionPane.showMessageDialog(vista, "¡Penalización! Reputación: " + gestor.getJugador().getReputacion());
         }
+        
+        this.ingresanteActual = null; 
     }
-public static void main(String[] args) {
-    // 1. Crear los Modelos
-    Jugador jugador = new Jugador("Inspector", 3);
-    GestorReputacion gestor = new GestorReputacion(jugador);
-    PoliticaFronterizaDia1 politicaDia1 = new PoliticaFronterizaDia1("07/09/2026", TipoCiudad.COMODORO_RIVADAVIA, TipoClan.JUSTICIALISTA, TipoRaza.HUMANO);
-        
-    // 2. Crear la Vista
-    Escenario vista = new Escenario();
-        
-    // 3. Crear el Controlador (uniendo vista y modelos)
-    ControladorJuego controlador = new ControladorJuego(vista, gestor, politicaDia1);
-        
-    // 4. Cargar un ingresante de prueba
-    Ingresante ingresantePrueba = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA, 9);
-    controlador.setIngresanteActual(ingresantePrueba);
 
-    // 5. Mostrar la ventana
-    vista.setVisible(true);
-}
-}
+    // MAIN: El único lugar donde aparecen los new de las tres clases[cite: 34]
+    public static void main(String[] args) {
+        Jugador jugador = new Jugador("Inspector", 3);
+        GestorReputacion gestor = new GestorReputacion(jugador);
+        PoliticaFronterizaDia1 politica = new PoliticaFronterizaDia1("07/09/2026", TipoCiudad.COMODORO_RIVADAVIA, TipoClan.JUSTICIALISTA, TipoRaza.HUMANO);
+            
+        Escenario vista = new Escenario();
+        ControladorJuego controlador = new ControladorJuego(vista, gestor, politica);
+            
+        IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA, 9);
+        controlador.setIngresanteActual(ingresante);
 
+        // Se muestra la ventana tras conectar todo[cite: 34]
+        vista.setVisible(true);
+    }
+}

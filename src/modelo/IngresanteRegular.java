@@ -2,11 +2,11 @@ package modelo;
 import java.util.ArrayList;
 
 public class IngresanteRegular extends Ingresante{
-    private int ramdom;
+    private int random;
     
     public IngresanteRegular(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, int ramdom){
         super(nombreDeclarado, alturaVisual, pesoEnBalanza, reputacion, documentos, tipo, raza, clan, ciudad);
-        this.ramdom = ramdom;
+        this.random = random;
     }
 
     public void mostrarDetalle(){

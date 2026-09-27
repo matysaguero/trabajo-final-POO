@@ -2,72 +2,74 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Escenario extends JFrame {
     
-    // 1. Declaración de los componentes visuales
-    private JLabel lblInfoIngresante;
-    private JButton btnAceptar;
-    private JButton btnRechazar;
+    // Los botones (fuentes de eventos)
+    private JButton btnRequisitos;
+    private JButton btnWanted;
+    private JButton btnRevisar;
+    private JButton btnVerificar;
+    private JButton btnDecidir;
 
     public Escenario() {
-        // 2. Configuración básica de la ventana principal
-        this.setTitle("Frontier - Control de Frontera");
-        this.setSize(600, 400); // Ancho y alto inicial
+        super("Frontier"); // Llama al constructor de JFrame[cite: 34]
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout(10, 10)); // BorderLayout con márgenes
-        this.setLocationRelativeTo(null); // Centra la ventana en la pantalla
-
-        // 3. Crear el panel superior/central para el Ingresante
-        JPanel panelIngresante = new JPanel();
-        panelIngresante.setBorder(BorderFactory.createTitledBorder("Información del Ingresante"));
-        panelIngresante.setLayout(new BorderLayout()); // Para que el texto ocupe todo el espacio
         
-        // Usamos JLabel. En el futuro, si son muchos datos, podrías cambiarlo a un JTextArea
-        lblInfoIngresante = new JLabel("Esperando al siguiente ingresante...", SwingConstants.CENTER);
-        panelIngresante.add(lblInfoIngresante, BorderLayout.CENTER);
-
-        // 4. Crear el panel inferior para los botones
-        JPanel panelBotones = new JPanel();
-        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Alineados al centro con separación
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(screenSize.width, screenSize.height);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        this.setUndecorated(true);
         
-        btnAceptar = new JButton("Aceptar (Sello Verde)");
-        btnRechazar = new JButton("Rechazar (Sello Rojo)");
+        FondoPanel panelPrincipal = new FondoPanel("assets/imagenes/Panel del juego del controlador de frontera.png"); 
+        panelPrincipal.setLayout(null);
         
-        // Colores opcionales para guiar al jugador
-        btnAceptar.setBackground(new Color(144, 238, 144)); // Verde claro
-        btnRechazar.setBackground(new Color(255, 182, 193)); // Rojo claro
+        // Creamos los botones (simplificados para el ejemplo)
+        btnRequisitos = crearBotonInvisible();
+        btnRequisitos.setBounds((int)(screenSize.width * 0.67), (int)(screenSize.height * 0.11), (int)(screenSize.width * 0.25), (int)(screenSize.height * 0.26));
+        panelPrincipal.add(btnRequisitos);
+        
+        btnRevisar = crearBotonInvisible();
+        btnRevisar.setBounds((int)(screenSize.width * 0.26), (int)(screenSize.height * 0.86), (int)(screenSize.width * 0.11), (int)(screenSize.height * 0.05));
+        panelPrincipal.add(btnRevisar);
 
-        panelBotones.add(btnAceptar);
-        panelBotones.add(btnRechazar);
-
-        // 5. Agregar los paneles a la ventana principal
-        this.add(panelIngresante, BorderLayout.CENTER);
-        this.add(panelBotones, BorderLayout.SOUTH);
+        btnDecidir = crearBotonInvisible();
+        btnDecidir.setBounds((int)(screenSize.width * 0.60), (int)(screenSize.height * 0.86), (int)(screenSize.width * 0.11), (int)(screenSize.height * 0.05));
+        panelPrincipal.add(btnDecidir);
+        
+        this.setContentPane(panelPrincipal);
     }
-
-    // =================================================================
-    // GETTERS PARA EL CONTROLADOR (Muy importante para respetar el MVC)
-    // =================================================================
     
-    public JButton getBtnAceptar() {
-        return btnAceptar;
+    private JButton crearBotonInvisible() {
+        JButton boton = new JButton();
+        boton.setOpaque(false); 
+        boton.setContentAreaFilled(false); 
+        boton.setBorderPainted(false);
+        boton.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+        return boton;
     }
 
-    public JButton getBtnRechazar() {
-        return btnRechazar;
-    }
+    // --- GETTERS: La vista expone lo que el controlador necesita para registrarse[cite: 34] ---
+    public JButton getBtnRequisitos() { return btnRequisitos; }
+    public JButton getBtnRevisar() { return btnRevisar; }
+    public JButton getBtnDecidir() { return btnDecidir; }
 
-    // =================================================================
-    // MÉTODOS DE ACTUALIZACIÓN DE INTERFAZ
-    // =================================================================
-    
-    /**
-     * El controlador llamará a este método pasándole los datos del 
-     * modelo Ingresante para que se muestren en la pantalla.
-     */
-    public void actualizarDatosIngresante(String datos) {
-        // En un JLabel, usar HTML permite los saltos de línea (<br>)
-        lblInfoIngresante.setText("<html>" + datos.replace("\n", "<br>") + "</html>");
+    // Clase interna para el fondo
+    class FondoPanel extends JPanel {
+        private Image imagenFondo;
+        public FondoPanel(String ruta) {
+            File archivoFondo = new File(ruta);
+            if (archivoFondo.exists()) {
+                imagenFondo = new ImageIcon(archivoFondo.getAbsolutePath()).getImage();
+            }
+        }
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g); 
+            if(imagenFondo != null) {
+                g.drawImage(imagenFondo, 0, 0, this.getWidth(), this.getHeight(), this); 
+            }
+        }
     }
 }
