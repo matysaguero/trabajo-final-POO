@@ -8,10 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-// Ya no necesita "implements ActionListener"
-=======
->>>>>>> 96af83830fbc0917965c3fbedeb8c6c521b5936c
 public class ControladorJuego {
     
     private final MenuPrincipal menu;
@@ -30,12 +26,6 @@ public class ControladorJuego {
         this.gestor = gestor;
         this.politicaActual = politicaActual;
 
-<<<<<<< HEAD
-        // Delegación de eventos usando Lambdas: Un receptor por evento, escrito donde se registra
-        this.vista.getBtnRequisitos().addActionListener(evento -> this.leerRequisitos());
-        this.vista.getBtnRevisar().addActionListener(evento -> this.revisarPapeles());
-        this.vista.getBtnDecidir().addActionListener(evento -> this.tomarDecision());
-=======
         // Lambdas
         this.menu.getBtnJugar().addActionListener(evento -> this.iniciarJuego());
         this.menu.getBtnTutorial().addActionListener(evento -> System.out.println("El tutorial se implementará pronto."));
@@ -44,7 +34,6 @@ public class ControladorJuego {
         
         this.vistaDecision.getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.vistaDecision.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
->>>>>>> 96af83830fbc0917965c3fbedeb8c6c521b5936c
     }
 
     private void iniciarJuego() {
@@ -63,11 +52,7 @@ public class ControladorJuego {
         System.out.println("Un nuevo ingresante se acerca a la ventanilla...");
     }
 
-<<<<<<< HEAD
-    // --- MÉTODOS PRIVADOS PARA CADA BOTÓN 
-=======
     // --- MÉTODOS PRIVADOS QUE ATIENDEN A LAS LAMBDAS ---
->>>>>>> 96af83830fbc0917965c3fbedeb8c6c521b5936c
 
     private void abrirVentanaDecision() {
         if (this.ingresanteActual == null) {
@@ -82,15 +67,8 @@ public class ControladorJuego {
         // 1. Para ocultar la ventanita
         this.vistaDecision.ocultar();
         
-<<<<<<< HEAD
-        boolean decisionJugador = (eleccion == JOptionPane.YES_OPTION);
-        
-        // El controlador modifica el modelo
-        boolean esValido = politicaActual.esValido(ingresanteActual); 
-=======
         // 2. Evaluamos la lógica del negocio
         boolean esValido = politicaActual.esValido(this.ingresanteActual); 
->>>>>>> 96af83830fbc0917965c3fbedeb8c6c521b5936c
         boolean acierto = gestor.evaluarDecision(decisionJugador, esValido);
 
         // 3. Mostramos feedback que seria temporal de momento, pero que sirve para ver que la lógica funciona. En el juego final esperaremos esto sería reemplazado por animaciones, sonidos, etc.
@@ -104,11 +82,7 @@ public class ControladorJuego {
         this.ingresanteActual = null; 
     }
 
-<<<<<<< HEAD
     // MAIN: El único lugar donde aparecen los new de las tres clases
-=======
-    // El único lugar donde aparecen los "new" de las tres capas
->>>>>>> 96af83830fbc0917965c3fbedeb8c6c521b5936c
     public static void main(String[] args) {
         // Ejecución en el hilo de Swing como recomienda la cátedra
         SwingUtilities.invokeLater(() -> {
@@ -128,13 +102,8 @@ public class ControladorJuego {
             IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA, 9);
             controlador.setIngresanteActual(ingresante);
 
-<<<<<<< HEAD
         // Se muestra la ventana tras conectar todo
-        vista.setVisible(true);
-=======
-            // 4. Mostrar el punto de entrada inicial
-            menu.mostrar();
-        });
->>>>>>> 96af83830fbc0917965c3fbedeb8c6c521b5936c
-    }
+        menu.mostrar();
+    });
+}
 }

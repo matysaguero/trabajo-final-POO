@@ -17,5 +17,9 @@ public class IngresanteRegular extends Ingresante{
     public String responderInterrogatorio(){
         return "Vengo de turismo.";
     }
+@Override 
+    public String darPresentacion(){
+        return "Hola, soy un ciudadano regular.";
+    }
 
 }

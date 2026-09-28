@@ -9,7 +9,7 @@ import modelo.TipoCiudad;
 import modelo.TipoClan;
 import modelo.TipoIngresante;
 import modelo.TipoRaza;
-import java.util.Scanner;
+
 
 public class Dia {
     public static void main(String[] args) {
