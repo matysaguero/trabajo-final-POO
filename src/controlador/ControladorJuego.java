@@ -5,7 +5,7 @@ import modelo.*;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
-// Ya no necesita "implements ActionListener"[cite: 30]
+// Ya no necesita "implements ActionListener"
 public class ControladorJuego {
     
     private Escenario vista;
@@ -18,7 +18,7 @@ public class ControladorJuego {
         this.gestor = gestor;
         this.politicaActual = politicaActual;
 
-        // Delegación de eventos usando Lambdas: Un receptor por evento, escrito donde se registra[cite: 30].
+        // Delegación de eventos usando Lambdas: Un receptor por evento, escrito donde se registra
         this.vista.getBtnRequisitos().addActionListener(evento -> this.leerRequisitos());
         this.vista.getBtnRevisar().addActionListener(evento -> this.revisarPapeles());
         this.vista.getBtnDecidir().addActionListener(evento -> this.tomarDecision());
@@ -29,7 +29,7 @@ public class ControladorJuego {
         System.out.println("Un nuevo ingresante se acerca a la ventanilla...");
     }
 
-    // --- MÉTODOS PRIVADOS PARA CADA BOTÓN (Como sugiere la Clase 10)[cite: 30] ---
+    // --- MÉTODOS PRIVADOS PARA CADA BOTÓN 
 
     private void leerRequisitos() {
         System.out.println("\n--- LEYENDO REQUISITOS DEL DÍA ---");
@@ -56,7 +56,7 @@ public class ControladorJuego {
         
         boolean decisionJugador = (eleccion == JOptionPane.YES_OPTION);
         
-        // El controlador modifica el modelo[cite: 36]
+        // El controlador modifica el modelo
         boolean esValido = politicaActual.esValido(ingresanteActual); 
         boolean acierto = gestor.evaluarDecision(decisionJugador, esValido);
 
@@ -69,7 +69,7 @@ public class ControladorJuego {
         this.ingresanteActual = null; 
     }
 
-    // MAIN: El único lugar donde aparecen los new de las tres clases[cite: 34]
+    // MAIN: El único lugar donde aparecen los new de las tres clases
     public static void main(String[] args) {
         Jugador jugador = new Jugador("Inspector", 3);
         GestorReputacion gestor = new GestorReputacion(jugador);
@@ -81,7 +81,7 @@ public class ControladorJuego {
         IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA, 9);
         controlador.setIngresanteActual(ingresante);
 
-        // Se muestra la ventana tras conectar todo[cite: 34]
+        // Se muestra la ventana tras conectar todo
         vista.setVisible(true);
     }
 }

@@ -21,7 +21,7 @@ public class PanelJuego extends JPanel {
         // Desactivamos el layout para usar coordenadas absolutas, igual que antes
         this.setLayout(null);
         
-        // Cargamos la imagen al estilo del profesor[cite: 26]
+        // Cargamos la imagen al estilo del profesor
         File archivoFondo = new File("assets/imagenes/Panel del juego del controlador de frontera.png");
         if (archivoFondo.exists()) {
             imagenFondo = new ImageIcon(archivoFondo.getAbsolutePath()).getImage();
@@ -81,7 +81,7 @@ public class PanelJuego extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (imagenFondo != null) {
-            // Dibuja la imagen escalándola al tamaño actual del panel[cite: 26]
+            // Dibuja la imagen escalándola al tamaño actual del panel
             g.drawImage(imagenFondo, 0, 0, getWidth(), getHeight(), this);
         }
     }

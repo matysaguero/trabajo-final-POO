@@ -20,7 +20,7 @@ public class VentanaApp extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        // Los métodos setSize, add y setVisible se heredan de las clases padre Component, Container y Window[cite: 31]
+        // Los métodos setSize, add y setVisible se heredan de las clases padre Component, Container y Window
         this.setSize(screenSize.width, screenSize.height); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setUndecorated(true); 

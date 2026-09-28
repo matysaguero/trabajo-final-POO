@@ -14,7 +14,7 @@ public class Escenario extends JFrame {
     private JButton btnDecidir;
 
     public Escenario() {
-        super("Frontier"); // Llama al constructor de JFrame[cite: 34]
+        super("Frontier"); // Llama al constructor de JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -50,7 +50,7 @@ public class Escenario extends JFrame {
         return boton;
     }
 
-    // --- GETTERS: La vista expone lo que el controlador necesita para registrarse[cite: 34] ---
+    // --- GETTERS: La vista expone lo que el controlador necesita para registrarse
     public JButton getBtnRequisitos() { return btnRequisitos; }
     public JButton getBtnRevisar() { return btnRevisar; }
     public JButton getBtnDecidir() { return btnDecidir; }
