@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Enemigo extends Ingresante{
 
-    protected boolean portaBomba;
+    private boolean portaBomba;
 
     public Enemigo(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, boolean portaBomba){
         super(nombreDeclarado, alturaVisual, pesoEnBalanza, reputacion, documentos, tipo, raza, clan, ciudad);
