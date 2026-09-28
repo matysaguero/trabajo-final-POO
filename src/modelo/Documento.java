@@ -1,9 +1,9 @@
 package modelo;
 
 public abstract class Documento {
-    protected String fechaVencimiento;
-    protected int numId;
-    protected boolean trucho;
+    private String fechaVencimiento;
+    private int numId;
+    private boolean trucho;
 
     public Documento(String fechaVencimiento, int numId, boolean trucho){
         if (fechaVencimiento == null || fechaVencimiento.isBlank()) {
