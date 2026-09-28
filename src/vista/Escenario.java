@@ -2,74 +2,63 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
-public class Escenario extends JFrame {
+public class Escenario {
     
-    // Los botones (fuentes de eventos)
-    private JButton btnRequisitos;
-    private JButton btnWanted;
-    private JButton btnRevisar;
-    private JButton btnVerificar;
-    private JButton btnDecidir;
+    // Regla del profe: Tiene una ventana, no es una ventana
+    private final JFrame ventana;
+    
+    // Botón invisible para la decisión
+    private final BotonInvisible btnDecidir;
 
     public Escenario() {
-        super("Frontier"); // Llama al constructor de JFrame[cite: 34]
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.ventana = new JFrame("Frontier");
+        this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        this.ventana.setUndecorated(true);
+        
+        // Creamos el panel de fondo en el mismo lugar
+        JPanel panelFondo = new JPanel() {
+            private final Image imagenFondo = new ImageIcon("assets/imagenes/Gameplay.jpg").getImage();
+            
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g); 
+                if(imagenFondo != null) {
+                    g.drawImage(imagenFondo, 0, 0, getWidth(), getHeight(), this); 
+                }
+            }
+        };
+        // layout null para mapear píxeles del juego.
+        panelFondo.setLayout(null); 
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize(screenSize.width, screenSize.height);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        this.setUndecorated(true);
         
-        FondoPanel panelPrincipal = new FondoPanel("assets/imagenes/Panel del juego del controlador de frontera.png"); 
-        panelPrincipal.setLayout(null);
+        // Instanciamos y ubicamos el botón invisible debajo del "Sello"
+        this.btnDecidir = new BotonInvisible();
+        // Coordenadas y tamaño del botón invisible, ajustadas al diseño del juego
+        this.btnDecidir.setBounds(
+            (int)(screenSize.width * 0.22),  // X: 22% de la pantalla hacia la derecha
+            (int)(screenSize.height * 0.70), // Y: 70% de la pantalla hacia abajo
+            (int)(screenSize.width * 0.08),  // Ancho
+            (int)(screenSize.height * 0.10)  // Alto
+        );
         
-        // Creamos los botones (simplificados para el ejemplo)
-        btnRequisitos = crearBotonInvisible();
-        btnRequisitos.setBounds((int)(screenSize.width * 0.67), (int)(screenSize.height * 0.11), (int)(screenSize.width * 0.25), (int)(screenSize.height * 0.26));
-        panelPrincipal.add(btnRequisitos);
-        
-        btnRevisar = crearBotonInvisible();
-        btnRevisar.setBounds((int)(screenSize.width * 0.26), (int)(screenSize.height * 0.86), (int)(screenSize.width * 0.11), (int)(screenSize.height * 0.05));
-        panelPrincipal.add(btnRevisar);
-
-        btnDecidir = crearBotonInvisible();
-        btnDecidir.setBounds((int)(screenSize.width * 0.60), (int)(screenSize.height * 0.86), (int)(screenSize.width * 0.11), (int)(screenSize.height * 0.05));
-        panelPrincipal.add(btnDecidir);
-        
-        this.setContentPane(panelPrincipal);
+        panelFondo.add(this.btnDecidir);
+        this.ventana.setContentPane(panelFondo);
     }
     
-    private JButton crearBotonInvisible() {
-        JButton boton = new JButton();
-        boton.setOpaque(false); 
-        boton.setContentAreaFilled(false); 
-        boton.setBorderPainted(false);
-        boton.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
-        return boton;
+    public void mostrar() { 
+        this.ventana.setVisible(true); 
     }
 
-    // --- GETTERS: La vista expone lo que el controlador necesita para registrarse[cite: 34] ---
-    public JButton getBtnRequisitos() { return btnRequisitos; }
-    public JButton getBtnRevisar() { return btnRevisar; }
-    public JButton getBtnDecidir() { return btnDecidir; }
-
-    // Clase interna para el fondo
-    class FondoPanel extends JPanel {
-        private Image imagenFondo;
-        public FondoPanel(String ruta) {
-            File archivoFondo = new File(ruta);
-            if (archivoFondo.exists()) {
-                imagenFondo = new ImageIcon(archivoFondo.getAbsolutePath()).getImage();
-            }
-        }
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g); 
-            if(imagenFondo != null) {
-                g.drawImage(imagenFondo, 0, 0, this.getWidth(), this.getHeight(), this); 
-            }
-        }
+    // La vista expone lo que el controlador necesita para registrarse, y nada más
+    public JButton getBtnDecidir() { 
+        return this.btnDecidir; 
+    }
+    
+    // Getter temporal para pasarle al JDialog emergente de decisión
+    public JFrame getVentana() {
+        return this.ventana;
     }
 }
