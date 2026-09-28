@@ -76,4 +76,6 @@ public class MenuPrincipal {
     // La vista expone lo que el controlador necesita para registrarse, y nada más
     public JButton getBtnJugar() { return this.btnJugar; }
     public JButton getBtnTutorial() { return this.btnTutorial; }
+
 }
+
