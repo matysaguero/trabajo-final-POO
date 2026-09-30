@@ -1,8 +1,7 @@
-package controlador;
+package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Ingresante;
 
 public class Resolutor {
     private List <PoliticaFronteriza> politicas; 

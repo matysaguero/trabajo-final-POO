@@ -1,9 +1,4 @@
-package controlador;
-
-import modelo.Ingresante;
-import modelo.TipoCiudad;
-import modelo.TipoClan;
-import modelo.TipoRaza;
+package modelo;
 
 public class PoliticaFronterizaDia1 extends PoliticaFronteriza{
     private TipoRaza raza;

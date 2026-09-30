@@ -5,6 +5,7 @@ import modelo.Documento;
 import modelo.Ingresante;
 import modelo.IngresanteRegular;
 import modelo.Pasaporte;
+import modelo.PoliticaFronterizaDia1;
 import modelo.TipoCiudad;
 import modelo.TipoClan;
 import modelo.TipoIngresante;

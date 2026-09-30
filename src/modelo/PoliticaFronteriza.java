@@ -1,8 +1,4 @@
-package controlador;
-
-import modelo.Ingresante;
-import modelo.TipoCiudad;
-import modelo.TipoClan;
+package modelo;
 
 public abstract class PoliticaFronteriza{ // Principalmente seran las pautas que regularan la dificultad del juego
     private final String fecha;

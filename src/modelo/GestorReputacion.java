@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 //CONTROL DE SISTEMA DE REPUTACION MEDIANTE INTERFACE ES LO IDEAL O N0?
 //public abstract interface GestorReputacion {
