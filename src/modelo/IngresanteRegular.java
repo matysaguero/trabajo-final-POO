@@ -11,7 +11,7 @@ public class IngresanteRegular extends Ingresante{
 
 
 public int getRamdom(){
-    return this.ramdom;
+    return this.random;
 }
 
 @Override 
