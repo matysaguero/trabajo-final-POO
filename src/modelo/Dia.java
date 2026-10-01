@@ -1,19 +1,7 @@
-package controlador;
+package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import modelo.Documento;
-import modelo.Ingresante;
-import modelo.IngresanteRegular;
-import modelo.Pasaporte;
-import modelo.PoliticaClan;
-import modelo.PoliticaFronteriza;
-import modelo.Resolutor;
-import modelo.TipoCiudad;
-import modelo.TipoClan;
-import modelo.TipoIngresante;
-import modelo.TipoRaza;
 
 public class Dia {
 
