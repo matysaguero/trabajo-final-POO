@@ -1,6 +1,7 @@
 package modelo;
 
 public abstract class PoliticaFronteriza{ // Principalmente seran las pautas que regularan la dificultad del juego
+   /*
     private final String fecha;
     private final TipoCiudad ciudadPermitida;
     private final TipoClan clanProhibido;
@@ -26,8 +27,13 @@ public abstract class PoliticaFronteriza{ // Principalmente seran las pautas que
         return this.clanProhibido;
     }
 
-    public abstract void mostrarDetalle();
+    public abstract void mostrarDetalle(); 
+    */
 
     // NUEVA LÍNEA: Declarar el método abstracto
-    public abstract boolean esValido(Ingresante ingresante); 
+    public abstract boolean esValido (Ingresante ingresante); 
+    
+    //Politica fronteriza deja de representar una politica especifica
+    //y representa un concepto general de "regla fronteriza"
+    //TODA POLITICA FRONTERIZA  DEBE PODER VERIFICAR UN INGRESANTE
 }
