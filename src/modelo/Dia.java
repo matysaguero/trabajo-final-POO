@@ -31,17 +31,7 @@ public class Dia {
 
             // 3. Creamos un ingresante de prueba
             Ingresante ingresantePrueba = new IngresanteRegular(
-                "Andrea Gonzales",
-                170,
-                63,
-                6.7,
-                documentos,
-                TipoIngresante.TURISTA,
-                TipoRaza.HUMANO,
-                TipoClan.LLA,
-                TipoCiudad.COMODORO_RIVADAVIA,
-                9
-            );
+                "Andrea Gonzales", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA,TipoCiudad.COMODORO_RIVADAVIA);
 
             System.out.println("----- DATOS DEL INGRESANTE -----");
             ingresantePrueba.mostrarDetalle();

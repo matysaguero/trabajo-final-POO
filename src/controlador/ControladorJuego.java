@@ -150,7 +150,7 @@ public class ControladorJuego {
                 ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, gestor, resolutor, vistaConsola);
 
                 // 4. INGRESANTE
-                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA, 9);
+                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA);
 
                 controlador.setIngresanteActual(ingresante);
 
