@@ -115,6 +115,13 @@ public class ControladorJuego {
             // 6. Despachamos al ingresante
             this.ingresanteActual = null;
 
+            // 7. NUEVO: fin de juego si el jugador se quedó sin reputación
+            if (gestor.juegoPerdido()) {
+                vistaConsola.mostrarFinDeJuego();
+                JOptionPane.showMessageDialog(vista.getVentana(), "Te quedaste sin reputación. Fin del juego.");
+            System.exit(0); // provisional: se reemplaza cuando exista Partida
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -128,7 +135,7 @@ public class ControladorJuego {
             try {
 
                 // 1. MODELOS
-                Jugador jugador = new Jugador("Inspector", 3);
+                Jugador jugador = new Jugador("Inspector", 1);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
                 PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.JUSTICIALISTA));

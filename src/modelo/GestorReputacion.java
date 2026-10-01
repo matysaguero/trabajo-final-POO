@@ -29,4 +29,12 @@ public class GestorReputacion {
         return this.jugador;
     }
 
+    public int getReputacion() {
+        return this.jugador.getReputacion();
+    }
+
+    public boolean juegoPerdido() {
+        return this.jugador.estaSinReputacion();
+    }
+
 }

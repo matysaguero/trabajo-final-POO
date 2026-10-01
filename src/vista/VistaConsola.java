@@ -34,5 +34,10 @@ public class VistaConsola {
 
         System.out.println("Reputación actual: " + reputacion);
         System.out.println();
+    }                       
+
+    public void mostrarFinDeJuego() {   // <-- método nuevo
+        System.out.println("===== FIN DEL JUEGO: reputación agotada =====");
     }
-}
+
+}                              
