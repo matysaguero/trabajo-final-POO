@@ -21,6 +21,7 @@ public class Placa extends Documento {
         return this.idPlaca;
     }
 
+    @Override
     public void mostrarDetalle(){
         
         System.out.println("======== PLACA ========:");

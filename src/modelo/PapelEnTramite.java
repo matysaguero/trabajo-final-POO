@@ -15,6 +15,7 @@ public class PapelEnTramite extends Documento {
         return this.firmalegal;
     }
 
+    @Override
     public void mostrarDetalle(){
         
         System.out.println("======== PAPEL EN TRAMITE ========:");
