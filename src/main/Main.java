@@ -4,23 +4,13 @@ import controlador.ControladorJuego;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.SwingUtilities;
-import modelo.GestorReputacion;
-import modelo.Jugador;
-import modelo.Partida;
-import modelo.TipoCiudad;
-import modelo.TipoClan;
-import modelo.TipoIngresante;
-import modelo.TipoRaza;
+import modelo.*;
 import modelo.Ingresantes.IngresanteRegular;
 import modelo.politicas.PoliticaClan;
 import modelo.politicas.PoliticaFronteriza;
 import modelo.politicas.PoliticaIngresante;
 import modelo.politicas.Resolutor;
-import vista.Escenario;
-import vista.MenuPrincipal;
-import vista.VistaConsola;
-import vista.VistaDecision;
-import vista.VistaMesaDocumentos;
+import vista.*;
 
 public class Main {
     public static void main(String[] args) {

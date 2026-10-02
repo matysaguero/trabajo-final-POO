@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.Ingresantes.Ingresante;
 import modelo.Ingresantes.IngresanteRegular;
 import modelo.documentos.Documento;
@@ -42,7 +41,7 @@ public class Dia {
                 "Andrea Gonzales", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA,TipoCiudad.COMODORO_RIVADAVIA);
 
             System.out.println("----- DATOS DEL INGRESANTE -----");
-            ingresantePrueba.mostrarDetalle();
+            //ingresantePrueba.mostrarDetalle();
 
             // 4. Creamos una política de clan
             PoliticaClan politicaClan = new PoliticaClan(
