@@ -21,6 +21,7 @@ public class Permiso extends Documento {
         return this.ocupacion;
     }
 
+    @Override 
     public void mostrarDetalle(){
         
         System.out.println("======== PERMISO ========:");

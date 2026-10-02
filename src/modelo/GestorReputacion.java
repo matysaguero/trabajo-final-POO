@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 //CONTROL DE SISTEMA DE REPUTACION MEDIANTE INTERFACE ES LO IDEAL O N0?
 //public abstract interface GestorReputacion {
@@ -24,8 +24,17 @@ public class GestorReputacion {
         return false;
         }
     }
+    
     public Jugador getJugador() {
         return this.jugador;
+    }
+
+    public int getReputacion() {
+        return this.jugador.getReputacion();
+    }
+
+    public boolean juegoPerdido() {
+        return this.jugador.estaSinReputacion();
     }
 
 }

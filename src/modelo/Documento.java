@@ -15,6 +15,7 @@ public abstract class Documento {
     
     this.fechaVencimiento = fechaVencimiento;
     this.numId = numId;
+    this.trucho = trucho;
     }
 
     public String getFechaVencimiento(){

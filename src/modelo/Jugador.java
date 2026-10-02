@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 public class Jugador{
     private String nombre;
@@ -15,7 +15,7 @@ public class Jugador{
         }
 
         this.nombre = nombre;
-        this.reputacionJugador = 3;
+        this.reputacionJugador = reputacionInicial;
 
     }
 
@@ -39,7 +39,13 @@ public class Jugador{
         reputacionJugador++;
     }
 
-    public void restaReputacion (){        
+    public void restaReputacion (){
+        if (reputacionJugador > 0) {   
         reputacionJugador--;
+        }
+    } 
+
+    public boolean estaSinReputacion() {
+        return reputacionJugador <= 0;
     }
 }
