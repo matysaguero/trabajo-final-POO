@@ -43,17 +43,5 @@ public class Pasaporte extends Documento {
     public String getCiudad(){
         return this.ciudad;
     }
-    
-@Override
-    public void mostrarDetalle(){
-        
-        System.out.println("======== PASAPORTE ========");
-        System.out.println("Peso: "+ peso + "kg.");
-        System.out.println("Altura: "+ altura+ "cm");
-        System.out.println("Pais: "+ pais);
-        System.out.println("Ciudad: "+ ciudad);
-        System.out.println("");
-        
-        super.mostrarDetalle();
-    }
+ 
 }

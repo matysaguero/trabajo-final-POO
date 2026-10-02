@@ -44,18 +44,4 @@ public class DNI extends Documento {
     public String getDomicilio(){
         return this.domicilio;
     }
-
-    @Override
-    public void mostrarDetalle() {
-        System.out.println("======== DNI ========");
-        System.out.println("Huella: " + huella);
-        System.out.println("Lugar de nacimiento: " + lugarNacimiento);
-        System.out.println("Sexo: " + sexo);
-        System.out.println("Domicilio: " + domicilio);
-        System.out.println("");
-        
-        super.mostrarDetalle();
-    }
-
-
 }

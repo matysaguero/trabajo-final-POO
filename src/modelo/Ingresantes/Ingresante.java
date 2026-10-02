@@ -1,6 +1,7 @@
 package modelo.Ingresantes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import modelo.TipoCiudad;
 import modelo.TipoClan;
@@ -78,22 +79,8 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return this.ciudad;
     }
 
-    public void mostrarDetalle(){
-        System.out.println("======== DECLARACIÓN ========");
-        System.out.println("Mi nombre es: "+ nombreDeclarado);
-        System.out.println("Mi altura es: "+ alturaVisual+"cm");
-        System.out.println("El peso muestra: "+ pesoEnBalanza+"kg");
-        System.out.println("Soy de: "+ clan +", y vengo de: " + ciudad);
-        System.out.println("Tipo de ingresante: "+ tipo);
-        System.out.println("Mi raza es: "+ raza);
-        System.out.println("");
-        System.out.println("");
-
-        for (int i = 0; i < documentos.size(); i++) {
-            Documento documento = documentos.get(i);
-            documento.mostrarDetalle();
-        }
-
+    public List<Documento> getDocumentos() { //NUEVO: getter para los documentos.
+        return List.copyOf(documentos);
     }
 
     public abstract String responderInterrogatorio();
