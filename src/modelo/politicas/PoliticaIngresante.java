@@ -1,4 +1,6 @@
-package modelo; //rechaza a los ingresantes que son amenaza.
+package modelo.politicas; //rechaza a los ingresantes que son amenaza.
+
+import modelo.Ingresantes.Ingresante;
 
 public class PoliticaIngresante extends PoliticaFronteriza {
 

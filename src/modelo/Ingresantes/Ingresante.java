@@ -1,6 +1,12 @@
-package modelo;
+package modelo.Ingresantes;
 
 import java.util.ArrayList;
+
+import modelo.TipoCiudad;
+import modelo.TipoClan;
+import modelo.TipoIngresante;
+import modelo.TipoRaza;
+import modelo.documentos.Documento;
 
 public abstract class Ingresante { // Añadi abstract porque al usar el metodo "public abstract String responderInterrogatorio()" y colocarlo en "Enemigo.java" es una condicion obligatoria aclarar que ahora la clase "ingreante.java" es abstracta. --07/09/26 , 20:48hs
     private String nombreDeclarado;

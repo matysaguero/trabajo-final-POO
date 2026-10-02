@@ -1,4 +1,4 @@
-package modelo;
+package modelo.documentos;
 
 public class DNI extends Documento {
     private String huella;

@@ -1,4 +1,4 @@
-package modelo;
+package modelo.documentos;
 
 public abstract class Documento {
     private String fechaVencimiento;

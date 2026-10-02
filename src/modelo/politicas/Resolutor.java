@@ -1,7 +1,9 @@
-package modelo;
+package modelo.politicas;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import modelo.Ingresantes.Ingresante;
 
 public class Resolutor {
     private List <PoliticaFronteriza> politicas; 

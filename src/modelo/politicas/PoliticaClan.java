@@ -1,6 +1,9 @@
-package modelo;
+package modelo.politicas;
 import java.util.ArrayList;
 import java.util.List;
+
+import modelo.TipoClan;
+import modelo.Ingresantes.Ingresante;
 
 public class PoliticaClan extends PoliticaFronteriza {
 

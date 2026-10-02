@@ -1,4 +1,4 @@
-package modelo;
+package modelo.documentos;
 
 public class Pasaporte extends Documento {
     private String ciudad;

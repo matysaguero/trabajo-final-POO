@@ -1,5 +1,11 @@
-package modelo;
+package modelo.Ingresantes;
 import java.util.ArrayList;
+
+import modelo.TipoCiudad;
+import modelo.TipoClan;
+import modelo.TipoIngresante;
+import modelo.TipoRaza;
+import modelo.documentos.Documento;
 
 public class IngresanteRegular extends Ingresante{
     

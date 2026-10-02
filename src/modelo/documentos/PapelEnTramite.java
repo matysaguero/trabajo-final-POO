@@ -1,4 +1,4 @@
-package modelo;
+package modelo.documentos;
 
 public class PapelEnTramite extends Documento {
     private String firmalegal;
