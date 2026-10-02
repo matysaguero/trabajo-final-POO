@@ -12,7 +12,7 @@ public class VistaMesaDocumentos {
         this.panelDocumentos = new JLayeredPane();
         this.panelDocumentos.setBackground(new Color(45, 50, 45)); // Dark desk color
         this.panelDocumentos.setOpaque(false);
-        this.panelDocumentos.setBounds(520,280,1000, 580);
+        this.panelDocumentos.setBounds(520,305,1000, 560);
 
         this.panelDocumentos.add(crearDocumento("Pasaporte", Color.GREEN, 100, 150), JLayeredPane.DEFAULT_LAYER);
         this.panelDocumentos.add(crearDocumento("Permiso entrada", Color.GRAY, 300, 200), JLayeredPane.DEFAULT_LAYER);
