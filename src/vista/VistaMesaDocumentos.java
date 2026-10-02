@@ -19,7 +19,7 @@ public class VistaMesaDocumentos {
         this.Documento = new JLayeredPane();
         this.Documento.setBackground(new Color(45, 50, 45)); // Dark desk color
         this.Documento.setOpaque(true);
-        this.Documento.add(Escritorio); 
+        this.Escritorio.add(this.Documento); 
 
         this.Documento.add(crearDocumento("Pasaporte", Color.GREEN, 100, 150), JLayeredPane.DEFAULT_LAYER);
         this.Documento.add(crearDocumento("Permiso entrada", Color.GRAY, 300, 200), JLayeredPane.DEFAULT_LAYER);
@@ -41,11 +41,7 @@ public class VistaMesaDocumentos {
         documento.addMouseListener(mover);
         documento.addMouseMotionListener(mover);
 
-        return documento;        
-    
-    
-    
-    
+        return documento;
     }
 
 

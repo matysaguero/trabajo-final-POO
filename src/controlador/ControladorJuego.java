@@ -1,37 +1,36 @@
 package controlador;
 
+import javax.swing.JOptionPane;
+import modelo.*;
 import vista.Escenario;
-import vista.VistaDecision;
 import vista.MenuPrincipal;
 import vista.VistaConsola;
-
-import modelo.*;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import java.util.ArrayList;
-import java.util.List;
+import vista.VistaDecision;
 
 public class ControladorJuego {
     
     private final MenuPrincipal menu;
     private final Escenario vista;
     private final VistaDecision vistaDecision;
-    private final GestorReputacion gestor;
-    private final Resolutor resolutor; // NUEVO: el controlador ya no conoce una política concreta
     private final VistaConsola vistaConsola;
-
-    private Ingresante ingresanteActual; 
-
-    // El controlador recibe las dependencias necesarias
-    public ControladorJuego(MenuPrincipal menu, Escenario vista, VistaDecision vistaDecision, GestorReputacion gestor, Resolutor resolutor, VistaConsola vistaConsola) {
+    private final Partida partida; // reemplaza a GestorReputacion, Resolutor y a Ingresante.
+    
+    // private Ingresante ingresanteActual; 
+    
+    //private final GestorReputacion gestor;
+    //private final Resolutor resolutor; // NUEVO: el controlador ya no conoce una política concreta
+    
+    // NUEVO: 2/10, Se implemento la clase Partida, para alivianar al controlador y,
+    // que solo se encargue de conectar la vista con los modelos.
+    
+    // El controlador recibe las dependencias necesarias. 
+ 
+    public ControladorJuego(MenuPrincipal menu, Escenario vista, VistaDecision vistaDecision, VistaConsola vistaConsola, Partida partida) {
         this.menu = menu;
         this.vista = vista;
         this.vistaDecision = vistaDecision;
-        this.gestor = gestor;
-        this.resolutor = resolutor;
         this.vistaConsola = vistaConsola;
+        this.partida = partida;
 
         // Lambdas
         this.menu.getBtnJugar().addActionListener(evento -> this.iniciarJuego());
@@ -57,7 +56,7 @@ public class ControladorJuego {
     */
 
     public void setIngresanteActual(Ingresante ingresante) {
-        this.ingresanteActual = ingresante;
+        partida.setIngresanteActual(ingresante);
 
         // NUEVO: la VistaConsola muestra el mismo ingresante que está en el juego
         this.vistaConsola.mostrarIngresante(ingresante);
@@ -67,7 +66,7 @@ public class ControladorJuego {
 
     private void abrirVentanaDecision() {
 
-        if (this.ingresanteActual == null) {
+        if (this.partida.getIngresanteActual() == null) {
             System.out.println("No hay ingresante en la ventanilla todavía.");
             return;
         }
@@ -85,38 +84,46 @@ public class ControladorJuego {
 
         try {
 
-            // 2. El Resolutor determina si el ingresante debería pasar
+            /* 2. El Resolutor determina si el ingresante debería pasar
             boolean puedeIngresar = resolutor.puedeIngresar(this.ingresanteActual);
 
-            // 3. GestorReputacion compara la decisión del jugador con el resultado real
-            boolean acierto = gestor.evaluarDecision(decisionJugador, puedeIngresar);
+              3. GestorReputacion compara la decisión del jugador con el resultado real
+            boolean acierto = gestor.evaluarDecision(decisionJugador, puedeIngresar); */
+            
+            // Esta parte se va reemplazada por un llamado a partida.procesarDecisionJugador que hace exactamente lo
+            // mismo pero en otra clase.
+            boolean acierto = partida.procesarDecisionJugador(decisionJugador);
+
+            // o se podria hacer if (partida.procesarDecisionJugador(decisionJugador))
 
             // 4. Vista gráfica
             if (acierto) {
 
                 JOptionPane.showMessageDialog(
                     vista.getVentana(),
-                    "¡Decisión correcta! Reputación: " + gestor.getJugador().getReputacion()
+                    "¡Decisión correcta! Reputación: " + partida.getReputacionActual()
                 );
 
             } else {
 
                 JOptionPane.showMessageDialog(
                     vista.getVentana(),
-                    "¡Penalización! Reputación: " + gestor.getJugador().getReputacion()
+                    "¡Penalización! Reputación: " + partida.getReputacionActual()
                 );
             }
 
             // 5. NUEVO: mostramos el mismo resultado en la consola
-            vistaConsola.mostrarPuedeIngresar(puedeIngresar);
+            vistaConsola.mostrarPuedeIngresar(partida.estaPerdida());
             vistaConsola.mostrarDecisionJugador(decisionJugador);
-            vistaConsola.mostrarResultado(acierto, gestor.getJugador().getReputacion());
+            vistaConsola.mostrarResultado(acierto, partida.getReputacionActual());
 
             // 6. Despachamos al ingresante
-            this.ingresanteActual = null;
+            // this.ingresanteActual = null; 
+            // NUEVO 2/10: De esto se encarga ya partida.procesarDecisionJugador al final del metodo. 
+
 
             // 7. NUEVO: fin de juego si el jugador se quedó sin reputación
-            if (gestor.juegoPerdido()) {
+            if (partida.estaPerdida()) {
                 vistaConsola.mostrarFinDeJuego();
                 JOptionPane.showMessageDialog(vista.getVentana(), "Te quedaste sin reputación. Fin del juego.");
             System.exit(0); // provisional: se reemplaza cuando exista Partida
@@ -128,47 +135,5 @@ public class ControladorJuego {
     }
 
     // MAIN: creación y conexión de los objetos principales del juego
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(() -> {
-
-            try {
-
-                // 1. MODELOS
-                Jugador jugador = new Jugador("Inspector", 1);
-                GestorReputacion gestor = new GestorReputacion(jugador);
-
-                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.JUSTICIALISTA));
-                PoliticaIngresante politicaIngresante = new PoliticaIngresante();//NUEVO 02/10
-
-                List<PoliticaFronteriza> politicas = new ArrayList<>();
-                politicas.add(politicaClan);
-                politicas.add(politicaIngresante);//NUEVO 02/10
-
-                Resolutor resolutor = new Resolutor(politicas);
-                // 2. VISTAS
-                MenuPrincipal menu = new MenuPrincipal();
-                Escenario vistaPrincipal = new Escenario();
-                VistaDecision vistaPopUp = new VistaDecision(vistaPrincipal.getVentana());
-
-                // NUEVO: segunda vista del juego, representada por consola
-                VistaConsola vistaConsola = new VistaConsola();
-
-                // 3. CONTROLADOR
-                ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, gestor, resolutor, vistaConsola);
-
-                // 4. INGRESANTE
-                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA);
-
-                controlador.setIngresanteActual(ingresante);
-
-                // 5. Mostramos la ventana
-                menu.mostrar();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        });
-    }
+    
 }

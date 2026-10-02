@@ -1,9 +1,9 @@
 package vista;
 
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
-import org.w3c.dom.events.MouseEvent;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
 
 
 public class MoverComponentes extends MouseAdapter {
@@ -16,10 +16,16 @@ public class MoverComponentes extends MouseAdapter {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            // Bring clicked document to the very top layer
-            .moveToFront(panelObjetivo);
+            Container padre = panelObjetivo.getParent();
+
+            // Trae el panel clickeado (los documentos) al frente.
+            if (padre instanceof JLayeredPane) { 
+                ((JLayeredPane) padre).moveToFront(panelObjetivo); // si el padre es un panel con capas,
+                // lo trae al frente del panelObjetivo que va a ser la ventana.
+            }
+        
             
-            // Remember exactly where the mouse clicked inside the panel
+            // 
             screenOffset = e.getPoint();
         }
 
@@ -32,6 +38,14 @@ public class MoverComponentes extends MouseAdapter {
             int newY = panelObjetivo.getY() + e.getY() - screenOffset.y;
 
             // Se deben agregar reestricciones (CONSTRAINTS) para que no puedan salir de la ventana los documentos creados
+            Container padre = panelObjetivo.getParent();
+            
+            if (padre != null) {
+                // Math.max evita que pase del borde izquierdo/superior (0)
+                // Math.min evita que pase del borde derecho/inferior (anchoPadre - anchoDocumento)
+                newX = Math.max(0, Math.min(newX, padre.getWidth() - panelObjetivo.getWidth()));
+                newY = Math.max(0, Math.min(newY, padre.getHeight() - panelObjetivo.getHeight()));
+            }            
             
             panelObjetivo.setLocation(newX, newY);
         }
