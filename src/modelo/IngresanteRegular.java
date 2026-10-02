@@ -18,4 +18,9 @@ public class IngresanteRegular extends Ingresante{
         return "Hola, soy un ciudadano regular.";
     }
 
+@Override //NUEVO METODO ABSTRACTO: que devuelve true o false si el ingresante es una amenaza
+public boolean esAmenaza() {
+    return false;
+}
+
 }

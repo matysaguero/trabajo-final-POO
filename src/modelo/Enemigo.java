@@ -20,7 +20,7 @@ public class Enemigo extends Ingresante{
         super.mostrarDetalle();
     }
 
-@Override
+    @Override
     public String responderInterrogatorio() {
         return "¡No tengo por que darte explicaciones, oficial!";
     }
@@ -28,5 +28,10 @@ public class Enemigo extends Ingresante{
     @Override 
     public String darPresentacion(){
         return "Hola, quiero ingresar al planeta";
+    }
+
+    @Override
+    public boolean esAmenaza() { //NUEVO
+        return true;
     }
 }

@@ -6,8 +6,6 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     private String nombreDeclarado;
     private int alturaVisual;
     private int pesoEnBalanza;
-    //private String clan;
-    //private String ciudadOrigen;
     private Double reputacion;
     private ArrayList<Documento> documentos;    
     private TipoIngresante tipo; 
@@ -31,8 +29,6 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         this.nombreDeclarado = nombreDeclarado;
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
-        //his.clan = clan;
-        //this.ciudadOrigen = ciudadOrigen;
         this.reputacion = reputacion;
         this.documentos = documentos;
         this.tipo = tipo;
@@ -52,15 +48,6 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     public int getPesoEnBalanza(){
         return this.pesoEnBalanza;
     }
-
-    /*
-    public String getClan(){
-        return this.clan;
-    }
-
-    public String getCiudadOrigen(){
-        return this.ciudadOrigen;
-    }*/
 
     public TipoIngresante getTipoIngresante(){
         return this.tipo;
@@ -98,6 +85,7 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
 
     public abstract String responderInterrogatorio();
     public abstract String darPresentacion();
+    public abstract boolean esAmenaza(); //NUEVO
 
     //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
     

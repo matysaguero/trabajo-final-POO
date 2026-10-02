@@ -139,12 +139,13 @@ public class ControladorJuego {
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
                 PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.JUSTICIALISTA));
+                PoliticaIngresante politicaIngresante = new PoliticaIngresante();//NUEVO 02/10
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();
                 politicas.add(politicaClan);
+                politicas.add(politicaIngresante);//NUEVO 02/10
 
                 Resolutor resolutor = new Resolutor(politicas);
-
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
                 Escenario vistaPrincipal = new Escenario();
