@@ -20,16 +20,4 @@ public class Permiso extends Documento {
     public String getOcupacion(){
         return this.ocupacion;
     }
-
-    @Override 
-    public void mostrarDetalle(){
-        
-        System.out.println("======== PERMISO ========:");
-        System.out.println("Sello: "+ sello);
-        System.out.println("Ocupación: "+ ocupacion);
-        System.out.println("");
-        
-        super.mostrarDetalle();
-    }
-
 }

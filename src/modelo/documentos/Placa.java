@@ -20,16 +20,4 @@ public class Placa extends Documento {
     public int getIdPlaca(){
         return this.idPlaca;
     }
-
-    @Override
-    public void mostrarDetalle(){
-        
-        System.out.println("======== PLACA ========:");
-        System.out.println("Clan: "+ clan);
-        System.out.println("ID Placa: "+ idPlaca);
-        System.out.println("");
-        
-        super.mostrarDetalle();
-    }
-
 }
