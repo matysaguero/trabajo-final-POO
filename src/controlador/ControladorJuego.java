@@ -2,6 +2,7 @@ package controlador;
 
 import javax.swing.JOptionPane;
 import modelo.*;
+import modelo.Ingresantes.Ingresante;
 import vista.Escenario;
 import vista.MenuPrincipal;
 import vista.VistaConsola;

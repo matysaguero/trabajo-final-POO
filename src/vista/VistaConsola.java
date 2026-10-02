@@ -1,7 +1,7 @@
 
 package vista;
 
-import modelo.Ingresante;
+import modelo.Ingresantes.Ingresante;
 
 public class VistaConsola {
 

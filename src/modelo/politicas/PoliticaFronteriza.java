@@ -1,4 +1,6 @@
-package modelo;
+package modelo.politicas;
+
+import modelo.Ingresantes.Ingresante;
 
 public abstract class PoliticaFronteriza{ // Principalmente seran las pautas que regularan la dificultad del juego
    /*

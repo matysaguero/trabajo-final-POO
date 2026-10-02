@@ -1,4 +1,4 @@
-package modelo;
+package modelo.documentos;
 
 public class Placa extends Documento {
     private String clan;

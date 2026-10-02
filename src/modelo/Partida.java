@@ -1,6 +1,7 @@
 package modelo;
 
-
+import modelo.Ingresantes.Ingresante;
+import modelo.politicas.Resolutor;
 
 public class Partida {
     private final GestorReputacion gestor;

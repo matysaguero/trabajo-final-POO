@@ -3,6 +3,14 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Ingresantes.Ingresante;
+import modelo.Ingresantes.IngresanteRegular;
+import modelo.documentos.Documento;
+import modelo.documentos.Pasaporte;
+import modelo.politicas.PoliticaClan;
+import modelo.politicas.PoliticaFronteriza;
+import modelo.politicas.Resolutor;
+
 public class Dia {
 
     public static void main(String[] args) {

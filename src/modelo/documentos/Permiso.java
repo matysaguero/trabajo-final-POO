@@ -1,4 +1,4 @@
-package modelo;
+package modelo.documentos;
 
 public class Permiso extends Documento {
     private String sello;
