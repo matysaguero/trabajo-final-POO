@@ -6,6 +6,8 @@ import vista.Escenario;
 import vista.MenuPrincipal;
 import vista.VistaConsola;
 import vista.VistaDecision;
+import vista.VistaMesaDocumentos;
+
 
 public class ControladorJuego {
     
@@ -13,6 +15,7 @@ public class ControladorJuego {
     private final Escenario vista;
     private final VistaDecision vistaDecision;
     private final VistaConsola vistaConsola;
+    private final VistaMesaDocumentos vistaMesaDocumentos;
     private final Partida partida; // reemplaza a GestorReputacion, Resolutor y a Ingresante.
     
     // private Ingresante ingresanteActual; 
@@ -25,12 +28,13 @@ public class ControladorJuego {
     
     // El controlador recibe las dependencias necesarias. 
  
-    public ControladorJuego(MenuPrincipal menu, Escenario vista, VistaDecision vistaDecision, VistaConsola vistaConsola, Partida partida) {
+    public ControladorJuego(MenuPrincipal menu, Escenario vista, VistaDecision vistaDecision, VistaConsola vistaConsola, VistaMesaDocumentos vistaMesaDocumentos, Partida partida) {
         this.menu = menu;
         this.vista = vista;
         this.vistaDecision = vistaDecision;
         this.vistaConsola = vistaConsola;
         this.partida = partida;
+        this.vistaMesaDocumentos = vistaMesaDocumentos;
 
         // Lambdas
         this.menu.getBtnJugar().addActionListener(evento -> this.iniciarJuego());
@@ -133,7 +137,5 @@ public class ControladorJuego {
             e.printStackTrace();
         }
     }
-
-    // MAIN: creación y conexión de los objetos principales del juego
-    
+     
 }

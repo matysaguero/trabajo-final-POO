@@ -1,7 +1,7 @@
 package vista;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class Escenario {
     
@@ -11,7 +11,7 @@ public class Escenario {
     // Botón invisible para la decisión
     private final BotonInvisible btnDecidir;
 
-    public Escenario() {
+    public Escenario(VistaMesaDocumentos vistaMesa) {
         this.ventana = new JFrame("Frontier");
         this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -46,6 +46,7 @@ public class Escenario {
         
         panelFondo.add(this.btnDecidir);
         this.ventana.setContentPane(panelFondo);
+        this.ventana.add(vistaMesa.getPanelDocumentos(), 0);
     }
     
     public void mostrar() { 

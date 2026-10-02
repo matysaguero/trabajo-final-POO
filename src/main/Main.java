@@ -20,6 +20,7 @@ import vista.Escenario;
 import vista.MenuPrincipal;
 import vista.VistaConsola;
 import vista.VistaDecision;
+import vista.VistaMesaDocumentos;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,14 +46,15 @@ public class Main {
                 
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
-                Escenario vistaPrincipal = new Escenario();
+                VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
+                Escenario vistaPrincipal = new Escenario(vistaMesa);
                 VistaDecision vistaPopUp = new VistaDecision(vistaPrincipal.getVentana());
 
                 // NUEVO: segunda vista del juego, representada por consola
                 VistaConsola vistaConsola = new VistaConsola();
 
                 // 3. CONTROLADOR
-                ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, vistaConsola, partida);
+                ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, partida);
 
                 // 4. INGRESANTE
                 IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA);
