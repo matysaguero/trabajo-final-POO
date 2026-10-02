@@ -30,11 +30,18 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         this.alturaVisual = alturaVisual;
         this.pesoEnBalanza = pesoEnBalanza;
         this.reputacion = reputacion;
-        this.documentos = documentos;
+        //this.documentos = documentos;
         this.tipo = tipo;
         this.raza= raza;
         this.clan = clan;
         this.ciudad = ciudad;
+        // Si no llegan documentos (null), se usa una lista vacía para que mostrarDetalle()
+        // no falle. Se guarda una copia para que la lista original no pueda modificarse desde afuera.
+        if (documentos == null) {
+            this.documentos = new ArrayList<>();
+            } else {
+                this.documentos = new ArrayList<>(documentos);
+            }   
     }
     
     public String getNombreDeclarado(){
