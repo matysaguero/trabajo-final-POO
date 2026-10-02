@@ -4,25 +4,18 @@ import java.awt.*;
 import javax.swing.*;
 
 public class VistaMesaDocumentos {
-    
-    private final JFrame Escritorio;
-    private final JLayeredPane Documento;
+    private final JLayeredPane panelDocumentos;
 
-    public VistaMesaDocumentos(JFrame Mesa) {
-        this.Escritorio = new JFrame("Escritorio");
-        this.Escritorio.setUndecorated(true);
-        this.Escritorio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Sin layout porque necesito el espacio libre para poder arrastrar los documentos que quiero controlar
-        this.Escritorio.setLayout(null);
+    public VistaMesaDocumentos() {
 
         // JLayeredPane permite componentes que se superpongan
-        this.Documento = new JLayeredPane();
-        this.Documento.setBackground(new Color(45, 50, 45)); // Dark desk color
-        this.Documento.setOpaque(true);
-        this.Escritorio.add(this.Documento); 
+        this.panelDocumentos = new JLayeredPane();
+        this.panelDocumentos.setBackground(new Color(45, 50, 45)); // Dark desk color
+        this.panelDocumentos.setOpaque(false);
+        this.panelDocumentos.setBounds(520,280,1000, 580);
 
-        this.Documento.add(crearDocumento("Pasaporte", Color.GREEN, 100, 150), JLayeredPane.DEFAULT_LAYER);
-        this.Documento.add(crearDocumento("Permiso entrada", Color.GRAY, 300, 200), JLayeredPane.DEFAULT_LAYER);
+        this.panelDocumentos.add(crearDocumento("Pasaporte", Color.GREEN, 100, 150), JLayeredPane.DEFAULT_LAYER);
+        this.panelDocumentos.add(crearDocumento("Permiso entrada", Color.GRAY, 300, 200), JLayeredPane.DEFAULT_LAYER);
     }
 
     public JPanel crearDocumento(String titulo, Color color, int posX, int posY){
@@ -44,8 +37,8 @@ public class VistaMesaDocumentos {
         return documento;
     }
 
-
-    public void mostrar() { this.Escritorio.setVisible(true); }
-    public void ocultar() { this.Escritorio.setVisible(false); }
+public JLayeredPane getPanelDocumentos(){
+    return this.panelDocumentos;
+}
   //preguntar si esta bien la distro de las tareas de esta clase  
 } 
