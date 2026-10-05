@@ -19,7 +19,7 @@ public class Escenario {
         
         // Creamos el panel de fondo en el mismo lugar
         JPanel panelFondo = new JPanel() {
-            private final Image imagenFondo = new ImageIcon("assets/imagenes/gameplay.jpg").getImage();
+            private final Image imagenFondo = new ImageIcon("assets/imagenes/paneles/gameplay.jpg").getImage();
             
             @Override
             protected void paintComponent(Graphics g) {

@@ -22,7 +22,7 @@ public class MenuPrincipal {
         int altoPantalla = tamanoPantalla.height;
 
         JPanel panelFondo = new JPanel() {
-            private final Image imagenFondo = new ImageIcon("assets/imagenes/menu_principal.png").getImage();
+            private final Image imagenFondo = new ImageIcon("assets/imagenes/paneles/menu_principal.png").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -42,8 +42,8 @@ public class MenuPrincipal {
         int posXTutorial = (int) (altoPantalla * 0.916);
 
         // Se crean los botones utilizando las imágenes requeridas
-        this.btnJugar = crearBotonConImagen("assets/imagenes/boton_jugar.png", posXJugar, posY, anchoBoton, altoBoton);
-        this.btnTutorial = crearBotonConImagen("assets/imagenes/boton_tutorial.png", posXTutorial, posY, anchoBoton, altoBoton);
+        this.btnJugar = crearBotonConImagen("assets/imagenes/botones/boton_jugar.png", posXJugar, posY, anchoBoton, altoBoton);
+        this.btnTutorial = crearBotonConImagen("assets/imagenes/botones/boton_tutorial.png", posXTutorial, posY, anchoBoton, altoBoton);
 
         panelFondo.add(this.btnJugar);
         panelFondo.add(this.btnTutorial);

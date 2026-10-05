@@ -19,8 +19,8 @@ public class VistaDecision {
         this.ventanaEmergente.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
 
         // Escalamos las imágenes a un tamaño equivalente en píxeles
-        this.btnAceptar = crearBotonImagen("assets/imagenes/boton_aceptar.png", 200, 65);
-        this.btnRechazar = crearBotonImagen("assets/imagenes/boton_rechazar.png", 200, 65);
+        this.btnAceptar = crearBotonImagen("assets/imagenes/botones/boton_aceptar.png", 200, 65);
+        this.btnRechazar = crearBotonImagen("assets/imagenes/botones/boton_rechazar.png", 200, 65);
 
         this.ventanaEmergente.add(this.btnAceptar);
         this.ventanaEmergente.add(this.btnRechazar);
