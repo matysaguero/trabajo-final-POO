@@ -35,15 +35,19 @@ public class Jugador{
         return false;
     }
 
-    public void sumaReputacion(){
-        reputacionJugador++;
-    }
+    // NUEVO:
+    // Jugador conserva el estado de su reputación,
+    // pero GestorReputacion decide cuánto debe modificarse.
+    // Sin "public": solo las clases del paquete modelo (GestorReputacion) pueden llamarlo,
+    // así ninguna vista ni el controlador puede alterar la reputación por su cuenta.
+    void modificarReputacion(int variacion) {
 
-    public void restaReputacion (){
-        if (reputacionJugador > 0) {   
-        reputacionJugador--;
+        reputacionJugador += variacion;
+
+        if (reputacionJugador < 0) {
+            reputacionJugador = 0;
         }
-    } 
+    }
 
     public boolean estaSinReputacion() {
         return reputacionJugador <= 0;
