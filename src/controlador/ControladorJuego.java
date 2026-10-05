@@ -19,11 +19,6 @@ public class ControladorJuego {
     private final VistaMesaDocumentos vistaMesaDocumentos;
     private final Partida partida; // reemplaza a GestorReputacion, Resolutor y a Ingresante.
     
-    // private Ingresante ingresanteActual; 
-    
-    //private final GestorReputacion gestor;
-    //private final Resolutor resolutor; // NUEVO: el controlador ya no conoce una política concreta
-    
     // NUEVO: 2/10, Se implemento la clase Partida, para alivianar al controlador y,
     // que solo se encargue de conectar la vista con los modelos.
     
@@ -54,11 +49,7 @@ public class ControladorJuego {
 
     // --- MÉTODOS PÚBLICOS QUE ATIENDEN A LA LÓGICA DEL JUEGO ---
 
-    /*
-    public Ingresante getIngresanteActual() {
-        return this.ingresanteActual;
-    }
-    */
+
 
     public void setIngresanteActual(Ingresante ingresante) {
         partida.setIngresanteActual(ingresante);
@@ -97,30 +88,34 @@ public class ControladorJuego {
             
             // Esta parte se va reemplazada por un llamado a partida.procesarDecisionJugador que hace exactamente lo
             // mismo pero en otra clase.
-            boolean acierto = partida.procesarDecisionJugador(decisionJugador);
 
-            // o se podria hacer if (partida.procesarDecisionJugador(decisionJugador))
+            // NUEVO 4/10: Partida procesa toda la decisión y devuelve un ResultadoDecision.
+            // Este objeto reúne los resultados del turno para evitar consultar a Partida
+            // varias veces por separado. Luego se accede a cada dato mediante sus getters.
+            ResultadoDecision resultado = partida.procesarDecisionJugador(decisionJugador);
+
+ 
 
             // 4. Vista gráfica
-            if (acierto) {
+            if (resultado.getAcierto()) {
 
                 JOptionPane.showMessageDialog(
                     vista.getVentana(),
-                    "¡Decisión correcta! Reputación: " + partida.getReputacionActual()
+                    "¡Decisión correcta! Reputación: " + resultado.getReputacionActual()
                 );
 
             } else {
 
                 JOptionPane.showMessageDialog(
                     vista.getVentana(),
-                    "¡Penalización! Reputación: " + partida.getReputacionActual()
+                    "¡Penalización! Reputación: " + resultado.getReputacionActual()
                 );
             }
 
             // 5. NUEVO: mostramos el mismo resultado en la consola
-            vistaConsola.mostrarPuedeIngresar(partida.estaPerdida());
+            vistaConsola.mostrarPuedeIngresar(resultado.getPuedeIngresar());
             vistaConsola.mostrarDecisionJugador(decisionJugador);
-            vistaConsola.mostrarResultado(acierto, partida.getReputacionActual());
+            vistaConsola.mostrarResultado(resultado.getAcierto(),resultado.getReputacionActual());
 
             // 6. Despachamos al ingresante
             // this.ingresanteActual = null; 
@@ -128,7 +123,7 @@ public class ControladorJuego {
 
 
             // 7. NUEVO: fin de juego si el jugador se quedó sin reputación
-            if (partida.estaPerdida()) {
+            if (resultado.getPartidaPerdida()) {
                 vistaConsola.mostrarFinDeJuego();
                 JOptionPane.showMessageDialog(vista.getVentana(), "Te quedaste sin reputación. Fin del juego.");
             System.exit(0); // provisional: se reemplaza cuando exista Partida

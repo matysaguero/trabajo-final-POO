@@ -21,22 +21,15 @@ public class Partida {
         return this.ingresanteActual;
     }
 
-    // Procesa la decisión y devuelve true si el jugador acertó, o false si se equivocó
-    public boolean procesarDecisionJugador(boolean decisionJugador) throws Exception {
-        boolean puedeIngresar = resolutor.puedeIngresar(this.ingresanteActual);
-        boolean acierto = gestor.evaluarDecision(decisionJugador, puedeIngresar);
-        
-        // Despachamos al ingresante actual porque su turno terminó
-        this.ingresanteActual = null; 
-        
-        return acierto;
-    }
+// NUEVO 4/10: Procesa un turno completo: evalúa al ingresante actual, compara con la decisión del jugador, actualiza la reputación y devuelve todos los datos del turno en un ResultadoDecision.
+public ResultadoDecision procesarDecisionJugador(boolean decisionJugador) throws Exception {
+     boolean puedeIngresar = resolutor.puedeIngresar(this.ingresanteActual);
+     boolean acierto = gestor.evaluarDecision(decisionJugador, puedeIngresar);
 
-    public boolean estaPerdida() {
-        return gestor.juegoPerdido();
-    }
+     ResultadoDecision resultado = new ResultadoDecision(puedeIngresar,acierto,gestor.getReputacion(),gestor.juegoPerdido());
 
-    public int getReputacionActual() {
-        return gestor.getJugador().getReputacion();
-    }
+    // Despachamos al ingresante actual porque su turno terminó.
+     this.ingresanteActual = null;
+     return resultado;
+ }
 }
