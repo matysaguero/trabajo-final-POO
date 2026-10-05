@@ -21,11 +21,6 @@ public class Enemigo extends Ingresante{
         return this.portaBomba;
     }
 
-    /* 
-    @Override 
-    public void mostrarDetalle(){
-        super.mostrarDetalle();
-    }*/
 
     @Override
     public String responderInterrogatorio() {

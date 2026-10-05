@@ -3,13 +3,12 @@ package main;
 import controlador.ControladorJuego;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.SwingUtilities;
 import modelo.*;
-import modelo.Ingresantes.IngresanteRegular;
-import modelo.politicas.PoliticaClan;
-import modelo.politicas.PoliticaFronteriza;
-import modelo.politicas.PoliticaIngresante;
-import modelo.politicas.Resolutor;
+import modelo.Ingresantes.*;
+import modelo.documentos.*;
+import modelo.politicas.*;
 import vista.*;
 
 public class Main {
@@ -20,6 +19,24 @@ public class Main {
             try {
 
                 // 1. MODELOS
+                // a. DOCUMENTOS
+                Pasaporte pasaporte = new Pasaporte("3/10/25", 1, 60, 180, "Argentina", "Comodoro Rivadavia", true);
+                DNI dni = new DNI("3/6/2006", 2, true, "huella", "Santiago Del Estero", "masculino", "Ruta 25 de mayo");
+                
+                
+                ArrayList<Documento> documentos = new ArrayList<>();
+                documentos.add(pasaporte);
+                documentos.add(dni);
+
+                ArrayList<Documento> documentos2 = new ArrayList<>();
+                documentos2.add(pasaporte);
+                documentos2.add(dni);
+
+                // b. INGRESANTES
+                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA);
+                Enemigo enemigo = new Enemigo("Javier", 150, 50, 300, documentos, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.FENIX, TipoCiudad.LAS_HERAS, true);
+
+                // 
                 Jugador jugador = new Jugador("Inspector", 1);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
@@ -33,23 +50,23 @@ public class Main {
                 Resolutor resolutor = new Resolutor(politicas);
 
                 Partida partida = new Partida(gestor, resolutor);
+
                 
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
                 Escenario vistaPrincipal = new Escenario(vistaMesa);
                 VistaDecision vistaPopUp = new VistaDecision(vistaPrincipal.getVentana());
+                
+                FabricaVistaDocumento fabricaVistaDocumento = new FabricaVistaDocumento();
 
-                // NUEVO: segunda vista del juego, representada por consola
                 VistaConsola vistaConsola = new VistaConsola();
 
                 // 3. CONTROLADOR
-                ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, partida);
-
-                // 4. INGRESANTE
-                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, new ArrayList<>(), TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA);
+                ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, fabricaVistaDocumento, partida);
 
                 controlador.setIngresanteActual(ingresante);
+                controlador.setIngresanteActual(enemigo);
 
                 // 5. Mostramos la ventana
                 menu.mostrar();

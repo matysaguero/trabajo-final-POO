@@ -78,4 +78,3 @@ public class MenuPrincipal {
     public JButton getBtnTutorial() { return this.btnTutorial; }
 
 }
-

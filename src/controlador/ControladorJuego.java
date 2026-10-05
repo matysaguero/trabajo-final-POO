@@ -1,13 +1,12 @@
 package controlador;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import modelo.*;
 import modelo.Ingresantes.Ingresante;
-import vista.Escenario;
-import vista.MenuPrincipal;
-import vista.VistaConsola;
-import vista.VistaDecision;
-import vista.VistaMesaDocumentos;
+import modelo.documentos.Documento;
+import vista.*;
 
 
 public class ControladorJuego {
@@ -17,6 +16,7 @@ public class ControladorJuego {
     private final VistaDecision vistaDecision;
     private final VistaConsola vistaConsola;
     private final VistaMesaDocumentos vistaMesaDocumentos;
+    private final FabricaVistaDocumento fabricaDocumentos;
     private final Partida partida; // reemplaza a GestorReputacion, Resolutor y a Ingresante.
     
     // NUEVO: 2/10, Se implemento la clase Partida, para alivianar al controlador y,
@@ -24,13 +24,14 @@ public class ControladorJuego {
     
     // El controlador recibe las dependencias necesarias. 
  
-    public ControladorJuego(MenuPrincipal menu, Escenario vista, VistaDecision vistaDecision, VistaConsola vistaConsola, VistaMesaDocumentos vistaMesaDocumentos, Partida partida) {
+    public ControladorJuego(MenuPrincipal menu, Escenario vista, VistaDecision vistaDecision, VistaConsola vistaConsola, VistaMesaDocumentos vistaMesaDocumentos, FabricaVistaDocumento fabricaDocumentos, Partida partida) {
         this.menu = menu;
         this.vista = vista;
         this.vistaDecision = vistaDecision;
         this.vistaConsola = vistaConsola;
         this.partida = partida;
         this.vistaMesaDocumentos = vistaMesaDocumentos;
+        this.fabricaDocumentos = fabricaDocumentos;
 
         // Lambdas
         this.menu.getBtnJugar().addActionListener(evento -> this.iniciarJuego());
@@ -52,10 +53,25 @@ public class ControladorJuego {
 
 
     public void setIngresanteActual(Ingresante ingresante) {
-        partida.setIngresanteActual(ingresante);
+        this.vistaMesaDocumentos.limpiarMesa();
+        this.partida.setIngresanteActual(ingresante);
 
         // NUEVO: la VistaConsola muestra el mismo ingresante que está en el juego
         this.vistaConsola.mostrarIngresante(ingresante);
+    
+        int posicionX = 30;
+        int posicionY = 20;
+        for (Documento doc : ingresante.getDocumentos()) {
+            // La fábrica crea el dibujo usando los datos del modelo
+            JPanel vistaDoc = this.fabricaDocumentos.crearVista(doc, posicionX, posicionY);
+            
+            // La mesa recibe el dibujo listo y lo pega en pantalla
+            this.vistaMesaDocumentos.agregarDocumentoEnMesa(vistaDoc);
+            
+            // Desplazamos un poco la X y la Y para que los papeles aparezcan apilados como un mazo
+            posicionX += 40; 
+            posicionY += 20; 
+        }
     }
 
     // --- MÉTODOS PRIVADOS QUE ATIENDEN A LAS LAMBDAS ---

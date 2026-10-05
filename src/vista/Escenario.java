@@ -11,6 +11,9 @@ public class Escenario {
     // Botón invisible para la decisión
     private final BotonInvisible btnDecidir;
 
+    // Botón invisible para llamar al siguiente ingresante
+    private final BotonInvisible btnLlamar;
+
     public Escenario(VistaMesaDocumentos vistaMesa) {
         this.ventana = new JFrame("Frontier");
         this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,15 +41,26 @@ public class Escenario {
         this.btnDecidir = new BotonInvisible();
         // Coordenadas y tamaño del botón invisible, ajustadas al diseño del juego
         this.btnDecidir.setBounds(
-            (int)(tamanoPantalla.width * 0.22),  // X: 22% de la pantalla hacia la derecha
-            (int)(tamanoPantalla.height * 0.70), // Y: 70% de la pantalla hacia abajo
-            (int)(tamanoPantalla.width * 0.08),  // Ancho
-            (int)(tamanoPantalla.height * 0.10)  // Alto
+            (int)(tamanoPantalla.width * 0.23),  // X: 22% de la pantalla hacia la derecha
+            (int)(tamanoPantalla.height * 0.74), // Y: 70% de la pantalla hacia abajo
+            (int)(tamanoPantalla.width * 0.07),  // Ancho
+            (int)(tamanoPantalla.height * 0.085)  // Alto
         );
         
         panelFondo.add(this.btnDecidir);
         this.ventana.setContentPane(panelFondo);
         this.ventana.add(vistaMesa.getPanelDocumentos(), 0);
+
+        this.btnLlamar = new BotonInvisible();
+        // Coordenadas y tamaño del botón invisible, ajustadas al diseño del juego
+        this.btnLlamar.setBounds(
+            (int)(tamanoPantalla.width * 0.288),  // X: 22% de la pantalla hacia la derecha
+            (int)(tamanoPantalla.height * 0.199), // Y: 70% de la pantalla hacia abajo
+            (int)(tamanoPantalla.width * 0.038),  // Ancho
+            (int)(tamanoPantalla.height * 0.05)  // Alto
+        );
+        panelFondo.add(this.btnLlamar);
+
     }
     
     public void mostrar() { 
