@@ -122,7 +122,7 @@ public class ControladorJuego {
             // NUEVO 2/10: De esto se encarga ya partida.procesarDecisionJugador al final del metodo. 
 
 
-            // 7. NUEVO: fin de juego si el jugador se quedó sin reputación
+            // 7. NUEVO: fin de juego si el jugador se quedó sin reputación. DEBE SALIR HACIA LA VISTA.
             if (resultado.getPartidaPerdida()) {
                 vistaConsola.mostrarFinDeJuego();
                 JOptionPane.showMessageDialog(vista.getVentana(), "Te quedaste sin reputación. Fin del juego.");

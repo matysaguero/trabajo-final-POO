@@ -32,16 +32,16 @@ public class Escenario {
         // layout null para mapear píxeles del juego.
         panelFondo.setLayout(null); 
         
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
         
         // Instanciamos y ubicamos el botón invisible debajo del "Sello"
         this.btnDecidir = new BotonInvisible();
         // Coordenadas y tamaño del botón invisible, ajustadas al diseño del juego
         this.btnDecidir.setBounds(
-            (int)(screenSize.width * 0.22),  // X: 22% de la pantalla hacia la derecha
-            (int)(screenSize.height * 0.70), // Y: 70% de la pantalla hacia abajo
-            (int)(screenSize.width * 0.08),  // Ancho
-            (int)(screenSize.height * 0.10)  // Alto
+            (int)(tamanoPantalla.width * 0.22),  // X: 22% de la pantalla hacia la derecha
+            (int)(tamanoPantalla.height * 0.70), // Y: 70% de la pantalla hacia abajo
+            (int)(tamanoPantalla.width * 0.08),  // Ancho
+            (int)(tamanoPantalla.height * 0.10)  // Alto
         );
         
         panelFondo.add(this.btnDecidir);
