@@ -14,7 +14,7 @@ public class Escenario {
     // Botón invisible para llamar al siguiente ingresante
     private final BotonInvisible btnLlamar;
 
-    public Escenario(VistaMesaDocumentos vistaMesa) {
+    public Escenario(VistaMesaDocumentos vistaMesa, Ventanilla ventanilla) {
         this.ventana = new JFrame("Frontier");
         this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -49,7 +49,8 @@ public class Escenario {
         
         panelFondo.add(this.btnDecidir);
         this.ventana.setContentPane(panelFondo);
-        this.ventana.add(vistaMesa.getPanelDocumentos(), 0);
+        this.ventana.add(vistaMesa.getPanelDocumentos(), JLayeredPane.DEFAULT_LAYER);
+        this.ventana.add(ventanilla.getVentanilla(), JLayeredPane.DEFAULT_LAYER);
 
         this.btnLlamar = new BotonInvisible();
         // Coordenadas y tamaño del botón invisible, ajustadas al diseño del juego

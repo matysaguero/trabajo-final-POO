@@ -19,8 +19,9 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     private TipoRaza raza;
     private TipoClan clan;
     private TipoCiudad ciudad;
+    private String rutaImagen;
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
@@ -42,6 +43,8 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         this.raza= raza;
         this.clan = clan;
         this.ciudad = ciudad;
+        this.rutaImagen = rutaImagen;
+
         // Si no llegan documentos (null), se usa una lista vacía para que mostrarDetalle()
         // no falle. Se guarda una copia para que la lista original no pueda modificarse desde afuera.
         if (documentos == null) {
@@ -79,6 +82,10 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return this.ciudad;
     }
 
+    public String getRutaImagen(){
+        return this.rutaImagen;
+    }
+    
     public List<Documento> getDocumentos() { //NUEVO: getter para los documentos.
         return List.copyOf(documentos);
     }

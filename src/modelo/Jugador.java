@@ -11,12 +11,9 @@ public class Jugador{
         }
         if (reputacionInicial <0) {
             throw new IllegalArgumentException("La reputacion no puede ser negativa.");
-
         }
-
         this.nombre = nombre;
         this.reputacionJugador = reputacionInicial;
-
     }
 
     public String getNombre(){
@@ -40,8 +37,8 @@ public class Jugador{
     // pero GestorReputacion decide cuánto debe modificarse.
     // Sin "public": solo las clases del paquete modelo (GestorReputacion) pueden llamarlo,
     // así ninguna vista ni el controlador puede alterar la reputación por su cuenta.
-    void modificarReputacion(int variacion) {
 
+    void modificarReputacion(int variacion) {
         reputacionJugador += variacion;
 
         if (reputacionJugador < 0) {

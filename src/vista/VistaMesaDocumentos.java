@@ -35,5 +35,4 @@ public class VistaMesaDocumentos {
         this.panelDocumentos.removeAll();
         this.panelDocumentos.repaint();
     }
-  //preguntar si esta bien la distro de las tareas de esta clase.
 } 

@@ -40,6 +40,6 @@ public class FabricaVistaDocumento {
         return panelFondo;
     }
 
-private final Image imagenFondo = new ImageIcon("assets/imagenes/documentos/pasaporte_vigente.jpeg").getImage();
+private final Image imagenFondo = new ImageIcon("assets/imagenes/pasaportes/pasaporte_soldado.jpeg").getImage();
 }
 
