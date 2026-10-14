@@ -73,5 +73,6 @@ public class ControladorJuego {
         } catch (Exception e) {
             this.ui.mostrarError("Error al procesar el veredicto: " + e.getMessage());
         }
+        this.ui.ocultarVentanaDecision();
     }
 }
