@@ -3,6 +3,7 @@ package controlador;
 import modelo.Partida;
 import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
+import vista.GestorVista;
 
 
 public class ControladorJuego {
@@ -20,14 +21,20 @@ public class ControladorJuego {
         this.ui = ui;
         this.partida = partida;
         
+        
 
         // Lambdas
+        this.ui.getMenuPrincipal().getBtnJugar().addActionListener(evento -> this.ui.iniciarJuego());
+        this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(evento -> System.out.println("El tutorial se implementará pronto."));
         this.ui.getMenuPrincipal().getBtnJugar().addActionListener(evento -> this.ui.iniciarJuego());
         this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(evento -> System.out.println("El tutorial se implementará pronto."));
         
         // this.vista.getBtnLlamar().addActionListener(evento -> );
         this.ui.getEscenario().getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
+        this.ui.getEscenario().getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
         
+        this.ui.getVistaDecision().getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
+        this.ui.getVistaDecision().getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
         this.ui.getVistaDecision().getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getVistaDecision().getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
     }
@@ -49,6 +56,8 @@ public class ControladorJuego {
     }
 
     private void procesarVeredicto(boolean decisionJugador) {
+        
+        this.ui.getVistaDecision().ocultar();
         
         this.ui.getVistaDecision().ocultar();
 

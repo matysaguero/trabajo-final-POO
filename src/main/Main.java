@@ -34,11 +34,13 @@ public class Main {
 
                 // b. INGRESANTES
                 IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.SPACERS, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
+                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.SPACERS, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
                 Enemigo enemigo = new Enemigo("Javier", 150, 50, 300, documentos, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.FENIX, TipoCiudad.LAS_HERAS, "assets/imagenes/ingresantes/caballero.png",  true);
 
                 Jugador jugador = new Jugador("Inspector", 1);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
+                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
                 PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
                 PoliticaIngresante politicaIngresante = new PoliticaIngresante();//NUEVO 02/10
 
@@ -54,6 +56,7 @@ public class Main {
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
                 
+                VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
                 
@@ -71,6 +74,7 @@ public class Main {
                 partida.suscribir(ui);
 
                 // 3. CONTROLADOR
+                ControladorJuego controlador = new ControladorJuego(ui, partida);
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
                 controlador.setIngresanteActual(ingresante);
