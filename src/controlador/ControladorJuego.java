@@ -33,9 +33,9 @@ public class ControladorJuego {
         });
 
         // NUEVA LÓGICA: Ya en la vista del tutorial, al tocar el boton de Volver, ocultamos tutorial y mostramos menú
-        this.ui.getBtnTutorial().getBtnVolver().addActionListener(evento -> {
-            this.ui.getVistaTutorial().ocultar();
-            this.ui.getMenuPrincipal().mostrar();
+        this.ui.getBtnVolver().addActionListener(evento -> {
+            this.ui.ocultarTutorial();;
+            this.ui.mostrarMenuPrincipal();
         });
 
         // Si no hay ingresante en ventanilla, el botón Llamar hace pasar al siguiente

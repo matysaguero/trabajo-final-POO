@@ -70,6 +70,10 @@ public class GestorVista implements ObservadorPartida{
         return this.menu.getBtnTutorial();
     }
 
+    public JButton getBtnVolver(){
+        return this.vistaTutorial.getBtnVolver();
+    }
+
     public JButton getBtnLlamar() {
         return this.escenario.getBtnLlamar();
     }
