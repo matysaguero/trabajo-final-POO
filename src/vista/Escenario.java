@@ -68,6 +68,10 @@ public class Escenario {
         this.ventana.setVisible(true); 
     }
 
+    public void ocultar() { 
+        this.ventana.setVisible(false); 
+    }
+
     // La vista expone lo que el controlador necesita para registrarse, y nada más
     public JButton getBtnDecidir() { 
         return this.btnDecidir; 
