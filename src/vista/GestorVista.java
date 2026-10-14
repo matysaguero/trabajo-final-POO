@@ -7,6 +7,7 @@ import modelo.documentos.Documento;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 public class GestorVista implements ObservadorPartida{
     private final MenuPrincipal menu;
@@ -27,10 +28,49 @@ public class GestorVista implements ObservadorPartida{
         this.fabrica = fabrica;
     }
 
+    // METODOS FACHADA CONTROL DE VISTAS
+    public void mostrarMenuPrincipal(){
+        this.menu.mostrar();
+    }
+
     public void iniciarJuego(){
         this.menu.ocultar();
         this.escenario.mostrar();
     }
+
+    public void mostrarVentanaDecision(){
+        this.vistaDecision.mostrar();
+    }
+
+    public void ocultarVentanaDecision(){
+        this.vistaDecision.ocultar();
+    }
+
+    // METODOS DE LA FACHADA PARA EXPONER LOS BOTONES AL CONTROLADOR
+    public JButton getBtnJugar() {
+        return this.menu.getBtnJugar();
+    }
+
+    public JButton getBtnTutorial() {
+        return this.menu.getBtnTutorial();
+    }
+
+    public JButton getBtnLlamar() {
+        return this.escenario.getBtnLlamar();
+    }
+
+    public JButton getBtnDecidir() {
+        return this.escenario.getBtnDecidir();
+    }
+
+    public JButton getBtnAceptar() {
+        return this.vistaDecision.getBtnAceptar();
+    }
+
+    public JButton getBtnRechazar() {
+        return this.vistaDecision.getBtnRechazar();
+    }
+
 
 @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
@@ -89,11 +129,4 @@ public class GestorVista implements ObservadorPartida{
         JOptionPane.showMessageDialog(this.escenario.getVentana(), mensaje);
     }
 
-    public MenuPrincipal getMenuPrincipal() {return this.menu;}
-    public Escenario getEscenario() {return this.escenario;}
-    public VistaDecision getVistaDecision() {return this.vistaDecision;}
-    public VistaConsola getVistaConsola() {return this.consola;}
-    public VistaMesaDocumentos getVistaMesaDocumentos() {return this.mesa;}
-    public VistaVentanilla getVistaVentanilla() {return this.ventanilla;}
-    public FabricaVistaDocumento getFabricaVistaDocumento() {return this.fabrica;}
 }
