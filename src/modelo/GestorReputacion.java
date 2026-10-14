@@ -39,14 +39,12 @@ public class GestorReputacion {
         }
 
         return acierto;
-    }
-    
-    
-/*     
+    }   
+     
     public Jugador getJugador() {
         return this.jugador;
     }
-*/
+
 
     public int getReputacion() {
         return this.jugador.getReputacion();

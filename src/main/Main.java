@@ -67,6 +67,9 @@ public class Main {
 
                 GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento);
 
+                // SUSCRIPCIÓN OBSERVADOR PARTIDA
+                partida.suscribir(ui);
+
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
