@@ -39,8 +39,9 @@ public class GestorReputacion {
         }
 
         return acierto;
-    }   
-     
+    }
+    
+         
     public Jugador getJugador() {
         return this.jugador;
     }
