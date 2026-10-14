@@ -1,10 +1,6 @@
 package controlador;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import modelo.Partida;
-import modelo.ResultadoDecision;
 import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
 
@@ -19,7 +15,7 @@ public class ControladorJuego {
     public ControladorJuego(GestorVista ui, Partida partida) {
         this.ui = ui;
         this.partida = partida;
-        
+        this.partida.suscribir(this.ui);
 
         // Lambdas
         this.ui.getMenuPrincipal().getBtnJugar().addActionListener(evento -> this.ui.iniciarJuego());

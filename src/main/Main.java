@@ -50,7 +50,6 @@ public class Main {
 
                 Partida partida = new Partida(gestor, resolutor);
 
-                
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
                 
