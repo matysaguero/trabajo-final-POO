@@ -44,4 +44,13 @@ public class DNI extends Documento {
     public String getDomicilio(){
         return this.domicilio;
     }
+
+    @Override
+    public String obtenerDetalles() {
+        return "Tipo: DNI\n" +
+               "Huella: " + this.getHuella() + "\n" +
+               "Lugar de nacimiento: " + this.getLugarNacimiento() + "\n" +
+               "Sexo: " + this.getSexo() + "\n" +
+               "Domicilio: " + this.getDomicilio();
+    }
 }

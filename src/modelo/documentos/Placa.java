@@ -20,4 +20,11 @@ public class Placa extends Documento {
     public int getIdPlaca(){
         return this.idPlaca;
     }
+    @Override
+    public String obtenerDetalles() {
+        return "Tipo: Placa\n" +
+               "Clan: " + this.getClan() + "\n" +
+               "ID de placa: " + this.getIdPlaca();
+    }
+
 }

@@ -30,5 +30,6 @@ public abstract class Documento {
         return this.trucho;
     }
 
+    public abstract String obtenerDetalles();
 
 }

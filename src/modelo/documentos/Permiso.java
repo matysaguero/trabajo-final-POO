@@ -20,4 +20,11 @@ public class Permiso extends Documento {
     public String getOcupacion(){
         return this.ocupacion;
     }
+
+    @Override
+    public String obtenerDetalles() {
+        return "Tipo: Permiso\n" +
+               "Sello: " + this.getSello() + "\n" +
+               "Ocupación: " + this.getOcupacion();
+    }
 }
