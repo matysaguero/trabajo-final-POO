@@ -182,8 +182,8 @@ La persistencia todavía no se encuentra implementada. Se contempla incorporar p
  
 ## 3. Arquitectura y Diseño 
 ### Patrón de Diseño
-- Observer (GestorVista). -> 
-- Facade (ControladorJuego).
+- Observer (GestorVista al Modelo).
+- Facade (ControladorJuego con GestorVista).
 
 
 ### Diagramas de Diseño
