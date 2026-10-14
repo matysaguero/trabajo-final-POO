@@ -3,8 +3,7 @@ package modelo;
 public enum TipoIngresante {
     CIUDADANO,
     TURISTA,
-    TRABAJADOR,
-    ALIADO
+    TRABAJADOR;
 }
 //Se utiliza un enumerado para representar los tipos 
 // distintos de ingresantes "buenos" posibles sin la 

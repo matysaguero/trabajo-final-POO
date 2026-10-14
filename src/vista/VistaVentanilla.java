@@ -3,14 +3,14 @@ package vista;
 import javax.swing.*;
 import java.awt.Image;
 
-public class Ventanilla {
+public class VistaVentanilla {
     private final JLabel labelPersonaje;
     
     // El tamaño fijo que el personaje ocupará visualmente en el juego
     private final int ANCHO_NPC = 230;
     private final int ALTO_NPC = 260;
 
-    public Ventanilla() {
+    public VistaVentanilla() {
         this.labelPersonaje = new JLabel();
         
         this.labelPersonaje.setBounds(100, 245, ANCHO_NPC, ALTO_NPC); 

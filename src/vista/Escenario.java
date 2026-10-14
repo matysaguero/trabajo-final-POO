@@ -14,7 +14,7 @@ public class Escenario {
     // Botón invisible para llamar al siguiente ingresante
     private final BotonInvisible btnLlamar;
 
-    public Escenario(VistaMesaDocumentos vistaMesa, Ventanilla ventanilla) {
+    public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla) {
         this.ventana = new JFrame("Frontier");
         this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -77,6 +77,7 @@ public class Escenario {
         return this.btnLlamar;
     }
     
+
     // Getter temporal para pasarle al JDialog emergente de decisión
     public JFrame getVentana() {
         return this.ventana;

@@ -176,33 +176,18 @@ public class VistaConsola {
     }
 
 
-    public void mostrarResultado(
-            boolean acierto,
-            int reputacion) {
-
-        if (acierto) {
-
-            System.out.println(
-                "Decisión correcta."
-            );
+    public void mostrarResultado(boolean acierto,int reputacion) {
+        if (acierto) { System.out.println("Decisión correcta.");
 
         } else {
 
-            System.out.println(
-                "Decisión incorrecta."
-            );
+            System.out.println("Decisión incorrecta.");
+        
         }
 
-        System.out.println(
-            "Reputación actual: " + reputacion
-        );
+        System.out.println("Reputación actual: " + reputacion);
     }
 
 
-    public void mostrarFinDeJuego() {
-
-        System.out.println(
-            "===== FIN DEL JUEGO: reputación agotada ====="
-        );
-    }
+    public void mostrarFinDeJuego() {System.out.println("===== FIN DEL JUEGO: reputación agotada =====");}
 }                              

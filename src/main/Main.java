@@ -33,13 +33,13 @@ public class Main {
                 documentos2.add(dni);
 
                 // b. INGRESANTES
-                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.LLA, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
+                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.SPACERS, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
                 Enemigo enemigo = new Enemigo("Javier", 150, 50, 300, documentos, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.FENIX, TipoCiudad.LAS_HERAS, "assets/imagenes/ingresantes/caballero.png",  true);
 
                 Jugador jugador = new Jugador("Inspector", 1);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
-                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.JUSTICIALISTA));
+                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
                 PoliticaIngresante politicaIngresante = new PoliticaIngresante();//NUEVO 02/10
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Main {
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
                 
-                Ventanilla ventanilla = new Ventanilla();
+                VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
                 
                 Escenario vistaPrincipal = new Escenario(vistaMesa, ventanilla);
@@ -65,8 +65,10 @@ public class Main {
 
                 VistaConsola vistaConsola = new VistaConsola();
 
+                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento);
+
                 // 3. CONTROLADOR
-                ControladorJuego controlador = new ControladorJuego(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento, partida);
+                ControladorJuego controlador = new ControladorJuego(ui, partida);
 
                 controlador.setIngresanteActual(ingresante);
                 controlador.setIngresanteActual(enemigo);

@@ -182,9 +182,13 @@ La persistencia todavía no se encuentra implementada. Se contempla incorporar p
  
 ## 3. Arquitectura y Diseño 
 ### Patrón de Diseño
+- Observer (GestorVista). -> 
+- Facade (ControladorJuego).
+
+
 ### Diagramas de Diseño
 ### **Diagrama de Clases UML (Conceptual)**
-### **Prototipo de la IGU (Wireframe)**
+### Prototipo de la IGU (Wireframe)**
 
 ## 4. Stack Tecnologico
     - Lenguaje: Java.
