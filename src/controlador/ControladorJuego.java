@@ -22,10 +22,23 @@ public class ControladorJuego {
             this.partida.iniciarPartida();
         });
         
+        /* 
         this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(
             evento -> System.out.println("El tutorial se implementará pronto.")
-        );
+        );*/
         
+        // NUEVA LÓGICA: Al tocar el boton tutorial, ocultamos el menú y mostramos el tutorial
+        this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(evento -> {
+            this.ui.getMenuPrincipal().ocultar();
+            this.ui.getVistaTutorial().mostrar();
+        });
+
+        // NUEVA LÓGICA: Ya en la vista del tutorial, al tocar el boton de Volver, ocultamos tutorial y mostramos menú
+        this.ui.getVistaTutorial().getBtnVolver().addActionListener(evento -> {
+            this.ui.getVistaTutorial().ocultar();
+            this.ui.getMenuPrincipal().mostrar();
+        });
+
         // Si no hay ingresante en ventanilla, el botón Llamar hace pasar al siguiente
         this.ui.getEscenario().getBtnLlamar().addActionListener(evento -> {
             if (this.partida.getIngresanteActual() == null) {

@@ -16,8 +16,9 @@ public class GestorVista implements ObservadorPartida{
     private final VistaMesaDocumentos mesa;
     private final VistaVentanilla ventanilla;
     private final FabricaVistaDocumento fabrica;
+    private final VistaTutorial vistaTutorial; //NUEVO: para la vista tutorial, agregado en el constructor y su getter
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica){
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial){
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -25,6 +26,7 @@ public class GestorVista implements ObservadorPartida{
         this.mesa = mesa;
         this.ventanilla = ventanilla;
         this.fabrica = fabrica;
+        this.vistaTutorial = vistaTutorial;
     }
 
     public void iniciarJuego(){
@@ -96,4 +98,5 @@ public class GestorVista implements ObservadorPartida{
     public VistaMesaDocumentos getVistaMesaDocumentos() {return this.mesa;}
     public VistaVentanilla getVistaVentanilla() {return this.ventanilla;}
     public FabricaVistaDocumento getFabricaVistaDocumento() {return this.fabrica;}
+    public VistaTutorial getVistaTutorial() {return this.vistaTutorial;}
 }

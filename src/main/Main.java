@@ -39,10 +39,9 @@ public class Main {
                 FabricaVistaDocumento fabricaVistaDocumento = new FabricaVistaDocumento();
                 VistaConsola vistaConsola = new VistaConsola();
 
-                GestorVista ui = new GestorVista(
-                    menu, vistaPrincipal, vistaPopUp, vistaConsola,
-                    vistaMesa, ventanilla, fabricaVistaDocumento
-                );
+                // NUEVO: Instanciamos el tutorial
+                VistaTutorial vistaTutorial = new VistaTutorial();
+                GestorVista ui = new GestorVista( menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial);
 
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
