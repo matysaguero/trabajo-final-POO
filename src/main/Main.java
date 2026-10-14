@@ -1,4 +1,4 @@
-package main;
+    package main;
 
 import controlador.ControladorJuego;
 import java.util.ArrayList;
@@ -28,20 +28,20 @@ public class Main {
                 documentos.add(pasaporte);
                 documentos.add(dni);
 
-                ArrayList<Documento> documentos2 = new ArrayList<>();
+                /*ArrayList<Documento> documentos2 = new ArrayList<>();
                 documentos2.add(pasaporte);
-                documentos2.add(dni);
+                documentos2.add(dni);*/
 
                 // b. INGRESANTES
                 IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.SPACERS, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
-                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.SPACERS, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
+                
                 Enemigo enemigo = new Enemigo("Javier", 150, 50, 300, documentos, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.FENIX, TipoCiudad.LAS_HERAS, "assets/imagenes/ingresantes/caballero.png",  true);
 
                 Jugador jugador = new Jugador("Inspector", 1);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
                 PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
-                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
+               
                 PoliticaIngresante politicaIngresante = new PoliticaIngresante();//NUEVO 02/10
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();
@@ -57,7 +57,7 @@ public class Main {
                 MenuPrincipal menu = new MenuPrincipal();
                 
                 VistaVentanilla ventanilla = new VistaVentanilla();
-                VistaVentanilla ventanilla = new VistaVentanilla();
+
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
                 
                 Escenario vistaPrincipal = new Escenario(vistaMesa, ventanilla);
@@ -75,10 +75,9 @@ public class Main {
 
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
-                ControladorJuego controlador = new ControladorJuego(ui, partida);
 
                 controlador.setIngresanteActual(ingresante);
-                controlador.setIngresanteActual(enemigo);
+                // controlador.setIngresanteActual(enemigo);
 
                 // 5. Mostramos la ventana
                 menu.mostrar();
