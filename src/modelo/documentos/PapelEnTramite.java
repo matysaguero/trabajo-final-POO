@@ -15,4 +15,9 @@ public class PapelEnTramite extends Documento {
         return this.firmalegal;
     }
 
+    @Override
+    public String obtenerDetalles() {
+        return "Tipo: Papel en trámite\n" +
+               "Firma legal: " + this.getFirmaLegal();
+    }
 }

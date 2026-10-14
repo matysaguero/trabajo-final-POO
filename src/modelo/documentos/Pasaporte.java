@@ -43,5 +43,12 @@ public class Pasaporte extends Documento {
     public String getCiudad(){
         return this.ciudad;
     }
- 
+    @Override
+    public String obtenerDetalles() {
+        return "Tipo: Pasaporte\n" +
+               "País: " + this.getPais() + "\n" +
+               "Ciudad: " + this.getCiudad() + "\n" +
+               "Peso: " + this.getPeso() + "\n" +
+               "Altura: " + this.getAltura();
+}
 }
