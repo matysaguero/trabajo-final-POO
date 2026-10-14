@@ -76,7 +76,6 @@ public class Escenario {
     public JButton getBtnLlamar(){
         return this.btnLlamar;
     }
-    
 
     // Getter temporal para pasarle al JDialog emergente de decisión
     public JFrame getVentana() {
