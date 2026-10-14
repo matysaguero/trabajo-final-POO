@@ -78,9 +78,10 @@ public class GestorVista implements ObservadorPartida{
             this.consola.mostrarFinDeJuego();
             JOptionPane.showMessageDialog(
                 this.escenario.getVentana(), 
-                "Te quedaste sin reputación. Fin del juego."
+                "Te quedaste sin reputación (0/10). Volviendo al menú principal."
             );
-            System.exit(0);
+            this.escenario.ocultar();
+            this.menu.mostrar();
         }
     }
 

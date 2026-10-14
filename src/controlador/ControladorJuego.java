@@ -1,72 +1,65 @@
 package controlador;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import modelo.Partida;
-import modelo.ResultadoDecision;
 import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
 
-
 public class ControladorJuego {
     
-    private final GestorVista ui; // Se aplica patron Observer, reemplaza a las 6 vistas definidas hasta ahora.
-    private final Partida partida; // reemplaza a GestorReputacion, Resolutor y a Ingresante.
+    private final GestorVista ui;
+    private final Partida partida;
     
-    // El controlador recibe las dependencias necesarias. 
- 
     public ControladorJuego(GestorVista ui, Partida partida) {
         this.ui = ui;
         this.partida = partida;
         
-
-        // Lambdas
-        this.ui.getMenuPrincipal().getBtnJugar().addActionListener(evento -> this.ui.iniciarJuego());
-        this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(evento -> System.out.println("El tutorial se implementará pronto."));
+        // CONEXIÓN CLAVE DEL PATRÓN OBSERVER: la vista se suscribe a la partida
+        this.partida.suscribir(this.ui);
         
-        // this.vista.getBtnLlamar().addActionListener(evento -> );
+        // Al darle a Jugar, se muestra el escenario y se inicia/reinicia la partida con 10 de reputación
+        this.ui.getMenuPrincipal().getBtnJugar().addActionListener(evento -> {
+            this.ui.iniciarJuego();
+            this.partida.iniciarPartida();
+        });
+        
+        this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(
+            evento -> System.out.println("El tutorial se implementará pronto.")
+        );
+        
+        // Si no hay ingresante en ventanilla, el botón Llamar hace pasar al siguiente
+        this.ui.getEscenario().getBtnLlamar().addActionListener(evento -> {
+            if (this.partida.getIngresanteActual() == null) {
+                boolean hayMas = this.partida.llamarSiguienteIngresante();
+                if (!hayMas) {
+                    this.ui.mostrarError("¡Ya no quedan más ingresantes en la fila por hoy!");
+                }
+            }
+        });
+
         this.ui.getEscenario().getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
         
         this.ui.getVistaDecision().getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getVistaDecision().getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
     }
 
-    // --- MÉTODOS PÚBLICOS QUE ATIENDEN A LA LÓGICA DEL JUEGO ---
-
     public void setIngresanteActual(Ingresante ingresante) {
         this.partida.setIngresanteActual(ingresante);
-        this.ui.actualizarNuevoIngresante(ingresante);
     }
-
-    // --- MÉTODOS PRIVADOS QUE ATIENDEN A LAS LAMBDAS ---
 
     private void abrirVentanaDecision() {
         if (this.partida.getIngresanteActual() != null) {
-            
-            this.ui.getVistaDecision().mostrar();   
-        
+            this.ui.getVistaDecision().mostrar();
         } else {
-            
-            System.out.println("No hay ingresante en ventanilla.");
+            this.ui.mostrarError("No hay ningún ingresante en la ventanilla.");
         }
     }
 
-    // NUEVO: ahora el veredicto se procesa usando el Resolutor,
-    // que evalúa todas las políticas activas y devuelve si el ingresante puede pasar.
-    // Luego esa respuesta se compara con la decisión del jugador para saber si acertó.
-    
     private void procesarVeredicto(boolean decisionJugador) {
-        
         this.ui.getVistaDecision().ocultar();
-
         try {
-           // El controlador solo le avisa al modelo.
             this.partida.procesarDecisionJugador(decisionJugador);
-
         } catch (Exception e) {
-            this.ui.mostrarError("Error al procesar el veredicto: "+ e.getMessage());
+            this.ui.mostrarError("Error al procesar el veredicto: " + e.getMessage());
         }
     }
-     
 }

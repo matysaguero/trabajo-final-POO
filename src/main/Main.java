@@ -32,23 +32,41 @@ public class Main {
                 documentos2.add(pasaporte);
                 documentos2.add(dni); */
 
-                // b. INGRESANTES
-                IngresanteRegular ingresante = new IngresanteRegular("Andrea", 170, 63, 6.7, documentos, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.SPACERS, TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png");
-                // Enemigo enemigo = new Enemigo("Javier", 150, 50, 300, documentos, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.FENIX, TipoCiudad.LAS_HERAS, "assets/imagenes/ingresantes/caballero.png",  true);
+                // b. LISTA DE INGRESANTES
+                IngresanteRegular ingresante1 = new IngresanteRegular(
+                    "Andrea", 170, 63, 6.7, documentos,
+                    TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.FENIX,
+                    TipoCiudad.COMODORO_RIVADAVIA, "assets/imagenes/ingresantes/caballero.png"
+                );
 
-                Jugador jugador = new Jugador("Inspector", 1);
+                IngresanteRegular ingresante2 = new IngresanteRegular(
+                    "Marcos", 180, 75, 5.0, documentos,
+                    TipoIngresante.CIUDADANO, TipoRaza.HUMANO, TipoClan.SPACERS, // Clan prohibido -> debe rechazarse
+                    TipoCiudad.TRELEW, "assets/imagenes/ingresantes/caballero.png"
+                );
+
+                Enemigo ingresante3 = new Enemigo(
+                    "Javier", 150, 50, 300, documentos,
+                    TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.ERUDITO,
+                    TipoCiudad.LAS_HERAS, "assets/imagenes/ingresantes/caballero.png", true // Es amenaza -> debe rechazarse
+                );
+
+                // Jugador arranca con 10 puntos de reputación
+                Jugador jugador = new Jugador("Inspector", 10);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
                 PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
-                PoliticaIngresante politicaIngresante = new PoliticaIngresante();//NUEVO 02/10
+                PoliticaIngresante politicaIngresante = new PoliticaIngresante();
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();
                 politicas.add(politicaClan);
-                politicas.add(politicaIngresante);//NUEVO 02/10
+                politicas.add(politicaIngresante);
 
                 Resolutor resolutor = new Resolutor(politicas);
-
                 Partida partida = new Partida(gestor, resolutor);
+                
+                // Cargamos todos los ingresantes en la partida
+                partida.cargarIngresantes(List.of(ingresante1, ingresante2, ingresante3));
 
                 
                 // 2. VISTAS
@@ -70,8 +88,10 @@ public class Main {
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
-                controlador.setIngresanteActual(ingresante);
-                //controlador.setIngresanteActual(enemigo);
+                // 4. Inicializamos el juego
+                controlador.setIngresanteActual(ingresante1);
+                //controlador.setIngresanteActual(ingresante2);
+                //controlador.setIngresanteActual(ingresante3);
 
                 // 5. Mostramos la ventana
                 menu.mostrar();

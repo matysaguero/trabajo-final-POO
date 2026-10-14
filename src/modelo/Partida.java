@@ -2,19 +2,19 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.Ingresantes.Ingresante;
 import modelo.politicas.Resolutor;
 
 public class Partida {
     private final GestorReputacion gestor;
     private final Resolutor resolutor;
+    private final List<Ingresante> ingresantesIniciales = new ArrayList<>();
+    private final List<Ingresante> filaIngresantes = new ArrayList<>();
     private Ingresante ingresanteActual;
-
     private final List<ObservadorPartida> observadores = new ArrayList<>();
 
     public Partida(GestorReputacion gestor, Resolutor resolutor) {
-        if (gestor == null || resolutor == null){
+        if (gestor == null || resolutor == null) {
             throw new IllegalArgumentException("El gestor y el resolutor son obligatorios");
         }
         this.gestor = gestor;
@@ -30,12 +30,38 @@ public class Partida {
     }
 
     public boolean desuscribir(ObservadorPartida observador) {
-       return this.observadores.remove(observador);
-    }    
+        return this.observadores.remove(observador);
+    }
+
+    // Carga la lista de ingresantes del día
+    public void cargarIngresantes(List<Ingresante> ingresantes) {
+        if (ingresantes != null) {
+            this.ingresantesIniciales.clear();
+            this.ingresantesIniciales.addAll(ingresantes);
+        }
+    }
+
+    // Reinicia la reputación a 10 y vuelve a armar la fila cuando se da a "Jugar"
+    public void iniciarPartida() {
+        this.gestor.reiniciar();
+        this.filaIngresantes.clear();
+        this.filaIngresantes.addAll(this.ingresantesIniciales);
+        llamarSiguienteIngresante();
+    }
+
+    // Pasa al siguiente ingresante de la fila y avisa a la vista (Patrón Observer)
+    public boolean llamarSiguienteIngresante() {
+        if (this.filaIngresantes.isEmpty()) {
+            this.ingresanteActual = null;
+            return false;
+        }
+        Ingresante siguiente = this.filaIngresantes.remove(0);
+        setIngresanteActual(siguiente);
+        return true;
+    }
 
     public void setIngresanteActual(Ingresante ingresante) {
         this.ingresanteActual = ingresante;
-        
         if (ingresante != null) {
             for (ObservadorPartida obs : this.observadores) {
                 obs.actualizarNuevoIngresante(ingresante);
@@ -47,20 +73,29 @@ public class Partida {
         return this.ingresanteActual;
     }
 
-// NUEVO 4/10: Procesa un turno completo: evalúa al ingresante actual, compara con la decisión del jugador, actualiza la reputación y devuelve todos los datos del turno en un ResultadoDecision.
     public ResultadoDecision procesarDecisionJugador(boolean decisionJugador) throws Exception {
         boolean puedeIngresar = resolutor.puedeIngresar(this.ingresanteActual);
         boolean acierto = gestor.evaluarDecision(decisionJugador, puedeIngresar);
-        int reputacionActual = this.gestor.getJugador().getReputacion();
 
-        ResultadoDecision resultado = new ResultadoDecision(puedeIngresar,acierto,gestor.getReputacion(),gestor.juegoPerdido());
-        
-        // Despachamos al ingresante actual porque su turno terminó.
+        ResultadoDecision resultado = new ResultadoDecision(
+            puedeIngresar,
+            acierto,
+            gestor.getReputacion(),
+            gestor.juegoPerdido()
+        );
+
         this.ingresanteActual = null;
-        
+
+        // 1. Notificamos el veredicto a la vista (muestra el cartel con la reputación)
         for (ObservadorPartida obs : this.observadores) {
             obs.actualizarVeredicto(decisionJugador, resultado);
         }
+
+        // 2. Si no perdió la partida, hacemos pasar al siguiente ingresante de la fila
+        if (!resultado.getPartidaPerdida()) {
+            llamarSiguienteIngresante();
+        }
+
         return resultado;
- }
+    }
 }
