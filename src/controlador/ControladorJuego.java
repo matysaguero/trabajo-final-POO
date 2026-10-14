@@ -27,13 +27,13 @@ public class ControladorJuego {
         );
         
         // NUEVA LÓGICA: Al tocar el boton tutorial, ocultamos el menú y mostramos el tutorial
-        this.ui.getMenuPrincipal().getBtnTutorial().addActionListener(evento -> {
-            this.ui.getMenuPrincipal().ocultar();
-            this.ui.getVistaTutorial().mostrar();
+        this.ui.getBtnTutorial().addActionListener(evento -> {
+            this.ui.ocultarMenuPrincipal();
+            this.ui.mostrarTutorial();
         });
 
         // NUEVA LÓGICA: Ya en la vista del tutorial, al tocar el boton de Volver, ocultamos tutorial y mostramos menú
-        this.ui.getVistaTutorial().getBtnVolver().addActionListener(evento -> {
+        this.ui.getBtnTutorial().getBtnVolver().addActionListener(evento -> {
             this.ui.getVistaTutorial().ocultar();
             this.ui.getMenuPrincipal().mostrar();
         });

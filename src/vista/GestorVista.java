@@ -35,6 +35,18 @@ public class GestorVista implements ObservadorPartida{
         this.menu.mostrar();
     }
 
+    public void ocultarMenuPrincipal(){
+        this.menu.ocultar();
+    }
+
+    public void mostrarTutorial(){
+        this.vistaTutorial.mostrar();
+    }
+
+    public void ocultarTutorial(){
+        this.vistaTutorial.ocultar();
+    }
+    
     public void iniciarJuego(){
         this.menu.ocultar();
         this.escenario.mostrar();
@@ -48,6 +60,7 @@ public class GestorVista implements ObservadorPartida{
         this.vistaDecision.ocultar();
     }
 
+    
     // METODOS DE LA FACHADA PARA EXPONER LOS BOTONES AL CONTROLADOR
     public JButton getBtnJugar() {
         return this.menu.getBtnJugar();
