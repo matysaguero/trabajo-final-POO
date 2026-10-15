@@ -13,6 +13,7 @@ public class Escenario {
 
     // Botón invisible para llamar al siguiente ingresante
     private final BotonInvisible btnLlamar;
+    
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla) {
         this.ventana = new JFrame("Frontier");
