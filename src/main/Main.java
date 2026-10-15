@@ -17,7 +17,7 @@ public class Main {
                 Jugador jugador = new Jugador("Inspector", 10);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
-                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.SPACERS));
+                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.PUERTO_UMBRAL, TipoClan.ALIEN, TipoClan.UNION_MAGICA));
                 PoliticaIngresante politicaIngresante = new PoliticaIngresante();
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();

@@ -1,8 +1,7 @@
 package modelo;
 
 public enum TipoClan {
-    FENIX,
-    ERUDITO,
-    GUERRERO,
-    SPACERS;
+    UNION_MAGICA,
+    ALIEN,
+    PUERTO_UMBRAL;
 }

@@ -15,7 +15,7 @@ public class FabricaIngresantes {
         // 1. CABALLERO (Regular - Todo en regla)
         plantel.add(crearPersonaje(
             "Sir Arthur", 180, 80, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
-            TipoClan.GUERRERO, TipoCiudad.COMODORO_RIVADAVIA, TipoAspecto.CABALLERO,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.CABALLERO,
             crearDocBasicos("12/12/2027", 101, 80, 180, "Argentina", "Comodoro Rivadavia", false),
             false, false
         ));
@@ -23,7 +23,7 @@ public class FabricaIngresantes {
         // 2. ALIEN (Regular - Todo en regla)
         plantel.add(crearPersonaje(
             "Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN,
-            TipoClan.FENIX, TipoCiudad.TRELEW, TipoAspecto.ALIEN,
+            TipoClan.ALIEN, TipoCiudad.LANDER, TipoAspecto.ALIEN,
             crearDocConPermiso("05/11/2028", 102, 65, 195, "Nebulosa", "Trelew", "Sello Galáctico", "Explorador", false),
             false, false
         ));
@@ -31,7 +31,7 @@ public class FabricaIngresantes {
         // 3. ALIEN_PONELE (Enemigo disfrazado - Es amenaza, debe ser rechazado)
         plantel.add(crearPersonaje(
             "Xylar el Humano", 172, 70, TipoIngresante.TURISTA, TipoRaza.ALIEN,
-            TipoClan.FENIX, TipoCiudad.LAS_HERAS, TipoAspecto.ALIEN_PONELE,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE,
             crearDocBasicos("01/02/2025", 103, 70, 172, "Marte", "Las Heras", true),
             true, true // Es Enemigo y porta bomba
         ));
@@ -39,7 +39,7 @@ public class FabricaIngresantes {
         // 4. ASTRONAUTA (Enemigo infiltrado - Es amenaza, aunque otro astronauta podría ser Regular)
         plantel.add(crearPersonaje(
             "Comandante Vance", 178, 76, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG,
-            TipoClan.ERUDITO, TipoCiudad.BARILOCHE, TipoAspecto.ASTRONAUTA,
+            TipoClan.UNION_MAGICA, TipoCiudad.BALES, TipoAspecto.ASTRONAUTA,
             crearDocConPermiso("20/08/2027", 104, 76, 178, "Estación Lunar", "Bariloche", "Sello Espacial", "Piloto", false),
             true, false // Es Enemigo (sin bomba)
         ));
@@ -47,7 +47,7 @@ public class FabricaIngresantes {
         // 5. VIAJERO_POBRE (Enemigo contrabandista - Es amenaza, aunque otro viajero pobre podría ser Regular)
         plantel.add(crearPersonaje(
             "Lázaro", 168, 60, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
-            TipoClan.FENIX, TipoCiudad.SANTIAGO_DE_CHILE, TipoAspecto.VIAJERO_POBRE,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.BALES, TipoAspecto.VIAJERO_POBRE,
             crearDocEnTramite("10/10/2026", 105, "Firma Borrosa", true),
             true, true // Es Enemigo y porta bomba
         ));
@@ -55,7 +55,7 @@ public class FabricaIngresantes {
         // 6. MAGO_CLAN_2 (Regular - Todo en regla)
         plantel.add(crearPersonaje(
             "Aldebarán", 175, 68, TipoIngresante.CIUDADANO, TipoRaza.GUARDIANES,
-            TipoClan.ERUDITO, TipoCiudad.BARILOCHE, TipoAspecto.MAGO_CLAN_2,
+            TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_2,
             crearDocConPlaca("15/05/2029", 106, 68, 175, "Arcadia", "Bariloche", "ERUDITO", 884, false),
             false, false
         ));
@@ -63,7 +63,7 @@ public class FabricaIngresantes {
         // 7. MAGO_CLAN_3 (Regular pero de Clan Prohibido SPACERS -> debe ser rechazado por PoliticaClan)
         plantel.add(crearPersonaje(
             "Malakor", 182, 74, TipoIngresante.TURISTA, TipoRaza.GUARDIANES,
-            TipoClan.SPACERS, TipoCiudad.TRELEW, TipoAspecto.MAGO_CLAN_3,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,
             crearDocConPlaca("19/09/2027", 107, 74, 182, "Arcadia", "Trelew", "SPACERS", 991, false),
             false, false
         ));
@@ -71,7 +71,7 @@ public class FabricaIngresantes {
         // 8. MAGO_CLAN_4 (Regular - Todo en regla)
         plantel.add(crearPersonaje(
             "Lyra", 165, 58, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
-            TipoClan.FENIX, TipoCiudad.COMODORO_RIVADAVIA, TipoAspecto.MAGO_CLAN_4,
+            TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_4,
             crearDocBasicos("30/04/2028", 108, 58, 165, "Argentina", "Comodoro Rivadavia", false),
             false, false
         ));
@@ -79,7 +79,7 @@ public class FabricaIngresantes {
         // 9. VIAJERO (Regular - Todo en regla)
         plantel.add(crearPersonaje(
             "Marco Polo", 176, 72, TipoIngresante.TURISTA, TipoRaza.HUMANO,
-            TipoClan.FENIX, TipoCiudad.SANTIAGO_DE_CHILE, TipoAspecto.VIAJERO,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.VIAJERO,
             crearDocBasicos("14/07/2028", 109, 72, 176, "Chile", "Santiago de Chile", false),
             false, false
         ));
@@ -87,7 +87,7 @@ public class FabricaIngresantes {
         // 10. VIKINGO (Regular pero de Clan Prohibido SPACERS -> debe ser rechazado por PoliticaClan)
         plantel.add(crearPersonaje(
             "Ragnar", 192, 98, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
-            TipoClan.SPACERS, TipoCiudad.LAS_HERAS, TipoAspecto.VIKINGO,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.VIKINGO,
             crearDocBasicos("22/11/2027", 110, 98, 192, "Valhalla", "Las Heras", false),
             false, false
         ));
