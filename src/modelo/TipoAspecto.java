@@ -5,7 +5,7 @@ public enum TipoAspecto {
     ALIEN_PONELE("assets/imagenes/ingresantes/alien_ponele.png"),
     ASTRONAUTA("assets/imagenes/ingresantes/astronauta.png"),
     CABALLERO("assets/imagenes/ingresantes/caballero.png"),
-    MAGO_CLAN_2("assets/imagenes/ingresantes/mago_clan2.png"),
+    MAGO_CLAN_2("assets/imagenes/ingresantes/mago_clan_2.png"),
     MAGO_CLAN_3("assets/imagenes/ingresantes/mago_clan_3.png"),
     MAGO_CLAN_4("assets/imagenes/ingresantes/mago_clan_4.png"),
     VIAJERO("assets/imagenes/ingresantes/viajero.png"),
