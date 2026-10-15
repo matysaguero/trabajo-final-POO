@@ -1,0 +1,9 @@
+GUIA PARA PROBAR FUNCIONES DEL JUEGO (Hasta ahora)
+
+- Run java al Main.java
+- Se abre el menu y hay 2 botones. 
+	JUGAR: Entras directamente al juego
+	TUTORIAL: abre una imagen pero por el momento no hay nada mas. Presione en boton VOLVER
+- Si presionas en JUGAR :
+	SELLO (ubicado a la derecha de la mesa en donde estan los ingresantees) presionalo para abrir la opcion de rechazar o aceptar al ingresante
+	TROMPETA (de color celeste ubicado arriba a la derecha del ingresante) Presionalo cuando no hayas aceptado o rechazado al primero para hacer pasar al siguiente
