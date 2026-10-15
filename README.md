@@ -47,43 +47,40 @@ El núcleo jugable comprende la presentación de ingresantes, la inspección de 
 
 ## Funcionalidades Principales
 ### Sistema de Ingresantes
-- Se utiliza una jerarquía basada en la clase abstracta Ingresante, con las clases concretas IngresanteRegular y Enemigo.
+- Se utiliza una jerarquía basada en la clase abstracta "Ingresante", con las clases concretas "IngresanteRegular" y "Enemigo".
 - Cada personaje contiene nombre declarado, altura, peso, tipo de ingresante, raza, clan, ciudad de origen, documentos y una ruta de imagen para su representación visual.
-- Los métodos darPresentacion(), responderInterrogatorio() y esAmenaza() permiten comportamientos polimórficos. Su existencia no implica que ya haya un sistema completo de diálogos interactivos.
-- FabricaIngresantes.crearPlantelInicial() construye diez personajes y mezcla su orden.
+- Los métodos "darPresentacion()", "responderInterrogatorio()" y "esAmenaza()" permiten comportamientos polimórficos. Su existencia no implica que ya haya un sistema completo de diálogos interactivos.
+- "FabricaIngresantes.crearPlantelInicial()" construye diez personajes y mezcla su orden.
 - Partida conserva el plantel inicial, la fila y el ingresante actual. La fila utiliza actualmente una lista; todavía no se cambió a Queue.
 - La fábrica se invoca una vez en Main. Al reiniciar, se reconstruye la fila a partir del mismo plantel y orden cargados.
   
 ---
 
 ### Sistema de Documentación
-- Se modelan DNI, Pasaporte, Permiso, Placa y PapelEnTramite, derivados de la clase abstracta Documento.
+- Se modelan "DNI", "Pasaporte", "Permiso", "Placa" y "PapelEnTramite", derivados de la clase abstracta Documento.
 - Los documentos comparten número de identificación, fecha de vencimiento e indicador de falsificación, además de atributos específicos según su tipo.
 - Un ingresante puede presentar varios documentos.
-- FabricaVistaDocumento crea sus representaciones visuales y VistaMesaDocumentos las presenta en la mesa.
+- "FabricaVistaDocumento" crea sus representaciones visuales y "VistaMesaDocumentos" las presenta en la mesa.
 - Está pendiente completar las reglas que contrasten los documentos entre sí, con los datos del personaje y con las condiciones de ingreso. Tener los atributos de vencimiento y falsificación no significa que todas esas validaciones estén activas.
 
 ---
 
 ### Sistema de Políticas Fronterizas
-- La clase abstracta PoliticaFronteriza define el contrato esValido(Ingresante ingresante).
-- Resolutor mantiene una colección de políticas y permite el ingreso únicamente si todas se cumplen: Politica1 AND Politica2 AND Politica3 .... y asi sucevamente.
-- La configuración actual activa PoliticaClan y PoliticaIngresante.
+- La clase abstracta "PoliticaFronteriza" define el contrato "esValido(Ingresante ingresante)".
+- "Resolutor" mantiene una colección de políticas y permite el ingreso únicamente si todas se cumplen: "Politica1 AND Politica2 AND Politica3.." y asi sucevamente.
+- La configuración actual activa "PoliticaClan" y "PoliticaIngresante".
 - Esta separación permite incorporar nuevas evaluaciones mediante implementaciones del contrato, sin agregar al resolutor las reglas particulares de cada política.
 
 ---
 
 ### Sistema de Reputación
-- Jugador conserva la reputación y GestorReputacion determina su variación según la decisión tomada y el resultado del resolutor.
+- "Jugador" conserva la reputación y "GestorReputacion" determina su variación según la decisión tomada y el resultado del resolutor.
 - La partida comienza y se reinicia con 10 puntos. La reputación se mantiene entre 0 y 10.
-- ResultadoDecision reúne si el personaje podía ingresar, si la decisión fue correcta, la reputación resultante y si se perdió la partida.
+- "ResultadoDecision" reúne si el personaje podía ingresar, si la decisión fue correcta, la reputación resultante y si se perdió la partida.
 Las reglas implementadas en la versión documentada son:
 
-| Decisión | Condición del ingresante | Resultado | Variación |
-| Aceptar  | Puede ingresar           | Acierto   |     0     |
-| Rechazar | No puede ingresar        | Acierto   |     0     |
-| Aceptar  | No puede ingresar        | Error     |    -1     |
-| Rechazar | Puede ingresar           | Error     |    -1     |
+<img width="790" height="284" alt="image" src="https://github.com/user-attachments/assets/73912f0d-87e8-4e89-9cb2-b80143dbeba2" />
+
 
 - Los aciertos conservan la reputación; los errores la reducen. Premiar los aciertos con puntos sería un cambio de reglas, no el comportamiento actual. Cuando la reputación llega a cero, se informa la derrota y se vuelve al menú.
 
@@ -98,8 +95,10 @@ El flujo presente en el código es:
   5. Partida consulta a Resolutor y delega la actualización de puntos en GestorReputacion.
   6. Se genera ResultadoDecision y se notifica a los observadores.
   7. La vista informa el resultado y, si no se perdió, el modelo intenta llamar automáticamente al siguiente ingresante.
-
-- El botón de llamado actúa cuando no hay un ingresante en ventanilla. Todavía falta una finalización explícita de jornada al agotarse la fila.
+  8. El primer ingresante desaparece automáticamente. Después de cada decisión, el jugador llama al siguiente pulsando el botón invisible del altavoz.
+      - Solo funciona con la ventanilla vacía.
+      - El controlador solicita el siguiente ingresante y el modelo notifica a las vistas.
+      - Si no quedan ingresantes, se muestra un aviso. El cierre de jornada sigue pendiente.
 
 ---
 
@@ -140,6 +139,12 @@ La persistencia todavía no se encuentra implementada. Se contempla incorporar p
 
 
 ### Prototipo de la IGU (Wireframe)**
+#### Menú principal
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/2dd4b8ba-a37c-4830-b051-80a611b9be8d" />
+
+#### Escenario del juego
+<img width="1558" height="924" alt="image" src="https://github.com/user-attachments/assets/e716bc8c-9478-4f33-b1c0-df1ee8f47d60" />
+
 
 ## 4. Stack Tecnologico
     - Lenguaje: Java.
