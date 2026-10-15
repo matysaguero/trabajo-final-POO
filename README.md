@@ -40,135 +40,83 @@ El proyecto busca mantener una arquitectura modular para evitar que la incorpora
 
 ---
 
-## 3. Funcionalidades Principales
-### Sistema de Ingresantes
-El sistema posee una jerarquía de ingresantes representada mediante una clase abstracta `Ingresante`. Actualmente existen:
-
-- `IngresanteRegular`
-- `Enemigo`
-
-Cada ingresante contiene información como:
-
-- Nombre declarado.
-- Altura.
-- Peso.
-- Tipo de ingresante.
-- Raza.
-- Clan.
-- Ciudad de origen.
-- Documentación presentada.
-
-Los distintos tipos de ingresantes pueden implementar comportamientos diferentes mediante polimorfismo, por ejemplo:
-
-- Responder interrogatorios.
-- Presentarse ante el jugador.
-- Determinar si representan una amenaza.
+### Alcance del Sistema
+El núcleo jugable comprende la presentación de ingresantes, la inspección de información y documentos, la decisión de ingreso, la evaluación de las políticas y la gestión de reputación. Se consideran ampliaciones futuras los interrogatorios interactivos, las jornadas con reglas variables, los eventos especiales, los nuevos tipos de enemigos y los finales alternativos. No se presentan como funcionalidades terminadas.
 
 ---
 
+## Funcionalidades Principales
+### Sistema de Ingresantes
+- Se utiliza una jerarquía basada en la clase abstracta Ingresante, con las clases concretas IngresanteRegular y Enemigo.
+- Cada personaje contiene nombre declarado, altura, peso, tipo de ingresante, raza, clan, ciudad de origen, documentos y una ruta de imagen para su representación visual.
+- Los métodos darPresentacion(), responderInterrogatorio() y esAmenaza() permiten comportamientos polimórficos. Su existencia no implica que ya haya un sistema completo de diálogos interactivos.
+- FabricaIngresantes.crearPlantelInicial() construye diez personajes y mezcla su orden.
+- Partida conserva el plantel inicial, la fila y el ingresante actual. La fila utiliza actualmente una lista; todavía no se cambió a Queue.
+- La fábrica se invoca una vez en Main. Al reiniciar, se reconstruye la fila a partir del mismo plantel y orden cargados.
+  
+---
+
 ### Sistema de Documentación
-Los ingresantes pueden presentar uno o más documentos. Actualmente se encuentran modelados los siguientes tipos:
-
-- `DNI`
-- `Pasaporte`
-- `Permiso`
-- `Placa`
-- `PapelEnTramite`
-
-Todos ellos heredan de la clase abstracta `Documento`. Los documentos poseen información común como:
-
-- Número de identificación.
-- Fecha de vencimiento.
-- Indicador de falsificación.
-
-Además, cada documento puede contener información específica dependiendo de su tipo. El objetivo es que esta documentación pueda ser comparada posteriormente con los datos declarados por el ingresante y con las reglas fronterizas vigentes.
+- Se modelan DNI, Pasaporte, Permiso, Placa y PapelEnTramite, derivados de la clase abstracta Documento.
+- Los documentos comparten número de identificación, fecha de vencimiento e indicador de falsificación, además de atributos específicos según su tipo.
+- Un ingresante puede presentar varios documentos.
+- FabricaVistaDocumento crea sus representaciones visuales y VistaMesaDocumentos las presenta en la mesa.
+- Está pendiente completar las reglas que contrasten los documentos entre sí, con los datos del personaje y con las condiciones de ingreso. Tener los atributos de vencimiento y falsificación no significa que todas esas validaciones estén activas.
 
 ---
 
 ### Sistema de Políticas Fronterizas
-Las condiciones de ingreso se encuentran separadas mediante una jerarquía de políticas. La clase abstracta:
-
-`PoliticaFronteriza`
-
-define el comportamiento común:
-
-`esValido(Ingresante ingresante)`
-
-Actualmente se encuentran implementadas políticas como:
-
-- `PoliticaClan`
-- `PoliticaIngresante`
-
-Cada política evalúa una condición determinada de forma independiente. La clase `Resolutor` mantiene una colección de políticas y determina si un ingresante puede atravesar la frontera. Para que el ingreso sea válido, todas las políticas activas deben cumplirse. Conceptualmente:
-
-`Politica1 AND Politica2 AND Politica3 ...`
-
-Esta estructura permite agregar nuevas políticas sin modificar el funcionamiento interno del `Resolutor`.
+- La clase abstracta PoliticaFronteriza define el contrato esValido(Ingresante ingresante).
+- Resolutor mantiene una colección de políticas y permite el ingreso únicamente si todas se cumplen: Politica1 AND Politica2 AND Politica3 .... y asi sucevamente.
+- La configuración actual activa PoliticaClan y PoliticaIngresante.
+- Esta separación permite incorporar nuevas evaluaciones mediante implementaciones del contrato, sin agregar al resolutor las reglas particulares de cada política.
 
 ---
 
 ### Sistema de Reputación
-El jugador posee un valor de reputación que representa su desempeño durante la partida. Las clases principales involucradas son:
+- Jugador conserva la reputación y GestorReputacion determina su variación según la decisión tomada y el resultado del resolutor.
+- La partida comienza y se reinicia con 10 puntos. La reputación se mantiene entre 0 y 10.
+- ResultadoDecision reúne si el personaje podía ingresar, si la decisión fue correcta, la reputación resultante y si se perdió la partida.
+Las reglas implementadas en la versión documentada son:
 
-- `Jugador`
-- `GestorReputacion`
+| Decisión | Condición del ingresante | Resultado | Variación |
+| Aceptar  | Puede ingresar           | Acierto   |     0     |
+| Rechazar | No puede ingresar        | Acierto   |     0     |
+| Aceptar  | No puede ingresar        | Error     |    -1     |
+| Rechazar | Puede ingresar           | Error     |    -1     |
 
-El sistema compara:
-
-- La decisión tomada por el jugador.
-- El resultado obtenido mediante las políticas fronterizas.
-
-Las reglas actuales son:
-
-- Aceptar correctamente a un ingresante válido → aumenta la reputación.
-- Rechazar correctamente a un ingresante inválido → aumenta la reputación.
-- Aceptar incorrectamente a un ingresante inválido → disminuye la reputación.
-- Rechazar incorrectamente a un ingresante válido → disminuye la reputación.
-
-Cuando la reputación llega a cero, se considera finalizada la partida.
+- Los aciertos conservan la reputación; los errores la reducen. Premiar los aciertos con puntos sería un cambio de reglas, no el comportamiento actual. Cuando la reputación llega a cero, se informa la derrota y se vuelve al menú.
 
 ---
 
 ### Mecánica de Decisión
-El flujo básico implementado es:
+El flujo presente en el código es:
+  1. El jugador selecciona Jugar y se inicia la partida.
+  2. Se carga automáticamente el primer ingresante y se muestran sus documentos.
+  3. El jugador inspecciona la información y abre la ventana de decisión.
+  4. El jugador selecciona Aceptar o Rechazar.
+  5. Partida consulta a Resolutor y delega la actualización de puntos en GestorReputacion.
+  6. Se genera ResultadoDecision y se notifica a los observadores.
+  7. La vista informa el resultado y, si no se perdió, el modelo intenta llamar automáticamente al siguiente ingresante.
 
-1. Se presenta un ingresante.
-2. El sistema evalúa las políticas fronterizas activas.
-3. Se determina internamente si el ingresante puede ingresar.
-4. El jugador selecciona **Aceptar** o **Rechazar**.
-5. El sistema compara ambas decisiones.
-6. Se actualiza la reputación.
-7. Se informa el resultado.
+- El botón de llamado actúa cuando no hay un ingresante en ventanilla. Todavía falta una finalización explícita de jornada al agotarse la fila.
 
 ---
 
 ### Interfaz Gráfica
-La interfaz está desarrollada utilizando **Java Swing**. Actualmente existen las siguientes clases principales de vista:
+La interfaz se implementa con Java Swing. Sus componentes principales son:
+- MenuPrincipal:	presenta las opciones de inicio y tutorial.
+- Escenario:	Muestra el puesto fronterizo y sus controles.
+- VistaVentanilla:	Muestra al ingresante actual.
+- VistaMesaDocumentos:	Presenta los documentos sobre la mesa.
+- VistaDecision:	Muestra las opciones Aceptar y Rechazar.
+- VistaTutorial:	Muestra la pantalla de ayuda y el botón Volver.
+- VistaConsola:	Informa datos del ingresante y resultados por consola.
+- GestorVista:	Coordina las vistas y recibir notificaciones del modelo.
+- FabricaVistaDocumento:	Crea la representación visual de cada tipo de documento.
+- BotonInvisible:	Proporciona un control gráfico auxiliar.
 
-- `MenuPrincipal`
-- `Escenario`
-- `VistaDecision`
-- `VistaConsola`
-- `BotonInvisible`
-
-El sistema permite actualmente:
-
-- Mostrar el menú principal.
-- Iniciar la partida.
-- Mostrar el escenario del puesto fronterizo.
-- Abrir una ventana de decisión.
-- Aceptar o rechazar al ingresante.
-- Mostrar información y resultados por consola.
-
-Se encuentra planificada la incorporación progresiva de:
-
-- Visualización gráfica del ingresante actual.
-- Visualización interactiva de documentos.
-- Panel de políticas vigentes.
-- Indicador visual de reputación.
-- Interrogatorios.
-- Cambio automático al siguiente ingresante.
-- Información correspondiente al día actual.
+Se incorporaron al código el menú principal, el escenario, la representación gráfica de ingresantes y documentos, las opciones de decisión y la navegación al tutorial. Están pendientes un panel de políticas vigentes, un indicador permanente de reputación, el sistema de interrogatorios y la información de la jornada actual.
 
 ---
 
@@ -184,12 +132,13 @@ La persistencia todavía no se encuentra implementada. Se contempla incorporar p
 ### Patrón de Diseño
 - Observer (GestorVista al Modelo).
 - Facade (ControladorJuego con GestorVista).
-Los mismos de detallan en el siguiente documento: [Frontier - Patrones de diseño.docx](https://github.com/user-attachments/files/33466417/Frontier.-.Patrones.de.diseno.docx)
-
-
+- Los mismos se detallan en el siguiente documento: [Frontier - Patrones de diseño.docx](https://github.com/user-attachments/files/33466417/Frontier.-.Patrones.de.diseno.docx)
 
 ### Diagramas de Diseño
-### **Diagrama de Clases UML (Conceptual)**
+### **Diagrama de Clases UML (General por tema de simplificacion)**
+<img width="2690" height="1115" alt="diagrama de clases general UML - arquitectura MVC" src="https://github.com/user-attachments/assets/ac6769a0-d82a-455f-be87-e508a00bf726" />
+
+
 ### Prototipo de la IGU (Wireframe)**
 
 ## 4. Stack Tecnologico
