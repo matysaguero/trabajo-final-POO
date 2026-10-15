@@ -6,6 +6,7 @@ import modelo.Ingresantes.Ingresante;
 import modelo.politicas.Resolutor;
 
 public class Partida {
+
     private final GestorReputacion gestor;
     private final Resolutor resolutor;
     private final List<Ingresante> ingresantesIniciales = new ArrayList<>();
@@ -51,8 +52,7 @@ public class Partida {
 
     // Pasa al siguiente ingresante de la fila y avisa a la vista (Patrón Observer)
     public boolean llamarSiguienteIngresante() {
-        if (this.filaIngresantes.isEmpty()) {
-            this.ingresanteActual = null;
+        if (this.ingresanteActual != null || this.filaIngresantes.isEmpty()) {
             return false;
         }
         Ingresante siguiente = this.filaIngresantes.remove(0);
@@ -62,6 +62,7 @@ public class Partida {
 
     public void setIngresanteActual(Ingresante ingresante) {
         this.ingresanteActual = ingresante;
+
         if (ingresante != null) {
             for (ObservadorPartida obs : this.observadores) {
                 obs.actualizarNuevoIngresante(ingresante);
@@ -84,16 +85,12 @@ public class Partida {
             gestor.juegoPerdido()
         );
 
+        // Despachamos al ingresante actual; la ventanilla queda vacía hasta tocar btnLlamar
         this.ingresanteActual = null;
 
-        // 1. Notificamos el veredicto a la vista (muestra el cartel con la reputación)
+        // Notificamos el veredicto a la vista (limpia mesa/ventanilla y muestra el cartel)
         for (ObservadorPartida obs : this.observadores) {
             obs.actualizarVeredicto(decisionJugador, resultado);
-        }
-
-        // 2. Si no perdió la partida, hacemos pasar al siguiente ingresante de la fila
-        if (!resultado.getPartidaPerdida()) {
-            llamarSiguienteIngresante();
         }
 
         return resultado;

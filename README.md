@@ -184,6 +184,8 @@ La persistencia todavía no se encuentra implementada. Se contempla incorporar p
 ### Patrón de Diseño
 - Observer (GestorVista al Modelo).
 - Facade (ControladorJuego con GestorVista).
+Los mismos de detallan en el siguiente documento: [Frontier - Patrones de diseño.docx](https://github.com/user-attachments/files/33466417/Frontier.-.Patrones.de.diseno.docx)
+
 
 
 ### Diagramas de Diseño
