@@ -54,11 +54,12 @@ public class Escenario {
 
         this.btnLlamar = new BotonInvisible();
         this.btnLlamar.setBounds(
-            (int) (tamanoPantalla.width * 0.288),
-            (int) (tamanoPantalla.height * 0.199),
-            (int) (tamanoPantalla.width * 0.038),
-            (int) (tamanoPantalla.height * 0.05)
+            (int) (tamanoPantalla.width * 0.2765),
+            (int) (tamanoPantalla.height * 0.180),
+            (int) (tamanoPantalla.width * 0.0607),
+            (int) (tamanoPantalla.height * 0.105)
         );
+        this.btnLlamar.configurarImagenHover("assets/imagenes/botones/boton_llamar_seleccionado.png");
         panelFondo.add(this.btnLlamar);
     }
 
