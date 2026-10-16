@@ -1,39 +1,52 @@
 package modelo.documentos;
 
 public class DNI extends Documento {
-    private static final String PLANTILLA_DNI = "assets/imagenes/documento.png";
-    private String raza;
+    private String PLANTILLA_DNI;
     private String fecha_nacimiento;
     private int nro_dni;
-    private String huella;
     private String vencimiento;
+    private String huella;
     private String foto;
+    private String raza;
 
-public DNI(String PLANTILLA_DNI, String nombre, String origen, boolean valido, String fecha_nacimiento, int nro_dni, String vencimiento, String huella, String foto, String raza) {
+    public DNI(String PLANTILLA_DNI, String nombre, String origen, boolean valido,
+               String fecha_nacimiento, int nro_dni, String vencimiento,
+               String huella, String foto, String raza) {
         super(nombre, origen, valido);
-        if (raza == null || raza.isBlank()) {
-            throw new IllegalArgumentException("raza no puede estar vacio ni ser nulo");
+
+        if (PLANTILLA_DNI == null || PLANTILLA_DNI.isBlank()) {
+            throw new IllegalArgumentException("La plantilla no es válida");
         }
         if (fecha_nacimiento == null || fecha_nacimiento.isBlank()) {
-            throw new IllegalArgumentException("fecha_nacimiento no puede estar vacio ni ser nulo");
+            throw new IllegalArgumentException("La fecha de nacimiento no es válida");
+        }
+        if (nro_dni <= 0) {
+            throw new IllegalArgumentException("El número de DNI no es válido");
         }
         if (vencimiento == null || vencimiento.isBlank()) {
-            throw new IllegalArgumentException("vencimiento no puede estar vacio ni ser nulo");
+            throw new IllegalArgumentException("La fecha de vencimiento no es válida");
+        }
+        if (huella == null || huella.isBlank()) {
+            throw new IllegalArgumentException("La huella no es válida");
         }
         if (foto == null || foto.isBlank()) {
-            throw new IllegalArgumentException("foto no puede estar vacio ni ser nulo");
+            throw new IllegalArgumentException("La foto no es válida");
+        }
+        if (raza == null || raza.isBlank()) {
+            throw new IllegalArgumentException("La raza no es válida");
         }
 
-        this.raza = raza;
+        this.PLANTILLA_DNI = PLANTILLA_DNI;
         this.fecha_nacimiento = fecha_nacimiento;
         this.nro_dni = nro_dni;
         this.vencimiento = vencimiento;
-        this.foto = foto;
         this.huella = huella;
+        this.foto = foto;
+        this.raza = raza;
     }
 
-    public String getRaza() {
-        return this.raza;
+    public String getPlantillaDni() {
+        return this.PLANTILLA_DNI;
     }
 
     public String getFechaNacimiento() {
@@ -48,58 +61,21 @@ public DNI(String PLANTILLA_DNI, String nombre, String origen, boolean valido, S
         return this.vencimiento;
     }
 
-    public String getFoto() {
-        return this.foto;
-    }
-
     public String getHuella() {
         return this.huella;
     }
 
-    @Override
-    public String obtenerDetalles() {
-        return "DNI: " + getNombre() + ", Origen: " + getOrigen() + ", Válido: " + isValido() +
-               ", Raza: " + raza + ", Fecha de Nacimiento: " + fecha_nacimiento +
-               ", Número de DNI: " + nro_dni + ", Vencimiento: " + vencimiento +
-               ", Huella: " + huella + ", Foto: " + foto;
-    }
-}    
-    /* 
-    public DNI(String fechaVencimiento, int numId, boolean trucho, String huella, String lugarNacimiento, String raza, String domicilio){
-        super(fechaVencimiento, numId, trucho);
-        
-        if (huella == null || huella.isBlank()) {
-            throw new IllegalArgumentException("huella no puede estar vacio ni ser nulo");    
-        }
-        if (lugarNacimiento == null || lugarNacimiento.isBlank()) {
-            throw new IllegalArgumentException("lugarNacimiento no puede estar vacio ni ser nulo");
-        }
-        if (raza == null || raza.isBlank()) {
-            throw new IllegalArgumentException("raza no puede estar vacio ni ser nulo");
-        }
-        if (domicilio == null || domicilio.isBlank()) {
-            throw new IllegalArgumentException("domicilio no puede estar vacio ni ser nulo");
-        }
-
-        this.huella = huella;
-        this.lugarNacimiento = lugarNacimiento;
-        this.raza = raza;
-        this.domicilio = domicilio;
+    public String getFoto() {
+        return this.foto;
     }
 
-    public String getHuella(){
-        return this.huella;
-    }
-
-    public String getLugarNacimiento(){
-        return this.lugarNacimiento;
-    }
-
-    public String getRaza(){
+    public String getRaza() {
         return this.raza;
     }
 
-    public String getDomicilio(){
-        return this.domicilio;
+    @Override
+    public String obtenerDetalles() {
+        return "DNI [Nro: " + nro_dni + ", Raza: " + raza +
+               ", Nacimiento: " + fecha_nacimiento + ", Vencimiento: " + vencimiento + "]";
     }
-*/
+}
