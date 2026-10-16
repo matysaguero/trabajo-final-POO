@@ -36,12 +36,12 @@ public class ControladorJuego {
 
         // Si no hay ingresante en ventanilla, el botón Llamar hace pasar al siguiente
         this.ui.getBtnLlamar().addActionListener(evento -> {
-            if (this.partida.getIngresanteActual() == null) {
-                boolean hayMas = this.partida.llamarSiguienteIngresante();
-                if (!hayMas) {
-                    this.ui.mostrarError("¡Ya no quedan más ingresantes en la fila por hoy!");
+            try { 
+                this.partida.usarMegafono();
+            } 
+                catch (IllegalStateException e) { 
+                    this.ui.mostrarError(e.getMessage()); 
                 }
-            }
         });
 
         this.ui.getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
@@ -50,16 +50,24 @@ public class ControladorJuego {
         this.ui.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
     }
 
+    /*
     public void setIngresanteActual(Ingresante ingresante) {
         this.partida.setIngresanteActual(ingresante);
-    }
+    }*/
 
     private void abrirVentanaDecision() {
-        if (this.partida.getIngresanteActual() != null) {
+        try {
+            // Primero se consulta al estado actual.
+            this.partida.usarSello();
+
+            // Solo se abre si State permitió la acción.
             this.ui.mostrarVentanaDecision();
-        } else {
-            this.ui.mostrarError("No hay ningún ingresante en la ventanilla.");
-        }
+
+            } catch (IllegalStateException e) {
+
+                // Informar que la acción no está permitida.
+                this.ui.mostrarError(e.getMessage());
+                }
     }
 
     private void procesarVeredicto(boolean decisionJugador) {

@@ -49,6 +49,12 @@ public class GestorVista implements ObservadorPartida{
     
     public void iniciarJuego(){
         this.menu.ocultar();
+
+        // Limpiar los elementos de la atención anterior.
+        this.mesa.limpiarMesa();
+        this.ventanilla.limpiarVentanilla();
+
+        // Mostrar el puesto de control vacío.
         this.escenario.mostrar();
     }
 
