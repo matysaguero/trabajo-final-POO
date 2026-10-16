@@ -17,7 +17,8 @@ public class Main {
                 Jugador jugador = new Jugador("Inspector", 10);
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
-                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.PUERTO_UMBRAL, TipoClan.ALIEN, TipoClan.UNION_MAGICA));
+                // Se prohíbe únicamente el clan ALIEN para permitir el paso de ingresantes regulares válidos
+                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.ALIEN));
                 PoliticaIngresante politicaIngresante = new PoliticaIngresante();
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Main {
                 Resolutor resolutor = new Resolutor(politicas);
                 Partida partida = new Partida(gestor, resolutor);
 
-                // Cargamos los 10 personajes (1 de cada aspecto) desde la Fábrica
+                // Cargamos los 10 personajes desde la Fábrica
                 partida.cargarIngresantes(FabricaIngresantes.crearPlantelInicial());
 
                 // 2. VISTAS
@@ -38,17 +39,18 @@ public class Main {
                 VistaDecision vistaPopUp = new VistaDecision(vistaPrincipal.getVentana());
                 FabricaVistaDocumento fabricaVistaDocumento = new FabricaVistaDocumento();
                 VistaConsola vistaConsola = new VistaConsola();
-
-                // NUEVO: Instanciamos el tutorial
                 VistaTutorial vistaTutorial = new VistaTutorial();
-                GestorVista ui = new GestorVista( menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial);
+
+                GestorVista ui = new GestorVista(
+                    menu, vistaPrincipal, vistaPopUp, vistaConsola,
+                    vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial
+                );
 
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
                 // 4. MOSTRAR MENÚ INICIAL
                 menu.mostrar();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

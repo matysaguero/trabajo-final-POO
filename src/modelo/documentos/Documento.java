@@ -1,33 +1,33 @@
 package modelo.documentos;
 
 public abstract class Documento {
-    private String fechaVencimiento;
-    private int numId;
-    private boolean trucho;
+    private String nombre;
+    private String origen;
+    private boolean valido;
 
-    public Documento(String fechaVencimiento, int numId, boolean trucho){
-        if (fechaVencimiento == null || fechaVencimiento.isBlank()) {
-            throw new IllegalArgumentException("La fecha de vencimiento no puede ser negativa ni igual a cero");
-        }  
-        if (numId <= 0 ){
-            throw new IllegalArgumentException("el numero de id no puede ser negativo ni igual a cero");
+    public Documento(String nombre, String origen, boolean valido) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("nombre no puede estar vacio ni ser nulo");
         }
-    
-    this.fechaVencimiento = fechaVencimiento;
-    this.numId = numId;
-    this.trucho = trucho;
+        if (origen == null || origen.isBlank()) {
+            throw new IllegalArgumentException("origen no puede estar vacio ni ser nulo");
+        }
+
+        this.nombre = nombre;
+        this.origen = origen;
+        this.valido = valido;
     }
 
-    public String getFechaVencimiento(){
-    return this.fechaVencimiento;
-    } 
-
-    public int getNumId(){
-        return this.numId;
+    public String getNombre() {
+        return this.nombre;
     }
 
-    public boolean getTrucho(){
-        return this.trucho;
+    public String getOrigen() {
+        return this.origen;
+    }
+
+    public boolean isValido() {
+        return this.valido;
     }
 
     public abstract String obtenerDetalles();

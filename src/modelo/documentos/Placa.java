@@ -1,30 +1,31 @@
 package modelo.documentos;
 
-public class Placa extends Documento {
-    private String clan;
-    private int idPlaca;
+public class Placa {
+    private String nombre;
+    private String foto;
 
-    public Placa(String fechaVencimiento, int numId, String clan, int idPlaca, boolean trucho){
-        super(fechaVencimiento, numId, trucho);
-        if (clan == null || clan.isBlank()){
-            throw new IllegalArgumentException("Clan no valido");
+    public Placa(String nombre, String foto) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("nombre no puede estar vacio ni ser nulo");
         }
-        this.clan = clan;
-        this.idPlaca = idPlaca;
+        if (foto == null || foto.isBlank()) {
+            throw new IllegalArgumentException("foto no puede estar vacio ni ser nulo");
+        }
+
+        this.nombre = nombre;
+        this.foto = foto;
     }
 
-    public String getClan(){
-        return this.clan;
+    public String getNombre() {
+        return this.nombre;
     }
 
-    public int getIdPlaca(){
-        return this.idPlaca;
+    public String getFoto() {
+        return this.foto;
     }
-    @Override
+
     public String obtenerDetalles() {
-        return "Tipo: Placa\n" +
-               "Clan: " + this.getClan() + "\n" +
-               "ID de placa: " + this.getIdPlaca();
+        return "Placa: " + getNombre() + ", Foto: " + getFoto();
     }
 
 }

@@ -18,6 +18,7 @@ import modelo.Ingresantes.IngresanteRegular;
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
 import modelo.documentos.Pasaporte;
+import modelo.documentos.Permiso;
 
 public class IngresanteDAOSQLite implements IngresanteDAO {
 
@@ -28,9 +29,7 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
             throw new IllegalArgumentException("La conexion es obligatoria");
         }
         this.conexion = conexion;
-
         try (Statement sentencia = conexion.createStatement()) {
-            // Tabla de ingresantes
             sentencia.execute("CREATE TABLE IF NOT EXISTS ingresantes ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "nombre TEXT NOT NULL, "
@@ -45,22 +44,24 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
                     + "es_enemigo INTEGER NOT NULL, "
                     + "porta_bomba INTEGER NOT NULL)");
 
-            // Tabla de documentos asociados a cada ingresante
             sentencia.execute("CREATE TABLE IF NOT EXISTS documentos ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "ingresante_id INTEGER NOT NULL, "
                     + "clase_doc TEXT NOT NULL, "
-                    + "fecha_vencimiento TEXT NOT NULL, "
-                    + "num_id INTEGER NOT NULL, "
-                    + "trucho INTEGER NOT NULL, "
-                    + "peso INTEGER, "
-                    + "altura INTEGER, "
-                    + "pais TEXT, "
-                    + "ciudad TEXT, "
-                    + "huella TEXT, "
-                    + "lugar_nacimiento TEXT, "
-                    + "sexo TEXT, "
-                    + "domicilio TEXT)");
+                    + "nombre TEXT NOT NULL, "
+                    + "origen TEXT NOT NULL, "
+                    + "valido INTEGER NOT NULL, "
+                    + "fecha_nacimiento TEXT, "
+                    + "raza_int INTEGER, "
+                    + "huella_int INTEGER, "
+                    + "nro_dni INTEGER, "
+                    + "vencimiento TEXT, "
+                    + "huella_str TEXT, "
+                    + "foto TEXT, "
+                    + "raza_str TEXT, "
+                    + "dni_permiso TEXT, "
+                    + "ocupacion TEXT, "
+                    + "num_permiso INTEGER)");
         }
     }
 
@@ -77,7 +78,7 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
             sentencia.setString(1, ingresante.getNombreDeclarado());
             sentencia.setInt(2, ingresante.getAlturaVisual());
             sentencia.setInt(3, ingresante.getPesoEnBalanza());
-            sentencia.setDouble(4, 5.0); // Valor base válido (> 0)
+            sentencia.setDouble(4, 5.0);
             sentencia.setString(5, ingresante.getTipoIngresante().name());
             sentencia.setString(6, ingresante.getRaza().name());
             sentencia.setString(7, ingresante.getClan().name());
@@ -86,7 +87,6 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
 
             boolean esEnemigo = ingresante.esAmenaza();
             boolean portaBomba = (ingresante instanceof Enemigo) && ((Enemigo) ingresante).getportaBomba();
-
             sentencia.setInt(10, esEnemigo ? 1 : 0);
             sentencia.setInt(11, portaBomba ? 1 : 0);
 
@@ -95,7 +95,6 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
                 return false;
             }
 
-            // Obtenemos el ID autogenerado del ingresante para guardar sus documentos
             try (ResultSet claves = sentencia.getGeneratedKeys()) {
                 if (claves.next()) {
                     int ingresanteId = claves.getInt(1);
@@ -112,28 +111,37 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
 
     private void guardarDocumento(int ingresanteId, Documento doc) throws SQLException {
         String sqlDoc = "INSERT INTO documentos "
-                + "(ingresante_id, clase_doc, fecha_vencimiento, num_id, trucho, peso, altura, pais, ciudad, huella, lugar_nacimiento, sexo, domicilio) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(ingresante_id, clase_doc, nombre, origen, valido, fecha_nacimiento, "
+                + "raza_int, huella_int, nro_dni, vencimiento, huella_str, foto, raza_str, "
+                + "dni_permiso, ocupacion, num_permiso) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement sentencia = this.conexion.prepareStatement(sqlDoc)) {
             sentencia.setInt(1, ingresanteId);
             sentencia.setString(2, doc.getClass().getSimpleName());
-            sentencia.setString(3, doc.getFechaVencimiento());
-            sentencia.setInt(4, doc.getNumId());
-            sentencia.setInt(5, doc.getTrucho() ? 1 : 0);
+            sentencia.setString(3, doc.getNombre());
+            sentencia.setString(4, doc.getOrigen());
+            sentencia.setInt(5, doc.isValido() ? 1 : 0);
 
             if (doc instanceof Pasaporte) {
                 Pasaporte pas = (Pasaporte) doc;
-                sentencia.setInt(6, pas.getPeso());
-                sentencia.setInt(7, pas.getAltura());
-                sentencia.setString(8, pas.getPais());
-                sentencia.setString(9, pas.getCiudad());
+                sentencia.setString(6, pas.getFechaNacimiento());
+                sentencia.setInt(7, pas.getRaza());
+                sentencia.setInt(8, pas.getHuella());
             } else if (doc instanceof DNI) {
                 DNI dni = (DNI) doc;
-                sentencia.setString(10, dni.getHuella());
-                sentencia.setString(11, dni.getLugarNacimiento());
-                sentencia.setString(12, dni.getSexo());
-                sentencia.setString(13, dni.getDomicilio());
+                sentencia.setString(6, dni.getFechaNacimiento());
+                sentencia.setInt(9, dni.getNroDni());
+                sentencia.setString(10, dni.getVencimiento());
+                sentencia.setString(11, dni.getHuella());
+                sentencia.setString(12, dni.getFoto());
+                sentencia.setString(13, dni.getRaza());
+            } else if (doc instanceof Permiso) {
+                Permiso perm = (Permiso) doc;
+                sentencia.setString(10, perm.getFechaVencimiento());
+                sentencia.setString(14, perm.getDni());
+                sentencia.setString(15, perm.getOcupacion());
+                sentencia.setInt(16, perm.getNumPermiso());
             }
             sentencia.executeUpdate();
         }
@@ -143,10 +151,8 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
     public List<Ingresante> listarTodos() {
         String sql = "SELECT * FROM ingresantes";
         List<Ingresante> resultado = new ArrayList<>();
-
         try (PreparedStatement sentencia = this.conexion.prepareStatement(sql);
              ResultSet filas = sentencia.executeQuery()) {
-
             while (filas.next()) {
                 int id = filas.getInt("id");
                 String nombre = filas.getString("nombre");
@@ -178,32 +184,46 @@ public class IngresanteDAOSQLite implements IngresanteDAO {
     private ArrayList<Documento> cargarDocumentosDeIngresante(int ingresanteId) throws SQLException {
         String sql = "SELECT * FROM documentos WHERE ingresante_id = ?";
         ArrayList<Documento> docs = new ArrayList<>();
-
         try (PreparedStatement sentencia = this.conexion.prepareStatement(sql)) {
             sentencia.setInt(1, ingresanteId);
             try (ResultSet filas = sentencia.executeQuery()) {
                 while (filas.next()) {
                     String clase = filas.getString("clase_doc");
-                    String vencimiento = filas.getString("fecha_vencimiento");
-                    int numId = filas.getInt("num_id");
-                    boolean trucho = filas.getInt("trucho") == 1;
+                    String nombre = filas.getString("nombre");
+                    String origen = filas.getString("origen");
+                    boolean valido = filas.getInt("valido") == 1;
 
                     if ("Pasaporte".equals(clase)) {
                         docs.add(new Pasaporte(
-                            vencimiento, numId,
-                            filas.getInt("peso"),
-                            filas.getInt("altura"),
-                            filas.getString("pais"),
-                            filas.getString("ciudad"),
-                            trucho
+                            nombre,
+                            origen,
+                            valido,
+                            filas.getString("fecha_nacimiento"),
+                            filas.getInt("raza_int"),
+                            filas.getInt("huella_int")
                         ));
                     } else if ("DNI".equals(clase)) {
                         docs.add(new DNI(
-                            vencimiento, numId, trucho,
-                            filas.getString("huella"),
-                            filas.getString("lugar_nacimiento"),
-                            filas.getString("sexo"),
-                            filas.getString("domicilio")
+                            "assets/imagenes/documento.png",
+                            nombre,
+                            origen,
+                            valido,
+                            filas.getString("fecha_nacimiento"),
+                            filas.getInt("nro_dni"),
+                            filas.getString("vencimiento"),
+                            filas.getString("huella_str"),
+                            filas.getString("foto"),
+                            filas.getString("raza_str")
+                        ));
+                    } else if ("Permiso".equals(clase)) {
+                        docs.add(new Permiso(
+                            nombre,
+                            origen,
+                            valido,
+                            filas.getString("dni_permiso"),
+                            filas.getString("ocupacion"),
+                            filas.getInt("num_permiso"),
+                            filas.getString("vencimiento")
                         ));
                     }
                 }

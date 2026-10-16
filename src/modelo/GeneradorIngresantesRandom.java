@@ -14,8 +14,6 @@ public class GeneradorIngresantesRandom {
 
     private static final String[] NOMBRES = {"Andrea", "Marcos", "Javier", "Elena", "Kael", "Lyra", "Tarius", "Valeria", "Dante", "Sora"};
     private static final String[] PAISES = {"Alfheim", "Utopía", "Confederación Solar", "República Austral de Gaalad"};
-    private static final String[] DOMICILIOS = {"Ruta 25 de Mayo", "Av. Rivadavia 123", "Sector 7G", "Calle Falsa 123"};
-    private static final String[] SEXOS = {"Masculino", "Femenino", "No binario", "Otro"};
 
     private final Random random = new Random();
 
@@ -23,7 +21,7 @@ public class GeneradorIngresantesRandom {
         String nombre = NOMBRES[random.nextInt(NOMBRES.length)];
         int altura = 150 + random.nextInt(45); // Entre 150 y 194 cm
         int peso = 50 + random.nextInt(50);    // Entre 50 y 99 kg
-        double reputacion = 1.0 + random.nextInt(10); //Entre 10  y 11.0
+        double reputacion = 1.0 + random.nextInt(10);
 
         TipoIngresante tipo = TipoIngresante.values()[random.nextInt(TipoIngresante.values().length)];
         TipoRaza raza = TipoRaza.values()[random.nextInt(TipoRaza.values().length)];
@@ -31,22 +29,36 @@ public class GeneradorIngresantesRandom {
         TipoCiudad ciudad = TipoCiudad.values()[random.nextInt(TipoCiudad.values().length)];
         String rutaImagen = "assets/imagenes/ingresantes/caballero.png";
 
-        // Generamos documentos para el ingresante
+        // Generamos documentos compatibles con las clases actuales de modelo.documentos
         ArrayList<Documento> documentos = new ArrayList<>();
-        boolean pasaporteTrucho = random.nextBoolean();
-        boolean dniTrucho = random.nextBoolean();
+        boolean pasaporteValido = random.nextBoolean();
+        boolean dniValido = random.nextBoolean();
 
-        Pasaporte pasaporte = new Pasaporte("15/10/2027", numIdBase, peso, altura, 
-            PAISES[random.nextInt(PAISES.length)], ciudad.name(), pasaporteTrucho);
+        String origenPais = PAISES[random.nextInt(PAISES.length)];
+        String fechaNacimiento = "15/06/1990";
+        int codigoRaza = raza.ordinal() + 1; // Siempre > 0
+        int codigoHuella = 1000 + random.nextInt(9000); // Siempre > 0
+
+        Pasaporte pasaporte = new Pasaporte(
+            nombre,
+            origenPais,
+            pasaporteValido,
+            fechaNacimiento,
+            codigoRaza,
+            codigoHuella
+        );
 
         DNI dni = new DNI(
-            "20/12/2028",
-            numIdBase + 1000,
-            dniTrucho,
-            "HUELLA-" + (1000 + random.nextInt(9000)),
+            "assets/imagenes/documento.png",
+            nombre,
             ciudad.name(),
-            SEXOS[random.nextInt(SEXOS.length)],
-            DOMICILIOS[random.nextInt(DOMICILIOS.length)]
+            dniValido,
+            fechaNacimiento,
+            numIdBase + 1000,
+            "20/12/2028",
+            "HUELLA-" + codigoHuella,
+            rutaImagen,
+            raza.name()
         );
 
         documentos.add(pasaporte);
