@@ -13,6 +13,10 @@ public class Escenario {
 
     // Botón invisible para llamar al siguiente ingresante
     private final BotonInvisible btnLlamar;
+
+    // Boton invisible para abrir el libro de reglas
+    private final BotonInvisible btnLibroReglas;    
+
     
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla) {
@@ -61,6 +65,18 @@ public class Escenario {
         );
         this.btnLlamar.configurarImagenHover("assets/imagenes/botones/boton_llamar_seleccionado.png");
         panelFondo.add(this.btnLlamar);
+
+        // Botón invisible ubicado sobre el libro de reglas
+        this.btnLibroReglas = new BotonInvisible();
+        this.btnLibroReglas.setBounds(
+            (int) (tamanoPantalla.width * 0.198),  // X
+            (int) (tamanoPantalla.height * 0.868), // Y
+            (int) (tamanoPantalla.width * 0.055),  // Ancho
+            (int) (tamanoPantalla.height * 0.115)  // Alto
+        );
+        
+        this.btnLibroReglas.configurarImagenHover("assets/imagenes/permisos de entrada, libro de reglas y sellos/libro_de_reglas_cerrado.png");
+        panelFondo.add(this.btnLibroReglas);
     }
 
     public void mostrar() {
@@ -77,6 +93,10 @@ public class Escenario {
 
     public JButton getBtnLlamar() {
         return this.btnLlamar;
+    }
+
+    public JButton getBtnLibroReglas() {
+        return this.btnLibroReglas;
     }
 
     public JFrame getVentana() {

@@ -44,8 +44,10 @@ public class ControladorJuego {
                 }
         });
 
+        
+        this.ui.getBtnLibroReglas().addActionListener(evento -> { System.out.println("Se hizo clic en el libro de reglas.");});
+        
         this.ui.getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
-
         this.ui.getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
     }
