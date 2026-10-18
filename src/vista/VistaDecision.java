@@ -9,6 +9,7 @@ public class VistaDecision {
     private final JDialog ventanaEmergente;
     private final JButton btnAceptar;
     private final JButton btnRechazar;
+    private final JButton btnVolver;
 
     public VistaDecision(JFrame ventanaPadre) {
         this.ventanaEmergente = new JDialog(ventanaPadre, "Decisión", true);
@@ -21,9 +22,11 @@ public class VistaDecision {
         // Escalamos las imágenes a un tamaño equivalente en píxeles
         this.btnAceptar = crearBotonImagen("assets/imagenes/botones/boton_aceptar.png", 200, 65);
         this.btnRechazar = crearBotonImagen("assets/imagenes/botones/boton_rechazar.png", 200, 65);
+        this.btnVolver = crearBotonImagen("assets/imagenes/botones/boton_volver.png", 80, 37);
 
         this.ventanaEmergente.add(this.btnAceptar);
         this.ventanaEmergente.add(this.btnRechazar);
+        this.ventanaEmergente.add(this.btnVolver);
 
         // Regal del profe: pack() en vez de setSize(). Dimensiona la ventana automáticamente
         this.ventanaEmergente.pack();
