@@ -12,13 +12,11 @@ public class EstadoAtendiendoIngresante implements EstadoPartida{
 
     @Override
     public void usarMegafono(Partida partida) {
-        System.out.println("No puede llamar a otro ingresante mientras ya hay uno en ventanilla.");
+        throw new IllegalStateException("No puedes llamar a otro ingresante mientras ya hay uno en ventanilla.");
     }
-
 
     @Override
     public void procesarDecision(Partida partida, boolean decisionJugador) {
-        System.out.println("Primero debe abrir el sello para decidir.");
+        throw new IllegalStateException("Primero debes abrir el sello para decidir.");
     }
-
 }

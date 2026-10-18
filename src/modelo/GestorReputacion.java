@@ -6,9 +6,9 @@ package modelo;
 
 public class GestorReputacion {
     private Jugador jugador;
-    private static final int PUNTOS_ACEPTAR_CORRECTO = 0;   // aceptó a alguien que podía ingresar
+    private static final int PUNTOS_ACEPTAR_CORRECTO = 1;   // aceptó a alguien que podía ingresar
     private static final int PUNTOS_ERROR = -1;             // aceptó a quien no debía, o rechazó a quien sí podía
-    private static final int PUNTOS_RECHAZAR_CORRECTO = 0;  // rechazó a alguien que no podía ingresar (cambiar a 1 para premiar atraparlo)
+    private static final int PUNTOS_RECHAZAR_CORRECTO = 1;  // rechazó a alguien que no podía ingresar (cambiar a 1 para premiar atraparlo)
 
     public GestorReputacion(Jugador jugador) {
         if (jugador == null) {
