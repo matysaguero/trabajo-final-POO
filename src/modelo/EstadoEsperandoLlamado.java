@@ -23,7 +23,7 @@ public class EstadoEsperandoLlamado implements EstadoPartida {
 
     @Override 
     public void procesarDecision (Partida partida, boolean descisionJugador){
-        System.out.println("No se puede decidir porque no hay un ingresante.");
+        throw new IllegalStateException( "No puedes aceptar o rechazar sin un ingresante en la ventanilla.");
     }
 
 

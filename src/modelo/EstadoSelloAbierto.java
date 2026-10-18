@@ -2,14 +2,14 @@ package modelo;
 
 public class EstadoSelloAbierto implements EstadoPartida {
     
-    @Override 
-    public void usarSello(Partida partida){
-        System.out.println("El sello ya esta abierto.");
+    @Override
+    public void usarSello(Partida partida) {
+        throw new IllegalStateException( "El sello ya está abierto. Debes aceptar o rechazar al ingresante.");
     }
 
-    @Override 
-    public void usarMegafono(Partida partida){
-        System.out.println("No puede llamar a otro ingresante mientras ya hay uno en ventanilla.");
+    @Override
+    public void usarMegafono(Partida partida) {
+        throw new IllegalStateException("No puedes llamar a otro ingresante mientras hay una decisión pendiente.");
     }
 
     // El jugador acepta o rechaza al ingresante.
