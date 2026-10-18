@@ -18,10 +18,12 @@ public class EstadoSelloAbierto implements EstadoPartida {
 
         // Resolver la decisión que toma el jugador con la logica del modelo.
         ResultadoDecision resultado = partida.resolverTurno(decisionJugador);
-
-        // Primero comprueba si perdio la partida y si quedan ingreasantes aun en la fila.
-        if (resultado.getPartidaPerdida() || !partida.quedanIngresantes()) {
-            // Cambia de estado.
+        // Primero comprueba si perdio la partida (reputación <= 0)
+        if (resultado.getPartidaPerdida()) {
+            // Cambia al estado específico de derrota por baja reputación
+            partida.cambiarEstado(new EstadoReputacionTerminada());
+        } else if (!partida.quedanIngresantes()) {
+            // Cambia al estado de fin de partida normal (superó el día)
             partida.cambiarEstado(new EstadoPartidaFinalizada());
         } else {
             // La ventanilla queda vacía y vuelve al estado del principio: esperando otro ingresante de la fila.
