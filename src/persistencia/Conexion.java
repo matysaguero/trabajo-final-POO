@@ -5,12 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-
     private static Conexion instancia;
     private final Connection conexion;
 
     private Conexion() throws SQLException {
-        // Crea el archivo frontier.db en la raíz del proyecto
         this.conexion = DriverManager.getConnection("jdbc:sqlite:frontier.db");
     }
 
