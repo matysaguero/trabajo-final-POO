@@ -95,9 +95,14 @@ public class GestorVista implements ObservadorPartida{
         return this.vistaDecision.getBtnRechazar();
     }
 
+    public JButton getBtnVolverDecision() {
+        return this.vistaDecision.getBtnVolver();
+    }
+
     public JButton getBtnLibroReglas() {
         return this.escenario.getBtnLibroReglas();
     }
+
 
 @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {

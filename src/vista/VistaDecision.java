@@ -60,4 +60,5 @@ public class VistaDecision {
 
     public JButton getBtnAceptar() { return this.btnAceptar; }
     public JButton getBtnRechazar() { return this.btnRechazar; }
+    public JButton getBtnVolver() {return this.btnVolver;}
 }
