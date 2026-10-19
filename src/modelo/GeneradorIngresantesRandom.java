@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -35,7 +36,8 @@ public class GeneradorIngresantesRandom {
         boolean dniValido = random.nextBoolean();
 
         String origenPais = PAISES[random.nextInt(PAISES.length)];
-        String fechaNacimiento = "15/06/1990";
+        LocalDate fechaNacimiento = LocalDate.of(1990, 5, 10);
+        LocalDate fechaVencimiento = LocalDate.of(2040, 10, 14);
         int codigoRaza = raza.ordinal() + 1; // Siempre > 0
         int codigoHuella = 1000 + random.nextInt(9000); // Siempre > 0
 
@@ -43,6 +45,7 @@ public class GeneradorIngresantesRandom {
             nombre,
             origenPais,
             pasaporteValido,
+            fechaVencimiento,
             fechaNacimiento,
             codigoRaza,
             codigoHuella
@@ -55,7 +58,7 @@ public class GeneradorIngresantesRandom {
             dniValido,
             fechaNacimiento,
             numIdBase + 1000,
-            "20/12/2028",
+            fechaVencimiento,
             "HUELLA-" + codigoHuella,
             rutaImagen,
             raza.name()

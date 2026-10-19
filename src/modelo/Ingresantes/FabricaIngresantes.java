@@ -1,6 +1,7 @@
 package modelo.Ingresantes;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +23,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Sir Arthur", 180, 80, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.CABALLERO,
-            crearSoloDNI("Sir Arthur", "Hasgard", true, "10/05/1990", 40123101, "12/12/2027",
+            crearSoloDNI("Sir Arthur", "Hasgard", true, LocalDate.of(1990, 05, 10), 40123101, LocalDate.of(2159, 12, 12),
                          0, TipoRaza.HUMANO.name()),
             false, false
         ));
@@ -31,7 +32,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN,
             TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN,
-            crearSoloDNI("Zorglub", "Lander", true, "22/08/1985", 35890102, "05/11/2028",
+            crearSoloDNI("Zorglub", "Lander", true, LocalDate.of(1985, 8, 22), 35890102, LocalDate.of(2159, 11, 05),
                          1, TipoRaza.ALIEN.name()),
             false, false
         ));
@@ -40,7 +41,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Xylar el Humano", 172, 70, TipoIngresante.TURISTA, TipoRaza.ALIEN,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE,
-            crearSoloDNI("Xylar", "Lander", false, "01/01/1995", 42110103, "01/02/2025",
+            crearSoloDNI("Xylar", "Lander", false, LocalDate.of(1990, 1, 1), 42110103, LocalDate.of(2159, 11, 1),
                          2, TipoRaza.ALIEN.name()),
             true, true
         ));
@@ -49,7 +50,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Cmdte. Vance", 178, 76, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG,
             TipoClan.UNION_MAGICA, TipoCiudad.BALES, TipoAspecto.ASTRONAUTA,
-            crearSoloDNI("Cmdte. Vance", "Bales", true, "14/03/1988", 38440104, "20/08/2027",
+            crearSoloDNI("Cmdte. Vance", "Bales", true, LocalDate.of(2040, 10, 30), 38440104, LocalDate.of(2150, 12, 7),
                          3, TipoRaza.CYBORG.name()),
             true, false
         ));
@@ -58,7 +59,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Lázaro", 168, 60, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.BALES, TipoAspecto.VIAJERO_POBRE,
-            crearSoloDNI("Lázaro", "Bales", false, "09/09/1992", 39550105, "10/10/2026",
+            crearSoloDNI("Lázaro", "Bales", false, LocalDate.of(2150, 6, 1), 39550105, LocalDate.of(2159, 12, 20),
                          4, TipoRaza.HUMANO.name()),
             true, true
         ));
@@ -67,7 +68,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Aldebarán", 175, 68, TipoIngresante.CIUDADANO, TipoRaza.GUARDIANES,
             TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_2,
-            crearSoloDNI("Aldebarán", "Hasgard", true, "18/07/1980", 30112106, "15/05/2029",
+            crearSoloDNI("Aldebarán", "Hasgard", true, LocalDate.of(2100, 12, 20), 30112106, LocalDate.of(2159, 11, 15),
                          5, TipoRaza.GUARDIANES.name()),
             false, false
         ));
@@ -76,7 +77,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Malakor", 182, 74, TipoIngresante.TURISTA, TipoRaza.GUARDIANES,
             TipoClan.UNION_MAGICA, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,
-            crearSoloDNI("Malakor", "Namek", true, "03/11/1983", 32998107, "19/09/2027",
+            crearSoloDNI("Malakor", "Namek", true, LocalDate.of(2070, 9, 12), 32998107, LocalDate.of(2159, 11, 27),
                          6, TipoRaza.GUARDIANES.name()),
             false, false
         ));
@@ -85,7 +86,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Lyra", 165, 58, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
             TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_4,
-            crearSoloDNI("Lyra", "Hasgard", true, "25/12/1998", 44776108, "30/04/2028",
+            crearSoloDNI("Lyra", "Hasgard", true, LocalDate.of(2018, 9, 12), 44776108, LocalDate.of(2160, 12, 20),
                          7, TipoRaza.HUMANO.name()),
             false, false
         ));
@@ -94,7 +95,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Marco Polo", 176, 72, TipoIngresante.TURISTA, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.VIAJERO,
-            crearSoloDNI("Marco Polo", "Lander", true, "05/06/1991", 37665109, "14/07/2028",
+            crearSoloDNI("Marco Polo", "Lander", true, LocalDate.of(2011, 6, 26), 37665109, LocalDate.of(2160, 3, 15),
                          8, TipoRaza.HUMANO.name()),
             false, false
         ));
@@ -103,7 +104,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Ragnar", 192, 98, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.VIKINGO,
-            crearSoloDNI("Ragnar", "Hasgard", true, "11/11/1979", 29334110, "22/11/2027",
+            crearSoloDNI("Ragnar", "Hasgard", true, LocalDate.of(2022, 12, 18), 29334110, LocalDate.of(2161, 1, 2),
                          9, TipoRaza.HUMANO.name()),
             false, false
         ));
@@ -134,7 +135,7 @@ public class FabricaIngresantes {
     // Crea únicamente el DNI seleccionando foto y huella de sus carpetas correspondientes
     private static ArrayList<Documento> crearSoloDNI(
             String nombre, String origen, boolean valido,
-            String fechaNacimiento, int nroDni, String vencimiento,
+            LocalDate fechaNacimiento, int nroDni, LocalDate vencimiento,
             int indiceRecurso, String razaStr) {
 
         ArrayList<Documento> docs = new ArrayList<>();

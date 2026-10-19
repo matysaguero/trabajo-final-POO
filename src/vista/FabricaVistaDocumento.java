@@ -74,8 +74,8 @@ public class FabricaVistaDocumento {
         return panelDNI;
     }
 
-    private JLabel crearLabelTexto(LocalDate texto, int x, int y, int ancho, int alto) {
-        JLabel label = new JLabel();
+    private JLabel crearLabelTexto(String texto, int x, int y, int ancho, int alto) {
+        JLabel label = new JLabel(texto);
         label.setFont(FUENTE_DATOS);
         label.setForeground(COLOR_TEXTO);
         label.setBounds(x, y, ancho, alto);

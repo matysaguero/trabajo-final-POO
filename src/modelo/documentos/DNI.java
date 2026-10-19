@@ -11,8 +11,8 @@ public class DNI extends Documento {
     private String raza;
 
     public DNI(String PLANTILLA_DNI, String nombre, String origen, boolean valido,
-               LocalDate vencimiento, LocalDate fecha_nacimiento, int nro_dni, 
-               String huella, String foto, String raza) {
+        LocalDate fecha_nacimiento, int nro_dni, 
+        LocalDate vencimiento, String huella, String foto, String raza) {
         super(nombre, origen, valido, vencimiento);
 
         if (PLANTILLA_DNI == null || PLANTILLA_DNI.isBlank()) {
