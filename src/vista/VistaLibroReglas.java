@@ -15,6 +15,9 @@ public class VistaLibroReglas {
     private JPanel libro;
 
     public VistaLibroReglas(JLayeredPane mesa) {
+        if (mesa == null) {
+            throw new IllegalArgumentException("La mesa debe existir");
+        }
         this.mesa = mesa;
     }
 

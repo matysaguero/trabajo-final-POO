@@ -1,9 +1,7 @@
 package controlador;
 
-import java.awt.event.ActionListener;
 
 import modelo.Partida;
-import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
 
 public class ControladorJuego {

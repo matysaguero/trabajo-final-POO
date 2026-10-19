@@ -17,7 +17,7 @@ public class GestorVista implements ObservadorPartida{
     private final VistaMesaDocumentos mesa;
     private final VistaVentanilla ventanilla;
     private final FabricaVistaDocumento fabrica;
-    private final VistaTutorial vistaTutorial; //NUEVO: para la vista tutorial, agregado en el constructor y su getter
+    private final VistaTutorial vistaTutorial;
     private final VistaLibroReglas libroReglas;
 
 
