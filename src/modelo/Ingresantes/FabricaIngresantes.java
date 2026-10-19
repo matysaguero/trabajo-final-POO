@@ -30,7 +30,7 @@ public class FabricaIngresantes {
         // 2. ALIEN
         plantel.add(crearPersonaje(
             "Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN,
-            TipoClan.ALIEN, TipoCiudad.LANDER, TipoAspecto.ALIEN,
+            TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN,
             crearSoloDNI("Zorglub", "Lander", true, "22/08/1985", 35890102, "05/11/2028",
                          1, TipoRaza.ALIEN.name()),
             false, false
@@ -75,7 +75,7 @@ public class FabricaIngresantes {
         // 7. MAGO_CLAN_3
         plantel.add(crearPersonaje(
             "Malakor", 182, 74, TipoIngresante.TURISTA, TipoRaza.GUARDIANES,
-            TipoClan.ALIEN, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,
+            TipoClan.UNION_MAGICA, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,
             crearSoloDNI("Malakor", "Namek", true, "03/11/1983", 32998107, "19/09/2027",
                          6, TipoRaza.GUARDIANES.name()),
             false, false
@@ -102,7 +102,7 @@ public class FabricaIngresantes {
         // 10. VIKINGO
         plantel.add(crearPersonaje(
             "Ragnar", 192, 98, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
-            TipoClan.ALIEN, TipoCiudad.HASGARD, TipoAspecto.VIKINGO,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.VIKINGO,
             crearSoloDNI("Ragnar", "Hasgard", true, "11/11/1979", 29334110, "22/11/2027",
                          9, TipoRaza.HUMANO.name()),
             false, false

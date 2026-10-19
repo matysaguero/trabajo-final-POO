@@ -13,7 +13,7 @@ public class PoliticaTipoIngresante extends PoliticaFronteriza {
     private final List<TipoIngresante> tiposProhibidos;
  
     public PoliticaTipoIngresante(List<TipoIngresante> tiposProhibidos) {
-        if (tiposProhibidos == null || tiposProhibidos.isEmpty()) {
+        if (tiposProhibidos == null) {
             throw new IllegalArgumentException("La lista de tipos prohibidos no puede ser nula ni vacia.");
         }
         this.tiposProhibidos = new ArrayList<>(tiposProhibidos);

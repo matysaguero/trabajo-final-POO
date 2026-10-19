@@ -2,6 +2,8 @@ package vista;
 
 import java.awt.*;
 import java.io.File;
+import java.time.LocalDate;
+
 import javax.swing.*;
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
@@ -62,7 +64,7 @@ public class FabricaVistaDocumento {
         panelDNI.add(crearLabelTexto(String.valueOf(dni.getNroDni()), 216, 194, 188, 20));
 
         // Fecha de "VENCIMIENTO:" (ubicada junto al rótulo VENCIMIENTO:)
-        panelDNI.add(crearLabelTexto(dni.getVencimiento(), 280, 244, 125, 20));
+        panelDNI.add(crearLabelTexto(dni.getFechaVencimiento(), 280, 244, 125, 20));
 
         // Permitir arrastrar el DNI por la mesa
         MoverComponentes mover = new MoverComponentes(panelDNI);
@@ -72,8 +74,8 @@ public class FabricaVistaDocumento {
         return panelDNI;
     }
 
-    private JLabel crearLabelTexto(String texto, int x, int y, int ancho, int alto) {
-        JLabel label = new JLabel(texto);
+    private JLabel crearLabelTexto(LocalDate texto, int x, int y, int ancho, int alto) {
+        JLabel label = new JLabel();
         label.setFont(FUENTE_DATOS);
         label.setForeground(COLOR_TEXTO);
         label.setBounds(x, y, ancho, alto);
