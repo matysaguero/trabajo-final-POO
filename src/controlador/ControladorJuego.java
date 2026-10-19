@@ -51,17 +51,15 @@ public class ControladorJuego {
                 this.ui.mostrarError(e.getMessage());
             }
         });
-
-        
+ 
         this.ui.getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
         
-        this.ui.getBtnVolverDecision().addActionListener(evento -> {
-            this.ui.ocultarVentanaDecision();
-            this.partida.cancelarDecision();
-        });
-
+        this.ui.getBtnVolverDecision().addActionListener(evento -> {this.ui.ocultarVentanaDecision(); this.partida.cancelarDecision();});
         this.ui.getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
+    
+        this.ui.getBtnDocumentos().addActionListener(evento -> { System.out.println("Se presiono el boton de los documentos.");});
+
     }
 
     /*

@@ -14,8 +14,11 @@ public class Escenario {
     // Botón invisible para llamar al siguiente ingresante
     private final BotonInvisible btnLlamar;
 
-    // Boton invisible para abrir el libro de reglas
-    private final BotonInvisible btnLibroReglas;    
+    // Botón invisible para abrir el libro de reglas
+    private final BotonInvisible btnLibroReglas;  
+    
+    // Boton invisible para abrir los documentos en la mesa
+    private final BotonInvisible btnDocumentos;
 
     
 
@@ -38,7 +41,6 @@ public class Escenario {
         };
 
         panelFondo.setLayout(null);
-
         Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
         // Instanciio y ubicamos el botón invisible alineado al sprite completo del "Sello"
@@ -77,6 +79,23 @@ public class Escenario {
         
         this.btnLibroReglas.configurarImagenHover("assets/imagenes/permisos de entrada, libro de reglas y sellos/libro_de_reglas_cerrado.png");
         panelFondo.add(this.btnLibroReglas);
+
+        // Botón invisible ubicado sobre el sobre rojo.
+        this.btnDocumentos = new BotonInvisible();
+
+        this.btnDocumentos.setBounds(
+            (int) (tamanoPantalla.width * 0.073),  // X
+            (int) (tamanoPantalla.height * 0.720), // Y
+            (int) (tamanoPantalla.width * 0.051),  // Ancho
+            (int) (tamanoPantalla.height * 0.100)  // Alto
+        );
+        panelFondo.add(this.btnDocumentos);
+
+        // TEMPORAL: visualizar el área del botón.
+        this.btnDocumentos.setVisible(true);
+        this.btnDocumentos.setOpaque(false);
+        this.btnDocumentos.setBorderPainted(true);
+        this.btnDocumentos.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
     }
 
     public void mostrar() {
@@ -97,6 +116,10 @@ public class Escenario {
 
     public JButton getBtnLibroReglas() {
         return this.btnLibroReglas;
+    }
+
+    public JButton getBtnDocumentos() {
+        return this.btnDocumentos;
     }
 
     public JFrame getVentana() {

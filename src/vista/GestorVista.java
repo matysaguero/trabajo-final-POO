@@ -108,10 +108,13 @@ public class GestorVista implements ObservadorPartida{
         return this.escenario.getBtnLibroReglas();
     }
 
-    
     public void alternarLibroReglas() {
         this.libroReglas.alternar();
     }
+
+    public JButton getBtnDocumentos() {
+        return this.escenario.getBtnDocumentos();
+    }   
 
 
 @Override
