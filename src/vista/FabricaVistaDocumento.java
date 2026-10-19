@@ -55,7 +55,7 @@ public class FabricaVistaDocumento {
         panelDNI.add(crearLabelTexto(dni.getRaza(), 232, 111, 174, 20));
 
         // Al lado de "NACIMIENTO:"
-        panelDNI.add(crearLabelTexto(dni.getFechaNacimiento(), 316, 139, 92, 20));
+        panelDNI.add(crearLabelTexto(dni.getFechaNacimiento().toString(), 316, 139, 92, 20));
 
         // Al lado de "ORIGEN:"
         panelDNI.add(crearLabelTexto(dni.getOrigen(), 260, 166, 146, 20));
@@ -64,7 +64,7 @@ public class FabricaVistaDocumento {
         panelDNI.add(crearLabelTexto(String.valueOf(dni.getNroDni()), 216, 194, 188, 20));
 
         // Fecha de "VENCIMIENTO:" (ubicada junto al rótulo VENCIMIENTO:)
-        panelDNI.add(crearLabelTexto(dni.getFechaVencimiento(), 280, 244, 125, 20));
+        panelDNI.add(crearLabelTexto(dni.getFechaVencimiento().toString(), 280, 244, 125, 20));
 
         // Permitir arrastrar el DNI por la mesa
         MoverComponentes mover = new MoverComponentes(panelDNI);
