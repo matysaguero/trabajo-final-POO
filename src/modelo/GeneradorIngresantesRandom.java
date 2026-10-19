@@ -36,8 +36,12 @@ public class GeneradorIngresantesRandom {
         boolean dniValido = random.nextBoolean();
 
         String origenPais = PAISES[random.nextInt(PAISES.length)];
-        LocalDate fechaNacimiento = LocalDate.of(1990, 5, 10);
-        LocalDate fechaVencimiento = LocalDate.of(2040, 10, 14);
+        
+        //Se genera una fecha de nacimiento random.
+        LocalDate fechaNacimiento = generarFechas(LocalDate.of(2080, 1, 1), LocalDate.of(2120, 12, 31));
+        LocalDate fechaVencimiento = generarFechas(LocalDate.of(2157, 1, 1), LocalDate.of(2160, 12, 31));
+        
+        
         int codigoRaza = raza.ordinal() + 1; // Siempre > 0
         int codigoHuella = 1000 + random.nextInt(9000); // Siempre > 0
 
@@ -83,5 +87,14 @@ public class GeneradorIngresantesRandom {
             lista.add(generarIngresante(i));
         }
         return lista;
+    }
+
+    // Mi generador de fechas ramdom, al metodo le ingresa el rango de fechas en la cual queres generar.
+    public LocalDate generarFechas(LocalDate inicio, LocalDate fin){
+        long diasInicio = inicio.toEpochDay();
+        long diasFin = fin.toEpochDay();
+
+        long diasAleatorio = diasInicio + random.nextLong(diasFin - diasInicio);
+        return LocalDate.ofEpochDay(diasAleatorio);
     }
 }
