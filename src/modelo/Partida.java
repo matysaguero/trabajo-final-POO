@@ -78,9 +78,9 @@ public class Partida {
             this.ingresanteActual =this.filaIngresantes.remove(0);
         
         for (ObservadorPartida obs : this.observadores) {
-            obs.actualizarNuevoIngresante(this.ingresanteActual);
+            obs.actualizarNuevoIngresante(this.ingresanteActual); 
         }
-            return true;    
+            return true;   
     }
 
     //NUEVO: metodos que delegaran acciones en un estado.

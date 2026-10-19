@@ -70,6 +70,17 @@ public class GestorVista implements ObservadorPartida{
     public void ocultarVentanaDecision(){
         this.vistaDecision.ocultar();
     }
+    
+    private void mostrarDocumentos() {
+        this.escenario.getBtnDocumentos().setVisible(true);
+        this.escenario.getBtnDocumentos().setEnabled(true);
+    }
+
+    private void ocultarDocumento() {
+        this.escenario.getBtnDocumentos().setVisible(false);
+        this.escenario.getBtnDocumentos().setEnabled(false);
+    }
+
 
     // METODOS DE LA FACHADA PARA EXPONER LOS BOTONES AL CONTROLADOR
     public JButton getBtnJugar() {
@@ -108,11 +119,14 @@ public class GestorVista implements ObservadorPartida{
         return this.escenario.getBtnLibroReglas();
     }
 
-    
     public void alternarLibroReglas() {
         this.libroReglas.alternar();
     }
 
+    public JButton getBtnDocumentos() {
+        return this.escenario.getBtnDocumentos();
+    }
+    
 
 @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
@@ -123,15 +137,41 @@ public class GestorVista implements ObservadorPartida{
         int posicionX = 30;
         int posicionY = 30;
 
-        for (Documento documento : ingresante.getDocumentos()) {
+        /*for (Documento documento : ingresante.getDocumentos()) {
             JPanel vistaDoc = this.fabrica.crearVista(documento, posicionX, posicionY);
             this.mesa.agregarDocumentoEnMesa(vistaDoc);
             posicionX += 60; 
             posicionY += 20; 
-        }
+        } */
         
         this.libroReglas.restaurarSiAbierto();
+        mostrarDocumentos();
+    }
 
+
+    public void desplegarDocumentos(Ingresante ingresante) {
+        // Verificar que exista un ingresante
+        // y que el botón todavía esté habilitado.
+        if (ingresante == null ||!this.escenario.getBtnDocumentos().isEnabled()) {
+            return;
+        }
+
+            int posicionX = 30;
+            int posicionY = 30;
+
+        // Crear y mostrar los documentos sobre la mesa.
+        for (Documento documento : ingresante.getDocumentos()) {
+            JPanel vistaDoc = this.fabrica.crearVista(documento, posicionX, posicionY);
+            this.mesa.agregarDocumentoEnMesa(vistaDoc);
+            posicionX += 60;
+            posicionY += 20;
+        }
+
+        // Ocultar el botón después de desplegar los DNI.
+        ocultarDocumento();
+
+        // Mantener el libro de reglas sobre los documentos.
+        this.libroReglas.restaurarSiAbierto();
     }
 
 @Override
@@ -154,6 +194,8 @@ public class GestorVista implements ObservadorPartida{
                 "¡Penalización! Reputación: " + resultado.getReputacionActual()
             );
         }
+
+        ocultarDocumento();
 
         // 3. Actualizamos la vista por consola
         this.consola.mostrarPuedeIngresar(resultado.getPuedeIngresar());
