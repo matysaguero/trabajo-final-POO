@@ -18,7 +18,7 @@ public class MoverComponentes extends MouseAdapter {
         public void mousePressed(MouseEvent e) {
             Container padre = panelObjetivo.getParent();
 
-            // Trae el panel clickeado (los documentos) al frente.
+        // Trae el panel clickeado (los documentos) al frente.
             if (padre instanceof JLayeredPane) { 
                 ((JLayeredPane) padre).moveToFront(panelObjetivo); // si el padre es un panel con capas,
                 // lo trae al frente del panelObjetivo que va a ser la ventana.
