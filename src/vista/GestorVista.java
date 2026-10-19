@@ -18,6 +18,8 @@ public class GestorVista implements ObservadorPartida{
     private final VistaVentanilla ventanilla;
     private final FabricaVistaDocumento fabrica;
     private final VistaTutorial vistaTutorial; //NUEVO: para la vista tutorial, agregado en el constructor y su getter
+    private final VistaLibroReglas libroReglas;
+
 
     public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial){
         this.menu = menu;
@@ -27,7 +29,10 @@ public class GestorVista implements ObservadorPartida{
         this.mesa = mesa;
         this.ventanilla = ventanilla;
         this.fabrica = fabrica;
-        this.vistaTutorial = vistaTutorial;
+        this.vistaTutorial = vistaTutorial;       
+        this.libroReglas = new VistaLibroReglas( mesa.getPanelDocumentos()
+);
+
     }
 
     // METODOS FACHADA CONTROL DE VISTAS
@@ -103,6 +108,11 @@ public class GestorVista implements ObservadorPartida{
         return this.escenario.getBtnLibroReglas();
     }
 
+    
+    public void alternarLibroReglas() {
+        this.libroReglas.alternar();
+    }
+
 
 @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
@@ -119,13 +129,18 @@ public class GestorVista implements ObservadorPartida{
             posicionX += 60; 
             posicionY += 20; 
         }
+        
+        this.libroReglas.restaurarSiAbierto();
+
     }
 
 @Override
     public void actualizarVeredicto(boolean decisionJugador, ResultadoDecision resultado) {
         // 1. Limpiamos la mesa y la ventanilla porque el turno terminó
         this.mesa.limpiarMesa();
+        this.libroReglas.cerrar();
         this.ventanilla.limpiarVentanilla();
+        this.libroReglas.restaurarSiAbierto();
 
         // 2. Carteles emergentes en la Vista
         if (resultado.getAcierto()) {
