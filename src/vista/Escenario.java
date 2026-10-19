@@ -76,28 +76,35 @@ public class Escenario {
             (int) (tamanoPantalla.width * 0.055),  // Ancho
             (int) (tamanoPantalla.height * 0.115)  // Alto
         );
-        
         this.btnLibroReglas.configurarImagenHover("assets/imagenes/permisos de entrada, libro de reglas y sellos/libro_de_reglas_cerrado.png");
         panelFondo.add(this.btnLibroReglas);
 
-        // Botón invisible ubicado sobre el sobre rojo.
+        // Botón de documentos.
         this.btnDocumentos = new BotonInvisible();
-
         this.btnDocumentos.setBounds(
-            (int) (tamanoPantalla.width * 0.073),  // X
-            (int) (tamanoPantalla.height * 0.720), // Y
-            (int) (tamanoPantalla.width * 0.051),  // Ancho
-            (int) (tamanoPantalla.height * 0.100)  // Alto
+            (int) (tamanoPantalla.width * 0.073),
+            (int) (tamanoPantalla.height * 0.720),
+            (int) (tamanoPantalla.width * 0.051),
+            (int) (tamanoPantalla.height * 0.100)
         );
-        panelFondo.add(this.btnDocumentos);
 
-        // TEMPORAL: visualizar el área del botón.
-        this.btnDocumentos.setVisible(true);
-        this.btnDocumentos.setOpaque(false);
-        this.btnDocumentos.setBorderPainted(true);
-        this.btnDocumentos.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+        // Cargar el PNG.
+        ImageIcon icono = new ImageIcon("assets/imagenes/documentos de identidad/dorso_dni.png");
+
+        // Escalar la imagen al tamaño del botón.
+        Image imagenEscalada = icono.getImage().getScaledInstance(
+            this.btnDocumentos.getWidth(),
+            this.btnDocumentos.getHeight(),
+            Image.SCALE_REPLICATE
+        );
+
+        this.btnDocumentos.setIcon(new ImageIcon(imagenEscalada));
+
+        // Inicialmente oculto y deshabilitado.
         this.btnDocumentos.setVisible(false);
         this.btnDocumentos.setEnabled(false);
+        panelFondo.add(this.btnDocumentos);
+
     }
 
     public void mostrar() {
