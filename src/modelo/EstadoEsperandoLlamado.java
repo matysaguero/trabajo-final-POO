@@ -26,6 +26,11 @@ public class EstadoEsperandoLlamado implements EstadoPartida {
         throw new IllegalStateException( "No puedes aceptar o rechazar sin un ingresante en la ventanilla.");
     }
 
+    @Override
+    public void cancelarDecision(Partida partida) {
+        throw new IllegalStateException("No tomar una decisión si no has abierto el sello.");
+    }
+
 
 
 

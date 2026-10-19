@@ -33,4 +33,9 @@ public class EstadoSelloAbierto implements EstadoPartida {
         partida.notificarVeredicto(decisionJugador, resultado);
     }
 
+    @Override
+    public void cancelarDecision(Partida partida) {
+        // Cerraste el panel del sello, por lo tanto, volvemos al estado anterior.
+        partida.cambiarEstado(new EstadoAtendiendoIngresante());
+    }
 }

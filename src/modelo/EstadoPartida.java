@@ -11,5 +11,8 @@ public interface EstadoPartida {
 
     // El jugador acepta o rechaza al ingresante.
     void procesarDecision(Partida partida, boolean decisionJugador) throws Exception;
+
+    // El jugador cierra la ventana de Decisión en caso de querer revisar información.
+    void cancelarDecision(Partida partida) throws Exception;
 }
 

@@ -19,4 +19,9 @@ public class EstadoAtendiendoIngresante implements EstadoPartida{
     public void procesarDecision(Partida partida, boolean decisionJugador) {
         throw new IllegalStateException("Primero debes abrir el sello para decidir.");
     }
+
+    @Override 
+    public void cancelarDecision(Partida partida){
+        throw new IllegalStateException("Primero debes abrir el sello para decidir");
+    }
 }

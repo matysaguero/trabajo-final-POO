@@ -56,7 +56,11 @@ public class ControladorJuego {
 
         
         this.ui.getBtnDecidir().addActionListener(evento -> this.abrirVentanaDecision());
-        this.ui.getBtnVolverDecision().addActionListener(evento -> this.ui.ocultarVentanaDecision());
+        
+        this.ui.getBtnVolverDecision().addActionListener(evento -> {
+            this.ui.ocultarVentanaDecision();
+            this.partida.cancelarDecision();
+        });
 
         this.ui.getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));

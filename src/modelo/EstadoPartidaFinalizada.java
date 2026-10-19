@@ -20,4 +20,8 @@ public class EstadoPartidaFinalizada implements EstadoPartida {
         throw new IllegalStateException("La partida ha finalizado. No puedes procesar más decisiones.");
     }
 
+    @Override
+    public void cancelarDecision(Partida partida){
+        throw new IllegalStateException("La partida ha finalizado. No puedes procesar más decisiones.");
+    }
 }

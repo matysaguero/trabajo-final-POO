@@ -49,14 +49,18 @@ public class Partida {
     // Esto garantiza dos situaciones:
     // - Si existe un ingresante, la partida comienza en EstadoAtendiendoIngresante.
     // - Si no existen ingresantes, la partida pasa a EstadoPartidaFinalizada.
+
     public void iniciarPartida() {
         // Reincia la tReputacion
         this.gestor.reiniciar();
+        
         // Resconstruye la fila de ingresantes
         this.filaIngresantes.clear();
         this.filaIngresantes.addAll(this.ingresantesIniciales);
-         // La ventanilla comienza vacia
+        
+        // La ventanilla comienza vacia
         this.ingresanteActual = null;
+        
         // No se llama automaticamnete al primer ingresante.
         if (this.filaIngresantes.isEmpty()) {
             cambiarEstado(new EstadoPartidaFinalizada());
@@ -131,45 +135,18 @@ public class Partida {
         this.estado.procesarDecision(this, decisionJugador);
     }
 
-    
-    /*public void setIngresanteActual(Ingresante ingresante) {
-        this.ingresanteActual = ingresante;
-
-        if (ingresante != null) {
-            for (ObservadorPartida obs : this.observadores) {
-                obs.actualizarNuevoIngresante(ingresante);
-            }
+    // Se define nuevo método para poder cerrar el sello y que la partida vuelva al estado anterior.
+    public void cancelarDecision(){
+        if (this.estado instanceof EstadoSelloAbierto){
+            cambiarEstado(new EstadoAtendiendoIngresante());
         }
-    }*/
+    }
 
     public Ingresante getIngresanteActual() {
         return this.ingresanteActual;
     }
 
-    /* 
-    public ResultadoDecision procesarDecisionJugador(boolean decisionJugador) throws Exception {
-        boolean puedeIngresar = resolutor.puedeIngresar(this.ingresanteActual);
-        boolean acierto = gestor.evaluarDecision(decisionJugador, puedeIngresar);
 
-        ResultadoDecision resultado = new ResultadoDecision(
-            puedeIngresar,
-            acierto,
-            gestor.getReputacion(),
-            gestor.juegoPerdido()
-        );
-
-        // Despachamos al ingresante actual; la ventanilla queda vacía hasta tocar btnLlamar
-        this.ingresanteActual = null;
-
-        // Notificamos el veredicto a la vista (limpia mesa/ventanilla y muestra el cartel)
-        for (ObservadorPartida obs : this.observadores) {
-            obs.actualizarVeredicto(decisionJugador, resultado);
-        }
-
-        return resultado;
-    }*/
-
-    //NUEVO
     ResultadoDecision resolverTurno(boolean decisionJugador) throws Exception {
         if (this.ingresanteActual == null) {
             throw new IllegalStateException("No hay un ingresante para evaluar.");
