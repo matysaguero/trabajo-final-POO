@@ -60,6 +60,6 @@ public class DNI extends Documento {
     @Override
     public String obtenerDetalles() {
         return "DNI [Nro: " + nro_dni + ", Raza: " + raza +
-               ", Nacimiento: " + fecha_nacimiento + ", Vencimiento: " + this.getFechaVencimiento() + "]";
+               ", Nacimiento: " + this.getFechaNacimiento() + ", Vencimiento: " + this.getFechaVencimiento() + "]";
     }
 }

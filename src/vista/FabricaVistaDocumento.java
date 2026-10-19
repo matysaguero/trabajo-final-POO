@@ -2,8 +2,6 @@ package vista;
 
 import java.awt.*;
 import java.io.File;
-import java.time.LocalDate;
-
 import javax.swing.*;
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;

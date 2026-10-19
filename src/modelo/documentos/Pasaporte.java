@@ -39,7 +39,7 @@ public class Pasaporte extends Documento {
    @Override
     public String obtenerDetalles() {
         return "Pasaporte: " + getNombre() + ", Origen: " + getOrigen() + ", Válido: " + isValido() +
-               ", Fecha de Nacimiento: " + fecha_nacimiento +
+               ", Fecha de Nacimiento: " + this.getFechaNacimiento() +
                ", Raza: " + raza + ", Huella: " + huella;
     }
 }

@@ -1,16 +1,12 @@
 package main;
 
 import controlador.ControladorJuego;
-
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.SwingUtilities;
 import modelo.*;
 import modelo.Ingresantes.*;
 import modelo.politicas.*;
-import persistencia.Conexion;
-import persistencia.PuntajeDAOSQLite;
 import vista.*;
 
 public class Main {
@@ -56,8 +52,8 @@ public class Main {
                 // 4. MOSTRAR MENÚ INICIAL
                 menu.mostrar();
 
-                Connection conexion = Conexion.getInstancia().get();
-                PuntajeDAO puntajeDAO = new PuntajeDAOSQLite(conexion);
+                //Connection conexion = Conexion.getInstancia().get();
+                //PuntajeDAO puntajeDAO = new PuntajeDAOSQLite(conexion);
             } catch (Exception e) {
                 e.printStackTrace();
             }

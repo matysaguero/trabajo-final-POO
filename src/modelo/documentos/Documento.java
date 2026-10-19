@@ -21,6 +21,7 @@ public abstract class Documento {
         this.nombre = nombre;
         this.origen = origen;
         this.valido = valido;
+        this.vencimiento = vencimiento;
     }
 
     public String getNombre() { return this.nombre; }
