@@ -2,6 +2,6 @@ package modelo;
 
 public enum TipoClan {
     UNION_MAGICA,
-    ALIEN,
+    TITAN_DIGITAL,
     PUERTO_UMBRAL;
 }

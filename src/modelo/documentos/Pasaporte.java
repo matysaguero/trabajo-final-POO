@@ -1,13 +1,15 @@
 package modelo.documentos;
 
+import java.time.LocalDate;
+
 public class Pasaporte extends Documento {
-    private String fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
     private int raza;
     private int huella;
 
-    public Pasaporte(String nombre, String origen, boolean valido, String fecha_nacimiento, int raza, int huella) {
-        super(nombre, origen, valido);
-        if (fecha_nacimiento == null || fecha_nacimiento.isBlank()) {
+    public Pasaporte(String nombre, String origen, boolean valido, LocalDate vencimiento, LocalDate fecha_nacimiento, int raza, int huella) {
+        super(nombre, origen, valido, vencimiento);
+        if (fecha_nacimiento == null) {
             throw new IllegalArgumentException("fecha_nacimiento no puede estar vacio ni ser nulo");
         }
         if (raza <= 0) {
@@ -22,7 +24,7 @@ public class Pasaporte extends Documento {
         this.huella = huella;
     }
 
-    public String getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return this.fecha_nacimiento;
     }
 

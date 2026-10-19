@@ -12,8 +12,8 @@ public class PoliticaCiudad extends PoliticaFronteriza {
     private final List<TipoCiudad> ciudadesProhibidas;
 
     public PoliticaCiudad(List<TipoCiudad> ciudadesProhibidas) {
-        if (ciudadesProhibidas == null || ciudadesProhibidas.isEmpty()) {
-            throw new IllegalArgumentException("La lista de ciudades prohibidas no puede ser nula ni vacia.");
+        if (ciudadesProhibidas == null) {
+            throw new IllegalArgumentException("La lista de ciudades prohibidas no puede ser nula.");
         }
         this.ciudadesProhibidas = new ArrayList<>(ciudadesProhibidas);
     }
