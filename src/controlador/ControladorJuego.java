@@ -2,6 +2,7 @@ package controlador;
 
 
 import modelo.Partida;
+import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
 
 public class ControladorJuego {
@@ -58,7 +59,11 @@ public class ControladorJuego {
         this.ui.getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
     
-        this.ui.getBtnDocumentos().addActionListener(evento -> { System.out.println("Se presiono el boton de los documentos.");});
+        this.ui.getBtnDocumentos().addActionListener(evento -> { 
+            // Obtener el ingresante actual desde el Modelo.
+                Ingresante ingresante = this.partida.getIngresanteActual();
+            // Solicitar a la Vista que muestre sus documentos.
+                this.ui.desplegarDocumentos(ingresante);});
 
     }
 

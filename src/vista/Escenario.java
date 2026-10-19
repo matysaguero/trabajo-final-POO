@@ -96,6 +96,8 @@ public class Escenario {
         this.btnDocumentos.setOpaque(false);
         this.btnDocumentos.setBorderPainted(true);
         this.btnDocumentos.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+        this.btnDocumentos.setVisible(false);
+        this.btnDocumentos.setEnabled(false);
     }
 
     public void mostrar() {
