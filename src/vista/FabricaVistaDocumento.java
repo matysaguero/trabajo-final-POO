@@ -106,4 +106,5 @@ public class FabricaVistaDocumento {
         }
         return new ImageIcon(rutaLimpia).getImage();
     }
+
 }
