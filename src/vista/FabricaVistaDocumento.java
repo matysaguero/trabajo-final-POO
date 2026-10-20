@@ -2,6 +2,9 @@ package vista;
 
 import java.awt.*;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.*;
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
@@ -13,11 +16,31 @@ public class FabricaVistaDocumento {
     private static final Font FUENTE_DATOS = new Font("Monospaced", Font.BOLD, 14);
     private static final Color COLOR_TEXTO = new Color(35, 25, 20);
 
+    // Defino una interfaz funcional (una interfaz de un solo metodo abstracto) para poder usar lambdas
+@FunctionalInterface
+    private interface CreadorVista {
+        JPanel crear(Documento doc, int posX, int posY);
+    }
+
+    private final Map<Class<? extends Documento>, CreadorVista> creadores = new HashMap<>();
+
+    public FabricaVistaDocumento() {
+        //Registramos cada tipo de documento con la lambda que sabe dibujarlo
+        creadores.put(DNI.class, (doc, x, y) -> crearVistaDNI((DNI) doc, x, y));
+        
+        //creadores.put(Pasaporte.class, (doc, x, y) -> crearVistaPasaporte((Pasaporte) doc, x, y));
+    }
+    
     public JPanel crearVista(Documento doc, int posX, int posY) {
-        if (doc instanceof DNI) {
-            return crearVistaDNI((DNI) doc, posX, posY);
+        // Buscamos en el mapa la lambda que corresponde a la clase de este documento específico
+        CreadorVista creador = creadores.get(doc.getClass());
+        
+        if (creador != null) {
+            return creador.crear(doc, posX, posY); // Ejecuta el método específico
         }
-        return new JPanel();
+        
+        // Si llega un documento para el cual no programaste vista, devuelve panel vacío
+        return new JPanel(); 
     }
 
     private JPanel crearVistaDNI(DNI dni, int posX, int posY) {
