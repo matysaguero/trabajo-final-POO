@@ -10,6 +10,7 @@ public class MenuPrincipal {
     private final JFrame ventana;
     private final JButton btnJugar;
     private final JButton btnTutorial;
+    private final JButton btnSalir;
 
     public MenuPrincipal() {
         this.ventana = new JFrame("Frontier - Menú Principal");
@@ -40,15 +41,23 @@ public class MenuPrincipal {
         int posY = (int) (altoPantalla * 0.68);   
         int posXJugar = (int) (anchoPantalla * 0.382);       
         int posXTutorial = (int) (altoPantalla * 0.916);
+        int anchoBotonSalir = (int) (anchoPantalla * 0.045);
+        int altoBotonSalir = (int) (altoPantalla * 0.075);
+        int posXSalir = (int) (anchoPantalla * 0.015);
+        int posYSalir = (int) (altoPantalla * 0.020);
 
         // Se crean los botones utilizando las imágenes requeridas
         this.btnJugar = crearBotonConImagen("assets/imagenes/botones/boton_jugar.png", posXJugar, posY, anchoBoton, altoBoton);
         this.btnTutorial = crearBotonConImagen("assets/imagenes/botones/boton_tutorial.png", posXTutorial, posY, anchoBoton, altoBoton);
+        // Crear botón Salir.
+        this.btnSalir = crearBotonConImagen( "assets/imagenes/botones/boton_cruz.png", posXSalir, posYSalir, anchoBotonSalir, altoBotonSalir);
 
         panelFondo.add(this.btnJugar);
         panelFondo.add(this.btnTutorial);
+        panelFondo.add(this.btnSalir);
         
         this.ventana.setContentPane(panelFondo);
+    
     }
 
     private JButton crearBotonConImagen(String rutaImagen, int x, int y, int ancho, int alto) {
@@ -76,5 +85,6 @@ public class MenuPrincipal {
     // La vista expone lo que el controlador necesita para registrarse, y nada más
     public JButton getBtnJugar() { return this.btnJugar; }
     public JButton getBtnTutorial() { return this.btnTutorial; }
+    public JButton getBtnSalir() { return this.btnSalir;}
 
 }

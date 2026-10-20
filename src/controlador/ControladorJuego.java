@@ -23,6 +23,11 @@ public class ControladorJuego {
             this.partida.iniciarPartida();
         });
 
+        //Al presionar el boton para salir, este te saca del panel principal
+        this.ui.getBtnSalir().addActionListener( evento -> {
+            System.exit(0);
+        });
+        
         // Al tocar el botón tutorial, ocultamos el menú y mostramos el tutorial
         this.ui.getBtnTutorial().addActionListener(evento -> {
             this.ui.ocultarMenuPrincipal();
