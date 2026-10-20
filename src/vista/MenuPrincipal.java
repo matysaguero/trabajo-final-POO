@@ -43,7 +43,7 @@ public class MenuPrincipal {
         int posXTutorial = (int) (altoPantalla * 0.916);
         int anchoBotonSalir = (int) (anchoPantalla * 0.045);
         int altoBotonSalir = (int) (altoPantalla * 0.075);
-        int posXSalir = (int) (anchoPantalla * 0.015);
+        int posXSalir = (int) (anchoPantalla * 0.94);
         int posYSalir = (int) (altoPantalla * 0.020);
 
         // Se crean los botones utilizando las imágenes requeridas

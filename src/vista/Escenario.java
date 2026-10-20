@@ -20,6 +20,9 @@ public class Escenario {
     // Boton invisible para abrir los documentos en la mesa
     private final BotonInvisible btnDocumentos;
 
+    // Boton no invisible para salir del gameplay
+    private final JButton btnSalir;
+
     
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla) {
@@ -92,11 +95,7 @@ public class Escenario {
         ImageIcon icono = new ImageIcon("assets/imagenes/documentos de identidad/dorso_dni.png");
 
         // Escalar la imagen al tamaño del botón.
-        Image imagenEscalada = icono.getImage().getScaledInstance(
-            this.btnDocumentos.getWidth(),
-            this.btnDocumentos.getHeight(),
-            Image.SCALE_REPLICATE
-        );
+        Image imagenEscalada = icono.getImage().getScaledInstance(this.btnDocumentos.getWidth(),this.btnDocumentos.getHeight(),Image.SCALE_REPLICATE);
 
         this.btnDocumentos.setIcon(new ImageIcon(imagenEscalada));
 
@@ -104,6 +103,34 @@ public class Escenario {
         this.btnDocumentos.setVisible(false);
         this.btnDocumentos.setEnabled(false);
         panelFondo.add(this.btnDocumentos);
+
+    
+        // Posición y dimensiones del botón Salir.
+        int anchoBotonSalir = (int) (tamanoPantalla.width * 0.045);
+        int altoBotonSalir = (int) (tamanoPantalla.height * 0.075);
+        int posXSalir = (int) (tamanoPantalla.width * 0.94);
+        int posYSalir = (int) (tamanoPantalla.height * 0.020);
+
+        // Crear botón.
+        this.btnSalir = new JButton();
+        this.btnSalir.setBounds(posXSalir, posYSalir,anchoBotonSalir, altoBotonSalir);
+
+        // Cargar imagen PNG.
+        ImageIcon iconoSalir = new ImageIcon( "assets/imagenes/botones/boton_cruz.png");
+        Image imagenSalirEscalada = iconoSalir.getImage().getScaledInstance(anchoBotonSalir,altoBotonSalir,Image.SCALE_REPLICATE);
+        this.btnSalir.setIcon(new ImageIcon(imagenSalirEscalada));
+
+        // Quitar fondo y bordes predeterminados.
+        this.btnSalir.setContentAreaFilled(false);
+        this.btnSalir.setBorderPainted(false);
+        this.btnSalir.setFocusPainted(false);
+        this.btnSalir.setOpaque(false);
+
+        // Cursor interactivo.
+        this.btnSalir.setCursor( new Cursor(Cursor.HAND_CURSOR));
+
+        // Agregarlo al escenario.
+        panelFondo.add(this.btnSalir);
 
     }
 
@@ -129,6 +156,10 @@ public class Escenario {
 
     public JButton getBtnDocumentos() {
         return this.btnDocumentos;
+    }
+
+    public JButton getBtnSalir() {
+        return this.btnSalir;
     }
 
     public JFrame getVentana() {

@@ -40,6 +40,11 @@ public class ControladorJuego {
             this.ui.mostrarMenuPrincipal();
         });
 
+        // Cerrar el juego desde el gameplay.
+        this.ui.getBtnSalirJuego().addActionListener(evento -> {
+            System.exit(0);
+        });
+
         // Si no hay ingresante en ventanilla, el botón Llamar hace pasar al siguiente
         this.ui.getBtnLlamar().addActionListener(evento -> {
             try { 

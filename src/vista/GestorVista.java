@@ -95,6 +95,11 @@ public class GestorVista implements ObservadorPartida{
         return this.menu.getBtnSalir();
     }
 
+    // Botón Salir del gameplay.
+    public JButton getBtnSalirJuego() {
+        return this.escenario.getBtnSalir();
+    }
+
     public JButton getBtnVolver(){
         return this.vistaTutorial.getBtnVolver();
     }
