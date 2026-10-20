@@ -14,5 +14,8 @@ public interface EstadoPartida {
 
     // El jugador cierra la ventana de Decisión en caso de querer revisar información.
     void cancelarDecision(Partida partida) throws Exception;
+
+    // El jugador presiona los documentos para que estos aparezcan en la mesa
+    void solicitarDocumentos(Partida partida);
 }
 

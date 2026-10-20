@@ -59,12 +59,16 @@ public class ControladorJuego {
         this.ui.getBtnAceptar().addActionListener(evento -> this.procesarVeredicto(true));
         this.ui.getBtnRechazar().addActionListener(evento -> this.procesarVeredicto(false));
     
-        this.ui.getBtnDocumentos().addActionListener(evento -> { 
-            // Obtener el ingresante actual desde el Modelo.
-                Ingresante ingresante = this.partida.getIngresanteActual();
-            // Solicitar a la Vista que muestre sus documentos.
-                this.ui.desplegarDocumentos(ingresante);});
 
+        this.ui.getBtnDocumentos().addActionListener(evento -> {
+            try {
+                // Primero: validar con el Modelo.
+                this.partida.solicitarDocumentos();
+                // Segundo: mostrar los documentos si State lo permitió.
+                this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
+            } catch (IllegalStateException e) {
+                this.ui.mostrarError(e.getMessage());
+            }});
     }
 
     /*

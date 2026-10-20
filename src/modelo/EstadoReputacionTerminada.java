@@ -21,4 +21,9 @@ public class EstadoReputacionTerminada implements EstadoPartida {
     public void cancelarDecision(Partida partida) throws Exception {
         throw new IllegalStateException("Has cometido muchos errores. Estás despedido. Partida finalizada.");
     }
+
+    @Override 
+    public void solicitarDocumentos(Partida partida){
+        throw new IllegalStateException ("Has cometido muchos errores. Estás despedido. Partida finalizada");
+    }
 }

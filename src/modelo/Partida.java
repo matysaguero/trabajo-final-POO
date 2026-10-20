@@ -130,6 +130,12 @@ public class Partida {
 
         this.estado.usarMegafono(this);
     }
+    
+    public void solicitarDocumentos() {
+        System.out.println("[EVENTO] Documentos solicitados. Estado actual: " + this.estado.getClass().getSimpleName());
+
+        this.estado.solicitarDocumentos(this);
+    }
 
     public void procesarDecisionJugador(boolean decisionJugador) throws Exception {
         this.estado.procesarDecision(this, decisionJugador);

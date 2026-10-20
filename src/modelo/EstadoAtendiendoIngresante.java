@@ -24,4 +24,11 @@ public class EstadoAtendiendoIngresante implements EstadoPartida{
     public void cancelarDecision(Partida partida){
         throw new IllegalStateException("Primero debes abrir el sello para decidir");
     }
+
+    @Override
+    public void solicitarDocumentos(Partida partida) {
+        throw new IllegalStateException("Los documentos del ingresante ya fueron solicitados.");
+    }
+
+
 }

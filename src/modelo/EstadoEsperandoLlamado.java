@@ -7,19 +7,17 @@ public class EstadoEsperandoLlamado implements EstadoPartida {
         throw new IllegalStateException("No hay ningún ingresante en la ventanilla. " + "Primero debes llamar a uno con el megáfono.");
     }
 
-    @Override 
-    public void usarMegafono (Partida partida) {
-        // Obtener el siguiente ingresante de la fila.
+    //llamar a un ingresante no significa que ya tengas sus documentos disponibles para inspección AUN.
+    @Override
+    public void usarMegafono(Partida partida) {
         boolean haySiguiente = partida.prepararSiguienteIngresante();
-
         if (haySiguiente) {
-            // LLama el ingresante y aparece en ventanilla, cambiando de estado: EstadoEsperandoLlamado
-                partida.cambiarEstado(new EstadoAtendiendoIngresante());
+            partida.cambiarEstado(new EstadoEsperandoDocumentos());
         } else {
-            // No quedan mas ingresantes en la fila.
             partida.cambiarEstado(new EstadoPartidaFinalizada());
         }
     }
+
 
     @Override 
     public void procesarDecision (Partida partida, boolean descisionJugador){
@@ -31,14 +29,8 @@ public class EstadoEsperandoLlamado implements EstadoPartida {
         throw new IllegalStateException("No tomar una decisión si no has abierto el sello.");
     }
 
-
-
-
-
-
-
-
-
-
-
+    @Override 
+    public void solicitarDocumentos(Partida partida){
+        throw new IllegalStateException ("No pude abirir los documentos que no fueron solicitados.");
+    }
 }

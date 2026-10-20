@@ -38,4 +38,9 @@ public class EstadoSelloAbierto implements EstadoPartida {
         // Cerraste el panel del sello, por lo tanto, volvemos al estado anterior.
         partida.cambiarEstado(new EstadoAtendiendoIngresante());
     }
+
+    @Override 
+    public void solicitarDocumentos(Partida partida){
+        throw new IllegalStateException ("Los documentos ya estan en la mesa");
+    }
 }
