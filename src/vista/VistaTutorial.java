@@ -21,7 +21,7 @@ public class VistaTutorial {
 
         JPanel panelFondo = new JPanel() {
             // Reemplaza esta ruta con la imagen de tu tutorial
-            private final Image imagenFondo = new ImageIcon("assets/imagenes/paneles/panel_del_tutorial.png").getImage();
+            private final Image imagenFondo = new ImageIcon("assets/imagenes/paneles/panel_tutorial.jpg").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {
