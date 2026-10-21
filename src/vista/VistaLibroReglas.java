@@ -32,7 +32,7 @@ public class VistaLibroReglas {
         this.libro = this.fabrica.crearVista(reglas, 20, 20);
 
         // 2. Lo agregamos a la capa Palette para que quede por encima de los documentos
-        mesa.add(this.libro, JLayeredPane.PALETTE_LAYER);
+        mesa.add(this.libro, JLayeredPane.DEFAULT_LAYER);
         mesa.revalidate();
         mesa.repaint();
     }
@@ -49,7 +49,7 @@ public class VistaLibroReglas {
     // Recuperar el libro (Queda igual que antes)
     public void restaurarSiAbierto() {
         if (libro == null || libro.getParent() == mesa) return;
-        mesa.add(libro, JLayeredPane.PALETTE_LAYER);
+        mesa.add(libro, JLayeredPane.DEFAULT_LAYER);
         mesa.revalidate();
         mesa.repaint();
     }
