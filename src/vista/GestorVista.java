@@ -7,11 +7,11 @@ import modelo.Ingresantes.Ingresante;
 import modelo.documentos.Documento;
 import modelo.politicas.ReglasDia;
 
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 
-public class GestorVista implements ObservadorPartida{
+public class GestorVista implements ObservadorPartida {
     private final MenuPrincipal menu;
     private final Escenario escenario;
     private final VistaDecision vistaDecision;
@@ -24,10 +24,7 @@ public class GestorVista implements ObservadorPartida{
     private final VistaTutorial vistaTutorial;
     private final VistaFinPartida vistaFinPartida;
 
-
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, 
-        VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, 
-        VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida){
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -42,39 +39,35 @@ public class GestorVista implements ObservadorPartida{
         this.reglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
 
-    // METODOS FACHADA CONTROL DE VISTAS
-    public void mostrarMenuPrincipal(){
+    // --- MÉTODOS DE CONTROL DE NAVEGACIÓN Y VISTAS ---
+    public void mostrarMenuPrincipal() {
         this.menu.mostrar();
     }
 
-    public void ocultarMenuPrincipal(){
+    public void ocultarMenuPrincipal() {
         this.menu.ocultar();
     }
 
-    public void mostrarTutorial(){
+    public void mostrarTutorial() {
         this.vistaTutorial.mostrar();
     }
 
-    public void ocultarTutorial(){
+    public void ocultarTutorial() {
         this.vistaTutorial.ocultar();
     }
     
-    public void iniciarJuego(){
+    public void iniciarJuego() {
         this.menu.ocultar();
-
-        // Limpiar los elementos de la atención anterior.
         this.mesa.limpiarMesa();
         this.ventanilla.limpiarVentanilla();
-
-        // Mostrar el puesto de control vacío.
         this.escenario.mostrar();
     }
 
-    public void mostrarVentanaDecision(){
+    public void mostrarVentanaDecision() {
         this.vistaDecision.mostrar();
     }
 
-    public void ocultarVentanaDecision(){
+    public void ocultarVentanaDecision() {
         this.vistaDecision.ocultar();
     }
     
@@ -88,104 +81,86 @@ public class GestorVista implements ObservadorPartida{
         this.escenario.getBtnDocumentos().setEnabled(false);
     }
 
-    //NUEVO
     public void volverAlMenuDesdeFinPartida() {
         this.vistaFinPartida.ocultar();
         this.menu.mostrar();
     }
 
-
-    // METODOS DE LA FACHADA PARA EXPONER LOS BOTONES AL CONTROLADOR
-    public JButton getBtnJugar() {
-        return this.menu.getBtnJugar();
+    public void alternarLibroReglas() {
+        this.libroReglas.alternar();
     }
 
-    public JButton getBtnTutorial() {
-        return this.menu.getBtnTutorial();
+    // --- MÉTODOS DE LA FACHADA PARA REGISTRAR EVENTOS (SIN EXPONER COMPONENTES SWING) ---
+    public void alHacerClicEnJugar(ActionListener listener) {
+        this.menu.getBtnJugar().addActionListener(listener);
     }
 
-    public JButton getBtnSalir() {
-        return this.menu.getBtnSalir();
+    public void alHacerClicEnTutorial(ActionListener listener) {
+        this.menu.getBtnTutorial().addActionListener(listener);
     }
 
-    // Botón Salir del gameplay.
-    public JButton getBtnSalirJuego() {
-        return this.escenario.getBtnSalir();
+    public void alHacerClicEnSalir(ActionListener listener) {
+        this.menu.getBtnSalir().addActionListener(listener);
     }
 
-    public JButton getBtnVolver(){
-        return this.vistaTutorial.getBtnVolver();
+    public void alHacerClicEnSalirJuego(ActionListener listener) {
+        this.escenario.getBtnSalir().addActionListener(listener);
     }
 
-    public JButton getBtnLlamar() {
-        return this.escenario.getBtnLlamar();
+    public void alHacerClicEnVolverTutorial(ActionListener listener) {
+        this.vistaTutorial.getBtnVolver().addActionListener(listener);
     }
 
-    public JButton getBtnDecidir() {
-        return this.escenario.getBtnDecidir();
+    public void alHacerClicEnLlamar(ActionListener listener) {
+        this.escenario.getBtnLlamar().addActionListener(listener);
     }
 
-    public JButton getBtnAceptar() {
-        return this.vistaDecision.getBtnAceptar();
+    public void alHacerClicEnDecidir(ActionListener listener) {
+        this.escenario.getBtnDecidir().addActionListener(listener);
     }
 
-    public JButton getBtnRechazar() {
-        return this.vistaDecision.getBtnRechazar();
+    public void alHacerClicEnAceptar(ActionListener listener) {
+        this.vistaDecision.getBtnAceptar().addActionListener(listener);
     }
 
-    public JButton getBtnVolverDecision() {
-        return this.vistaDecision.getBtnVolver();
+    public void alHacerClicEnRechazar(ActionListener listener) {
+        this.vistaDecision.getBtnRechazar().addActionListener(listener);
     }
 
-    public JButton getBtnLibroReglas() {
-        return this.escenario.getBtnLibroReglas();
+    public void alHacerClicEnVolverDecision(ActionListener listener) {
+        this.vistaDecision.getBtnVolver().addActionListener(listener);
     }
 
-    public void alternarLibroReglas(ReglasDia reglasActivas) {
-        this.reglas.alternar(reglasActivas);
+    public void alHacerClicEnLibroReglas(ActionListener listener) {
+        this.escenario.getBtnLibroReglas().addActionListener(listener);
     }
 
-    public JButton getBtnDocumentos() {
-        return this.escenario.getBtnDocumentos();
+    public void alHacerClicEnDocumentos(ActionListener listener) {
+        this.escenario.getBtnDocumentos().addActionListener(listener);
     }
 
-    // NUEVO: Boton para colcer al menu cuando termina la partida
-    public JButton getBtnVolverFinPartida() {
-        return this.vistaFinPartida.getBtnVolverMenu();
+    public void alHacerClicEnVolverFinPartida(ActionListener listener) {
+        this.vistaFinPartida.getBtnVolverMenu().addActionListener(listener);
     }
-    
-@Override
+
+    // --- MÉTODOS DE LA INTERFAZ OBSERVADOR ---
+    @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
         this.mesa.limpiarMesa();
         this.consola.mostrarIngresante(ingresante);
         this.ventanilla.mostrarIngresante(ingresante.getRutaImagen());
-        
-        int posicionX = 30;
-        int posicionY = 30;
-
-        /*for (Documento documento : ingresante.getDocumentos()) {
-            JPanel vistaDoc = this.fabrica.crearVista(documento, posicionX, posicionY);
-            this.mesa.agregarDocumentoEnMesa(vistaDoc);
-            posicionX += 60; 
-            posicionY += 20; 
-        } */
-        
-        this.reglas.restaurarSiAbierto();
+        this.libroReglas.restaurarSiAbierto();
         mostrarDocumentos();
     }
 
-
     public void desplegarDocumentos(Ingresante ingresante) {
-        // Verificar que exista un ingresante
-        // y que el botón todavía esté habilitado.
-        if (ingresante == null ||!this.escenario.getBtnDocumentos().isEnabled()) {
+        if (ingresante == null || !this.escenario.getBtnDocumentos().isEnabled()) {
             return;
         }
 
-            int posicionX = 30;
-            int posicionY = 30;
+        int posicionX = 30;
+        int posicionY = 30;
 
-        // Crear y mostrar los documentos sobre la mesa.
         for (Documento documento : ingresante.getDocumentos()) {
             JPanel vistaDoc = this.fabrica.crearVista(documento, posicionX, posicionY);
             this.mesa.agregarDocumentoEnMesa(vistaDoc);
@@ -193,22 +168,17 @@ public class GestorVista implements ObservadorPartida{
             posicionY += 20;
         }
 
-        // Ocultar el botón después de desplegar los DNI.
         ocultarDocumento();
-
-        // Mantener el libro de reglas sobre los documentos.
-        this.reglas.restaurarSiAbierto();
+        this.libroReglas.restaurarSiAbierto();
     }
 
-@Override
+    @Override
     public void actualizarVeredicto(boolean decisionJugador, ResultadoDecision resultado) {
-        // 1. Limpiamos la mesa y la ventanilla porque el turno terminó
         this.mesa.limpiarMesa();
         this.reglas.cerrar();
         this.ventanilla.limpiarVentanilla();
         this.reglas.restaurarSiAbierto();
 
-        // 2. Carteles emergentes en la Vista
         if (resultado.getAcierto()) {
             JOptionPane.showMessageDialog(
                 this.escenario.getVentana(),
@@ -223,12 +193,10 @@ public class GestorVista implements ObservadorPartida{
 
         ocultarDocumento();
 
-        // 3. Actualizamos la vista por consola
         this.consola.mostrarPuedeIngresar(resultado.getPuedeIngresar());
         this.consola.mostrarDecisionJugador(decisionJugador);
         this.consola.mostrarResultado(resultado.getAcierto(), resultado.getReputacionActual());
 
-        // 4. Verificamos fin de juego
         if (resultado.getPartidaPerdida()) {
             this.consola.mostrarFinDeJuego();
             JOptionPane.showMessageDialog(
@@ -251,5 +219,4 @@ public class GestorVista implements ObservadorPartida{
         this.escenario.ocultar();
         this.vistaFinPartida.mostrar(resultado);
     }
-
 }
