@@ -7,11 +7,11 @@ import modelo.TipoCiudad;
 import modelo.Ingresantes.Ingresante;
 
 //Rechaza a los ingresantges que vengan de una ciudad prohibida.
-public class PoliticaCiudad extends PoliticaFronteriza {
+public class PoliticaProhibicionCiudad extends PoliticaFronteriza {
     
     private final List<TipoCiudad> ciudadesProhibidas;
 
-    public PoliticaCiudad(List<TipoCiudad> ciudadesProhibidas) {
+    public PoliticaProhibicionCiudad(List<TipoCiudad> ciudadesProhibidas) {
         if (ciudadesProhibidas == null) {
             throw new IllegalArgumentException("La lista de ciudades prohibidas no puede ser nula.");
         }

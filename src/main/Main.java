@@ -18,7 +18,7 @@ public class Main {
                 GestorReputacion gestor = new GestorReputacion(jugador);
 
                 // Se prohíbe únicamente el clan ALIEN para permitir el paso de ingresantes regulares válidos
-                PoliticaClan politicaClan = new PoliticaClan(List.of(TipoClan.UNION_MAGICA));
+                PoliticaProhibicionClan politicaClan = new PoliticaProhibicionClan(List.of(TipoClan.UNION_MAGICA));
                 PoliticaIngresante politicaIngresante = new PoliticaIngresante();
 
                 List<PoliticaFronteriza> politicas = new ArrayList<>();

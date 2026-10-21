@@ -20,8 +20,8 @@ public class PoliticaVencimiento extends PoliticaFronteriza {
     public boolean esValido(Ingresante ingresante) {
         for (Documento doc : ingresante.getDocumentos()) {
             try {
-                // Gracias al polimorfismo, no nos importa si es DNI, Pasaporte o Permiso.
-                // Simplemente le pedimos la fecha.
+                //Gracias al polimorfismo, no nos importa si es DNI, Pasaporte o Permiso.
+                //Simplemente le pedimos la fecha.
                 LocalDate vencimientoDoc = (doc.getFechaVencimiento());
                 
                 // Si la fecha de vencimiento es ANTERIOR a la fecha de hoy, está vencido -> Rechazar.
@@ -33,6 +33,6 @@ public class PoliticaVencimiento extends PoliticaFronteriza {
                 return false;
             }
         }
-        return true; // Todos los documentos están vigentes
+        return true; //Todos los documentos están vigentes
     }
 }

@@ -5,11 +5,11 @@ import java.util.List;
 import modelo.TipoClan;
 import modelo.Ingresantes.Ingresante;
 
-public class PoliticaClan extends PoliticaFronteriza {
+public class PoliticaProhibicionClan extends PoliticaFronteriza {
 
 private List<TipoClan> clanesProhibidos;
 
-public PoliticaClan(List<TipoClan> clanesProhibidos) {
+public PoliticaProhibicionClan(List<TipoClan> clanesProhibidos) {
     // Se valida acá para que el error aparezca al crear la política y no después, dentro de esValido().    
     if (clanesProhibidos == null) {
         throw new IllegalArgumentException("La lista de clanes prohibidos no puede ser nula.");
