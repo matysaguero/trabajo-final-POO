@@ -66,6 +66,9 @@ public class Partida {
         this.filaIngresantes.clear();
         this.filaIngresantes.addAll(this.ingresantesIniciales);
         
+        //NUEVO: informa cuántos esperan al comenzar la partida
+        notificarIngresantesRestantes();
+        
         // La ventanilla comienza vacia
         this.ingresanteActual = null;
         
@@ -77,6 +80,15 @@ public class Partida {
         }
     }
 
+    //NUEVO: notifica cuántos ingresantes quedan esperando en la fila.
+    private void notificarIngresantesRestantes() {
+        int restantes = this.filaIngresantes.size();
+        for (ObservadorPartida obs : this.observadores) {
+            obs.actualizarIngresantesRestantes(restantes);
+        }
+    }
+    
+    
     // NUEVO: prepararSiguienteIngresante() tiene visibilidad de paquete: las clases State ubicadas en modelo pueden llamarlo, 
     // mientras que el controlador, ubicado en otro paquete no
     boolean prepararSiguienteIngresante() {
@@ -84,6 +96,9 @@ public class Partida {
             return false;
         }
             this.ingresanteActual =this.filaIngresantes.remove(0);
+
+            //NUEVO: la fila cambió de tamaño
+            notificarIngresantesRestantes();
         
         for (ObservadorPartida obs : this.observadores) {
             obs.actualizarNuevoIngresante(this.ingresanteActual); 
