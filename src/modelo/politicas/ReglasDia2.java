@@ -12,8 +12,7 @@ import java.util.List;
 public class ReglasDia2 extends ReglasDia {
 
     public ReglasDia2() {
-        super(2, "Día 2: Se endurecen los controles. Se empiezan a aceptar el resto de razas, unicamente provenientes de HAGARD y LANDER. " +
-            "Se prohibe el ingreso a todo aquél que perteneza a la UNIÓN MÁGICA.", LocalDate.of(2159, 11, 15)
+        super(2, "Día 2: Se endurecen los controles.", LocalDate.of(2159, 11, 15)
         );
     }
 
@@ -30,5 +29,10 @@ public class ReglasDia2 extends ReglasDia {
     @Override
     public List<TipoRaza> getRazasProhibidas() {
         return List.of();
+    }
+
+    @Override
+    public List<String> getReglasDetalladas() {
+        return List.of("Ahora pueden pasar el resto de razas, UNICAMENTE provenientes de HAGARD y LANDER", "PROHIBIDO el acceso todo aquél que pertenezca a la UNION MÁGICA.");
     }
 }

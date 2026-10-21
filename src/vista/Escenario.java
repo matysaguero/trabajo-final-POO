@@ -25,7 +25,7 @@ public class Escenario {
 
     
 
-    public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla) {
+    public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla, VistaContadorIngresantes contador) {
         this.ventana = new JFrame("Frontier");
         this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -131,6 +131,9 @@ public class Escenario {
 
         // Agregarlo al escenario.
         panelFondo.add(this.btnSalir);
+
+        // NUEVO: contador de ingresantes restantes (solo se muestra, no genera eventos)
+        panelFondo.add(contador.getEtiqueta());
 
     }
 

@@ -24,8 +24,9 @@ public class GestorVista implements ObservadorPartida {
     private final VistaTutorial vistaTutorial;
     private final VistaFinPartida vistaFinPartida;
     private final VistaCartelReputacion cartelReputacion;
+    private final VistaContadorIngresantes contador;
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion) {
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -36,6 +37,7 @@ public class GestorVista implements ObservadorPartida {
         this.vistaTutorial = vistaTutorial;       
         this.vistaFinPartida = vistaFinPartida;
         this.cartelReputacion = cartelReputacion;
+        this.contador = contador;
 
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
@@ -226,5 +228,9 @@ public class GestorVista implements ObservadorPartida {
         this.libroReglas.cerrar();
         this.escenario.ocultar();
         this.vistaFinPartida.mostrar(resultado);
+    }
+    @Override
+    public void actualizarIngresantesRestantes(int restantes) {
+        this.contador.mostrarRestantes(restantes);
     }
 }

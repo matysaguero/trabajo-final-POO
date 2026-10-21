@@ -1,9 +1,7 @@
 package modelo.Ingresantes;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import modelo.*;
@@ -11,104 +9,137 @@ import modelo.documentos.*;
 
 public class FabricaIngresantes {
 
-    // Ajusta la extensión (.jpg o .png) según cómo esté guardado el archivo en tu carpeta assets
     private static final String RUTA_PLANTILLA_DNI = "assets/imagenes/documento.png";
-    private static final String CARPETA_HUELLAS = "assets/imagenes/huellas/";
-    private static final String CARPETA_FOTOS_DOC = "assets/imagenes/foto_doc/";
 
     public static List<Ingresante> crearPlantelInicial() {
         List<Ingresante> plantel = new ArrayList<>();
 
-        // 1. CABALLERO
+        // 1. SIR ARTHUR (Ciudadano Humano - Todo en regla)
+        ArrayList<Documento> docsArthur = crearDniEspecifico(
+            "Sir Arthur", "Hasgard", true, LocalDate.of(1990, 5, 10), 40123101, 
+            LocalDate.of(2165, 12, 12), TipoRaza.HUMANO.name(),
+            "assets/imagenes/foto_doc/carnet_caballero.png", 
+            "assets/imagenes/huellas/huella.png" 
+        );
         plantel.add(crearPersonaje(
             "Sir Arthur", 180, 80, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.CABALLERO,
-            crearSoloDNI("Sir Arthur", "Hasgard", true, LocalDate.of(1990, 05, 10), 40123101, LocalDate.of(2159, 12, 12),
-                         0, TipoRaza.HUMANO.name()),
-            false, false
+            docsArthur, false, false
         ));
 
-        // 2. ALIEN
+        // 2. ZORGLUB (Enemigo Alien - Le robó el DNI a Lázaro, dice ser Humano)
+        ArrayList<Documento> docsZorglub = crearDniEspecifico(
+            "Zorglub", "Lander", false, LocalDate.of(1985, 8, 22), 35890102, 
+            LocalDate.of(2160, 11, 5), TipoRaza.HUMANO.name(), 
+            "assets/imagenes/foto_doc/carnet_viajero2.png", // Foto de su disfraz/robo
+            "assets/imagenes/huellas/huella_alien.png" // Huella alienígena, lo delata
+        );
         plantel.add(crearPersonaje(
             "Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN,
             TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN,
-            crearSoloDNI("Zorglub", "Lander", true, LocalDate.of(1985, 8, 22), 35890102, LocalDate.of(2159, 11, 05),
-                         1, TipoRaza.ALIEN.name()),
-            false, false
+            docsZorglub, true, true // Es enemigo y porta bomba
         ));
 
-        // 3. ALIEN_PONELE
-        plantel.add(crearPersonaje(
-            "Xylar el Humano", 172, 70, TipoIngresante.TURISTA, TipoRaza.ALIEN,
-            TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE,
-            crearSoloDNI("Xylar", "Lander", false, LocalDate.of(1990, 1, 1), 42110103, LocalDate.of(2159, 11, 1),
-                         2, TipoRaza.ALIEN.name()),
-            true, true
-        ));
-
-        // 4. ASTRONAUTA
+        // 3. CMDTE. VANCE (Trabajador Cyborg - Todo en regla)
+        ArrayList<Documento> docsVance = crearDniEspecifico(
+            "Cmdte. Vance", "Bales", true, LocalDate.of(2040, 10, 30), 38440104, 
+            LocalDate.of(2160, 12, 7), TipoRaza.CYBORG.name(),
+            "assets/imagenes/foto_doc/carnet_astronauta.png",
+            "assets/imagenes/huellas/huella_2.png"
+        );
         plantel.add(crearPersonaje(
             "Cmdte. Vance", 178, 76, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG,
             TipoClan.UNION_MAGICA, TipoCiudad.BALES, TipoAspecto.ASTRONAUTA,
-            crearSoloDNI("Cmdte. Vance", "Bales", true, LocalDate.of(2040, 10, 30), 38440104, LocalDate.of(2150, 12, 7),
-                         3, TipoRaza.CYBORG.name()),
-            true, false
+            docsVance, false, false
         ));
 
-        // 5. VIAJERO_POBRE
+        // 4. XYLAR EL HUMANO (Impostor - Humano disfrazado de Alien)
+        ArrayList<Documento> docsXylar = crearDniEspecifico(
+            "Xylar", "Lander", false, LocalDate.of(1990, 1, 1), 42110103, 
+            LocalDate.of(2160, 11, 1), TipoRaza.ALIEN.name(), // Intenta hacerse pasar por Alien
+            "assets/imagenes/foto_doc/carnet_alien_impostor.png",
+            "assets/imagenes/huellas/huella_3.png" // Su huella es de humano, falsificación!
+        );
+        plantel.add(crearPersonaje(
+            "Xylar el Humano", 172, 70, TipoIngresante.TURISTA, TipoRaza.HUMANO,
+            TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE,
+            docsXylar, false, false
+        ));
+
+        // 5. LÁZARO (Viajero Pobre - Zorglub le robó sus papeles)
+        ArrayList<Documento> docsLazaro = new ArrayList<>(); // Lista de documentos vacía
         plantel.add(crearPersonaje(
             "Lázaro", 168, 60, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.BALES, TipoAspecto.VIAJERO_POBRE,
-            crearSoloDNI("Lázaro", "Bales", false, LocalDate.of(2150, 6, 1), 39550105, LocalDate.of(2159, 12, 20),
-                         4, TipoRaza.HUMANO.name()),
-            true, true
+            docsLazaro, false, false // No es amenaza, solo tuvo mala suerte
         ));
 
-        // 6. MAGO_CLAN_2
+        // 6. ALDEBARÁN (Mago Clan 2 - Guardián en regla)
+        ArrayList<Documento> docsAldebaran = crearDniEspecifico(
+            "Aldebarán", "Hasgard", true, LocalDate.of(2100, 12, 20), 30112106, 
+            LocalDate.of(2165, 11, 15), TipoRaza.GUARDIANES.name(),
+            "assets/imagenes/foto_doc/carnet_mago_2.png",
+            "assets/imagenes/huellas/huella_alien_2.png"
+        );
         plantel.add(crearPersonaje(
             "Aldebarán", 175, 68, TipoIngresante.CIUDADANO, TipoRaza.GUARDIANES,
             TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_2,
-            crearSoloDNI("Aldebarán", "Hasgard", true, LocalDate.of(2100, 12, 20), 30112106, LocalDate.of(2159, 11, 15),
-                         5, TipoRaza.GUARDIANES.name()),
-            false, false
+            docsAldebaran, false, false
         ));
 
-        // 7. MAGO_CLAN_3
+        // 7. MALAKOR (Mago Clan 3 - Enemigo Terrorista)
+        ArrayList<Documento> docsMalakor = crearDniEspecifico(
+            "Malakor", "Namek", true, LocalDate.of(2070, 9, 12), 32998107, 
+            LocalDate.of(2162, 11, 27), TipoRaza.GUARDIANES.name(),
+            "assets/imagenes/foto_doc/carnet_mago_3.png",
+            "assets/imagenes/huellas/huella_alien_3.png"
+        );
         plantel.add(crearPersonaje(
             "Malakor", 182, 74, TipoIngresante.TURISTA, TipoRaza.GUARDIANES,
             TipoClan.UNION_MAGICA, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,
-            crearSoloDNI("Malakor", "Namek", true, LocalDate.of(2070, 9, 12), 32998107, LocalDate.of(2159, 11, 27),
-                         6, TipoRaza.GUARDIANES.name()),
-            false, false
+            docsMalakor, true, true // Papeles en regla, pero porta una bomba (Enemigo)
         ));
 
-        // 8. MAGO_CLAN_4
+        // 8. LYRA (Mago Clan 4 - Humana Mágica)
+        ArrayList<Documento> docsLyra = crearDniEspecifico(
+            "Lyra", "Hasgard", true, LocalDate.of(2018, 9, 12), 44776108, 
+            LocalDate.of(2160, 12, 20), TipoRaza.HUMANO.name(),
+            "assets/imagenes/foto_doc/carnet_mago_4.png",
+            "assets/imagenes/huellas/huella_4.png"
+        );
         plantel.add(crearPersonaje(
             "Lyra", 165, 58, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
             TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_4,
-            crearSoloDNI("Lyra", "Hasgard", true, LocalDate.of(2018, 9, 12), 44776108, LocalDate.of(2160, 12, 20),
-                         7, TipoRaza.HUMANO.name()),
-            false, false
+            docsLyra, false, false
         ));
 
-        // 9. VIAJERO
+        // 9. MARCO POLO (Viajero - DNI Vencido)
+        ArrayList<Documento> docsMarco = crearDniEspecifico(
+            "Marco Polo", "Lander", false, LocalDate.of(2011, 6, 26), 37665109, 
+            LocalDate.of(2150, 3, 15), TipoRaza.HUMANO.name(), // Vencido en el 2150
+            "assets/imagenes/foto_doc/carnet_viajero.png",
+            "assets/imagenes/huellas/huella_5.png"
+        );
         plantel.add(crearPersonaje(
             "Marco Polo", 176, 72, TipoIngresante.TURISTA, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.VIAJERO,
-            crearSoloDNI("Marco Polo", "Lander", true, LocalDate.of(2011, 6, 26), 37665109, LocalDate.of(2160, 3, 15),
-                         8, TipoRaza.HUMANO.name()),
-            false, false
+            docsMarco, false, false
         ));
 
-        // 10. VIKINGO
+        // 10. RAGNAR (Vikingo - Ciudadano en regla)
+        ArrayList<Documento> docsRagnar = crearDniEspecifico(
+            "Ragnar", "Hasgard", true, LocalDate.of(2022, 12, 18), 29334110, 
+            LocalDate.of(2161, 1, 2), TipoRaza.HUMANO.name(),
+            "assets/imagenes/foto_doc/carnet_vikingo.png",
+            "assets/imagenes/huellas/huella_1.png"
+        );
         plantel.add(crearPersonaje(
             "Ragnar", 192, 98, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.VIKINGO,
-            crearSoloDNI("Ragnar", "Hasgard", true, LocalDate.of(2022, 12, 18), 29334110, LocalDate.of(2161, 1, 2),
-                         9, TipoRaza.HUMANO.name()),
-            false, false
+            docsRagnar, false, false
         ));
 
+        // Mezclamos el orden para que la partida sea distinta cada vez
         Collections.shuffle(plantel);
         return plantel;
     }
@@ -118,7 +149,6 @@ public class FabricaIngresantes {
             TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad,
             TipoAspecto aspecto, ArrayList<Documento> docs,
             boolean esEnemigo, boolean portaBomba) {
-
         if (esEnemigo) {
             return new Enemigo(
                 nombre, altura, peso, 1.0, docs,
@@ -132,16 +162,13 @@ public class FabricaIngresantes {
         }
     }
 
-    // Crea únicamente el DNI seleccionando foto y huella de sus carpetas correspondientes
-    private static ArrayList<Documento> crearSoloDNI(
+    private static ArrayList<Documento> crearDniEspecifico(
             String nombre, String origen, boolean valido,
             LocalDate fechaNacimiento, int nroDni, LocalDate vencimiento,
-            int indiceRecurso, String razaStr) {
-
+            String razaStr, String rutaFoto, String rutaHuella) {
+            
         ArrayList<Documento> docs = new ArrayList<>();
-        String rutaHuella = elegirImagenDeCarpeta(CARPETA_HUELLAS, indiceRecurso);
-        String rutaFoto = elegirImagenDeCarpeta(CARPETA_FOTOS_DOC, indiceRecurso);
-
+        
         docs.add(new DNI(
             RUTA_PLANTILLA_DNI,
             nombre,
@@ -150,27 +177,11 @@ public class FabricaIngresantes {
             fechaNacimiento,
             nroDni,
             vencimiento,
-            rutaHuella,
-            rutaFoto,
+            rutaHuella, 
+            rutaFoto,   
             razaStr
         ));
+        
         return docs;
-    }
-
-    // Busca imágenes dentro de la carpeta indicada y selecciona una según el índice
-    private static String elegirImagenDeCarpeta(String rutaCarpeta, int indice) {
-        File carpeta = new File(rutaCarpeta);
-        if (carpeta.exists() && carpeta.isDirectory()) {
-            File[] archivos = carpeta.listFiles((dir, name) -> {
-                String lower = name.toLowerCase();
-                return lower.endsWith(".png") || lower.endsWith(".jpg") || lower.endsWith(".jpeg");
-            });
-            if (archivos != null && archivos.length > 0) {
-                Arrays.sort(archivos);
-                File elegido = archivos[indice % archivos.length];
-                return elegido.getPath().replace("\\", "/");
-            }
-        }
-        return rutaCarpeta;
     }
 }
