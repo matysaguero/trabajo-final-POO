@@ -38,4 +38,5 @@ public abstract class ReglasDia {
     public abstract List<TipoCiudad> getCiudadesProhibidas();
     public abstract List<TipoClan> getClanesProhibidos();
     public abstract List<TipoRaza> getRazasProhibidas();
+    public abstract List<String> getReglasDetalladas();
 }
