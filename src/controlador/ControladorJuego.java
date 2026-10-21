@@ -2,7 +2,7 @@ package controlador;
 
 
 import modelo.Partida;
-import modelo.Ingresantes.Ingresante;
+import modelo.politicas.ReglasDia;
 import vista.GestorVista;
 
 public class ControladorJuego {
@@ -85,11 +85,6 @@ public class ControladorJuego {
             this.ui.volverAlMenuDesdeFinPartida();
         });
     }
-
-    /*
-    public void setIngresanteActual(Ingresante ingresante) {
-        this.partida.setIngresanteActual(ingresante);
-    }*/
 
     private void abrirVentanaDecision() {
         try {

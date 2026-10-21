@@ -4,8 +4,8 @@ import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.*;
+
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
 

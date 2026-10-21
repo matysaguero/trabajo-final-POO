@@ -5,6 +5,7 @@ import modelo.ResultadoDecision;
 import modelo.TipoFinPartida;
 import modelo.Ingresantes.Ingresante;
 import modelo.documentos.Documento;
+import modelo.politicas.ReglasDia;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,12 +19,15 @@ public class GestorVista implements ObservadorPartida{
     private final VistaMesaDocumentos mesa;
     private final VistaVentanilla ventanilla;
     private final FabricaVistaDocumento fabrica;
+    private final FabricaVistaReglas fabricaReglas;
+    private final VistaLibroReglas reglas;
     private final VistaTutorial vistaTutorial;
-    private final VistaLibroReglas libroReglas;
     private final VistaFinPartida vistaFinPartida;
 
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida){
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, 
+        VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, 
+        VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida){
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -32,8 +36,10 @@ public class GestorVista implements ObservadorPartida{
         this.ventanilla = ventanilla;
         this.fabrica = fabrica;
         this.vistaTutorial = vistaTutorial;       
-        this.libroReglas = new VistaLibroReglas( mesa.getPanelDocumentos() );
-        this.vistaFinPartida = vistaFinPartida;   
+        this.vistaFinPartida = vistaFinPartida;
+
+        this.fabricaReglas = new FabricaVistaReglas();
+        this.reglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
 
     // METODOS FACHADA CONTROL DE VISTAS
@@ -135,8 +141,8 @@ public class GestorVista implements ObservadorPartida{
         return this.escenario.getBtnLibroReglas();
     }
 
-    public void alternarLibroReglas() {
-        this.libroReglas.alternar();
+    public void alternarLibroReglas(ReglasDia reglasActivas) {
+        this.reglas.alternar(reglasActivas);
     }
 
     public JButton getBtnDocumentos() {
@@ -164,7 +170,7 @@ public class GestorVista implements ObservadorPartida{
             posicionY += 20; 
         } */
         
-        this.libroReglas.restaurarSiAbierto();
+        this.reglas.restaurarSiAbierto();
         mostrarDocumentos();
     }
 
@@ -191,16 +197,16 @@ public class GestorVista implements ObservadorPartida{
         ocultarDocumento();
 
         // Mantener el libro de reglas sobre los documentos.
-        this.libroReglas.restaurarSiAbierto();
+        this.reglas.restaurarSiAbierto();
     }
 
 @Override
     public void actualizarVeredicto(boolean decisionJugador, ResultadoDecision resultado) {
         // 1. Limpiamos la mesa y la ventanilla porque el turno terminó
         this.mesa.limpiarMesa();
-        this.libroReglas.cerrar();
+        this.reglas.cerrar();
         this.ventanilla.limpiarVentanilla();
-        this.libroReglas.restaurarSiAbierto();
+        this.reglas.restaurarSiAbierto();
 
         // 2. Carteles emergentes en la Vista
         if (resultado.getAcierto()) {
@@ -241,7 +247,7 @@ public class GestorVista implements ObservadorPartida{
     @Override
     public void actualizarFinPartida(TipoFinPartida resultado) {
         this.vistaDecision.ocultar();
-        this.libroReglas.cerrar();
+        this.reglas.cerrar();
         this.escenario.ocultar();
         this.vistaFinPartida.mostrar(resultado);
     }
