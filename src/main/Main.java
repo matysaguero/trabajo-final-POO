@@ -37,14 +37,15 @@ public class Main {
                 MenuPrincipal menu = new MenuPrincipal();
                 VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
-                Escenario vistaPrincipal = new Escenario(vistaMesa, ventanilla);
+                VistaContadorIngresantes vistaContador = new VistaContadorIngresantes(); // NUEVO
+                Escenario vistaPrincipal = new Escenario(vistaMesa, ventanilla, vistaContador);
                 VistaDecision vistaPopUp = new VistaDecision(vistaPrincipal.getVentana());
                 FabricaVistaDocumento fabricaVistaDocumento = new FabricaVistaDocumento();
                 VistaConsola vistaConsola = new VistaConsola();
                 VistaTutorial vistaTutorial = new VistaTutorial();
                 VistaFinPartida vistaFinPartida = new VistaFinPartida();
 
-                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola,vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida);
+                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola,vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaContador);
 
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
