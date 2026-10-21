@@ -26,7 +26,9 @@ public class Main {
                 politicas.add(politicaIngresante);
 
                 Resolutor resolutor = new Resolutor(politicas);
-                Partida partida = new Partida(gestor, resolutor);
+                ReglasDia reglasDia1 = new ReglasDia1();
+                
+                Partida partida = new Partida(gestor, resolutor, reglasDia1);
 
                 // Cargamos los 10 personajes desde la Fábrica
                 partida.cargarIngresantes(FabricaIngresantes.crearPlantelInicial());

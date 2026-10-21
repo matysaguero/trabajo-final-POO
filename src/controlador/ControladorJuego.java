@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.politicas.ReglasDia;
 import modelo.Partida;
 import vista.GestorVista;
 
@@ -45,7 +46,7 @@ public class ControladorJuego {
 
         this.ui.alHacerClicEnLibroReglas(evento -> {
             try {
-                this.ui.alternarLibroReglas();
+                this.ui.alternarLibroReglas(this.partida.getReglasDia());
             } catch (IllegalStateException e) {
                 this.ui.mostrarError(e.getMessage());
             }

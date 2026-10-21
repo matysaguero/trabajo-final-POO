@@ -20,7 +20,7 @@ public class GestorVista implements ObservadorPartida {
     private final VistaVentanilla ventanilla;
     private final FabricaVistaDocumento fabrica;
     private final FabricaVistaReglas fabricaReglas;
-    private final VistaLibroReglas reglas;
+    private final VistaLibroReglas libroReglas;
     private final VistaTutorial vistaTutorial;
     private final VistaFinPartida vistaFinPartida;
 
@@ -36,7 +36,7 @@ public class GestorVista implements ObservadorPartida {
         this.vistaFinPartida = vistaFinPartida;
 
         this.fabricaReglas = new FabricaVistaReglas();
-        this.reglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
+        this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
 
     // --- MÉTODOS DE CONTROL DE NAVEGACIÓN Y VISTAS ---
@@ -86,8 +86,8 @@ public class GestorVista implements ObservadorPartida {
         this.menu.mostrar();
     }
 
-    public void alternarLibroReglas() {
-        this.libroReglas.alternar();
+    public void alternarLibroReglas(ReglasDia reglasActivas) {
+        this.libroReglas.alternar(reglasActivas);
     }
 
     // --- MÉTODOS DE LA FACHADA PARA REGISTRAR EVENTOS (SIN EXPONER COMPONENTES SWING) ---
@@ -175,9 +175,9 @@ public class GestorVista implements ObservadorPartida {
     @Override
     public void actualizarVeredicto(boolean decisionJugador, ResultadoDecision resultado) {
         this.mesa.limpiarMesa();
-        this.reglas.cerrar();
+        this.libroReglas.cerrar();
         this.ventanilla.limpiarVentanilla();
-        this.reglas.restaurarSiAbierto();
+        this.libroReglas.restaurarSiAbierto();
 
         if (resultado.getAcierto()) {
             JOptionPane.showMessageDialog(
@@ -215,7 +215,7 @@ public class GestorVista implements ObservadorPartida {
     @Override
     public void actualizarFinPartida(TipoFinPartida resultado) {
         this.vistaDecision.ocultar();
-        this.reglas.cerrar();
+        this.libroReglas.cerrar();
         this.escenario.ocultar();
         this.vistaFinPartida.mostrar(resultado);
     }
