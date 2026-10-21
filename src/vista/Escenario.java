@@ -23,6 +23,8 @@ public class Escenario {
     // Boton no invisible para salir del gameplay
     private final JButton btnSalir;
 
+    // Botón invisible para interrogar al ingresante
+    private final JButton btnInterrogar;
     
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla, VistaContadorIngresantes contador) {
@@ -135,6 +137,11 @@ public class Escenario {
         // NUEVO: contador de ingresantes restantes (solo se muestra, no genera eventos)
         panelFondo.add(contador.getEtiqueta());
 
+        // Botón de interrogar al ingresante
+        this.btnInterrogar = new JButton("Interrogar");
+        this.btnInterrogar.setBounds((int)(tamanoPantalla.width * 0.45), (int)(tamanoPantalla.height * 0.85), 150, 40); // Ajusta X e Y para centrarlo
+        this.btnInterrogar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        panelFondo.add(this.btnInterrogar);
     }
 
     public void mostrar() {
@@ -167,5 +174,9 @@ public class Escenario {
 
     public JFrame getVentana() {
         return this.ventana;
+    }
+
+    public JButton getBtnInterrogar() { 
+        return this.btnInterrogar;
     }
 }

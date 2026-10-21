@@ -33,4 +33,9 @@ public class EstadoEsperandoLlamado implements EstadoPartida {
     public void solicitarDocumentos(Partida partida){
         throw new IllegalStateException ("No pude abirir los documentos que no fueron solicitados.");
     }
+
+    @Override
+    public String interrogar(Partida partida) {
+        throw new IllegalStateException("No hay ningún ingresante en la ventanilla al que interrogar.");
+    }
 }

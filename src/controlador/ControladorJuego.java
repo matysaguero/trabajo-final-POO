@@ -78,6 +78,26 @@ public class ControladorJuego {
 
         this.ui.alHacerClicEnAceptarCartel(evento -> this.ui.ocultarCartelReputacion());
 
+        this.ui.alHacerClicEnInterrogar(evento -> {
+            try {
+                String respuesta = this.partida.interrogar();
+        
+            if (respuesta.equals("DOCUMENTOS")) {
+                // Si el estado devolvió la bandera, lanzamos los documentos a la mesa
+                this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
+                this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
+            
+                // Nota: En el caso de Lázaro, su lista de documentos está vacía, 
+                // por lo que desplegarDocumentos() simplemente no pondrá nada en la mesa. ¡Narrativamente perfecto!
+            } else {
+                // Si ya dio los documentos, se le hace la pregunta de rigor
+                this.ui.mostrarDialogoInterrogatorio(respuesta);
+            }
+            } 
+            catch (IllegalStateException e) {
+                this.ui.mostrarError(e.getMessage());
+            }
+        });
     }
 
     private void abrirVentanaDecision() {

@@ -29,4 +29,9 @@ public class EstadoPartidaFinalizada implements EstadoPartida {
     public void solicitarDocumentos(Partida partida){
         throw new IllegalStateException ("La partida ha finalizado. No puedes solcitar mas documentos");
     }
+
+    @Override
+    public String interrogar(Partida partida) {
+        throw new IllegalStateException("La partida ha finalizado. No hay a quién interrogar.");
+    }
 }

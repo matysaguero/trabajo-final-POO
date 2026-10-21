@@ -20,8 +20,9 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     private TipoClan clan;
     private TipoCiudad ciudad;
     private String rutaImagen;
+    private String motivoVisita;
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen){
+    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen, String motivoVisita){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
@@ -44,6 +45,7 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         this.clan = clan;
         this.ciudad = ciudad;
         this.rutaImagen = rutaImagen;
+        this.motivoVisita = motivoVisita;
 
         // Si no llegan documentos (null), se usa una lista vacía para que mostrarDetalle()
         // no falle. Se guarda una copia para que la lista original no pueda modificarse desde afuera.
@@ -90,7 +92,9 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return List.copyOf(documentos);
     }
 
-    public abstract String responderInterrogatorio();
+    public String responderInterrogatorio(){
+        return this.motivoVisita;
+    }
     public abstract String darPresentacion();
     public abstract boolean esAmenaza(); //NUEVO
 

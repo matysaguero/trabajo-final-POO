@@ -26,4 +26,9 @@ public class EstadoReputacionTerminada implements EstadoPartida {
     public void solicitarDocumentos(Partida partida){
         throw new IllegalStateException ("Has cometido muchos errores. Estás despedido. Partida finalizada");
     }
+
+    @Override
+    public String interrogar(Partida partida) {
+        throw new IllegalStateException("Has sido despedido. Devuelve tu placa y retírate.");
+    }
 }

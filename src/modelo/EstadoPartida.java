@@ -17,5 +17,7 @@ public interface EstadoPartida {
 
     // El jugador presiona los documentos para que estos aparezcan en la mesa
     void solicitarDocumentos(Partida partida);
+
+    String interrogar(Partida partida);
 }
 

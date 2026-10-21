@@ -1,4 +1,4 @@
-package modelo;
+/*package modelo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -98,3 +98,4 @@ public class GeneradorIngresantesRandom {
         return LocalDate.ofEpochDay(diasAleatorio);
     }
 }
+    */

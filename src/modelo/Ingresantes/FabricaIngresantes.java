@@ -24,7 +24,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Sir Arthur", 180, 80, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.CABALLERO,
-            docsArthur, false, false
+            docsArthur, false, false, "Vengo a la capital a visitar el mercado."
         ));
 
         // 2. ZORGLUB (Enemigo Alien - Le robó el DNI a Lázaro, dice ser Humano)
@@ -37,7 +37,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN,
             TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN,
-            docsZorglub, true, true // Es enemigo y porta bomba
+            docsZorglub, true, true, "Eh... soy un humano normal haciendo cosas de humanos." // Es enemigo y porta bomba
         ));
 
         // 3. CMDTE. VANCE (Trabajador Cyborg - Todo en regla)
@@ -50,7 +50,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Cmdte. Vance", 178, 76, TipoIngresante.TRABAJADOR, TipoRaza.CYBORG,
             TipoClan.UNION_MAGICA, TipoCiudad.BALES, TipoAspecto.ASTRONAUTA,
-            docsVance, false, false
+            docsVance, false, false, "Fui reasignado a esta estación. Vengo por trabajo."
         ));
 
         // 4. XYLAR EL HUMANO (Impostor - Humano disfrazado de Alien)
@@ -63,7 +63,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Xylar el Humano", 172, 70, TipoIngresante.TURISTA, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE,
-            docsXylar, false, false
+            docsXylar, false, false, "¡Saludos humano! Digo... colega. Vengo de turismo galáctico."
         ));
 
         // 5. LÁZARO (Viajero Pobre - Zorglub le robó sus papeles)
@@ -71,7 +71,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Lázaro", 168, 60, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.BALES, TipoAspecto.VIAJERO_POBRE,
-            docsLazaro, false, false // No es amenaza, solo tuvo mala suerte
+            docsLazaro, false, false, "Señor, no tengo mis papeles... ¡un alienígena me los robó en la frontera!" // No es amenaza, solo tuvo mala suerte
         ));
 
         // 6. ALDEBARÁN (Mago Clan 2 - Guardián en regla)
@@ -84,7 +84,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Aldebarán", 175, 68, TipoIngresante.CIUDADANO, TipoRaza.GUARDIANES,
             TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_2,
-            docsAldebaran, false, false
+            docsAldebaran, false, false, "Asistiré a la conferencia anual de la Unión Mágica."
         ));
 
         // 7. MALAKOR (Mago Clan 3 - Enemigo Terrorista)
@@ -97,7 +97,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Malakor", 182, 74, TipoIngresante.TURISTA, TipoRaza.GUARDIANES,
             TipoClan.UNION_MAGICA, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,
-            docsMalakor, true, true // Papeles en regla, pero porta una bomba (Enemigo)
+            docsMalakor, true, true, "No tengo por qué darte explicaciones, oficial... pero si insistes, turismo." // Papeles en regla, pero porta una bomba (Enemigo)
         ));
 
         // 8. LYRA (Mago Clan 4 - Humana Mágica)
@@ -110,7 +110,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Lyra", 165, 58, TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,
             TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_4,
-            docsLyra, false, false
+            docsLyra, false, false, "Busco trabajo como profesora en la academia de magia."
         ));
 
         // 9. MARCO POLO (Viajero - DNI Vencido)
@@ -123,7 +123,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Marco Polo", 176, 72, TipoIngresante.TURISTA, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.VIAJERO,
-            docsMarco, false, false
+            docsMarco, false, false, "Vengo a explorar estas tierras. ¡Soy un aventurero!"
         ));
 
         // 10. RAGNAR (Vikingo - Ciudadano en regla)
@@ -136,7 +136,7 @@ public class FabricaIngresantes {
         plantel.add(crearPersonaje(
             "Ragnar", 192, 98, TipoIngresante.CIUDADANO, TipoRaza.HUMANO,
             TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.VIKINGO,
-            docsRagnar, false, false
+            docsRagnar, false, false, "Vuelvo a mi hogar después de una larga expedición."
         ));
 
         // Mezclamos el orden para que la partida sea distinta cada vez
@@ -144,23 +144,19 @@ public class FabricaIngresantes {
         return plantel;
     }
 
-    public static Ingresante crearPersonaje(
-            String nombre, int altura, int peso,
-            TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad,
-            TipoAspecto aspecto, ArrayList<Documento> docs,
-            boolean esEnemigo, boolean portaBomba) {
-        if (esEnemigo) {
-            return new Enemigo(
-                nombre, altura, peso, 1.0, docs,
-                tipo, raza, clan, ciudad, aspecto.getRutaImagen(), portaBomba
-            );
-        } else {
-            return new IngresanteRegular(
-                nombre, altura, peso, 1.0, docs,
-                tipo, raza, clan, ciudad, aspecto.getRutaImagen()
-            );
-        }
+// Firma actualizada de crearPersonaje
+public static Ingresante crearPersonaje(
+        String nombre, int altura, int peso,
+        TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad,
+        TipoAspecto aspecto, ArrayList<Documento> docs,
+        boolean esEnemigo, boolean portaBomba, String motivoVisita) { // <--- Nuevo parámetro
+    
+    if (esEnemigo) {
+        return new Enemigo(nombre, altura, peso, 1.0, docs, tipo, raza, clan, ciudad, aspecto.getRutaImagen(), motivoVisita, portaBomba);
+    } else {
+        return new IngresanteRegular(nombre, altura, peso, 1.0, docs, tipo, raza, clan, ciudad, aspecto.getRutaImagen(), motivoVisita);
     }
+}
 
     private static ArrayList<Documento> crearDniEspecifico(
             String nombre, String origen, boolean valido,

@@ -159,6 +159,15 @@ public class GestorVista implements ObservadorPartida {
         this.vistaFinPartida.getBtnVolverMenu().addActionListener(listener);
     }
 
+    public void alHacerClicEnInterrogar(ActionListener listener) {
+        this.escenario.getBtnInterrogar().addActionListener(listener);
+    }
+
+    // Método para desplegar la ventanita de diálogo
+    public void mostrarDialogoInterrogatorio(String dialogo) {
+        JOptionPane.showMessageDialog(this.escenario.getVentana(), dialogo, "Interrogatorio", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     // --- MÉTODOS DE LA INTERFAZ OBSERVADOR ---
     @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {

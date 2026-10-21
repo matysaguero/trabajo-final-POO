@@ -47,4 +47,9 @@ public class EstadoSelloAbierto implements EstadoPartida {
     public void solicitarDocumentos(Partida partida){
         throw new IllegalStateException ("Los documentos ya estan en la mesa");
     }
+
+    @Override
+    public String interrogar(Partida partida) {
+        throw new IllegalStateException("Cierra el panel de decisión (sello) primero si deseas seguir interrogando.");
+    }
 }

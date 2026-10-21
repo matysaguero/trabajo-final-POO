@@ -206,5 +206,8 @@ public class Partida {
 
         return resultado;
     }
-
+    
+    public String interrogar() {
+        return this.estado.interrogar(this);
+    }
 }

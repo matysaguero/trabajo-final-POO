@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.Ingresantes.Ingresante;
+
 public class EstadoAtendiendoIngresante implements EstadoPartida{
     
     // El jugador presiona el sello.
@@ -30,5 +32,10 @@ public class EstadoAtendiendoIngresante implements EstadoPartida{
         throw new IllegalStateException("Los documentos del ingresante ya fueron solicitados.");
     }
 
-
+    @Override
+    public String interrogar(Partida partida) {
+        // Si ya tiró los documentos, le hacemos la pregunta de rigor
+        Ingresante ingresante = partida.getIngresanteActual();
+        return "- Inspector: ¿A qué se debe su visita?\n- Ingresante: " + ingresante.responderInterrogatorio();
+    }
 }

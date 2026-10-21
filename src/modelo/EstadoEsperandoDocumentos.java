@@ -32,4 +32,11 @@ public class EstadoEsperandoDocumentos implements EstadoPartida {
     public void cancelarDecision(Partida partida) {
         throw new IllegalStateException("El sello todavía no fue abierto.");
     }
+
+    @Override
+    public String interrogar(Partida partida) {
+        // Al pedir documentos, avanzamos de estado
+        partida.cambiarEstado(new EstadoAtendiendoIngresante());
+        return "DOCUMENTOS"; // Retornamos esta bandera especial para que el Controlador sepa qué hacer
+    }
 }
