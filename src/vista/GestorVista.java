@@ -82,6 +82,12 @@ public class GestorVista implements ObservadorPartida{
         this.escenario.getBtnDocumentos().setEnabled(false);
     }
 
+    //NUEVO
+    public void volverAlMenuDesdeFinPartida() {
+        this.vistaFinPartida.ocultar();
+        this.menu.mostrar();
+    }
+
 
     // METODOS DE LA FACHADA PARA EXPONER LOS BOTONES AL CONTROLADOR
     public JButton getBtnJugar() {
@@ -136,8 +142,12 @@ public class GestorVista implements ObservadorPartida{
     public JButton getBtnDocumentos() {
         return this.escenario.getBtnDocumentos();
     }
-    
 
+    // NUEVO: Boton para colcer al menu cuando termina la partida
+    public JButton getBtnVolverFinPartida() {
+        return this.vistaFinPartida.getBtnVolverMenu();
+    }
+    
 @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
         this.mesa.limpiarMesa();

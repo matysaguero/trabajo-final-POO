@@ -79,6 +79,11 @@ public class ControladorJuego {
             } catch (IllegalStateException e) {
                 this.ui.mostrarError(e.getMessage());
             }});
+
+        // NUEVO: Escuchamos el botón Volver de las pantallas de victoria y derrota. Delegamos la navegación a GestorVista.
+        this.ui.getBtnVolverFinPartida().addActionListener(evento -> {
+            this.ui.volverAlMenuDesdeFinPartida();
+        });
     }
 
     /*
