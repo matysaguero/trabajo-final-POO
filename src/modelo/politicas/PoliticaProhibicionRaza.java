@@ -7,11 +7,11 @@ import modelo.TipoRaza;
 import modelo.Ingresantes.Ingresante;
  
 // Rechaza a los ingresantes cuya raza esté prohibida.
-public class PoliticaRaza extends PoliticaFronteriza {
+public class PoliticaProhibicionRaza extends PoliticaFronteriza {
  
     private final List<TipoRaza> razasProhibidas;
  
-    public PoliticaRaza(List<TipoRaza> razasProhibidas) {
+    public PoliticaProhibicionRaza(List<TipoRaza> razasProhibidas) {
         if (razasProhibidas == null || razasProhibidas.isEmpty()) {
             throw new IllegalArgumentException("La lista de razas prohibidas no puede ser nula ni vacia.");
         }
