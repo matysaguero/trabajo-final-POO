@@ -5,6 +5,7 @@ import modelo.ResultadoDecision;
 import modelo.TipoFinPartida;
 import modelo.Ingresantes.Ingresante;
 import modelo.documentos.Documento;
+import modelo.politicas.ReglasDia;
 
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -18,8 +19,9 @@ public class GestorVista implements ObservadorPartida {
     private final VistaMesaDocumentos mesa;
     private final VistaVentanilla ventanilla;
     private final FabricaVistaDocumento fabrica;
-    private final VistaTutorial vistaTutorial;
+    private final FabricaVistaReglas fabricaReglas;
     private final VistaLibroReglas libroReglas;
+    private final VistaTutorial vistaTutorial;
     private final VistaFinPartida vistaFinPartida;
 
     public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida) {
@@ -31,8 +33,10 @@ public class GestorVista implements ObservadorPartida {
         this.ventanilla = ventanilla;
         this.fabrica = fabrica;
         this.vistaTutorial = vistaTutorial;       
-        this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos());
-        this.vistaFinPartida = vistaFinPartida;   
+        this.vistaFinPartida = vistaFinPartida;
+
+        this.fabricaReglas = new FabricaVistaReglas();
+        this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
 
     // --- MÉTODOS DE CONTROL DE NAVEGACIÓN Y VISTAS ---
@@ -82,8 +86,8 @@ public class GestorVista implements ObservadorPartida {
         this.menu.mostrar();
     }
 
-    public void alternarLibroReglas() {
-        this.libroReglas.alternar();
+    public void alternarLibroReglas(ReglasDia reglasActivas) {
+        this.libroReglas.alternar(reglasActivas);
     }
 
     // --- MÉTODOS DE LA FACHADA PARA REGISTRAR EVENTOS (SIN EXPONER COMPONENTES SWING) ---

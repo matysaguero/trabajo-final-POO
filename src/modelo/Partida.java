@@ -3,6 +3,8 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Ingresantes.Ingresante;
+import modelo.politicas.ReglasDia;
+import modelo.politicas.ReglasDia1;
 import modelo.politicas.Resolutor;
 
 public class Partida {
@@ -14,13 +16,18 @@ public class Partida {
     private Ingresante ingresanteActual;
     private final List<ObservadorPartida> observadores = new ArrayList<>();
     private EstadoPartida estado; //NUEVO: state
+    private ReglasDia reglasActuales;
 
-    public Partida(GestorReputacion gestor, Resolutor resolutor) {
+    public Partida(GestorReputacion gestor, Resolutor resolutor, ReglasDia reglasActuales) {
         if (gestor == null || resolutor == null) {
             throw new IllegalArgumentException("El gestor y el resolutor son obligatorios");
         }
+        if (reglasActuales == null) {
+            throw new IllegalArgumentException("La partida no puede iniciar sin reglas.");
+        }
         this.gestor = gestor;
         this.resolutor = resolutor;
+        this.reglasActuales = reglasActuales;
         this.estado = new EstadoPartidaFinalizada();
     }
 
@@ -54,6 +61,7 @@ public class Partida {
         // Reincia la tReputacion
         this.gestor.reiniciar();
         
+        this.reglasActuales = new ReglasDia1();
         // Resconstruye la fila de ingresantes
         this.filaIngresantes.clear();
         this.filaIngresantes.addAll(this.ingresantesIniciales);
@@ -163,6 +171,11 @@ public class Partida {
         return this.ingresanteActual;
     }
 
+    public ReglasDia getReglasDia(){
+        if (this.reglasActuales == null) {
+            return new ReglasDia1();
+        } return this.reglasActuales;
+    }
 
     ResultadoDecision resolverTurno(boolean decisionJugador) throws Exception {
         if (this.ingresanteActual == null) {
