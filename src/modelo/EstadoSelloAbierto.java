@@ -13,24 +13,28 @@ public class EstadoSelloAbierto implements EstadoPartida {
     }
 
     // El jugador acepta o rechaza al ingresante.
-    @Override 
-    public void procesarDecision(Partida partida, boolean decisionJugador) throws Exception {
+    @Override
+    public void procesarDecision(Partida partida,boolean decisionJugador) throws Exception {
 
-        // Resolver la decisión que toma el jugador con la logica del modelo.
-        ResultadoDecision resultado = partida.resolverTurno(decisionJugador);
-        // Primero comprueba si perdio la partida (reputación <= 0)
+        ResultadoDecision resultado =partida.resolverTurno(decisionJugador); // Le solicita a Partida que resuelva el turno. resolverTurno() utiliza la lógica del juego para evaluar si el jugador tomó la decisión correcta y actualizar su reputación.
+        TipoFinPartida fin = null; // Esta variable almacena el resultado final de la partida, si es que terminó (DERROTA O VICTORIA).
+
         if (resultado.getPartidaPerdida()) {
-            // Cambia al estado específico de derrota por baja reputación
             partida.cambiarEstado(new EstadoReputacionTerminada());
-        } else if (!partida.quedanIngresantes()) {
-            // Cambia al estado de fin de partida normal (superó el día)
-            partida.cambiarEstado(new EstadoPartidaFinalizada());
+            fin = TipoFinPartida.DERROTA;
+            } else if (!partida.quedanIngresantes()) {
+                partida.cambiarEstado(new EstadoPartidaFinalizada());
+                fin = TipoFinPartida.VICTORIA;
         } else {
-            // La ventanilla queda vacía y vuelve al estado del principio: esperando otro ingresante de la fila.
-            partida.cambiarEstado(new EstadoEsperandoLlamado());
-        }
-        // Notificar a las vistas mediante Observer.
+            partida.cambiarEstado(new EstadoEsperandoLlamado());}
+
+        // Primero informamos el resultado de la decisión.
         partida.notificarVeredicto(decisionJugador, resultado);
+
+        // Después informamos si terminó la partida.
+        if (fin != null) {
+            partida.notificarFinPartida(fin);
+        }
     }
 
     @Override

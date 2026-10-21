@@ -2,6 +2,7 @@ package vista;
 
 import modelo.ObservadorPartida;
 import modelo.ResultadoDecision;
+import modelo.TipoFinPartida;
 import modelo.Ingresantes.Ingresante;
 import modelo.documentos.Documento;
 
@@ -19,9 +20,10 @@ public class GestorVista implements ObservadorPartida{
     private final FabricaVistaDocumento fabrica;
     private final VistaTutorial vistaTutorial;
     private final VistaLibroReglas libroReglas;
+    private final VistaFinPartida vistaFinPartida;
 
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial){
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida){
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -30,9 +32,8 @@ public class GestorVista implements ObservadorPartida{
         this.ventanilla = ventanilla;
         this.fabrica = fabrica;
         this.vistaTutorial = vistaTutorial;       
-        this.libroReglas = new VistaLibroReglas( mesa.getPanelDocumentos()
-);
-
+        this.libroReglas = new VistaLibroReglas( mesa.getPanelDocumentos() );
+        this.vistaFinPartida = vistaFinPartida;   
     }
 
     // METODOS FACHADA CONTROL DE VISTAS
@@ -225,6 +226,14 @@ public class GestorVista implements ObservadorPartida{
 
     public void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this.escenario.getVentana(), mensaje);
+    }
+
+    @Override
+    public void actualizarFinPartida(TipoFinPartida resultado) {
+        this.vistaDecision.ocultar();
+        this.libroReglas.cerrar();
+        this.escenario.ocultar();
+        this.vistaFinPartida.mostrar(resultado);
     }
 
 }

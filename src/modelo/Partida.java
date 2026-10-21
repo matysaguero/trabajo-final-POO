@@ -119,6 +119,17 @@ public class Partida {
         }
     }
 
+    // Notifica a los observadores cuando finaliza la partida.
+    void notificarFinPartida(TipoFinPartida resultado) {
+        if (resultado == null) {
+            throw new IllegalArgumentException("El resultado final no puede ser nulo.");
+        }
+        for (ObservadorPartida observador : this.observadores) {
+            observador.actualizarFinPartida(resultado);
+        }
+    }
+
+
     public void usarSello() {
         System.out.println( "[EVENTO] Sello presionado. Estado actual: " + this.estado.getClass().getSimpleName());
             
@@ -167,4 +178,5 @@ public class Partida {
 
         return resultado;
     }
+
 }
