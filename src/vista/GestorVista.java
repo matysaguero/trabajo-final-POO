@@ -23,8 +23,9 @@ public class GestorVista implements ObservadorPartida {
     private final VistaLibroReglas libroReglas;
     private final VistaTutorial vistaTutorial;
     private final VistaFinPartida vistaFinPartida;
+    private final VistaCartelReputacion cartelReputacion;
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida) {
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -34,6 +35,7 @@ public class GestorVista implements ObservadorPartida {
         this.fabrica = fabrica;
         this.vistaTutorial = vistaTutorial;       
         this.vistaFinPartida = vistaFinPartida;
+        this.cartelReputacion = cartelReputacion;
 
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
@@ -88,6 +90,18 @@ public class GestorVista implements ObservadorPartida {
 
     public void alternarLibroReglas(ReglasDia reglasActivas) {
         this.libroReglas.alternar(reglasActivas);
+    }
+
+    public void mostrarCartelReputacion(String mensaje) {
+        this.cartelReputacion.mostrarMensaje(mensaje);
+    }
+
+    public void ocultarCartelReputacion() {
+        this.cartelReputacion.ocultar();
+    }
+
+    public void alHacerClicEnAceptarCartel(ActionListener listener) {
+        this.cartelReputacion.getBtnAceptar().addActionListener(listener);
     }
 
     // --- MÉTODOS DE LA FACHADA PARA REGISTRAR EVENTOS (SIN EXPONER COMPONENTES SWING) ---
@@ -179,17 +193,11 @@ public class GestorVista implements ObservadorPartida {
         this.ventanilla.limpiarVentanilla();
         this.libroReglas.restaurarSiAbierto();
 
-        if (resultado.getAcierto()) {
-            JOptionPane.showMessageDialog(
-                this.escenario.getVentana(),
-                "¡Decisión correcta! Reputación: " + resultado.getReputacionActual()
-            );
-        } else {
-            JOptionPane.showMessageDialog(
-                this.escenario.getVentana(),
-                "¡Penalización! Reputación: " + resultado.getReputacionActual()
-            );
-        }
+        String mensaje = resultado.getAcierto() 
+            ? "<html><center>¡Decisión correcta!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>"  //Para centrar y que el texto aparezca con un ENTER del teclado, es decir, aprezca en 2 lineas distintas (una arriba, otra abajo)
+            : "<html><center>¡Penalización!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>";
+            
+        this.cartelReputacion.mostrarMensaje(mensaje);
 
         ocultarDocumento();
 

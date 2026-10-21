@@ -13,7 +13,7 @@ public class ControladorJuego {
         this.ui = ui;
         this.partida = partida;
 
-        // CONEXIÓN CLAVE DEL PATRÓN OBSERVER: la vista se suscribe a la partida
+        // CONEXIÓN IMPORTANTE DEL PATRÓN OBSERVER: la vista se suscribe a la partida
         this.partida.suscribir(this.ui);
 
         // Suscripciones delegadas a través de la Fachada (sin solicitar JButtons)
@@ -37,10 +37,10 @@ public class ControladorJuego {
         this.ui.alHacerClicEnSalirJuego(evento -> System.exit(0));
 
         this.ui.alHacerClicEnLlamar(evento -> {
-            try { 
-                this.partida.usarMegafono();
-            } catch (IllegalStateException e) { 
-                this.ui.mostrarError(e.getMessage()); 
+            try {
+                 this.partida.usarMegafono();
+            } catch (IllegalStateException e) {
+                 this.ui.mostrarError(e.getMessage());
             }
         });
 
@@ -75,18 +75,25 @@ public class ControladorJuego {
         this.ui.alHacerClicEnVolverFinPartida(evento -> {
             this.ui.volverAlMenuDesdeFinPartida();
         });
+
+        this.ui.alHacerClicEnAceptarCartel(evento -> this.ui.ocultarCartelReputacion());
+
     }
 
     private void abrirVentanaDecision() {
         try {
+            // Primero se consulta al estado actual.
             this.partida.usarSello();
+            // Solo se abre si State permitió la acción
             this.ui.mostrarVentanaDecision();
         } catch (IllegalStateException e) {
+            // Informar que la acción no está permitida.
             this.ui.mostrarError(e.getMessage());
         }
     }
 
     private void procesarVeredicto(boolean decisionJugador) {
+        // Primero cerramos la ventana de los botones Aceptar/Rechazar
         this.ui.ocultarVentanaDecision();
         try {
             this.partida.procesarDecisionJugador(decisionJugador);

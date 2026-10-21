@@ -43,9 +43,8 @@ public class Main {
                 VistaConsola vistaConsola = new VistaConsola();
                 VistaTutorial vistaTutorial = new VistaTutorial();
                 VistaFinPartida vistaFinPartida = new VistaFinPartida();
-
-                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola,vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida);
-
+                VistaCartelReputacion vistaCartel = new VistaCartelReputacion(vistaPrincipal.getVentana());
+                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola,vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel);
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
