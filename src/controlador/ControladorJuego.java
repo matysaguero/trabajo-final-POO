@@ -5,7 +5,6 @@ import modelo.Partida;
 import vista.GestorVista;
 
 public class ControladorJuego {
-
     private final GestorVista ui;
     private final Partida partida;
 
@@ -13,10 +12,8 @@ public class ControladorJuego {
         this.ui = ui;
         this.partida = partida;
 
-        // CONEXIÓN IMPORTANTE DEL PATRÓN OBSERVER: la vista se suscribe a la partida
         this.partida.suscribir(this.ui);
 
-        // Suscripciones delegadas a través de la Fachada (sin solicitar JButtons)
         this.ui.alHacerClicEnJugar(evento -> {
             this.ui.iniciarJuego();
             this.partida.iniciarPartida();
@@ -40,7 +37,7 @@ public class ControladorJuego {
             try {
                  this.partida.usarMegafono();
             } catch (IllegalStateException e) {
-                 this.ui.mostrarError(e.getMessage());
+                 this.manejarErrorEstado(e); // MODIFICADO
             }
         });
 
@@ -48,7 +45,7 @@ public class ControladorJuego {
             try {
                 this.ui.alternarLibroReglas(this.partida.getReglasDia());
             } catch (IllegalStateException e) {
-                this.ui.mostrarError(e.getMessage());
+                this.manejarErrorEstado(e); // MODIFICADO
             }
         });
 
@@ -60,7 +57,6 @@ public class ControladorJuego {
         });
 
         this.ui.alHacerClicEnAceptar(evento -> this.procesarVeredicto(true));
-
         this.ui.alHacerClicEnRechazar(evento -> this.procesarVeredicto(false));
 
         this.ui.alHacerClicEnDocumentos(evento -> {
@@ -68,7 +64,7 @@ public class ControladorJuego {
                 this.partida.solicitarDocumentos();
                 this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
             } catch (IllegalStateException e) {
-                this.ui.mostrarError(e.getMessage());
+                this.manejarErrorEstado(e); // MODIFICADO
             }
         });
 
@@ -77,48 +73,58 @@ public class ControladorJuego {
         });
 
         this.ui.alHacerClicEnAceptarCartel(evento -> this.ui.ocultarCartelReputacion());
+        
+        // NUEVO: Cerramos el anuncio cuando se toca el ACEPTAR invisible
+        this.ui.alHacerClicEnAceptarAnuncio(evento -> this.ui.ocultarAnuncioGrafico());
 
         this.ui.alHacerClicEnInterrogar(evento -> {
             try {
                 String respuesta = this.partida.interrogar();
-        
-            if (respuesta.equals("DOCUMENTOS")) {
-                // Si el estado devolvió la bandera, lanzamos los documentos a la mesa
-                this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
-                this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
-            
-                // Nota: En el caso de Lázaro, su lista de documentos está vacía, 
-                // por lo que desplegarDocumentos() simplemente no pondrá nada en la mesa. ¡Narrativamente perfecto!
-            } else {
-                // Si ya dio los documentos, se le hace la pregunta de rigor
-                this.ui.mostrarDialogoInterrogatorio(respuesta);
-            }
-            } 
-            catch (IllegalStateException e) {
-                this.ui.mostrarError(e.getMessage());
+                if (respuesta.equals("DOCUMENTOS")) {
+                    this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
+                    this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
+                } else {
+                    this.ui.mostrarDialogoInterrogatorio(respuesta);
+                }
+            } catch (IllegalStateException e) {
+                this.manejarErrorEstado(e); // MODIFICADO
             }
         });
     }
 
     private void abrirVentanaDecision() {
         try {
-            // Primero se consulta al estado actual.
             this.partida.usarSello();
-            // Solo se abre si State permitió la acción
             this.ui.mostrarVentanaDecision();
         } catch (IllegalStateException e) {
-            // Informar que la acción no está permitida.
-            this.ui.mostrarError(e.getMessage());
+            this.manejarErrorEstado(e); // MODIFICADO
         }
     }
 
     private void procesarVeredicto(boolean decisionJugador) {
-        // Primero cerramos la ventana de los botones Aceptar/Rechazar
         this.ui.ocultarVentanaDecision();
         try {
             this.partida.procesarDecisionJugador(decisionJugador);
         } catch (Exception e) {
             this.ui.mostrarError("Error al procesar el veredicto: " + e.getMessage());
+        }
+    }
+
+    // NUEVO: Enrutador de mensajes. Revisa qué mandó el Modelo y muestra la imagen correspondiente.
+    private void manejarErrorEstado(IllegalStateException e) {
+        String mensaje = e.getMessage();
+        if (mensaje.contains("Primero debes llamar a uno con el meg") || mensaje.contains("No hay ning")) {
+            this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSello1.png");
+        } 
+        else if (mensaje.contains("sin solicitar documentos primero")) {
+            this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSello2.png");
+        } 
+        else if (mensaje.contains("mientras ya hay uno en ventanilla") || mensaje.contains("Ya hay un ingresante")) {
+            this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSirena1.png"); 
+        } 
+        else {
+            // Para otros errores ("Partida Finalizada", etc.), se mantiene el cartel estándar
+            this.ui.mostrarError(mensaje);
         }
     }
 }

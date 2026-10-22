@@ -6,10 +6,10 @@ import modelo.TipoFinPartida;
 import modelo.Ingresantes.Ingresante;
 import modelo.documentos.Documento;
 import modelo.politicas.ReglasDia;
-
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 public class GestorVista implements ObservadorPartida {
     private final MenuPrincipal menu;
@@ -25,8 +25,9 @@ public class GestorVista implements ObservadorPartida {
     private final VistaFinPartida vistaFinPartida;
     private final VistaCartelReputacion cartelReputacion;
     private final VistaContadorIngresantes contador;
+    private final VistaAnuncio vistaAnuncio;
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador) {
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, VistaAnuncio vistaAnuncio) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -38,27 +39,15 @@ public class GestorVista implements ObservadorPartida {
         this.vistaFinPartida = vistaFinPartida;
         this.cartelReputacion = cartelReputacion;
         this.contador = contador;
-
+        this.vistaAnuncio = vistaAnuncio; // NUEVO
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
 
-    // --- MÉTODOS DE CONTROL DE NAVEGACIÓN Y VISTAS ---
-    public void mostrarMenuPrincipal() {
-        this.menu.mostrar();
-    }
-
-    public void ocultarMenuPrincipal() {
-        this.menu.ocultar();
-    }
-
-    public void mostrarTutorial() {
-        this.vistaTutorial.mostrar();
-    }
-
-    public void ocultarTutorial() {
-        this.vistaTutorial.ocultar();
-    }
+    public void mostrarMenuPrincipal() { this.menu.mostrar(); }
+    public void ocultarMenuPrincipal() { this.menu.ocultar(); }
+    public void mostrarTutorial() { this.vistaTutorial.mostrar(); }
+    public void ocultarTutorial() { this.vistaTutorial.ocultar(); }
     
     public void iniciarJuego() {
         this.menu.ocultar();
@@ -67,14 +56,9 @@ public class GestorVista implements ObservadorPartida {
         this.escenario.mostrar();
     }
 
-    public void mostrarVentanaDecision() {
-        this.vistaDecision.mostrar();
-    }
+    public void mostrarVentanaDecision() { this.vistaDecision.mostrar(); }
+    public void ocultarVentanaDecision() { this.vistaDecision.ocultar(); }
 
-    public void ocultarVentanaDecision() {
-        this.vistaDecision.ocultar();
-    }
-    
     private void mostrarDocumentos() {
         this.escenario.getBtnDocumentos().setVisible(true);
         this.escenario.getBtnDocumentos().setEnabled(true);
@@ -102,73 +86,43 @@ public class GestorVista implements ObservadorPartida {
         this.cartelReputacion.ocultar();
     }
 
+    // NUEVO: Métodos para controlar el anuncio de errores
+    public void mostrarAnuncioGrafico(String rutaImagen) {
+        this.vistaAnuncio.mostrarImagen(rutaImagen);
+    }
+
+    public void ocultarAnuncioGrafico() {
+        this.vistaAnuncio.ocultar();
+    }
+
     public void alHacerClicEnAceptarCartel(ActionListener listener) {
         this.cartelReputacion.getBtnAceptar().addActionListener(listener);
     }
 
-    // --- MÉTODOS DE LA FACHADA PARA REGISTRAR EVENTOS (SIN EXPONER COMPONENTES SWING) ---
-    public void alHacerClicEnJugar(ActionListener listener) {
-        this.menu.getBtnJugar().addActionListener(listener);
+    // NUEVO: Oyente para el botón del nuevo anuncio
+    public void alHacerClicEnAceptarAnuncio(ActionListener listener) {
+        this.vistaAnuncio.getBtnAceptar().addActionListener(listener);
     }
 
-    public void alHacerClicEnTutorial(ActionListener listener) {
-        this.menu.getBtnTutorial().addActionListener(listener);
-    }
+    public void alHacerClicEnJugar(ActionListener listener) { this.menu.getBtnJugar().addActionListener(listener); }
+    public void alHacerClicEnTutorial(ActionListener listener) { this.menu.getBtnTutorial().addActionListener(listener); }
+    public void alHacerClicEnSalir(ActionListener listener) { this.menu.getBtnSalir().addActionListener(listener); }
+    public void alHacerClicEnSalirJuego(ActionListener listener) { this.escenario.getBtnSalir().addActionListener(listener); }
+    public void alHacerClicEnVolverTutorial(ActionListener listener) { this.vistaTutorial.getBtnVolver().addActionListener(listener); }
+    public void alHacerClicEnLlamar(ActionListener listener) { this.escenario.getBtnLlamar().addActionListener(listener); }
+    public void alHacerClicEnDecidir(ActionListener listener) { this.escenario.getBtnDecidir().addActionListener(listener); }
+    public void alHacerClicEnAceptar(ActionListener listener) { this.vistaDecision.getBtnAceptar().addActionListener(listener); }
+    public void alHacerClicEnRechazar(ActionListener listener) { this.vistaDecision.getBtnRechazar().addActionListener(listener); }
+    public void alHacerClicEnVolverDecision(ActionListener listener) { this.vistaDecision.getBtnVolver().addActionListener(listener); }
+    public void alHacerClicEnLibroReglas(ActionListener listener) { this.escenario.getBtnLibroReglas().addActionListener(listener); }
+    public void alHacerClicEnDocumentos(ActionListener listener) { this.escenario.getBtnDocumentos().addActionListener(listener); }
+    public void alHacerClicEnVolverFinPartida(ActionListener listener) { this.vistaFinPartida.getBtnVolverMenu().addActionListener(listener); }
+    public void alHacerClicEnInterrogar(ActionListener listener) { this.escenario.getBtnInterrogar().addActionListener(listener); }
 
-    public void alHacerClicEnSalir(ActionListener listener) {
-        this.menu.getBtnSalir().addActionListener(listener);
-    }
-
-    public void alHacerClicEnSalirJuego(ActionListener listener) {
-        this.escenario.getBtnSalir().addActionListener(listener);
-    }
-
-    public void alHacerClicEnVolverTutorial(ActionListener listener) {
-        this.vistaTutorial.getBtnVolver().addActionListener(listener);
-    }
-
-    public void alHacerClicEnLlamar(ActionListener listener) {
-        this.escenario.getBtnLlamar().addActionListener(listener);
-    }
-
-    public void alHacerClicEnDecidir(ActionListener listener) {
-        this.escenario.getBtnDecidir().addActionListener(listener);
-    }
-
-    public void alHacerClicEnAceptar(ActionListener listener) {
-        this.vistaDecision.getBtnAceptar().addActionListener(listener);
-    }
-
-    public void alHacerClicEnRechazar(ActionListener listener) {
-        this.vistaDecision.getBtnRechazar().addActionListener(listener);
-    }
-
-    public void alHacerClicEnVolverDecision(ActionListener listener) {
-        this.vistaDecision.getBtnVolver().addActionListener(listener);
-    }
-
-    public void alHacerClicEnLibroReglas(ActionListener listener) {
-        this.escenario.getBtnLibroReglas().addActionListener(listener);
-    }
-
-    public void alHacerClicEnDocumentos(ActionListener listener) {
-        this.escenario.getBtnDocumentos().addActionListener(listener);
-    }
-
-    public void alHacerClicEnVolverFinPartida(ActionListener listener) {
-        this.vistaFinPartida.getBtnVolverMenu().addActionListener(listener);
-    }
-
-    public void alHacerClicEnInterrogar(ActionListener listener) {
-        this.escenario.getBtnInterrogar().addActionListener(listener);
-    }
-
-    // Método para desplegar la ventanita de diálogo
     public void mostrarDialogoInterrogatorio(String dialogo) {
         JOptionPane.showMessageDialog(this.escenario.getVentana(), dialogo, "Interrogatorio", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // --- MÉTODOS DE LA INTERFAZ OBSERVADOR ---
     @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
         this.mesa.limpiarMesa();
@@ -182,17 +136,14 @@ public class GestorVista implements ObservadorPartida {
         if (ingresante == null || !this.escenario.getBtnDocumentos().isEnabled()) {
             return;
         }
-
         int posicionX = 30;
         int posicionY = 30;
-
         for (Documento documento : ingresante.getDocumentos()) {
             JPanel vistaDoc = this.fabrica.crearVista(documento, posicionX, posicionY);
             this.mesa.agregarDocumentoEnMesa(vistaDoc);
             posicionX += 60;
             posicionY += 20;
         }
-
         ocultarDocumento();
         this.libroReglas.restaurarSiAbierto();
     }
@@ -205,13 +156,12 @@ public class GestorVista implements ObservadorPartida {
         this.libroReglas.restaurarSiAbierto();
 
         String mensaje = resultado.getAcierto() 
-            ? "<html><center>¡Decisión correcta!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>"  //Para centrar y que el texto aparezca con un ENTER del teclado, es decir, aprezca en 2 lineas distintas (una arriba, otra abajo)
-            : "<html><center>¡Penalización!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>";
-            
+             ? "<html><center>¡Decisión correcta!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>"
+             : "<html><center>¡Penalización!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>";
+                     
         this.cartelReputacion.mostrarMensaje(mensaje);
 
         ocultarDocumento();
-
         this.consola.mostrarPuedeIngresar(resultado.getPuedeIngresar());
         this.consola.mostrarDecisionJugador(decisionJugador);
         this.consola.mostrarResultado(resultado.getAcierto(), resultado.getReputacionActual());
@@ -238,6 +188,7 @@ public class GestorVista implements ObservadorPartida {
         this.escenario.ocultar();
         this.vistaFinPartida.mostrar(resultado);
     }
+
     @Override
     public void actualizarIngresantesRestantes(int restantes) {
         this.contador.mostrarRestantes(restantes);

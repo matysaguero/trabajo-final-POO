@@ -34,10 +34,11 @@ public class Main {
                 partida.cargarIngresantes(FabricaIngresantes.crearPlantelInicial());
 
                 // 2. VISTAS
+                // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
                 VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
-                VistaContadorIngresantes vistaContador = new VistaContadorIngresantes(); // NUEVO
+                VistaContadorIngresantes vistaContador = new VistaContadorIngresantes();
                 Escenario vistaPrincipal = new Escenario(vistaMesa, ventanilla, vistaContador);
                 VistaDecision vistaPopUp = new VistaDecision(vistaPrincipal.getVentana());
                 FabricaVistaDocumento fabricaVistaDocumento = new FabricaVistaDocumento();
@@ -45,7 +46,11 @@ public class Main {
                 VistaTutorial vistaTutorial = new VistaTutorial();
                 VistaFinPartida vistaFinPartida = new VistaFinPartida();
                 VistaCartelReputacion vistaCartel = new VistaCartelReputacion(vistaPrincipal.getVentana());
-                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola,vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador);
+                
+                // Instanciamos el Anuncio para cuando un usuario haga algo que no debe (ej; usar el sello sin haber solicitado documentos)
+                VistaAnuncio vistaAnuncio = new VistaAnuncio(vistaPrincipal.getVentana());
+
+                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio);
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
