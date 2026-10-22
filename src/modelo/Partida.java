@@ -1,11 +1,10 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Ingresantes.Ingresante;
-import modelo.politicas.ReglasDia;
-import modelo.politicas.ReglasDia1;
-import modelo.politicas.Resolutor;
+import modelo.politicas.*;
 
 public class Partida {
 
@@ -60,8 +59,10 @@ public class Partida {
     public void iniciarPartida() {
         // Reincia la tReputacion
         this.gestor.reiniciar();
-        
-        this.reglasActuales = new ReglasDia1();
+
+        //Se cargan todas las politicas y reglas que se tendran en cuenta durante el dia
+        cargarPoliticasDelDia();
+
         // Resconstruye la fila de ingresantes
         this.filaIngresantes.clear();
         this.filaIngresantes.addAll(this.ingresantesIniciales);
@@ -209,5 +210,35 @@ public class Partida {
     
     public String interrogar() {
         return this.estado.interrogar(this);
+    }
+    
+    private void cargarPoliticasDelDia() {
+        try {
+            this.resolutor.setPoliticas(new ArrayList<>());
+            
+            LocalDate fechaActual = this.reglasActuales.getFechaDia(); //Depende el dia, la fecha con la que voy a estar comparando.
+
+            //Políticas fijas, siempre se controlan. (discrepancias con nombre, origen, vencimientos) 
+            this.resolutor.agregarPolitica(new PoliticaCoherenciaNombre());
+            this.resolutor.agregarPolitica(new PoliticaCoherenciaOrigen());
+            this.resolutor.agregarPolitica(new PoliticaVencimiento(fechaActual));  
+            this.resolutor.agregarPolitica(new PoliticaDocumentacionRequerida());
+
+            //Políticas dinámicas dictadas por el ReglasDia actual, dependiendo el dia, la norma que dicta.
+            ReglasDia reglas = getReglasDia();
+            
+            if (!reglas.getCiudadesProhibidas().isEmpty()) {
+                this.resolutor.agregarPolitica(new PoliticaProhibicionCiudad(reglas.getCiudadesProhibidas()));
+            }
+            if (!reglas.getClanesProhibidos().isEmpty()) {
+                this.resolutor.agregarPolitica(new PoliticaProhibicionClan(reglas.getClanesProhibidos()));
+            }
+            if (!reglas.getRazasProhibidas().isEmpty()) {
+                this.resolutor.agregarPolitica(new PoliticaProhibicionRaza(reglas.getRazasProhibidas()));
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error al cargar políticas: " + e.getMessage());
+        }
     }
 }
