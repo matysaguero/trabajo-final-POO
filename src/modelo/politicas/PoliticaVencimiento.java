@@ -24,7 +24,7 @@ public class PoliticaVencimiento extends PoliticaFronteriza {
                 //Simplemente le pedimos la fecha.
                 LocalDate vencimientoDoc = (doc.getFechaVencimiento());
                 
-                // Si la fecha de vencimiento es ANTERIOR a la fecha de hoy, está vencido -> Rechazar.
+                //Si la fecha de vencimiento es ANTERIOR a la fecha de hoy, está vencido -> Rechazar.
                 if (vencimientoDoc.isBefore(this.fechaActualDelJuego)) {
                     return false; // El ingresante tiene al menos un documento vencido
                 }
