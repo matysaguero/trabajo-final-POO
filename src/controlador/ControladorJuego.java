@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.politicas.ReglasDia;
 import modelo.Partida;
+import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
 
 public class ControladorJuego {
@@ -59,14 +60,18 @@ public class ControladorJuego {
         this.ui.alHacerClicEnAceptar(evento -> this.procesarVeredicto(true));
         this.ui.alHacerClicEnRechazar(evento -> this.procesarVeredicto(false));
 
-        this.ui.alHacerClicEnDocumentos(evento -> {
+       this.ui.alHacerClicEnDocumentos(evento -> {
             try {
+                // 1. El Modelo gestiona la acción del juego.
                 this.partida.solicitarDocumentos();
-                this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
-            } catch (IllegalStateException e) {
-                this.manejarErrorEstado(e); // MODIFICADO
-            }
-        });
+
+                // 2. Recuperamos el ingresante actual.
+                Ingresante ingresante = this.partida.getIngresanteActual();
+
+                // 3. Enviamos los datos necesarios a la Vista.
+                this.ui.desplegarDocumentos(ingresante.getDocumentos(), ingresante.getClan());
+
+            } catch (IllegalStateException e) { this.manejarErrorEstado(e);}});
 
         this.ui.alHacerClicEnVolverFinPartida(evento -> {
             this.ui.volverAlMenuDesdeFinPartida();
@@ -81,9 +86,13 @@ public class ControladorJuego {
             try {
                 String respuesta = this.partida.interrogar();
                 if (respuesta.equals("DOCUMENTOS")) {
-                    this.ui.desplegarDocumentos(this.partida.getIngresanteActual());
-                    this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
-                } else {
+                   Ingresante ingresante =
+        this.partida.getIngresanteActual();
+
+        this.ui.desplegarDocumentos( ingresante.getDocumentos(), ingresante.getClan());
+        
+        this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
+            } else {
                     this.ui.mostrarDialogoInterrogatorio(respuesta);
                 }
             } catch (IllegalStateException e) {

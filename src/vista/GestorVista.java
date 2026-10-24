@@ -2,6 +2,7 @@ package vista;
 
 import modelo.ObservadorPartida;
 import modelo.ResultadoDecision;
+import modelo.TipoClan;
 import modelo.TipoFinPartida;
 import modelo.Ingresantes.Ingresante;
 import modelo.documentos.Documento;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import java.util.List;
+import modelo.TipoClan;
 
 public class GestorVista implements ObservadorPartida {
     private final MenuPrincipal menu;
@@ -39,7 +42,7 @@ public class GestorVista implements ObservadorPartida {
         this.vistaFinPartida = vistaFinPartida;
         this.cartelReputacion = cartelReputacion;
         this.contador = contador;
-        this.vistaAnuncio = vistaAnuncio; // NUEVO
+        this.vistaAnuncio = vistaAnuncio; 
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
@@ -132,18 +135,22 @@ public class GestorVista implements ObservadorPartida {
         mostrarDocumentos();
     }
 
-    public void desplegarDocumentos(Ingresante ingresante) {
-        if (ingresante == null || !this.escenario.getBtnDocumentos().isEnabled()) {
+    public void desplegarDocumentos(List<Documento> documentos, TipoClan clan) {
+
+        if (documentos == null || !this.escenario.getBtnDocumentos().isEnabled()) {
             return;
         }
+
         int posicionX = 30;
         int posicionY = 30;
-        for (Documento documento : ingresante.getDocumentos()) {
-            JPanel vistaDoc = this.fabrica.crearVista(documento, posicionX, posicionY);
+
+        for (Documento documento : documentos) {
+            JPanel vistaDoc = this.fabrica.crearVista(documento, clan, posicionX, posicionY);
             this.mesa.agregarDocumentoEnMesa(vistaDoc);
             posicionX += 60;
             posicionY += 20;
         }
+
         ocultarDocumento();
         this.libroReglas.restaurarSiAbierto();
     }

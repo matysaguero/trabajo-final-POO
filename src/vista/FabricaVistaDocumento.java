@@ -8,6 +8,8 @@ import javax.swing.*;
 
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
+import modelo.TipoClan; //NUEVO
+import modelo.documentos.Permiso; //NUEVO
 
 public class FabricaVistaDocumento {
 
@@ -15,28 +17,31 @@ public class FabricaVistaDocumento {
     private static final int ALTO_DNI = 312;
     private static final Font FUENTE_DATOS = new Font("Monospaced", Font.BOLD, 14);
     private static final Color COLOR_TEXTO = new Color(35, 25, 20);
+    private static final int ANCHO_PERMISO = 320;
+    private static final int ALTO_PERMISO = 456;
 
     // Defino una interfaz funcional (una interfaz de un solo metodo abstracto) para poder usar lambdas
 @FunctionalInterface
     private interface CreadorVista {
-        JPanel crear(Documento doc, int posX, int posY);
+        JPanel crear(Documento doc, TipoClan clan, int posX, int posY);
     }
 
     private final Map<Class<? extends Documento>, CreadorVista> creadores = new HashMap<>();
 
     public FabricaVistaDocumento() {
         //Registramos cada tipo de documento con la lambda que sabe dibujarlo
-        creadores.put(DNI.class, (doc, x, y) -> crearVistaDNI((DNI) doc, x, y));
-        
+        creadores.put(DNI.class, (doc, clan, x, y) -> crearVistaDNI((DNI) doc, x, y));
+        creadores.put(Permiso.class, (doc, clan, x, y) -> crearVistaPermiso((Permiso) doc, x, y));
         //creadores.put(Pasaporte.class, (doc, x, y) -> crearVistaPasaporte((Pasaporte) doc, x, y));
     }
     
-    public JPanel crearVista(Documento doc, int posX, int posY) {
+    public JPanel crearVista(Documento doc,TipoClan clan, int posX, int posY) {
+        // if con doc == null
         // Buscamos en el mapa la lambda que corresponde a la clase de este documento específico
         CreadorVista creador = creadores.get(doc.getClass());
         
         if (creador != null) {
-            return creador.crear(doc, posX, posY); // Ejecuta el método específico
+            return creador.crear(doc,clan, posX, posY); // Ejecuta el método específico
         }
         
         // Si llega un documento para el cual no programaste vista, devuelve panel vacío
@@ -95,6 +100,50 @@ public class FabricaVistaDocumento {
         return panelDNI;
     }
 
+    private JPanel crearVistaPermiso(Permiso permiso, int posX, int posY) {
+
+        // 1. Elegir la plantilla según el clan EMISOR del permiso.
+        String ruta = obtenerRutaPermiso(permiso.getClanEmisor());
+
+        // Reutilizamos tu método existente.
+        Image imagenPlantilla = cargarImagen(ruta);
+
+        // 2. Crear el panel con la plantilla de fondo.
+        JPanel panelPermiso = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g.create();
+                try {
+                    // Conserva los bordes del pixel art.
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(imagenPlantilla,0, 0,getWidth(), getHeight(),this);
+                } finally {
+                    g2.dispose();
+                }
+            }
+        };
+
+        panelPermiso.setLayout(null);
+        panelPermiso.setOpaque(false);
+        panelPermiso.setBounds(posX, posY, ANCHO_PERMISO, ALTO_PERMISO);
+
+        // 3. Incorporar la información del Modelo.
+        panelPermiso.add(crearLabelTexto(permiso.getNombre(), 120, 157, 190, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getDni(), 120, 183, 190, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getOcupacion(), 148, 207, 160, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getOrigen(), 120, 232, 190, 22));
+        panelPermiso.add(crearLabelTexto(String.valueOf(permiso.getNumPermiso()),155, 257, 150, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getFechaVencimiento().toString(),105, 282, 200, 22));
+
+        // 4. Permitir mover el documento por la mesa.
+        MoverComponentes mover = new MoverComponentes(panelPermiso);
+        panelPermiso.addMouseListener(mover);
+        panelPermiso.addMouseMotionListener(mover);
+
+        return panelPermiso;
+    }
+
     private JLabel crearLabelTexto(String texto, int x, int y, int ancho, int alto) {
         JLabel label = new JLabel(texto);
         label.setFont(FUENTE_DATOS);
@@ -128,6 +177,16 @@ public class FabricaVistaDocumento {
             return new ImageIcon(archivo.getPath()).getImage();
         }
         return new ImageIcon(rutaLimpia).getImage();
+    }
+
+    private String obtenerRutaPermiso(TipoClan clan) {
+        if (clan == null) {
+            throw new IllegalArgumentException("El clan no puede ser nulo");
+        }
+        return switch (clan) {
+            case UNION_MAGICA -> "assets/imagenes/permisos/permiso_um.jpg";
+            case PUERTO_UMBRAL -> "assets/imagenes/permisos/permiso_pu.jpg";
+            case TITAN_DIGITAL -> "assets/imagenes/permisos/permiso_ca.jpg";};
     }
 
 }
