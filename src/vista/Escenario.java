@@ -122,6 +122,21 @@ public class Escenario {
         Image imagenSalirEscalada = iconoSalir.getImage().getScaledInstance(anchoBotonSalir,altoBotonSalir,Image.SCALE_REPLICATE);
         this.btnSalir.setIcon(new ImageIcon(imagenSalirEscalada));
 
+        int anchoFecha = (int) (tamanoPantalla.width * 0.061);
+        int altoFecha = (int) (tamanoPantalla.height * 0.035);
+        int posXFecha = (int) (tamanoPantalla.width * 0.002);
+        int posYFecha = (int) (tamanoPantalla.height * 0.969);
+
+        JLabel lblFechaActual = new JLabel();
+        lblFechaActual.setBounds(posXFecha, posYFecha, anchoFecha, altoFecha);
+
+        ImageIcon iconoFecha = new ImageIcon("assets/imagenes/paneles/fecha_actual.png"); 
+        Image imagenFechaEscalada = iconoFecha.getImage().getScaledInstance(anchoFecha, altoFecha, Image.SCALE_REPLICATE);
+        lblFechaActual.setIcon(new ImageIcon(imagenFechaEscalada));
+        
+        // El 0 hace q el componente se dibuje en la capa superior del panel
+        panelFondo.add(lblFechaActual, 0);
+
         // Quitar fondo y bordes predeterminados.
         this.btnSalir.setContentAreaFilled(false);
         this.btnSalir.setBorderPainted(false);
