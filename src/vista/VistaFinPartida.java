@@ -27,8 +27,8 @@ public class VistaFinPartida {
     private TipoFinPartida resultadoActual = TipoFinPartida.DERROTA;
 
     // Imágenes de derrota y victoria
-    private final Image imagenDerrota = cargarImagen("assets/imagenes/paneles/panel_de_derrota.jpg");
-    private final Image imagenVictoria = cargarImagen("assets/imagenes/paneles/panel_de_victoria.jpg");
+    private final Image imagenDerrota = cargarImagen("assets/imagenes/paneles/panel_de_derrota.jpeg");
+    private final Image imagenVictoria = cargarImagen("assets/imagenes/paneles/panel_de_victoria.jpeg");
 
     // Constructor
     public VistaFinPartida() {

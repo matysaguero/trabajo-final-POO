@@ -29,8 +29,9 @@ public class GestorVista implements ObservadorPartida {
     private final VistaCartelReputacion cartelReputacion;
     private final VistaContadorIngresantes contador;
     private final VistaAnuncio vistaAnuncio;
+    private final VistaInterrogatorio vistaInterrogatorio;
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, VistaAnuncio vistaAnuncio) {
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -43,6 +44,7 @@ public class GestorVista implements ObservadorPartida {
         this.cartelReputacion = cartelReputacion;
         this.contador = contador;
         this.vistaAnuncio = vistaAnuncio; 
+        this.vistaInterrogatorio = vistaInterrogatorio;
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
     }
@@ -136,7 +138,13 @@ public class GestorVista implements ObservadorPartida {
     public void alHacerClicEnInterrogar(ActionListener listener) { this.escenario.getBtnInterrogar().addActionListener(listener); }
 
     public void mostrarDialogoInterrogatorio(String dialogo) {
-        JOptionPane.showMessageDialog(this.escenario.getVentana(), dialogo, "Interrogatorio", JOptionPane.INFORMATION_MESSAGE);
+        // 1. Apagamos (deshabilitamos) el botón para que no se pueda spamear
+        this.escenario.getBtnInterrogar().setEnabled(false);
+        
+        // 2. Mostramos el diálogo y le pasamos la acción a ejecutar cuando se oculte (reactivar el botón)
+        this.vistaInterrogatorio.mostrar(dialogo, () -> {
+            this.escenario.getBtnInterrogar().setEnabled(true);
+        });
     }
 
     @Override
