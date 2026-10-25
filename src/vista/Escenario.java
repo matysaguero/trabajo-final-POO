@@ -24,7 +24,7 @@ public class Escenario {
     private final JButton btnSalir;
 
     // Botón invisible para interrogar al ingresante
-    private final JButton btnInterrogar;
+    private final BotonInvisible btnInterrogar;;
     
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla, VistaContadorIngresantes contador) {
@@ -153,9 +153,15 @@ public class Escenario {
         panelFondo.add(contador.getEtiqueta());
 
         // Botón de interrogar al ingresante
-        this.btnInterrogar = new JButton("Interrogar");
-        this.btnInterrogar.setBounds((int)(tamanoPantalla.width * 0.45), (int)(tamanoPantalla.height * 0.85), 150, 40); // Ajusta X e Y para centrarlo
-        this.btnInterrogar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.btnInterrogar = new BotonInvisible();
+        this.btnInterrogar.setBounds(
+            (int) (tamanoPantalla.width * 0.13),  // X
+            (int) (tamanoPantalla.height * 0.83), // Y
+            105,                                  // Ancho
+            115                                   // Alto
+        );
+        this.btnInterrogar.configurarImagenHover("assets/imagenes/botones/boton_interrogar.png");
+        
         panelFondo.add(this.btnInterrogar);
     }
 
