@@ -27,9 +27,10 @@ public class EstadoEsperandoDocumentos implements EstadoPartida {
         throw new IllegalStateException("El sello todavía no fue abierto.");
     }
 
+    // La entrevista ya se completó. Repetirla conserva esta etapa
+    // hasta que el jugador pulse el botón de documentos.
     @Override
     public String interrogar(Partida partida) {
-        partida.cambiarEstado(new EstadoAtendiendoIngresante());
-        return "DOCUMENTOS"; 
+        return "- Inspector: ¿A qué se debe su visita?\n- Ingresante: " + partida.getIngresanteActual().responderInterrogatorio();
     }
 }

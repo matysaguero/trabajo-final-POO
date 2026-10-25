@@ -12,7 +12,7 @@ public class EstadoEsperandoLlamado implements EstadoPartida {
     public void usarMegafono(Partida partida) {
         boolean haySiguiente = partida.prepararSiguienteIngresante();
         if (haySiguiente) {
-            partida.cambiarEstado(new EstadoEsperandoDocumentos());
+            partida.cambiarEstado(new EstadoEsperandoInterrogatorio());
         } else {
             partida.cambiarEstado(new EstadoPartidaFinalizada());
         }

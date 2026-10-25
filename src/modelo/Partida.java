@@ -211,7 +211,14 @@ public class Partida {
     public String interrogar() {
         return this.estado.interrogar(this);
     }
-    
+
+    // Visibilidad de paquete: los estados notifican el hecho de dominio.
+    // El modelo no conoce botones ni clases concretas de la vista.
+    void notificarDocumentosDisponibles() {
+        for (ObservadorPartida observador : this.observadores) {
+            observador.actualizarDocumentosDisponibles();
+        }
+    }
     private void cargarPoliticasDelDia() {
         try {
             this.resolutor.setPoliticas(new ArrayList<>());
