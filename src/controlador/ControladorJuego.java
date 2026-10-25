@@ -84,22 +84,12 @@ public class ControladorJuego {
 
         this.ui.alHacerClicEnInterrogar(evento -> {
             try {
-                String respuesta = this.partida.interrogar();
-                if (respuesta.equals("DOCUMENTOS")) {
-                   Ingresante ingresante =
-        this.partida.getIngresanteActual();
-
-        this.ui.desplegarDocumentos( ingresante.getDocumentos(), ingresante.getClan());
-        
-        this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
-            } else {
+                    String respuesta = this.partida.interrogar();
                     this.ui.mostrarDialogoInterrogatorio(respuesta);
-                }
-            } catch (IllegalStateException e) {
-                this.manejarErrorEstado(e); // MODIFICADO
+                } catch (IllegalStateException e) {
+                    this.manejarErrorEstado(e);
             }
-        });
-    }
+        });}
 
     private void abrirVentanaDecision() {
         try {

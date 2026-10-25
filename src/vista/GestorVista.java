@@ -56,20 +56,33 @@ public class GestorVista implements ObservadorPartida {
         this.menu.ocultar();
         this.mesa.limpiarMesa();
         this.ventanilla.limpiarVentanilla();
+        ocultarDocumento();
         this.escenario.mostrar();
     }
 
     public void mostrarVentanaDecision() { this.vistaDecision.mostrar(); }
     public void ocultarVentanaDecision() { this.vistaDecision.ocultar(); }
 
+    // Mantiene sincronizadas la visibilidad y la interacción del botón.
+    private void actualizarBotonDocumentos(boolean disponible) {
+        JButton boton = this.escenario.getBtnDocumentos();
+
+        boton.setEnabled(disponible);
+        boton.setVisible(disponible);
+
+        // Refresca el fondo del botón transparente.
+        if (boton.getParent() != null) {
+            boton.getParent().revalidate();
+            boton.getParent().repaint();
+        }
+    }
+      
     private void mostrarDocumentos() {
-        this.escenario.getBtnDocumentos().setVisible(true);
-        this.escenario.getBtnDocumentos().setEnabled(true);
+        actualizarBotonDocumentos(true);
     }
 
     private void ocultarDocumento() {
-        this.escenario.getBtnDocumentos().setVisible(false);
-        this.escenario.getBtnDocumentos().setEnabled(false);
+        actualizarBotonDocumentos(false);
     }
 
     public void volverAlMenuDesdeFinPartida() {
@@ -128,10 +141,15 @@ public class GestorVista implements ObservadorPartida {
 
     @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
+        ocultarDocumento(); // Cada ingresante debe ser entrevistado antes de acceder a sus documentos.
         this.mesa.limpiarMesa();
         this.consola.mostrarIngresante(ingresante);
         this.ventanilla.mostrarIngresante(ingresante.getRutaImagen());
         this.libroReglas.restaurarSiAbierto();
+    }
+
+    @Override
+    public void actualizarDocumentosDisponibles() {
         mostrarDocumentos();
     }
 
