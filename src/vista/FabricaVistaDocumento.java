@@ -8,17 +8,20 @@ import javax.swing.*;
 
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
-import modelo.TipoClan; //NUEVO
-import modelo.documentos.Permiso; //NUEVO
+import modelo.TipoClan; // NUEVO
+import modelo.documentos.Permiso; // NUEVO
+import modelo.documentos.Pasaporte; // NUEVO
 
 public class FabricaVistaDocumento {
 
-    private static final int ANCHO_DNI = 420;
-    private static final int ALTO_DNI = 312;
     private static final Font FUENTE_DATOS = new Font("Monospaced", Font.BOLD, 14);
     private static final Color COLOR_TEXTO = new Color(35, 25, 20);
+    private static final int ANCHO_DNI = 420;
+    private static final int ALTO_DNI = 312;
     private static final int ANCHO_PERMISO = 320;
     private static final int ALTO_PERMISO = 456;
+    private static final int ANCHO_PASAPORTE = 360;
+    private static final int ALTO_PASAPORTE = 440;
 
     // Defino una interfaz funcional (una interfaz de un solo metodo abstracto) para poder usar lambdas
 @FunctionalInterface
@@ -32,7 +35,7 @@ public class FabricaVistaDocumento {
         //Registramos cada tipo de documento con la lambda que sabe dibujarlo
         creadores.put(DNI.class, (doc, clan, x, y) -> crearVistaDNI((DNI) doc, x, y));
         creadores.put(Permiso.class, (doc, clan, x, y) -> crearVistaPermiso((Permiso) doc, x, y));
-        //creadores.put(Pasaporte.class, (doc, x, y) -> crearVistaPasaporte((Pasaporte) doc, x, y));
+        creadores.put(Pasaporte.class, (doc, clan, x, y) -> crearVistaPasaporte((Pasaporte) doc, x, y));
     }
     
     public JPanel crearVista(Documento doc,TipoClan clan, int posX, int posY) {
@@ -142,6 +145,56 @@ public class FabricaVistaDocumento {
         panelPermiso.addMouseMotionListener(mover);
 
         return panelPermiso;
+    }
+
+    private JPanel crearVistaPasaporte(Pasaporte pasaporte, int posX, int posY) {
+
+        Image imgPlantilla =cargarImagen(pasaporte.getPlantillaPasaporte());
+        
+        JPanel panelPasaporte = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+                if (imgPlantilla != null) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    try {
+                        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                        g2.drawImage( imgPlantilla, 0, 0, getWidth(), getHeight(), this);
+                    } finally {
+                        g2.dispose();
+                    }
+                }
+            }
+        };
+
+        panelPasaporte.setLayout(null);
+        panelPasaporte.setOpaque(false);
+        panelPasaporte.setBounds( posX, posY, ANCHO_PASAPORTE, ALTO_PASAPORTE);
+
+        // Foto carnet.
+        panelPasaporte.add(crearLabelImagen(pasaporte.getFoto(),34, 86, 111, 115));
+
+        // Nombre.
+        panelPasaporte.add(crearLabelTexto(pasaporte.getNombre(),225, 78, 125, 20));
+
+        // Raza.
+        panelPasaporte.add(crearLabelTexto(pasaporte.getRaza(),212, 106, 138, 20));
+
+        // Fecha de nacimiento.
+        panelPasaporte.add(crearLabelTexto(pasaporte.getFechaNacimiento().toString(),260, 132, 88, 20));
+
+        // Origen.
+        panelPasaporte.add(crearLabelTexto(pasaporte.getOrigen(),225, 160, 125, 20));
+
+        // Huella: se muestra como imagen.
+        panelPasaporte.add(crearLabelImagen(pasaporte.getHuella(), 230, 183, 75, 32));
+
+        // Arrastre por la mesa.
+        MoverComponentes mover = new MoverComponentes(panelPasaporte);
+        panelPasaporte.addMouseListener(mover);
+        panelPasaporte.addMouseMotionListener(mover);
+
+        return panelPasaporte;
     }
 
     private JLabel crearLabelTexto(String texto, int x, int y, int ancho, int alto) {
