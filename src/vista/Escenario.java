@@ -24,7 +24,7 @@ public class Escenario {
     private final JButton btnSalir;
 
     // Botón invisible para interrogar al ingresante
-    private final JButton btnInterrogar;
+    private final BotonInvisible btnInterrogar;;
     
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla, VistaContadorIngresantes contador) {
@@ -122,6 +122,21 @@ public class Escenario {
         Image imagenSalirEscalada = iconoSalir.getImage().getScaledInstance(anchoBotonSalir,altoBotonSalir,Image.SCALE_REPLICATE);
         this.btnSalir.setIcon(new ImageIcon(imagenSalirEscalada));
 
+        int anchoFecha = (int) (tamanoPantalla.width * 0.061);
+        int altoFecha = (int) (tamanoPantalla.height * 0.035);
+        int posXFecha = (int) (tamanoPantalla.width * 0.002);
+        int posYFecha = (int) (tamanoPantalla.height * 0.969);
+
+        JLabel lblFechaActual = new JLabel();
+        lblFechaActual.setBounds(posXFecha, posYFecha, anchoFecha, altoFecha);
+
+        ImageIcon iconoFecha = new ImageIcon("assets/imagenes/paneles/fecha_actual.png"); 
+        Image imagenFechaEscalada = iconoFecha.getImage().getScaledInstance(anchoFecha, altoFecha, Image.SCALE_REPLICATE);
+        lblFechaActual.setIcon(new ImageIcon(imagenFechaEscalada));
+        
+        // El 0 hace q el componente se dibuje en la capa superior del panel
+        panelFondo.add(lblFechaActual, 0);
+
         // Quitar fondo y bordes predeterminados.
         this.btnSalir.setContentAreaFilled(false);
         this.btnSalir.setBorderPainted(false);
@@ -138,9 +153,15 @@ public class Escenario {
         panelFondo.add(contador.getEtiqueta());
 
         // Botón de interrogar al ingresante
-        this.btnInterrogar = new JButton("Interrogar");
-        this.btnInterrogar.setBounds((int)(tamanoPantalla.width * 0.45), (int)(tamanoPantalla.height * 0.85), 150, 40); // Ajusta X e Y para centrarlo
-        this.btnInterrogar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.btnInterrogar = new BotonInvisible();
+        this.btnInterrogar.setBounds(
+            (int) (tamanoPantalla.width * 0.13),  // X
+            (int) (tamanoPantalla.height * 0.83), // Y
+            105,                                  // Ancho
+            115                                   // Alto
+        );
+        this.btnInterrogar.configurarImagenHover("assets/imagenes/botones/boton_interrogar.png");
+        
         panelFondo.add(this.btnInterrogar);
     }
 
