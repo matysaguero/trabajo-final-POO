@@ -7,7 +7,7 @@ public class EstadoEsperandoInterrogatorio  implements  EstadoPartida {
     // El sello requiere completar la entrevista y solicitar los documentos.
     @Override 
     public void usarSello (Partida partida) {
-        throw new IllegalStateException("Primero bedes interrogar al ingresante y solicitar sus documentos");
+        throw new IllegalStateException("Primero debes interrogar al ingresante y solicitar sus documentos");
     }
 
     // Mantiene al ingresante actual en ventanilla.

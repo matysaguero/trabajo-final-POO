@@ -121,9 +121,13 @@ public class ControladorJuego {
         else if (mensaje.contains("mientras ya hay uno en ventanilla") || mensaje.contains("Ya hay un ingresante")) {
             this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSirena1.png"); 
         } 
+        else if (mensaje.contains("Primero debes interrogar al ingresante")) {
+            this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSello3.png");
+        }
         else {
             // Para otros errores ("Partida Finalizada", etc.), se mantiene el cartel estándar
             this.ui.mostrarError(mensaje);
         }
+
     }
 }
