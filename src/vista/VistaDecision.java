@@ -13,7 +13,7 @@ public class VistaDecision {
 
 
     public VistaDecision(JFrame ventanaPadre) {
-        this.ventanaEmergente = new JDialog(ventanaPadre, "Decisión", true);
+        this.ventanaEmergente = new JDialog(ventanaPadre, "Decisión", false);
         this.ventanaEmergente.setUndecorated(true);
         this.ventanaEmergente.setBackground(new Color(0, 0, 0, 0));
        

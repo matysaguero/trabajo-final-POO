@@ -12,7 +12,7 @@ public class VistaCartelReputacion {
 
     public VistaCartelReputacion(JFrame ventanaPadre) {
         // JDialog modal: detiene la ejecución de la ventana padre hasta que se cierre
-        this.ventanaEmergente = new JDialog(ventanaPadre, "Resultado", true);
+        this.ventanaEmergente = new JDialog(ventanaPadre, "Resultado", false);
         this.ventanaEmergente.setUndecorated(true);
         this.ventanaEmergente.setBackground(new Color(0, 0, 0, 0));
 
