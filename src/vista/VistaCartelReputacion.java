@@ -26,11 +26,11 @@ public class VistaCartelReputacion {
 
         // Mensaje dinámico
         this.lblMensaje = new JLabel("", SwingConstants.CENTER);
-        this.lblMensaje.setFont(new Font("Monospaced", Font.BOLD, 22)); // Fuente y tamaño del mensaje reputacion
+        this.lblMensaje.setFont(new Font("Monospaced", Font.BOLD, 20)); // Fuente y tamaño del mensaje reputacion
         this.lblMensaje.setForeground(Color.WHITE);
         
         // Agregamos un margen invisible a la izquierda para empujarlo a la derecha
-        this.lblMensaje.setBorder(BorderFactory.createEmptyBorder(135, 100, 0, 0));
+        this.lblMensaje.setBorder(BorderFactory.createEmptyBorder(115, 200, -10, 60));
         
         fondo.add(this.lblMensaje, BorderLayout.CENTER);
         fondo.add(this.lblMensaje, BorderLayout.CENTER);

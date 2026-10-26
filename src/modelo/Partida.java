@@ -248,6 +248,7 @@ public class Partida {
             this.resolutor.agregarPolitica(new PoliticaCoherenciaNombre());
             this.resolutor.agregarPolitica(new PoliticaCoherenciaOrigen());
             this.resolutor.agregarPolitica(new PoliticaCoherenciaDni());
+            this.resolutor.agregarPolitica(new PoliticaCoherenciaRaza());
             this.resolutor.agregarPolitica(new PoliticaVencimiento(fechaActual));
             this.resolutor.agregarPolitica(new PoliticaNacimientoValido(fechaActual));
             this.resolutor.agregarPolitica(new PoliticaDocumentacionRequerida());
