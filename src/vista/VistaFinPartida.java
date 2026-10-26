@@ -87,7 +87,7 @@ public class VistaFinPartida {
         btnVolverMenu = crearBotonConImagen("assets/imagenes/botones/boton_volver_menu.png",posXVolver,posYVolver,anchoBoton,altoBoton);
 
         // Creamos boton Guardar
-        btnGuardarPuntuacion = crearBotonConImagen("assets/imagenes/botones/boton_tutorial.png",posXGuardar,posYGuardar,anchoBoton,altoBoton);
+        btnGuardarPuntuacion = crearBotonConImagen("assets/imagenes/botones/boton_guardar_puntaje.png",posXGuardar,posYGuardar,anchoBoton,altoBoton);
 
         // Agregamos el botón al panel que muestra las imágenes de derrota y victoria.
         panelFondo.add(btnVolverMenu);
