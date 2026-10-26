@@ -33,6 +33,6 @@ public class ReglasDia2 extends ReglasDia {
 
     @Override
     public List<String> getReglasDetalladas() {
-        return List.of("Ahora pueden pasar el resto de razas, UNICAMENTE provenientes de HAGARD y LANDER", "PROHIBIDO el acceso todo aquél que pertenezca a la UNION MÁGICA.");
+        return List.of("Ahora pueden pasar el resto de razas, UNICAMENTE provenientes de HASGARD y LANDER", "PROHIBIDO el acceso todo aquél que pertenezca a la UNION MÁGICA.");
     }
 }

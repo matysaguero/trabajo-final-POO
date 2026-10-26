@@ -60,6 +60,10 @@ public class GestorVista implements ObservadorPartida {
     public void mostrarTutorial() { this.vistaTutorial.mostrar(); }
     public void ocultarTutorial() { this.vistaTutorial.ocultar(); }
     
+    // Métodos de navegación del tutorial
+    public void avanzarTutorial() { this.vistaTutorial.paginaSiguiente(); }
+    public void retrocederTutorial() { this.vistaTutorial.paginaAnterior(); }
+
     public void iniciarJuego() {
         this.menu.ocultar();
         this.mesa.limpiarMesa();
@@ -132,7 +136,7 @@ public class GestorVista implements ObservadorPartida {
         this.cartelReputacion.getBtnAceptar().addActionListener(listener);
     }
 
-    // NUEVO: Oyente para el botón del nuevo anuncio
+    // Oyente para el botón del nuevo anuncio
     public void alHacerClicEnAceptarAnuncio(ActionListener listener) {
         this.vistaAnuncio.getBtnAceptar().addActionListener(listener);
     }
@@ -142,6 +146,8 @@ public class GestorVista implements ObservadorPartida {
     public void alHacerClicEnSalir(ActionListener listener) { this.menu.getBtnSalir().addActionListener(listener); }
     public void alHacerClicEnSalirJuego(ActionListener listener) { this.escenario.getBtnSalir().addActionListener(listener); }
     public void alHacerClicEnVolverTutorial(ActionListener listener) { this.vistaTutorial.getBtnVolver().addActionListener(listener); }
+    public void alHacerClicEnSiguienteTutorial(ActionListener listener) {this.vistaTutorial.getBtnSiguiente().addActionListener(listener);} //Oyentes para pasar a la siguiente/anteior página del tutorial
+    public void alHacerClicEnAnteriorTutorial(ActionListener listener) {this.vistaTutorial.getBtnAnterior().addActionListener(listener);}
     public void alHacerClicEnLlamar(ActionListener listener) { this.escenario.getBtnLlamar().addActionListener(listener); }
     public void alHacerClicEnDecidir(ActionListener listener) { this.escenario.getBtnDecidir().addActionListener(listener); }
     public void alHacerClicEnAceptar(ActionListener listener) { this.vistaDecision.getBtnAceptar().addActionListener(listener); }

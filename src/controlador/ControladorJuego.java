@@ -32,6 +32,10 @@ public class ControladorJuego {
             this.ui.mostrarMenuPrincipal();
         });
 
+        // Lógica de navegación del tutorial
+        this.ui.alHacerClicEnSiguienteTutorial(evento -> this.ui.avanzarTutorial());
+        this.ui.alHacerClicEnAnteriorTutorial(evento -> this.ui.retrocederTutorial());
+
         this.ui.alHacerClicEnSalirJuego(evento -> System.exit(0));
 
         this.ui.alHacerClicEnLlamar(evento -> {
