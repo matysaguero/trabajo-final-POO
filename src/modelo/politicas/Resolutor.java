@@ -35,20 +35,22 @@ public class Resolutor {
         this.politicas.add(politica);
     }
 
-    public boolean puedeIngresar(Ingresante ingresante) throws Exception {
+    // Devuelve la política exacta que falló, o null si todo está en regla.
+    public PoliticaFronteriza obtenerPoliticaFallida(Ingresante ingresante) throws Exception {
         if (ingresante == null) {
             throw new Exception("El ingresante no puede ser nulo.");
         }
-
-        //Recorre todas las politicas activas.
-        //Si una sola no se cumple, el ingresente no puede pasar.
         for (PoliticaFronteriza politica : politicas) {
-            if (!politica.esValido(ingresante)){
-                return false;
+            if (!politica.esValido(ingresante)) {
+                return politica;
             }
         }
-        //Si cumplió todas las políticas ACTIVAS POR EL MOMENTO, puede ingresar.
-        return true;
+        return null;
+    }
+
+    // Adaptado para reutilizar la lógica anterior
+    public boolean puedeIngresar(Ingresante ingresante) throws Exception {
+        return obtenerPoliticaFallida(ingresante) == null;
     }
 
 }

@@ -14,7 +14,7 @@ public class Partida {
     private final List<Ingresante> filaIngresantes = new ArrayList<>();
     private Ingresante ingresanteActual;
     private final List<ObservadorPartida> observadores = new ArrayList<>();
-    private EstadoPartida estado; //NUEVO: state
+    private EstadoPartida estado; //State
     private ReglasDia reglasActuales;
 
     public Partida(GestorReputacion gestor, Resolutor resolutor, ReglasDia reglasActuales) {
@@ -50,7 +50,7 @@ public class Partida {
         }
     }
 
-    // NUEVO: sigue reiniciando la reputación a 10, reconstruye la fila y prepara al primer ingresante, 
+    // Sigue reiniciando la reputación a 10, reconstruye la fila y prepara al primer ingresante, 
     // pero además asigna el estado que corresponde.
     // Esto garantiza dos situaciones:
     // - Si existe un ingresante, la partida comienza en EstadoAtendiendoIngresante.
@@ -81,7 +81,7 @@ public class Partida {
         }
     }
 
-    //NUEVO: notifica cuántos ingresantes quedan esperando en la fila.
+    // Notifica cuántos ingresantes quedan esperando en la fila.
     private void notificarIngresantesRestantes() {
         int restantes = this.filaIngresantes.size();
         for (ObservadorPartida obs : this.observadores) {
@@ -90,7 +90,7 @@ public class Partida {
     }
     
     
-    // NUEVO: prepararSiguienteIngresante() tiene visibilidad de paquete: las clases State ubicadas en modelo pueden llamarlo, 
+    // prepararSiguienteIngresante() tiene visibilidad de paquete: las clases State ubicadas en modelo pueden llamarlo, 
     // mientras que el controlador, ubicado en otro paquete no
     boolean prepararSiguienteIngresante() {
         if (this.ingresanteActual != null || this.filaIngresantes.isEmpty()) {
@@ -98,7 +98,7 @@ public class Partida {
         }
             this.ingresanteActual =this.filaIngresantes.remove(0);
 
-            //NUEVO: la fila cambió de tamaño
+            // La fila cambió de tamaño
             notificarIngresantesRestantes();
         
         for (ObservadorPartida obs : this.observadores) {
@@ -107,7 +107,7 @@ public class Partida {
             return true;   
     }
 
-    //NUEVO: metodos que delegaran acciones en un estado.
+    // Metodos que delegaran acciones en un estado.
 
     void cambiarEstado(EstadoPartida nuevoEstado) {
         if (nuevoEstado == null) {
@@ -191,38 +191,66 @@ public class Partida {
         } return this.reglasActuales;
     }
 
+
     ResultadoDecision resolverTurno(boolean decisionJugador) throws Exception {
         if (this.ingresanteActual == null) {
             throw new IllegalStateException("No hay un ingresante para evaluar.");
         }
-        boolean puedeIngresar = this.resolutor.puedeIngresar(this.ingresanteActual);
+        
+        // Obtenemos la política que falló (si la hay) y determinamos si ingresa
+        PoliticaFronteriza politicaFallida = this.resolutor.obtenerPoliticaFallida(this.ingresanteActual);
+        boolean puedeIngresar = (politicaFallida == null);
+        
+        boolean acierto = this.gestor.evaluarDecision(decisionJugador, puedeIngresar);
+        
+        // Lógica de mensajes
+        String motivoError = "";
+        if (!acierto) {
+            if (decisionJugador) {
+                motivoError = politicaFallida.getMotivoRechazo();
+            } else {
+                motivoError = "Todos los datos del ingresante estaban en orden y al dia";
+            }
+        }
 
-        boolean acierto = this.gestor.evaluarDecision( decisionJugador, puedeIngresar);
-
-        ResultadoDecision resultado = new ResultadoDecision(puedeIngresar, acierto, this.gestor.getReputacion(), this.gestor.juegoPerdido());
-
+        ResultadoDecision resultado = new ResultadoDecision(
+            puedeIngresar, acierto, 
+            this.gestor.getReputacion(), 
+            this.gestor.juegoPerdido(), 
+            motivoError
+        );
+        
         this.ingresanteActual = null;
-
         return resultado;
     }
     
     public String interrogar() {
         return this.estado.interrogar(this);
     }
-    
+
+    // Visibilidad de paquete: los estados notifican el hecho de dominio.
+    // El modelo no conoce botones ni clases concretas de la vista.
+    void notificarDocumentosDisponibles() {
+        for (ObservadorPartida observador : this.observadores) {
+            observador.actualizarDocumentosDisponibles();
+        }
+    }
+
     private void cargarPoliticasDelDia() {
         try {
             this.resolutor.setPoliticas(new ArrayList<>());
             
-            LocalDate fechaActual = this.reglasActuales.getFechaDia(); //Depende el dia, la fecha con la que voy a estar comparando.
-
-            //Políticas fijas, siempre se controlan. (discrepancias con nombre, origen, vencimientos) 
+            LocalDate fechaActual = this.reglasActuales.getFechaDia();
+            
+            // Políticas fijas
             this.resolutor.agregarPolitica(new PoliticaCoherenciaNombre());
             this.resolutor.agregarPolitica(new PoliticaCoherenciaOrigen());
-            this.resolutor.agregarPolitica(new PoliticaVencimiento(fechaActual));  
+            this.resolutor.agregarPolitica(new PoliticaCoherenciaDni());
+            this.resolutor.agregarPolitica(new PoliticaVencimiento(fechaActual));
+            this.resolutor.agregarPolitica(new PoliticaNacimientoValido(fechaActual));
             this.resolutor.agregarPolitica(new PoliticaDocumentacionRequerida());
-
-            //Políticas dinámicas dictadas por el ReglasDia actual, dependiendo el dia, la norma que dicta.
+            
+            // Políticas dinámicas
             ReglasDia reglas = getReglasDia();
             
             if (!reglas.getCiudadesProhibidas().isEmpty()) {

@@ -21,4 +21,6 @@ public class PoliticaCoherenciaNombre extends PoliticaFronteriza {
         
         return true; //Todos los papeles y documentos presentados tienen el mismo nombre
     }
+
+    @Override public String getMotivoRechazo() { return "Nombres no coincidentes entre documentos"; }
 }

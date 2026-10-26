@@ -35,4 +35,6 @@ public class PoliticaVencimiento extends PoliticaFronteriza {
         }
         return true; //Todos los documentos están vigentes
     }
+
+    @Override public String getMotivoRechazo() { return "Documento Vencido"; }
 }

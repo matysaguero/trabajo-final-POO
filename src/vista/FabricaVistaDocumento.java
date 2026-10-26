@@ -132,12 +132,12 @@ public class FabricaVistaDocumento {
         panelPermiso.setBounds(posX, posY, ANCHO_PERMISO, ALTO_PERMISO);
 
         // 3. Incorporar la información del Modelo.
-        panelPermiso.add(crearLabelTexto(permiso.getNombre(), 120, 157, 190, 22));
-        panelPermiso.add(crearLabelTexto(permiso.getDni(), 120, 183, 190, 22));
-        panelPermiso.add(crearLabelTexto(permiso.getOcupacion(), 148, 207, 160, 22));
-        panelPermiso.add(crearLabelTexto(permiso.getOrigen(), 120, 232, 190, 22));
-        panelPermiso.add(crearLabelTexto(String.valueOf(permiso.getNumPermiso()),155, 257, 150, 22));
-        panelPermiso.add(crearLabelTexto(permiso.getFechaVencimiento().toString(),105, 282, 200, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getNombre(), 120, 160, 190, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getDni(), 80, 190, 190, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getOcupacion(), 153, 215, 160, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getOrigen(), 115, 246, 230, 22));
+        panelPermiso.add(crearLabelTexto(String.valueOf(permiso.getNumPermiso()), 152, 270, 150, 22));
+        panelPermiso.add(crearLabelTexto(permiso.getFechaVencimiento().toString(), 105, 297, 200, 22));
 
         // 4. Permitir mover el documento por la mesa.
         MoverComponentes mover = new MoverComponentes(panelPermiso);

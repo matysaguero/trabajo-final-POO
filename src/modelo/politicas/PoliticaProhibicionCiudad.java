@@ -23,4 +23,5 @@ public class PoliticaProhibicionCiudad extends PoliticaFronteriza {
         return !ciudadesProhibidas.contains(ingresante.getCiudadOrigen());
     }
 
+    @Override public String getMotivoRechazo() { return "Ciudad de origen prohibida"; }
 }

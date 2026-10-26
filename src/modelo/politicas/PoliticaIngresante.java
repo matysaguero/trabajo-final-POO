@@ -8,4 +8,6 @@ public class PoliticaIngresante extends PoliticaFronteriza {
     public boolean esValido(Ingresante ingresante) {
         return !ingresante.esAmenaza();
     }
+
+    @Override public String getMotivoRechazo() { return "El ingresante es una amenaza"; }
 }

@@ -22,4 +22,6 @@ public class PoliticaProhibicionRaza extends PoliticaFronteriza {
     public boolean esValido(Ingresante ingresante) {
         return !razasProhibidas.contains(ingresante.getRaza());
     }
+
+    @Override public String getMotivoRechazo() { return "Raza no humana"; }
 }

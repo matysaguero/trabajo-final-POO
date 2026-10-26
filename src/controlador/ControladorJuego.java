@@ -84,22 +84,12 @@ public class ControladorJuego {
 
         this.ui.alHacerClicEnInterrogar(evento -> {
             try {
-                String respuesta = this.partida.interrogar();
-                if (respuesta.equals("DOCUMENTOS")) {
-                   Ingresante ingresante =
-        this.partida.getIngresanteActual();
-
-        this.ui.desplegarDocumentos( ingresante.getDocumentos(), ingresante.getClan());
-        
-        this.ui.mostrarDialogoInterrogatorio("- Inspector: Documentos, por favor.\n- Ingresante: Aquí tiene.");
-            } else {
+                    String respuesta = this.partida.interrogar();
                     this.ui.mostrarDialogoInterrogatorio(respuesta);
-                }
-            } catch (IllegalStateException e) {
-                this.manejarErrorEstado(e); // MODIFICADO
+                } catch (IllegalStateException e) {
+                    this.manejarErrorEstado(e);
             }
-        });
-    }
+        });}
 
     private void abrirVentanaDecision() {
         try {
@@ -131,9 +121,13 @@ public class ControladorJuego {
         else if (mensaje.contains("mientras ya hay uno en ventanilla") || mensaje.contains("Ya hay un ingresante")) {
             this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSirena1.png"); 
         } 
+        else if (mensaje.contains("Primero debes interrogar al ingresante")) {
+            this.ui.mostrarAnuncioGrafico("assets/imagenes/paneles/anuncioSello3.png");
+        }
         else {
             // Para otros errores ("Partida Finalizada", etc.), se mantiene el cartel estándar
             this.ui.mostrarError(mensaje);
         }
+
     }
 }

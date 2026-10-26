@@ -35,4 +35,6 @@ public class PoliticaDocumentacionRequerida extends PoliticaFronteriza {
         }
         return true;
     }
+
+    @Override public String getMotivoRechazo() { return "Falta documentacion requerida"; }
 }
