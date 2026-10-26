@@ -28,8 +28,8 @@ public class VistaAnimacionSello {
         
         if (panelDoc != null) {
             // Sumamos la posición de la mesa + la posición interna del documento arrastrado
-            xDestino = mesa.getPanelDocumentos().getX() + panelDoc.getX() + (panelDoc.getWidth() / 2) - (anchoMano / 2);
-            yDestino = mesa.getPanelDocumentos().getY() + panelDoc.getY() + (panelDoc.getHeight() / 2) - (altoMano / 2);
+            xDestino = mesa.getPanelDocumentos().getX() + panelDoc.getX() + (panelDoc.getWidth() / 2) - (anchoMano / 2) + 50;
+            yDestino = mesa.getPanelDocumentos().getY() + panelDoc.getY() + (panelDoc.getHeight() / 2) - (altoMano / 2) + 50;
         } else {
             // Si el ingresante no trajo documentos (ej. Lázaro), estampamos en el medio de la mesa
             xDestino = (int) (pantalla.width * 0.40);
@@ -62,11 +62,11 @@ public class VistaAnimacionSello {
                                                 : "assets/imagenes/sello/sello_rojo.png";
                     
                     // Tamaño de la mancha que deja el sello (ajusta a tu gusto)
-                    JLabel lblMarca = new JLabel(cargarIcono(rutaMarca, 120, 120)); 
+                    JLabel lblMarca = new JLabel(cargarIcono(rutaMarca, 200, 200)); 
                     
                     // Centramos la marca dentro del pasaporte (o DNI)
                     int marcaX = (panelDoc.getWidth() / 2) - 60;
-                    int marcaY = (panelDoc.getHeight() / 2) + 20;
+                    int marcaY = (panelDoc.getHeight() / 2) + 50;
                     lblMarca.setBounds(marcaX, marcaY, 120, 120);
                     
                     // El "0" asegura que el sello quede por encima de la foto y las letras del documento
