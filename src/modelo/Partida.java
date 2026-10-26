@@ -66,7 +66,7 @@ public class Partida {
         // Resconstruye la fila de ingresantes
         this.filaIngresantes.clear();
         this.filaIngresantes.addAll(this.ingresantesIniciales);
-        
+
         //NUEVO: informa cuántos esperan al comenzar la partida
         notificarIngresantesRestantes();
         
@@ -110,11 +110,9 @@ public class Partida {
     //NUEVO: metodos que delegaran acciones en un estado.
 
     void cambiarEstado(EstadoPartida nuevoEstado) {
-
         if (nuevoEstado == null) {
              throw new IllegalArgumentException( "El estado no puede ser nulo.");
         }
-
         // Obtener el nombre del estado anterior.
         String estadoAnterior = this.estado.getClass().getSimpleName();
 
@@ -241,4 +239,10 @@ public class Partida {
             System.err.println("Error al cargar políticas: " + e.getMessage());
         }
     }
+
+    /*public void guardarPuntaje(String nombreJugador) {
+        // En tu juego, el puntaje sería tu reputación final u otro cálculo
+        Puntaje puntaje = new Puntaje(nombreJugador, this.gestor.getReputacion(), LocalDate.now());
+        this.puntajeDAO.guardar(puntaje); // Usas el DAO inyectado en el constructor
+    }*/
 }

@@ -1,16 +1,16 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Dimension;
 import java.awt.Toolkit; 
-import java.awt.Cursor; 
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JButton; 
 import modelo.TipoFinPartida;
 
 // Una única pantalla reutilizable para DERROTA y VICTORIA.
@@ -22,6 +22,9 @@ public class VistaFinPartida {
     private final JPanel panelFondo;
     // Boton para volver al menu principal
     private final JButton btnVolverMenu;
+
+    // Boton para Guardar
+    private final JButton btnGuardarPuntuacion;
 
     // Resultado que determina qué imagen mostrar
     private TipoFinPartida resultadoActual = TipoFinPartida.DERROTA;
@@ -77,11 +80,18 @@ public class VistaFinPartida {
         int posXVolver = (int) (anchoPantalla * 0.45);
         int posYVolver = (int) (altoPantalla * 0.81);
 
+        int posXGuardar = (int) (anchoPantalla * 0.45);
+        int posYGuardar = (int) (altoPantalla * 0.718);
+
         // Creamos un botón independiente reutilizando el mismo asset gráfico que utiliza VistaTutorial.
         btnVolverMenu = crearBotonConImagen("assets/imagenes/botones/boton_volver_menu.png",posXVolver,posYVolver,anchoBoton,altoBoton);
 
+        // Creamos boton Guardar
+        btnGuardarPuntuacion = crearBotonConImagen("assets/imagenes/botones/boton_tutorial.png",posXGuardar,posYGuardar,anchoBoton,altoBoton);
+
         // Agregamos el botón al panel que muestra las imágenes de derrota y victoria.
         panelFondo.add(btnVolverMenu);
+        panelFondo.add(btnGuardarPuntuacion);
         ventana.setContentPane(panelFondo);
     }
 
