@@ -15,8 +15,8 @@ public class VistaTutorial {
     private final String[] paginas = {
         "assets/imagenes/paneles/Tutorial_pagina_1.jpg",
         "assets/imagenes/paneles/Tutorial_pagina_2.jpg",
-        "assets/imagenes/paneles/Tutorial_pagina_3.png",
-        "assets/imagenes/paneles/Tutorial_pagina_4.png",
+        "assets/imagenes/paneles/Tutorial_pagina_3.jpeg",
+        "assets/imagenes/paneles/Tutorial_pagina_4.jpeg",
         "assets/imagenes/paneles/Tutorial_pagina_5.jpg",
         "assets/imagenes/paneles/Tutorial_pagina_6.jpg",
         "assets/imagenes/paneles/Tutorial_pagina_7.jpg"
