@@ -31,6 +31,6 @@ public class EstadoEsperandoDocumentos implements EstadoPartida {
     // hasta que el jugador pulse el botón de documentos.
     @Override
     public String interrogar(Partida partida) {
-        return "- Inspector: ¿A qué se debe su visita?\n- Ingresante: " + partida.getIngresanteActual().responderInterrogatorio();
+        return "- Inspector: ¿A qué se debe su visita?\n" + partida.getIngresanteActual().responderInterrogatorio();
     }
 }

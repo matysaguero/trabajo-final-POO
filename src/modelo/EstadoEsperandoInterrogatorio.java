@@ -47,7 +47,7 @@ public class EstadoEsperandoInterrogatorio  implements  EstadoPartida {
         }
 
         // Obtener la respuesta antes de modificar el estado de la partida.
-        String respuesta = "- Inspector: ¿A qué se debe su visita?\n" + "- Ingresante: " + ingresante.responderInterrogatorio();
+        String respuesta = "- Inspector: ¿A qué se debe su visita?\n" + ingresante.responderInterrogatorio();
 
         // La entrevista habilita solicitar documentos, pero aún no abre el sello.
         partida.cambiarEstado(new EstadoEsperandoDocumentos());
