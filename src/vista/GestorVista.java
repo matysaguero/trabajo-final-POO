@@ -31,6 +31,7 @@ public class GestorVista implements ObservadorPartida {
     private final VistaInterrogatorio vistaInterrogatorio;
     private final VistaAnimacionSello animacionSello;
     private final VistaGuardarPuntaje vistaPuntaje;
+    private TipoFinPartida finPendiente = null; // es una bandera para retrasar la pantalla de Game Over hasta que se cierre el cartel
 
     public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
         VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, 
@@ -107,9 +108,18 @@ public class GestorVista implements ObservadorPartida {
 
     public void ocultarCartelReputacion() {
         this.cartelReputacion.ocultar();
+        
+        // Cuando el usuario cierra el cartel, verificamos si el juego había terminado
+        if (this.finPendiente != null) {
+            this.vistaDecision.ocultar();
+            this.libroReglas.cerrar();
+            this.escenario.ocultar();
+            this.vistaFinPartida.mostrar(this.finPendiente);
+            this.finPendiente = null; // Reiniciamos la bandera
+        }
     }
 
-    // NUEVO: Métodos para controlar el anuncio de errores
+    // Métodos para controlar el anuncio de errores
     public void mostrarAnuncioGrafico(String rutaImagen) {
         this.vistaAnuncio.mostrarImagen(rutaImagen);
     }
@@ -220,10 +230,9 @@ public class GestorVista implements ObservadorPartida {
 
     @Override
     public void actualizarFinPartida(TipoFinPartida resultado) {
-        this.vistaDecision.ocultar();
-        this.libroReglas.cerrar();
-        this.escenario.ocultar();
-        this.vistaFinPartida.mostrar(resultado);
+        // En vez de cerrar todo y mostrar el fin de la partida instantáneamente, 
+        // se guarda como pendiente. La pantalla se mostrará recién al cerrar el cartel.
+        this.finPendiente = resultado;
     }
 
     @Override
