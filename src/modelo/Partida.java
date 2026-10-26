@@ -3,6 +3,7 @@ package modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import modelo.Ingresantes.Ingresante;
 import modelo.politicas.*;
 
@@ -64,7 +65,14 @@ public class Partida {
     public void iniciarPartida() {
         // Reincia la tReputacion
         this.gestor.reiniciar();
-
+        
+        // Elegir aleatoriamente entre las 3 variaciones
+        int variacion = new Random().nextInt(3) + 1; // Genera 1, 2 o 3
+        switch (variacion) {
+            case 1 -> this.reglasActuales = new ReglasVariacion1();
+            case 2 -> this.reglasActuales = new ReglasVariacion2();
+            case 3 -> this.reglasActuales = new ReglasVariacion3();
+        }
         //Se cargan todas las politicas y reglas que se tendran en cuenta durante el dia
         cargarPoliticasDelDia();
 
@@ -192,8 +200,9 @@ public class Partida {
 
     public ReglasDia getReglasDia(){
         if (this.reglasActuales == null) {
-            return new ReglasDia1();
-        } return this.reglasActuales;
+            return new ReglasVariacion1(); 
+        } 
+        return this.reglasActuales;
     }
 
 

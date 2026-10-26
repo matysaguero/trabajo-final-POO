@@ -29,12 +29,11 @@ public class Main {
                 politicas.add(politicaIngresante);
 
                 Resolutor resolutor = new Resolutor(politicas);
-                ReglasDia reglasDia1 = new ReglasDia1();
+                ReglasDia reglasBase = new ReglasVariacion1();
                 
                 Connection conexion = Conexion.getInstancia().get();
                 PuntajeDAO puntajeDAO = new PuntajeDAOSQLite(conexion);
-
-                Partida partida = new Partida(gestor, resolutor, reglasDia1, puntajeDAO);
+                Partida partida = new Partida(gestor, resolutor, reglasBase, puntajeDAO);
 
                 // Cargamos los 10 personajes desde la Fábrica
                 partida.cargarIngresantes(FabricaIngresantes.crearPlantelInicial());
