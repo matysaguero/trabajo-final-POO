@@ -193,7 +193,7 @@ public class FabricaVistaDocumento {
         MoverComponentes mover = new MoverComponentes(panelPasaporte);
         panelPasaporte.addMouseListener(mover);
         panelPasaporte.addMouseMotionListener(mover);
-
+        panelPasaporte.setName("Pasaporte");
         return panelPasaporte;
     }
 

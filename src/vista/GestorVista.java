@@ -29,11 +29,12 @@ public class GestorVista implements ObservadorPartida {
     private final VistaContadorIngresantes contador;
     private final VistaAnuncio vistaAnuncio;
     private final VistaInterrogatorio vistaInterrogatorio;
+    private final VistaAnimacionSello animacionSello;
     private final VistaGuardarPuntaje vistaPuntaje;
 
     public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
         VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, 
-        VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio, VistaGuardarPuntaje vistaPuntaje) {
+        VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio, VistaAnimacionSello animacionSello, VistaGuardarPuntaje vistaPuntaje) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -47,6 +48,7 @@ public class GestorVista implements ObservadorPartida {
         this.contador = contador;
         this.vistaAnuncio = vistaAnuncio; 
         this.vistaInterrogatorio = vistaInterrogatorio;
+        this.animacionSello = animacionSello;
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
         this.vistaPuntaje = vistaPuntaje;
@@ -149,6 +151,10 @@ public class GestorVista implements ObservadorPartida {
         this.vistaInterrogatorio.mostrar(dialogo, () -> {
             this.escenario.getBtnInterrogar().setEnabled(true);
         });
+    }
+
+    public void mostrarAnimacionSello(boolean decision, Runnable alTerminar) {
+        this.animacionSello.reproducir(decision, this.mesa, alTerminar);
     }
 
     public String pedirNombreJugador() { return this.vistaPuntaje.pedirNombreJugador();}
