@@ -8,9 +8,9 @@ import javax.swing.*;
 
 import modelo.documentos.DNI;
 import modelo.documentos.Documento;
-import modelo.TipoClan; // NUEVO
-import modelo.documentos.Permiso; // NUEVO
-import modelo.documentos.Pasaporte; // NUEVO
+import modelo.TipoClan;
+import modelo.documentos.Permiso;
+import modelo.documentos.Pasaporte;
 
 public class FabricaVistaDocumento {
 

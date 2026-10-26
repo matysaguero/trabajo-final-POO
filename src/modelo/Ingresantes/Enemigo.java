@@ -27,7 +27,7 @@ public class Enemigo extends Ingresante{
     }
 
     @Override
-    public boolean esAmenaza() { //NUEVO
+    public boolean esAmenaza() {
         return true;
     }
 }

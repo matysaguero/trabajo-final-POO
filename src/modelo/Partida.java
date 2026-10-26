@@ -72,7 +72,7 @@ public class Partida {
         this.filaIngresantes.clear();
         this.filaIngresantes.addAll(this.ingresantesIniciales);
 
-        //NUEVO: informa cuántos esperan al comenzar la partida
+        // informa cuántos esperan al comenzar la partida
         notificarIngresantesRestantes();
         
         // La ventanilla comienza vacia
