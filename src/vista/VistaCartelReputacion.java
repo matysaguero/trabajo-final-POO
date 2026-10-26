@@ -18,7 +18,7 @@ public class VistaCartelReputacion {
 
         // Cargar imagen de fondo
         ImageIcon imagenOriginal = new ImageIcon("assets/imagenes/paneles/cartel_reputacion.png");
-        Image imagenReducida = imagenOriginal.getImage().getScaledInstance(578, 432, Image.SCALE_REPLICATE);
+        Image imagenReducida = imagenOriginal.getImage().getScaledInstance(650, 432, Image.SCALE_REPLICATE);
         JLabel fondo = new JLabel(new ImageIcon(imagenReducida));
         fondo.setOpaque(false);
         // BorderLayout divide en regiones. Centro para el texto, Sur para el botón.
@@ -30,7 +30,7 @@ public class VistaCartelReputacion {
         this.lblMensaje.setForeground(Color.WHITE);
         
         // Agregamos un margen invisible a la izquierda para empujarlo a la derecha
-        this.lblMensaje.setBorder(BorderFactory.createEmptyBorder(115, 200, -10, 60));
+        this.lblMensaje.setBorder(BorderFactory.createEmptyBorder(115, 230, -10, 85));
         
         fondo.add(this.lblMensaje, BorderLayout.CENTER);
         fondo.add(this.lblMensaje, BorderLayout.CENTER);
@@ -42,7 +42,7 @@ public class VistaCartelReputacion {
         // Agregamos un margen invisible abajo para empujar el botón ACEPTAR hacia arriba
         panelBoton.setBorder(BorderFactory.createEmptyBorder(0, 0, 75, 0));
 
-        this.btnAceptar = crearBotonImagen("assets/imagenes/botones/boton_aceptar.png", 190, 70);
+        this.btnAceptar = crearBotonImagen("assets/imagenes/botones/boton_aceptar.png", 205, 70);
         panelBoton.add(this.btnAceptar);
         
         fondo.add(panelBoton, BorderLayout.SOUTH);
