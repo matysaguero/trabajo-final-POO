@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.util.List;
-import modelo.TipoClan;
 
 public class GestorVista implements ObservadorPartida {
     private final MenuPrincipal menu;
@@ -135,6 +134,7 @@ public class GestorVista implements ObservadorPartida {
     public void alHacerClicEnLibroReglas(ActionListener listener) { this.escenario.getBtnLibroReglas().addActionListener(listener); }
     public void alHacerClicEnDocumentos(ActionListener listener) { this.escenario.getBtnDocumentos().addActionListener(listener); }
     public void alHacerClicEnVolverFinPartida(ActionListener listener) { this.vistaFinPartida.getBtnVolverMenu().addActionListener(listener); }
+    public void alHacerClicEnGuardar(ActionListener listener) { this.vistaFinPartida.getBtnGuardarPuntaje().addActionListener(listener); }
     public void alHacerClicEnInterrogar(ActionListener listener) { this.escenario.getBtnInterrogar().addActionListener(listener); }
 
     public void mostrarDialogoInterrogatorio(String dialogo) {
@@ -146,6 +146,8 @@ public class GestorVista implements ObservadorPartida {
             this.escenario.getBtnInterrogar().setEnabled(true);
         });
     }
+
+    public String pedirNombreJugador() { return this.vistaFinPartida.pedirNombreJugador();}
 
     @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
@@ -227,4 +229,6 @@ public class GestorVista implements ObservadorPartida {
     public void actualizarIngresantesRestantes(int restantes) {
         this.contador.mostrarRestantes(restantes);
     }
+
+
 }

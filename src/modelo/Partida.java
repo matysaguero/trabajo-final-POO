@@ -16,17 +16,22 @@ public class Partida {
     private final List<ObservadorPartida> observadores = new ArrayList<>();
     private EstadoPartida estado; //State
     private ReglasDia reglasActuales;
+    private PuntajeDAO puntajeDAO;
 
-    public Partida(GestorReputacion gestor, Resolutor resolutor, ReglasDia reglasActuales) {
+    public Partida(GestorReputacion gestor, Resolutor resolutor, ReglasDia reglasActuales, PuntajeDAO puntajeDAO) {
         if (gestor == null || resolutor == null) {
             throw new IllegalArgumentException("El gestor y el resolutor son obligatorios");
         }
         if (reglasActuales == null) {
             throw new IllegalArgumentException("La partida no puede iniciar sin reglas.");
         }
+        if(puntajeDAO == null) {
+            throw new IllegalArgumentException("La partida no puede iniciar sin puntaje.");
+        }
         this.gestor = gestor;
         this.resolutor = resolutor;
         this.reglasActuales = reglasActuales;
+        this.puntajeDAO = puntajeDAO;
         this.estado = new EstadoPartidaFinalizada();
     }
 
@@ -269,9 +274,9 @@ public class Partida {
         }
     }
 
-    /*public void guardarPuntaje(String nombreJugador) {
-        // En tu juego, el puntaje sería tu reputación final u otro cálculo
+    public void guardarPuntaje(String nombreJugador) {
+        // El puntaje sería la reputación final.
         Puntaje puntaje = new Puntaje(nombreJugador, this.gestor.getReputacion(), LocalDate.now());
-        this.puntajeDAO.guardar(puntaje); // Usas el DAO inyectado en el constructor
-    }*/
+        this.puntajeDAO.guardar(puntaje);
+    }
 }

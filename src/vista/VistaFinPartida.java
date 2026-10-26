@@ -10,6 +10,7 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.TipoFinPartida;
 
@@ -20,6 +21,7 @@ public class VistaFinPartida {
     // Componentes de la ventana
     private final JFrame ventana;
     private final JPanel panelFondo;
+    
     // Boton para volver al menu principal
     private final JButton btnVolverMenu;
 
@@ -84,10 +86,12 @@ public class VistaFinPartida {
         int posYGuardar = (int) (altoPantalla * 0.718);
 
         // Creamos un botón independiente reutilizando el mismo asset gráfico que utiliza VistaTutorial.
-        btnVolverMenu = crearBotonConImagen("assets/imagenes/botones/boton_volver_menu.png",posXVolver,posYVolver,anchoBoton,altoBoton);
+        btnVolverMenu = crearBotonConImagen("assets/imagenes/botones/boton_volver_menu.png",
+        posXVolver,posYVolver,anchoBoton,altoBoton);
 
         // Creamos boton Guardar
-        btnGuardarPuntuacion = crearBotonConImagen("assets/imagenes/botones/boton_guardar_puntaje.png",posXGuardar,posYGuardar,anchoBoton,altoBoton);
+        btnGuardarPuntuacion = crearBotonConImagen("assets/imagenes/botones/boton_guardar_puntaje.png",
+        posXGuardar,posYGuardar,anchoBoton,altoBoton);
 
         // Agregamos el botón al panel que muestra las imágenes de derrota y victoria.
         panelFondo.add(btnVolverMenu);
@@ -108,7 +112,7 @@ public class VistaFinPartida {
     }
 
     // NUEVO: Método para construir un JButton utilizando una imagen.
-    private JButton crearBotonConImagen(String rutaImagen,int x,int y,int ancho,int alto) {
+    private JButton crearBotonConImagen(String rutaImagen, int x, int y, int ancho, int alto) {
 
         JButton boton = new JButton("Volver al menú");
         // Establecemos posición y dimensiones.
@@ -117,7 +121,7 @@ public class VistaFinPartida {
 
         if (imagen != null) {
             // Escalamos la imagen al tamaño del botón.
-            Image imagenEscalada = imagen.getScaledInstance(ancho,alto,Image.SCALE_REPLICATE);
+            Image imagenEscalada = imagen.getScaledInstance(ancho, alto, Image.SCALE_REPLICATE);
             boton.setIcon(new ImageIcon(imagenEscalada));
             boton.setText("");
             } else {
@@ -137,8 +141,6 @@ public class VistaFinPartida {
         return boton;
     }
 
-
-    // Mostrar la pantalla según el resultado
     public void mostrar(TipoFinPartida resultado) {
         if (resultado == null) {
             throw new IllegalArgumentException("El resultado final no puede ser nulo.");
@@ -148,15 +150,24 @@ public class VistaFinPartida {
         panelFondo.repaint();
         ventana.setVisible(true);
     }
-
-    // Ocultar la pantalla
+    
     public void ocultar() {
         ventana.setVisible(false);
     }
 
-    // NUEVO: Getter para que GestorVista pueda exponer el botón al ControladorJuego
-    public JButton getBtnVolverMenu() {
-        return btnVolverMenu;
+    public String pedirNombreJugador() {
+        // Despliega una ventanita preguntando el nombre.
+        // El primer parámetro 'ventana' hace que se superponga a VistaFinPartida.
+        return JOptionPane.showInputDialog(
+            this.ventana,
+            "¡Partida guardada! Ingresa tu nombre para el registro:",
+            "Guardar Puntaje",
+            JOptionPane.PLAIN_MESSAGE
+        );
     }
+
+    public JButton getBtnVolverMenu() { return btnVolverMenu; }
+
+    public JButton getBtnGuardarPuntaje() { return btnGuardarPuntuacion; }
 }
 

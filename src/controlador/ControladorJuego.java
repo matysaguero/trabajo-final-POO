@@ -89,8 +89,18 @@ public class ControladorJuego {
                 } catch (IllegalStateException e) {
                     this.manejarErrorEstado(e);
             }
-        });}
+        });
 
+        this.ui.alHacerClicEnGuardar(evento -> {
+            
+            String nombre = this.ui.pedirNombreJugador();
+            if (nombre != null && !nombre.trim().isEmpty()) {
+                this.partida.guardarPuntaje(nombre);
+                this.ui.mostrarError("¡Puntaje guardado con éxito!");
+            }
+        });
+    }
+        
     private void abrirVentanaDecision() {
         try {
             this.partida.usarSello();

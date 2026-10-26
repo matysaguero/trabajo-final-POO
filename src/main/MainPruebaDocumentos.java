@@ -3,7 +3,6 @@ package main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
 import modelo.TipoClan;

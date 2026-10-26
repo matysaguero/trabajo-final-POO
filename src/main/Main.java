@@ -4,10 +4,13 @@ import controlador.ControladorJuego;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.SwingUtilities;
+import java.sql.Connection;
+
 import modelo.*;
 import modelo.Ingresantes.*;
 import modelo.politicas.*;
 import vista.*;
+import persistencia.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,7 +31,10 @@ public class Main {
                 Resolutor resolutor = new Resolutor(politicas);
                 ReglasDia reglasDia1 = new ReglasDia1();
                 
-                Partida partida = new Partida(gestor, resolutor, reglasDia1);
+                Connection conexion = Conexion.getInstancia().get();
+                PuntajeDAO puntajeDAO = new PuntajeDAOSQLite(conexion);
+
+                Partida partida = new Partida(gestor, resolutor, reglasDia1, puntajeDAO);
 
                 // Cargamos los 10 personajes desde la Fábrica
                 partida.cargarIngresantes(FabricaIngresantes.crearPlantelInicial());
@@ -51,15 +57,17 @@ public class Main {
                 VistaAnuncio vistaAnuncio = new VistaAnuncio(vistaPrincipal.getVentana());
                 VistaInterrogatorio vistaInterrogatorio = new VistaInterrogatorio(vistaPrincipal.getVentana());
 
-                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio);
-                // 3. CONTROLADOR
+                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, 
+                    fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio);
+                
+                    // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
                 // 4. MOSTRAR MENÚ INICIAL
                 menu.mostrar();
 
-                //Connection conexion = Conexion.getInstancia().get();
-                //PuntajeDAO puntajeDAO = new PuntajeDAOSQLite(conexion);
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
