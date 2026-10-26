@@ -10,7 +10,7 @@ public class VistaAnuncio {
     private final BotonInvisible btnAceptar;
 
     public VistaAnuncio(JFrame ventanaPadre) {
-        this.ventanaEmergente = new JDialog(ventanaPadre, "Aviso", true);
+        this.ventanaEmergente = new JDialog(ventanaPadre, "Aviso", false);
         this.ventanaEmergente.setUndecorated(true);
         this.ventanaEmergente.setBackground(new Color(0, 0, 0, 0));
 

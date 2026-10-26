@@ -44,7 +44,7 @@ public class FabricaIngresantes {
         // DNI:
         ArrayList<Documento> docsVance = crearDniEspecifico("Cmdte. Vance", "Bales", true, LocalDate.of(2040, 10, 30), 38440104, LocalDate.of(2160, 12, 7), TipoRaza.CYBORG.name(), "assets/imagenes/foto_doc/carnet_astronauta.png", "assets/imagenes/huellas/huella_2.png");
         // PERMISO DE ENTRADA:
-        docsVance.add(new Permiso("Cmdte. Vance", "Bales", true, LocalDate.of(2160, 12, 7), "38440104", "Comandante de estación", 1003, TipoClan.UNION_MAGICA));
+        docsVance.add(new Permiso("Cmdte. Vance", "Bales", true, LocalDate.of(2160, 12, 7), "38440104", "Cmdte de estación", 1003, TipoClan.UNION_MAGICA));
         // PASAPORTE:
         docsVance.add(new Pasaporte("Cmdte. Vance","Bales",true,LocalDate.of(2160, 12, 7),LocalDate.of(2040, 10, 30),TipoRaza.CYBORG.name(),"assets/imagenes/huellas/huella_2.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_astronauta.png","assets/imagenes/pasaportes/pasp_um.jpg"));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
@@ -95,7 +95,7 @@ public class FabricaIngresantes {
         // DNI:
         ArrayList<Documento> docsLyra = crearDniEspecifico("Lyra", "Hasgard", true, LocalDate.of(2018, 9, 12), 44776108, LocalDate.of(2160, 12, 20), TipoRaza.HUMANO.name(),"assets/imagenes/foto_doc/carnet_mago_4.png","assets/imagenes/huellas/huella_4.png");
         // PERMISO DE ENTRADA:
-        docsLyra.add(new Permiso("Lyra", "Hasgard", true,LocalDate.of(2160, 12, 20),"44776108", "Profesora de magia", 1008, TipoClan.UNION_MAGICA));  
+        docsLyra.add(new Permiso("Lyra", "Hasgard", true,LocalDate.of(2160, 12, 20),"44776108", "Prof. de magia", 1008, TipoClan.UNION_MAGICA));  
         // PASAPORTE:
         docsLyra.add(new Pasaporte("Lyra","Hasgard",true,LocalDate.of(2160, 12, 20),LocalDate.of(2018, 9, 12),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_4.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_4.png","assets/imagenes/pasaportes/pasp_um.jpg"));     
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
