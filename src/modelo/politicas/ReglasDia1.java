@@ -2,7 +2,6 @@ package modelo.politicas;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import modelo.TipoCiudad;
 import modelo.TipoClan;
 import modelo.TipoRaza;
@@ -10,7 +9,8 @@ import modelo.TipoRaza;
 public class ReglasDia1 extends ReglasDia {
 
     public ReglasDia1() {
-        super(1, "Día 1: Se prohíbe el ingreso a todo aquél que no sea humano, pero deberá tener todo en órden.", LocalDate.of(2159, 11, 14));
+        super(1, "Día 1: Se prohíbe el ingreso a todo aquél que no sea humano, pero deberá tener todo en órden.", 
+        LocalDate.of(2159, 11, 14));
     }
 
     @Override

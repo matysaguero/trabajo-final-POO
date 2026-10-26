@@ -59,7 +59,7 @@ public class FabricaIngresantes {
         // PASAPORTE:
         docsXylar.add(new Pasaporte("Xylar","Lander",false,LocalDate.of(2160, 11, 1),LocalDate.of(1990, 1, 1),TipoRaza.ALIEN.name(),"assets/imagenes/huellas/huella_3.png",TipoClan.TITAN_DIGITAL,"assets/imagenes/foto_doc/carnet_alien_impostor.png","assets/imagenes/pasaportes/pasp_ca.jpg"));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
-        plantel.add(crearPersonaje( "Xylar el Humano", 172, 70, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE, docsXylar, false, false, "¡Saludos humano! Digo... colega. Vengo de turismo galáctico."));
+        plantel.add(crearPersonaje( "Xylar", 172, 70, TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE, docsXylar, false, false, "¡Saludos humano! Digo... colega. Vengo de turismo galáctico."));
 
 
         // 5. LÁZARO (Viajero Pobre - Zorglub le robó sus papeles - NO POSEE NINGUN DOCUMENTO)

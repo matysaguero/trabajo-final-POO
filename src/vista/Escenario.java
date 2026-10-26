@@ -156,9 +156,9 @@ public class Escenario {
         this.btnInterrogar = new BotonInvisible();
         this.btnInterrogar.setBounds(
             (int) (tamanoPantalla.width * 0.13),  // X
-            (int) (tamanoPantalla.height * 0.83), // Y
-            105,                                  // Ancho
-            115                                   // Alto
+            (int) (tamanoPantalla.height * 0.84), // Y
+            (int) (tamanoPantalla.width * 0.0539), // Ancho
+            (int) (tamanoPantalla.height * 0.106) // Alto
         );
         this.btnInterrogar.configurarImagenHover("assets/imagenes/botones/boton_interrogar.png");
         
