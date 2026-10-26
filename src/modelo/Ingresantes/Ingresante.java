@@ -88,7 +88,7 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return this.rutaImagen;
     }
     
-    public List<Documento> getDocumentos() { //NUEVO: getter para los documentos.
+    public List<Documento> getDocumentos() { // Getter para los documentos.
         return List.copyOf(documentos);
     }
 
@@ -96,7 +96,7 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
         return this.motivoVisita;
     }
     public abstract String darPresentacion();
-    public abstract boolean esAmenaza(); //NUEVO
+    public abstract boolean esAmenaza();
 
     //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
     

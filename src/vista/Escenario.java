@@ -149,7 +149,7 @@ public class Escenario {
         // Agregarlo al escenario.
         panelFondo.add(this.btnSalir);
 
-        // NUEVO: contador de ingresantes restantes (solo se muestra, no genera eventos)
+        // Contador de ingresantes restantes (solo se muestra, no genera eventos)
         panelFondo.add(contador.getEtiqueta());
 
         // Botón de interrogar al ingresante

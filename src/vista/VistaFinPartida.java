@@ -42,7 +42,7 @@ public class VistaFinPartida {
         ventana.setUndecorated(true);
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // NUEVO: Obtenemos las dimensiones de la pantalla para calcular la posición y el tamaño del botón.
+        // Obtenemos las dimensiones de la pantalla para calcular la posición y el tamaño del botón.
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int anchoPantalla = pantalla.width;
         int altoPantalla = pantalla.height;
@@ -111,7 +111,7 @@ public class VistaFinPartida {
         return icono.getIconWidth() > 0? icono.getImage(): null;
     }
 
-    // NUEVO: Método para construir un JButton utilizando una imagen.
+    // Método para construir un JButton utilizando una imagen.
     private JButton crearBotonConImagen(String rutaImagen, int x, int y, int ancho, int alto) {
 
         JButton boton = new JButton("Volver al menú");

@@ -32,6 +32,10 @@ public class ControladorJuego {
             this.ui.mostrarMenuPrincipal();
         });
 
+        // Lógica de navegación del tutorial
+        this.ui.alHacerClicEnSiguienteTutorial(evento -> this.ui.avanzarTutorial());
+        this.ui.alHacerClicEnAnteriorTutorial(evento -> this.ui.retrocederTutorial());
+
         this.ui.alHacerClicEnSalirJuego(evento -> System.exit(0));
 
         this.ui.alHacerClicEnLlamar(evento -> {
@@ -79,7 +83,7 @@ public class ControladorJuego {
 
         this.ui.alHacerClicEnAceptarCartel(evento -> this.ui.ocultarCartelReputacion());
         
-        // NUEVO: Cerramos el anuncio cuando se toca el ACEPTAR invisible
+        // Cerramos el anuncio cuando se toca el ACEPTAR invisible
         this.ui.alHacerClicEnAceptarAnuncio(evento -> this.ui.ocultarAnuncioGrafico());
 
         this.ui.alHacerClicEnInterrogar(evento -> {
@@ -121,7 +125,7 @@ public class ControladorJuego {
         });
     }
 
-    // NUEVO: Enrutador de mensajes. Revisa qué mandó el Modelo y muestra la imagen correspondiente.
+    // Enrutador de mensajes. Revisa qué mandó el Modelo y muestra la imagen correspondiente.
     private void manejarErrorEstado(IllegalStateException e) {
         String mensaje = e.getMessage();
         if (mensaje.contains("Primero debes llamar a uno con el meg") || mensaje.contains("No hay ning")) {

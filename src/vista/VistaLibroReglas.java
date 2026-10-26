@@ -7,7 +7,7 @@ public class VistaLibroReglas {
 
     private final JLayeredPane mesa;
     private JPanel libro;
-    private final FabricaVistaReglas fabrica; // NUEVO: La fábrica inyectada
+    private final FabricaVistaReglas fabrica; // La fábrica inyectada
 
     public VistaLibroReglas(JLayeredPane mesa, FabricaVistaReglas fabrica) {
         if (mesa == null || fabrica == null) {

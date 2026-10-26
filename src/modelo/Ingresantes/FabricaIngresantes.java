@@ -22,7 +22,7 @@ public class FabricaIngresantes {
         // DNI:
         ArrayList<Documento> docsArthur = crearDniEspecifico( "Sir Arthur", "Hasgard", true, LocalDate.of(1990, 5, 10), 40123101, LocalDate.of(2165, 12, 12), TipoRaza.HUMANO.name(), "assets/imagenes/foto_doc/carnet_caballero.png", "assets/imagenes/huellas/huella.png");
         // PERMISO DE ENTRADA:
-        docsArthur.add(new Permiso( "Sir Arthur", "Hasgard", true,LocalDate.of(2165, 12, 12), "40123101","Comerciante",1001, TipoClan.PUERTO_UMBRAL));
+        docsArthur.add(new Permiso( "Sir Arthur", "Husguiard", true,LocalDate.of(2165, 12, 12), "40123101","Comerciante",1001, TipoClan.PUERTO_UMBRAL));
         // PASAPORTE:
         docsArthur.add(new Pasaporte("Sir Arthur","Hasgard",true,  LocalDate.of(2165, 12, 12), /*Vencimiento*/ LocalDate.of(1990, 5, 10),  /*Nacimiento*/ TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_caballero.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
@@ -31,13 +31,13 @@ public class FabricaIngresantes {
 
         // 2. ZORGLUB (Alien - Enemigo - Le robó el DNI/PERMISO a Lázaro - Docuemntacion humana falsa)
         // DNI:
-        ArrayList<Documento> docsZorglub = crearDniEspecifico("Zorglub", "Lander", false, LocalDate.of(1985, 8, 22), 35890102, LocalDate.of(2160, 11, 5), TipoRaza.HUMANO.name(), "assets/imagenes/foto_doc/carnet_viajero2.png", /*Foto de su disfraz o robo*/ "assets/imagenes/huellas/huella_alien.png" /*Huella alienígena, lo delata*/);
+        ArrayList<Documento> docsZorglub = crearDniEspecifico("Lázaro", "Lander", false, LocalDate.of(1985, 8, 22), 35890102, LocalDate.of(2160, 11, 5), TipoRaza.HUMANO.name(), "assets/imagenes/foto_doc/carnet_viajero2.png", "assets/imagenes/huellas/huella_5.png");
         // PERMISO DE ENTRADA:
-        docsZorglub.add(new Permiso("Zorglub", "Lander", false, LocalDate.of(2160, 11, 5), "35890102", "Turista", 1002, TipoClan.PUERTO_UMBRAL));
+        docsZorglub.add(new Permiso("Lázaro", "Lander", false, LocalDate.of(2160, 11, 5), "35890102", "Turista", 1002, TipoClan.PUERTO_UMBRAL));
         // PASAPORTE:
-        docsZorglub.add(new Pasaporte("Lázaro","Bales",false,LocalDate.of(2158, 11, 5),LocalDate.of(1985, 8, 22),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_alien.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_viajero2.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
+        docsZorglub.add(new Pasaporte("Lázaro","Lander",false,LocalDate.of(2158, 11, 5),LocalDate.of(1985, 8, 22),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_5.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_viajero2.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
-        plantel.add(crearPersonaje("Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN, TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN, docsZorglub, true, true, "Eh... soy un humano normal haciendo cosas de humanos." /*Es enemigo y porta bomba*/));
+        plantel.add(crearPersonaje("Zorglub", 195, 65, TipoIngresante.TURISTA, TipoRaza.ALIEN, TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN, docsZorglub, true, true, "Eh... soy un humano normal haciendo cosas de humanos."));
 
 
         // 3. CMDTE. VANCE (Trabajador Cyborg - Documentación auténtica)
