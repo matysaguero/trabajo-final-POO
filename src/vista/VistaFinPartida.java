@@ -10,8 +10,8 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import modelo.TipoFinPartida;
 
 // Una única pantalla reutilizable para DERROTA y VICTORIA.
@@ -155,19 +155,10 @@ public class VistaFinPartida {
         ventana.setVisible(false);
     }
 
-    public String pedirNombreJugador() {
-        // Despliega una ventanita preguntando el nombre.
-        // El primer parámetro 'ventana' hace que se superponga a VistaFinPartida.
-        return JOptionPane.showInputDialog(
-            this.ventana,
-            "¡Partida guardada! Ingresa tu nombre para el registro:",
-            "Guardar Puntaje",
-            JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
     public JButton getBtnVolverMenu() { return btnVolverMenu; }
 
     public JButton getBtnGuardarPuntaje() { return btnGuardarPuntuacion; }
+
+    public JFrame getVentana() {return this.ventana;}
 }
 

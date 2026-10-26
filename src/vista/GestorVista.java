@@ -29,8 +29,11 @@ public class GestorVista implements ObservadorPartida {
     private final VistaContadorIngresantes contador;
     private final VistaAnuncio vistaAnuncio;
     private final VistaInterrogatorio vistaInterrogatorio;
+    private final VistaGuardarPuntaje vistaPuntaje;
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio) {
+    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
+        VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, 
+        VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio, VistaGuardarPuntaje vistaPuntaje) {
         this.menu = menu;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
@@ -46,6 +49,7 @@ public class GestorVista implements ObservadorPartida {
         this.vistaInterrogatorio = vistaInterrogatorio;
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
+        this.vistaPuntaje = vistaPuntaje;
     }
 
     public void mostrarMenuPrincipal() { this.menu.mostrar(); }
@@ -147,7 +151,7 @@ public class GestorVista implements ObservadorPartida {
         });
     }
 
-    public String pedirNombreJugador() { return this.vistaFinPartida.pedirNombreJugador();}
+    public String pedirNombreJugador() { return this.vistaPuntaje.pedirNombreJugador();}
 
     @Override
     public void actualizarNuevoIngresante(Ingresante ingresante) {
