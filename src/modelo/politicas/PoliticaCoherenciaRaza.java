@@ -27,10 +27,11 @@ public class PoliticaCoherenciaRaza extends PoliticaFronteriza {
                 
                 // EASTER EGG: Si es un humano disfrazado de alien con papeles de alien (Caso Xylar)
                 if (razaReal.equals("HUMANO") && razaDoc.equalsIgnoreCase("ALIEN")) {
-                    this.motivoError = "No es humano (en realidad si pero el documento dice lo contrario, terrible boludo)";
-                } else {
-                    // Para otros casos (ej. Zorglub: un Alien real con papeles de Humano)
-                    this.motivoError = "Falsificación: La raza biológica no coincide con la registrada";
+                    this.motivoError = "No es humano (en realidad si pero el documento dice lo contrario, terrible boludin)";
+                } else if(razaReal.equals("ALIEN") && razaDoc.equalsIgnoreCase("HUMANO")) {
+                    this.motivoError = "No era un humano, ¿de donde habra sacado esos documentos?";}
+                else {
+                    this.motivoError = "Falsificación: La raza del ingresante no coincide con la registrada";
                 }
                 return false;
             }
