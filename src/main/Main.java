@@ -56,9 +56,10 @@ public class Main {
                 // Instanciamos el Anuncio para cuando un usuario haga algo que no debe (ej; usar el sello sin haber solicitado documentos)
                 VistaAnuncio vistaAnuncio = new VistaAnuncio(vistaPrincipal.getVentana());
                 VistaInterrogatorio vistaInterrogatorio = new VistaInterrogatorio(vistaPrincipal.getVentana());
+                VistaAnimacionSello vistaSello = new VistaAnimacionSello(vistaPrincipal.getVentana().getLayeredPane());
 
                 GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, 
-                    fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio);
+                    fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio, vistaSello);
                 
                     // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);

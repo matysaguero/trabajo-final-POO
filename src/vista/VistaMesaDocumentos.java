@@ -35,4 +35,19 @@ public class VistaMesaDocumentos {
         this.panelDocumentos.removeAll();
         this.panelDocumentos.repaint();
     }
+    //RASTREADOR   
+    public JPanel obtenerDocumentoPrincipal() {
+        JPanel documentoSecundario = null;
+        
+        for (Component c : this.panelDocumentos.getComponents()) {
+            if (c instanceof JPanel) {
+                JPanel panelDoc = (JPanel) c;
+                if ("Pasaporte".equals(panelDoc.getName())) {
+                    return panelDoc;
+                }
+                documentoSecundario = panelDoc; 
+            }
+        }
+        return documentoSecundario;
+    }
 } 

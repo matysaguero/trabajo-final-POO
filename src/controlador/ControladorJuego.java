@@ -112,11 +112,13 @@ public class ControladorJuego {
 
     private void procesarVeredicto(boolean decisionJugador) {
         this.ui.ocultarVentanaDecision();
-        try {
-            this.partida.procesarDecisionJugador(decisionJugador);
-        } catch (Exception e) {
-            this.ui.mostrarError("Error al procesar el veredicto: " + e.getMessage());
-        }
+        this.ui.mostrarAnimacionSello(decisionJugador, () -> {
+            try {
+                this.partida.procesarDecisionJugador(decisionJugador);
+            } catch (Exception e) {
+                this.ui.mostrarError("Error al procesar el veredicto: " + e.getMessage());
+            }
+        });
     }
 
     // NUEVO: Enrutador de mensajes. Revisa qué mandó el Modelo y muestra la imagen correspondiente.
