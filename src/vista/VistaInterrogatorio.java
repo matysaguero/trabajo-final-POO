@@ -10,7 +10,6 @@ public class VistaInterrogatorio {
     private final JLabel lblDialogoIngresante;
     private Timer timerOcultar; 
 
-    // Medidas de tu PNG
     private final int anchoCuadro = 300;
     private final int altoCuadro = 100;
 
@@ -20,12 +19,10 @@ public class VistaInterrogatorio {
         this.ventanaEmergente.setBackground(new Color(0, 0, 0, 0));
         this.ventanaEmergente.setFocusableWindowState(false);
 
-        // 1. Hacemos que esta ventana transparente ocupe TODO el monitor
         Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
         this.ventanaEmergente.setSize(tamanoPantalla.width, tamanoPantalla.height);
         this.ventanaEmergente.setLocation(0, 0);
 
-        // 2. Usamos "null" para poder mover los labels a gusto
         JPanel panelContenedor = new JPanel();
         panelContenedor.setLayout(null); 
         panelContenedor.setOpaque(false);
@@ -35,16 +32,10 @@ public class VistaInterrogatorio {
         this.lblDialogoJugador = crearLabelDialogo(iconoDialogo);
         this.lblDialogoIngresante = crearLabelDialogo(iconoDialogo);
 
-        // ------------------------------------------------------------------
-        // UBICACIÓN INDEPENDIENTE EN PANTALLA (Usa decimales para ajustar)
-        // ------------------------------------------------------------------
-        
-        // A) Cuadro del Ingresante (Donde lo tenías antes: pegado a la izquierda, a un 30% de altura)
         int npcX = (int) (tamanoPantalla.width * 0.00); 
         int npcY = (int) (tamanoPantalla.height * 0.35);
         this.lblDialogoIngresante.setBounds(npcX, npcY, anchoCuadro, altoCuadro);
 
-        // B) Cuadro del Jugador (Inspector) (Ubicado por ejemplo más abajo y más al centro)
         int jugadorX = (int) (tamanoPantalla.width * 0.18); // <-- Ajusta este valor para Mover Izq/Der
         int jugadorY = (int) (tamanoPantalla.height * 0.30); // <-- Ajusta este valor para Mover Arriba/Abajo
         this.lblDialogoJugador.setBounds(jugadorX, jugadorY, anchoCuadro, altoCuadro);
@@ -73,10 +64,7 @@ public class VistaInterrogatorio {
         }
         label.setHorizontalTextPosition(SwingConstants.CENTER);
         label.setVerticalTextPosition(SwingConstants.CENTER);
-        
-        // 3. Color negro como pediste
         label.setForeground(Color.BLACK);
-        // 4. Letra más chica (13) para que entre en los 100px de altura
         label.setFont(new Font("Monospaced", Font.BOLD, 13)); 
         return label;
     }
@@ -84,8 +72,7 @@ public class VistaInterrogatorio {
     public void mostrar(String dialogoCompleto, Runnable alTerminar) {
         String[] partes = dialogoCompleto.split("\n");
 
-        // 5. El ancho del texto HTML se bajó a 260px para que tenga un "margen" interior 
-        // y no pise los bordes de la imagen de 300px
+
         if (partes.length >= 2) {
             this.lblDialogoJugador.setText("<html><div style='text-align: center; width: 230px;'>" + partes[0] + "</div></html>");
             this.lblDialogoIngresante.setText("<html><div style='text-align: center; width: 230px;'>" + partes[1] + "</div></html>");

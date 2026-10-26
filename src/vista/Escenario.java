@@ -163,6 +163,15 @@ public class Escenario {
         this.btnInterrogar.configurarImagenHover("assets/imagenes/botones/boton_interrogar.png");
         
         panelFondo.add(this.btnInterrogar);
+
+        //Reloj digital (elemento visual)
+        VistaReloj relojMesa = new VistaReloj(            
+            (int) (tamanoPantalla.width * 0.257),  // X
+            (int) (tamanoPantalla.height * 0.91), // Y
+            (int) (tamanoPantalla.width * 0.055), // Ancho
+            (int) (tamanoPantalla.height * 0.07) // Alto);
+        );
+        panelFondo.add(relojMesa.getComponente());
     }
 
     public void mostrar() {
