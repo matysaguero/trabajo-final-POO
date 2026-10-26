@@ -200,15 +200,6 @@ public class GestorVista implements ObservadorPartida {
         this.consola.mostrarDecisionJugador(decisionJugador);
         this.consola.mostrarResultado(resultado.getAcierto(), resultado.getReputacionActual());
 
-        if (resultado.getPartidaPerdida()) {
-            this.consola.mostrarFinDeJuego();
-            JOptionPane.showMessageDialog(
-                this.escenario.getVentana(), 
-                "Te quedaste sin reputación (0/10). Volviendo al menú principal."
-            );
-            this.escenario.ocultar();
-            this.menu.mostrar();
-        }
     }
 
     public void mostrarError(String mensaje) {
