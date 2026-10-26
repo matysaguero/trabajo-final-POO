@@ -23,4 +23,6 @@ public class PoliticaProhibicionTipo extends PoliticaFronteriza {
     public boolean esValido(Ingresante ingresante) {
         return !tiposProhibidos.contains(ingresante.getTipoIngresante());
     }
+
+    @Override public String getMotivoRechazo() { return "Tipo de ingresante prohibido"; }
 }

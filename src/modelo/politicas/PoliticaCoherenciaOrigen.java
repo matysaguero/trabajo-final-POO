@@ -20,4 +20,6 @@ public class PoliticaCoherenciaOrigen extends PoliticaFronteriza {
         
         return true;
     }
+    
+    @Override public String getMotivoRechazo() { return "Origen no coincidente entre documento"; }
 }

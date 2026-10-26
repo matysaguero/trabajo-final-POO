@@ -29,5 +29,6 @@ public boolean esValido (Ingresante ingresante){
  return true;
 }
 
+@Override public String getMotivoRechazo() { return "Clan prohibido"; }
 }
 

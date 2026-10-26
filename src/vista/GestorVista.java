@@ -188,9 +188,10 @@ public class GestorVista implements ObservadorPartida {
         this.ventanilla.limpiarVentanilla();
         this.libroReglas.restaurarSiAbierto();
 
+        // 1. Aquí se decide si es correcto o penalización e incrustamos el motivo
         String mensaje = resultado.getAcierto() 
              ? "<html><center>¡Decisión correcta!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>"
-             : "<html><center>¡Penalización!<br>Reputación: " + resultado.getReputacionActual() + "</center></html>";
+             : "<html><center>¡Penalización!<br>" + resultado.getMotivo() + "<br>Reputación: " + resultado.getReputacionActual() + "</center></html>";
                      
         this.cartelReputacion.mostrarMensaje(mensaje);
 
