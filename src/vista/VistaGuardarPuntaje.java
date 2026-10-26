@@ -14,6 +14,7 @@ public class VistaGuardarPuntaje {
         this.dialogoRegistro.setUndecorated(true);
         this.dialogoRegistro.setSize(600, 200); 
         this.dialogoRegistro.setLocationRelativeTo(ventanaPadre);
+        this.dialogoRegistro.setBackground(new Color(0, 0, 0, 0));
 
         JPanel panelFondo = new JPanel() {
             private final Image fondo = new ImageIcon("assets/imagenes/paneles/ingresa_nombre.png").getImage();
@@ -26,6 +27,7 @@ public class VistaGuardarPuntaje {
             }
         };
         panelFondo.setLayout(null);
+        panelFondo.setOpaque(false);
 
         // Campo de texto transparente
         JTextField campoNombre = new JTextField();
