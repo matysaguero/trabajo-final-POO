@@ -13,6 +13,7 @@ public class VistaTutorial {
     
     // Arreglo con las rutas de las 7 imágenes del tutorial
     private final String[] paginas = {
+        "assets/imagenes/paneles/Tutorial_pagina_0.jpg",
         "assets/imagenes/paneles/Tutorial_pagina_1.jpg",
         "assets/imagenes/paneles/Tutorial_pagina_2.jpg",
         "assets/imagenes/paneles/Tutorial_pagina_3.jpeg",
