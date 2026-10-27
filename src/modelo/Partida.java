@@ -290,6 +290,6 @@ public class Partida {
     }
 
     public List<Puntaje> tablaDeHonor() {
-        return this.puntajeDAO.mejores(4); 
+        return this.puntajeDAO.mejores(5); 
     }
 }
