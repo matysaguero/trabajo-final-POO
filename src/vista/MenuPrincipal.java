@@ -11,6 +11,7 @@ public class MenuPrincipal {
     private final JButton btnJugar;
     private final JButton btnTutorial;
     private final JButton btnSalir;
+    private final JButton btnPuntaje;
 
     public MenuPrincipal() {
         this.ventana = new JFrame("Frontier - Menú Principal");
@@ -33,7 +34,7 @@ public class MenuPrincipal {
                 }
             }
         };
-        // Posicionamiento manual para mapear los botones sobre el pixel art
+        
         panelFondo.setLayout(null); 
 
         int anchoBoton = (int) (anchoPantalla * 0.10); 
@@ -45,17 +46,21 @@ public class MenuPrincipal {
         int altoBotonSalir = (int) (altoPantalla * 0.075);
         int posXSalir = (int) (anchoPantalla * 0.94);
         int posYSalir = (int) (altoPantalla * 0.020);
+        int posXPuntaje = (int) (altoPantalla * 0.100);
+        int posYPuntaje = (int) (altoPantalla * 0.70);
 
         // Se crean los botones utilizando las imágenes requeridas
         this.btnJugar = crearBotonConImagen("assets/imagenes/botones/boton_jugar.png", posXJugar, posY, anchoBoton, altoBoton);
         this.btnTutorial = crearBotonConImagen("assets/imagenes/botones/boton_tutorial.png", posXTutorial, posY, anchoBoton, altoBoton);
         // Crear botón Salir.
         this.btnSalir = crearBotonConImagen( "assets/imagenes/botones/boton_cruz.png", posXSalir, posYSalir, anchoBotonSalir, altoBotonSalir);
+        this.btnPuntaje = crearBotonConImagen("assets/imagenes/botones/boton_puntajes.png", posXPuntaje, posYPuntaje, anchoBoton, altoBoton);
 
         panelFondo.add(this.btnJugar);
         panelFondo.add(this.btnTutorial);
         panelFondo.add(this.btnSalir);
-        
+        panelFondo.add(this.btnPuntaje);
+
         this.ventana.setContentPane(panelFondo);
     
     }
@@ -81,10 +86,12 @@ public class MenuPrincipal {
 
     public void mostrar() { this.ventana.setVisible(true); }
     public void ocultar() { this.ventana.setVisible(false); }
+    public JFrame getVentana() { return this.ventana;}
 
     // La vista expone lo que el controlador necesita para registrarse, y nada más
     public JButton getBtnJugar() { return this.btnJugar; }
     public JButton getBtnTutorial() { return this.btnTutorial; }
     public JButton getBtnSalir() { return this.btnSalir;}
+    public JButton getBtnPuntaje() { return this.btnPuntaje; }
 
 }

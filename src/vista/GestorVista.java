@@ -11,10 +11,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.util.List;
 
 public class GestorVista implements ObservadorPartida {
     private final MenuPrincipal menu;
+    private final VistaRanking vistaRanking;
     private final Escenario escenario;
     private final VistaDecision vistaDecision;
     private final VistaConsola consola;
@@ -33,10 +36,11 @@ public class GestorVista implements ObservadorPartida {
     private final VistaGuardarPuntaje vistaPuntaje;
     private TipoFinPartida finPendiente = null; // es una bandera para retrasar la pantalla de Game Over hasta que se cierre el cartel
 
-    public GestorVista(MenuPrincipal menu, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
+    public GestorVista(MenuPrincipal menu, VistaRanking vistaRanking, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
         VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, 
         VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio, VistaAnimacionSello animacionSello, VistaGuardarPuntaje vistaPuntaje) {
         this.menu = menu;
+        this.vistaRanking = vistaRanking;
         this.escenario = escenario;
         this.vistaDecision = vistaDecision;
         this.consola = consola;
@@ -106,6 +110,8 @@ public class GestorVista implements ObservadorPartida {
         this.libroReglas.alternar(reglasActivas);
     }
 
+    public JFrame getVentanaMenu() { return this.menu.getVentana(); }
+
     public void mostrarCartelReputacion(String mensaje) {
         this.cartelReputacion.mostrarMensaje(mensaje);
     }
@@ -143,6 +149,7 @@ public class GestorVista implements ObservadorPartida {
 
     public void alHacerClicEnJugar(ActionListener listener) { this.menu.getBtnJugar().addActionListener(listener); }
     public void alHacerClicEnTutorial(ActionListener listener) { this.menu.getBtnTutorial().addActionListener(listener); }
+    public void alHacerClickEnPuntaje(ActionListener listener) { this.menu.getBtnPuntaje().addActionListener(listener); }
     public void alHacerClicEnSalir(ActionListener listener) { this.menu.getBtnSalir().addActionListener(listener); }
     public void alHacerClicEnSalirJuego(ActionListener listener) { this.escenario.getBtnSalir().addActionListener(listener); }
     public void alHacerClicEnVolverTutorial(ActionListener listener) { this.vistaTutorial.getBtnVolver().addActionListener(listener); }
@@ -194,7 +201,6 @@ public class GestorVista implements ObservadorPartida {
         if (documentos == null || !this.escenario.getBtnDocumentos().isEnabled()) {
             return;
         }
-
         int posicionX = 30;
         int posicionY = 30;
 
@@ -227,7 +233,6 @@ public class GestorVista implements ObservadorPartida {
         this.consola.mostrarPuedeIngresar(resultado.getPuedeIngresar());
         this.consola.mostrarDecisionJugador(decisionJugador);
         this.consola.mostrarResultado(resultado.getAcierto(), resultado.getReputacionActual());
-
     }
 
     public void mostrarError(String mensaje) {
