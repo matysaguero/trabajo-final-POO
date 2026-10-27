@@ -3,6 +3,7 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import vista.VistaGuardarPuntaje;
+import vista.VistaMensajeExito;
 
 
 public class PruebaDialogo {
@@ -30,6 +31,9 @@ public class PruebaDialogo {
                 System.out.println("El jugador ingresó: '" + resultado + "'");
             }
             System.out.println("=================================");
+        
+            VistaMensajeExito mensajeExito = new VistaMensajeExito(ventanaPadre, "¡Puntaje guardado con éxito!");
+            mensajeExito.mostrar();
 
             System.exit(0);
         });

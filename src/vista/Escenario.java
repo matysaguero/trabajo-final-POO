@@ -47,7 +47,7 @@ public class Escenario {
 
         panelFondo.setLayout(null);
         Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
-
+        
         // Instanciio y ubicamos el botón invisible alineado al sprite completo del "Sello"
         this.btnDecidir = new BotonInvisible();
         this.btnDecidir.setBounds(

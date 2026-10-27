@@ -34,11 +34,13 @@ public class GestorVista implements ObservadorPartida {
     private final VistaInterrogatorio vistaInterrogatorio;
     private final VistaAnimacionSello animacionSello;
     private final VistaGuardarPuntaje vistaPuntaje;
+    private final VistaMensajeExito vistaMensajeExito;
     private TipoFinPartida finPendiente = null; // es una bandera para retrasar la pantalla de Game Over hasta que se cierre el cartel
 
     public GestorVista(MenuPrincipal menu, VistaRanking vistaRanking, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
         VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, 
-        VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio, VistaAnimacionSello animacionSello, VistaGuardarPuntaje vistaPuntaje) {
+        VistaAnuncio vistaAnuncio, VistaInterrogatorio vistaInterrogatorio, VistaAnimacionSello animacionSello, VistaGuardarPuntaje vistaPuntaje,
+        VistaMensajeExito vistaMensajeExito) {
         this.menu = menu;
         this.vistaRanking = vistaRanking;
         this.escenario = escenario;
@@ -57,6 +59,7 @@ public class GestorVista implements ObservadorPartida {
         this.fabricaReglas = new FabricaVistaReglas();
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
         this.vistaPuntaje = vistaPuntaje;
+        this.vistaMensajeExito = vistaMensajeExito;
     }
 
     public void mostrarMenuPrincipal() { this.menu.mostrar(); }
@@ -237,6 +240,11 @@ public class GestorVista implements ObservadorPartida {
 
     public void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this.escenario.getVentana(), mensaje);
+    }
+
+    public void mostrarMensajeExito(String mensaje) {
+        VistaMensajeExito aviso = new VistaMensajeExito(this.vistaFinPartida.getVentana(), mensaje);
+        aviso.mostrar();
     }
 
     @Override

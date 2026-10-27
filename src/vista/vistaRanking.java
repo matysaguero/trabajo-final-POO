@@ -44,8 +44,8 @@ public class VistaRanking {
         int xJugador = 180; 
         int xPuntuacion = 420;
 
-        //Limito a 4 guardados segun el asset
-        int limite = Math.min(listaPuntajes.size(), 4);
+        //Limito a 5 guardados segun el asset
+        int limite = Math.min(listaPuntajes.size(), 5);
 
         for (int i = 0; i < limite; i++) {
             Puntaje puntaje = listaPuntajes.get(i);

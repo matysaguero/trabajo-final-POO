@@ -40,7 +40,7 @@ public class Main {
 
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
-                VistaRanking vistaRanking = new VistaRanking(menu.getVentana(), puntajeDAO.mejores(4));
+                VistaRanking vistaRanking = new VistaRanking(menu.getVentana(), puntajeDAO.mejores(5));
                 VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
                 VistaContadorIngresantes vistaContador = new VistaContadorIngresantes();
@@ -52,6 +52,7 @@ public class Main {
                 VistaFinPartida vistaFinPartida = new VistaFinPartida();
                 VistaCartelReputacion vistaCartel = new VistaCartelReputacion(vistaPrincipal.getVentana());
                 VistaGuardarPuntaje vistaPuntaje = new VistaGuardarPuntaje(vistaFinPartida.getVentana());
+                VistaMensajeExito vistaMensajeExito = new VistaMensajeExito(vistaFinPartida.getVentana(), "Tu puntaje a sido guardado con éxito");
                 
                 // Instanciamos el Anuncio para cuando un usuario haga algo que no debe (ej; usar el sello sin haber solicitado documentos)
                 VistaAnuncio vistaAnuncio = new VistaAnuncio(vistaPrincipal.getVentana());
@@ -59,7 +60,7 @@ public class Main {
                 VistaAnimacionSello vistaSello = new VistaAnimacionSello(vistaPrincipal.getVentana().getLayeredPane());
 
                 GestorVista ui = new GestorVista(menu, vistaRanking, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, 
-                    fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio, vistaSello, vistaPuntaje);
+                    fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio, vistaSello, vistaPuntaje, vistaMensajeExito);
                 
                     // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
