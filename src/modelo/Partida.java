@@ -288,4 +288,8 @@ public class Partida {
         Puntaje puntaje = new Puntaje(nombreJugador, this.gestor.getReputacion(), LocalDate.now());
         this.puntajeDAO.guardar(puntaje);
     }
+
+    public List<Puntaje> tablaDeHonor() {
+        return this.puntajeDAO.mejores(4); 
+    }
 }

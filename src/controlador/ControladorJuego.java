@@ -1,9 +1,16 @@
 package controlador;
 
 import modelo.politicas.ReglasDia;
+
+import java.util.List;
+
+import javax.swing.SwingWorker;
+
 import modelo.Partida;
+import modelo.Puntaje;
 import modelo.Ingresantes.Ingresante;
 import vista.GestorVista;
+import vista.VistaRanking;
 
 public class ControladorJuego {
     private final GestorVista ui;
@@ -21,6 +28,8 @@ public class ControladorJuego {
         });
 
         this.ui.alHacerClicEnSalir(evento -> System.exit(0));
+
+        this.ui.alHacerClickEnPuntaje(evento -> this.verMejores());
 
         this.ui.alHacerClicEnTutorial(evento -> {
             this.ui.ocultarMenuPrincipal();
@@ -145,5 +154,30 @@ public class ControladorJuego {
             this.ui.mostrarError(mensaje);
         }
 
+    }
+
+    private void verMejores() {
+        new SwingWorker<List<Puntaje>, Void>() {
+            
+            @Override
+            protected List<Puntaje> doInBackground() {
+                return partida.tablaDeHonor(); 
+            }
+            
+            @Override
+            protected void done() {
+                try {
+                    // Volvemos al hilo de la interfaz para dibujar los componentes[cite: 4]
+                    List<Puntaje> mejores = get(); 
+                    
+                    // Instanciamos el diálogo pasándole la lista obtenida
+                    VistaRanking tabla = new VistaRanking(ui.getVentanaMenu(), mejores);
+                    tabla.mostrar();
+                    
+                } catch (Exception ex) {
+                    System.out.println("Error al cargar puntajes: " + ex.getMessage());
+                }
+            }
+        }.execute();
     }
 }

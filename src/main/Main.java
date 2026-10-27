@@ -40,6 +40,7 @@ public class Main {
 
                 // 2. VISTAS
                 MenuPrincipal menu = new MenuPrincipal();
+                VistaRanking vistaRanking = new VistaRanking(menu.getVentana(), puntajeDAO.mejores(4));
                 VistaVentanilla ventanilla = new VistaVentanilla();
                 VistaMesaDocumentos vistaMesa = new VistaMesaDocumentos();
                 VistaContadorIngresantes vistaContador = new VistaContadorIngresantes();
@@ -57,7 +58,7 @@ public class Main {
                 VistaInterrogatorio vistaInterrogatorio = new VistaInterrogatorio(vistaPrincipal.getVentana());
                 VistaAnimacionSello vistaSello = new VistaAnimacionSello(vistaPrincipal.getVentana().getLayeredPane());
 
-                GestorVista ui = new GestorVista(menu, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, 
+                GestorVista ui = new GestorVista(menu, vistaRanking, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, 
                     fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio, vistaSello, vistaPuntaje);
                 
                     // 3. CONTROLADOR
