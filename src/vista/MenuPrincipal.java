@@ -46,8 +46,8 @@ public class MenuPrincipal {
         int altoBotonSalir = (int) (altoPantalla * 0.075);
         int posXSalir = (int) (anchoPantalla * 0.94);
         int posYSalir = (int) (altoPantalla * 0.020);
-        int posXPuntaje = (int) (altoPantalla * 0.100);
-        int posYPuntaje = (int) (altoPantalla * 0.70);
+        int posXPuntaje = (int) (altoPantalla * 0.800);
+        int posYPuntaje = (int) (altoPantalla * 0.75);
 
         // Se crean los botones utilizando las imágenes requeridas
         this.btnJugar = crearBotonConImagen("assets/imagenes/botones/boton_jugar.png", posXJugar, posY, anchoBoton, altoBoton);
