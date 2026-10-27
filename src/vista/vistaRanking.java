@@ -14,7 +14,7 @@ public class VistaRanking {
     //El constructor recibe la ventana del menú para superponerse, y la lista ya cargada
     public VistaRanking(JFrame ventanaPadre, List<Puntaje> listaPuntajes) {
 
-        this.dialogoRanking = new JDialog(ventanaPadre, true); 
+        this.dialogoRanking = new JDialog(ventanaPadre, false); 
         this.dialogoRanking.setUndecorated(true);
         this.dialogoRanking.setBackground(new Color(0, 0, 0, 0)); //Fondo invisible
         
