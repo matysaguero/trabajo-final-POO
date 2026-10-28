@@ -14,13 +14,12 @@ public class VistaAnimacionSello {
     }
 
     public void reproducir(boolean aceptado, VistaMesaDocumentos mesa, Runnable alTerminar) {
-        // 1. CARGAMOS LA IMAGEN ÚNICA DE LA MANO
         int anchoMano = 250;
         int altoMano = 350;
         ImageIcon iconoMano = cargarIcono("assets/imagenes/sello/mano_sello.png", anchoMano, altoMano);
         if (iconoMano != null) this.lblManoSello.setIcon(iconoMano);
 
-        // 2. BUSCAMOS DÓNDE ESTÁ EL DOCUMENTO EN LA PANTALLA
+        // Buscamos la posición del documento principal en la mesa
         JPanel panelDoc = mesa.obtenerDocumentoPrincipal();
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         
@@ -31,7 +30,7 @@ public class VistaAnimacionSello {
             xDestino = mesa.getPanelDocumentos().getX() + panelDoc.getX() + (panelDoc.getWidth() / 2) - (anchoMano / 2) + 50;
             yDestino = mesa.getPanelDocumentos().getY() + panelDoc.getY() + (panelDoc.getHeight() / 2) - (altoMano / 2) + 50;
         } else {
-            // Si el ingresante no trajo documentos (ej. Lázaro), estampamos en el medio de la mesa
+            // Si el ingresante no trajo documentos estampamos en el medio de la mesa
             xDestino = (int) (pantalla.width * 0.40);
             yDestino = (int) (pantalla.height * 0.35);
         }
@@ -56,26 +55,23 @@ public class VistaAnimacionSello {
                 this.lblManoSello.setLocation(xDestino, actualY);
                 
             } else if (frame[0] == framesBajada) {
-                // FASE 2 (IMPACTO EXACTO): Insertar la marca visual en el documento
+                // FASE 2: Insertar la marca visual en el documento
                 if (panelDoc != null) {
                     String rutaMarca = aceptado ? "assets/imagenes/sello/sello_verde.png" 
                                                 : "assets/imagenes/sello/sello_rojo.png";
                     
-                    // Tamaño de la mancha que deja el sello (ajusta a tu gusto)
                     JLabel lblMarca = new JLabel(cargarIcono(rutaMarca, 200, 200)); 
                     
-                    // Centramos la marca dentro del pasaporte (o DNI)
                     int marcaX = (panelDoc.getWidth() / 2) - 60;
                     int marcaY = (panelDoc.getHeight() / 2) + 50;
                     lblMarca.setBounds(marcaX, marcaY, 120, 120);
                     
-                    // El "0" asegura que el sello quede por encima de la foto y las letras del documento
                     panelDoc.add(lblMarca, 0); 
                     panelDoc.repaint();
                 }
                 
             } else if (frame[0] <= framesBajada + framesPausa) {
-                // FASE 3: Pausa (se está apoyando)
+                // FASE 3: Pausa 
             } else if (frame[0] <= framesBajada + framesPausa + framesSubida) {
                 // FASE 4: La mano se retira
                 float progreso = (float) (frame[0] - framesBajada - framesPausa) / framesSubida;
