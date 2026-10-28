@@ -188,10 +188,8 @@ public class Partida {
     }
 
     // Se define nuevo método para poder cerrar el sello y que la partida vuelva al estado anterior.
-    public void cancelarDecision(){
-        if (this.estado instanceof EstadoSelloAbierto){
-            cambiarEstado(new EstadoAtendiendoIngresante());
-        }
+    public void cancelarDecision() throws Exception {
+        this.estado.cancelarDecision(this);
     }
 
     public Ingresante getIngresanteActual() {

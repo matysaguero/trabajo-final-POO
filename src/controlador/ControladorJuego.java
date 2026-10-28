@@ -67,7 +67,11 @@ public class ControladorJuego {
 
         this.ui.alHacerClicEnVolverDecision(evento -> {
             this.ui.ocultarVentanaDecision();
-            this.partida.cancelarDecision();
+            try {
+                this.partida.cancelarDecision();
+            } catch (Exception e) {
+                this.manejarErrorEstado(new IllegalStateException("No se pudo cancelar la decisión: " + e.getMessage()));
+            }
         });
 
         this.ui.alHacerClicEnAceptar(evento -> this.procesarVeredicto(true));
