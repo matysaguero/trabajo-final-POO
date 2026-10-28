@@ -32,7 +32,7 @@ public class PruebaRanking {
             tabla.mostrar();
             
             System.out.println("El ranking se cerró correctamente.");
-            System.exit(0);
+            
         });
     }
 }
