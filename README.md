@@ -102,7 +102,7 @@ Aplicamos observer a las notificaciones de los cambios del juego, conectando el 
 Usamos state porque el jugador siempre tiene los mismos controles disponibles: megáfono, pasaporte, sello y los botones Aceptar/Rechazar. Lo que cambia es qué debe pasar cuando los usa, según la fase de la atención. Sin state, partida o controladorjuego tendrían un if/switch sobre una bandera en cada acción, y cada fase nueva obligaría a tocar todos esos métodos. Con state, partida actúa como contexto y delega en estadopartida.
 
 ### Patrón de Diseño Creacionales
--Factory Method
+- Simple Factory
 <img width="1704" height="1214" alt="Frontier Factory Fabrica Vista de Documentos" src="https://github.com/user-attachments/assets/b14a9d45-5a17-44cf-9e1f-1c97912b2fb3" />
 <img width="1740" height="1080" alt="Frontier - Factory Fabrica de Ingresantes" src="https://github.com/user-attachments/assets/4a8ce7d5-a354-44d1-91af-567894980fd4" />
 Se implementó este patrón creacional para gestionar la instanciación dinámica de los componentes visuales (Vistas) correspondientes a los Documentos y los Ingresantes. Dado que la variedad de personajes y papeles a renderizar varía constantemente en tiempo de ejecución durante cada turno, la fábrica centraliza la creación de los paneles de Java Swing.
