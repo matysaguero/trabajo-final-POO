@@ -122,7 +122,7 @@ public class Escenario {
         Image imagenSalirEscalada = iconoSalir.getImage().getScaledInstance(anchoBotonSalir,altoBotonSalir,Image.SCALE_REPLICATE);
         this.btnSalir.setIcon(new ImageIcon(imagenSalirEscalada));
 
-        int anchoFecha = (int) (tamanoPantalla.width * 0.061);
+        int anchoFecha = (int) (tamanoPantalla.width * 0.062);
         int altoFecha = (int) (tamanoPantalla.height * 0.035);
         int posXFecha = (int) (tamanoPantalla.width * 0.002);
         int posYFecha = (int) (tamanoPantalla.height * 0.969);
@@ -168,7 +168,7 @@ public class Escenario {
         VistaReloj relojMesa = new VistaReloj(            
             (int) (tamanoPantalla.width * 0.257),  // X
             (int) (tamanoPantalla.height * 0.91), // Y
-            (int) (tamanoPantalla.width * 0.055), // Ancho
+            (int) (tamanoPantalla.width * 0.060), // Ancho
             (int) (tamanoPantalla.height * 0.07) // Alto);
         );
         panelFondo.add(relojMesa.getComponente());
