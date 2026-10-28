@@ -42,7 +42,7 @@ public class Resolutor {
         }
         for (PoliticaFronteriza politica : politicas) {
             if (!politica.esValido(ingresante)) {
-                return politica;
+                return politica; // Retorna la política que falló
             }
         }
         return null;
