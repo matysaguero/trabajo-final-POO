@@ -54,7 +54,7 @@ public class VistaTutorial {
         // --- BOTÓN VOLVER ---
         int anchoBotonVolver = (int) (anchoPantalla * 0.10);
         int altoBotonVolver = (int) (altoPantalla * 0.07);
-        int posYVolver = (int) (altoPantalla * 0.85); 
+        int posYVolver = (int) (altoPantalla * 0.90); 
         int posXVolver = (int) (anchoPantalla * 0.05); 
         this.btnVolver = crearBotonConImagen("assets/imagenes/botones/boton_volver.png", posXVolver, posYVolver, anchoBotonVolver, altoBotonVolver);
         this.panelFondo.add(this.btnVolver);

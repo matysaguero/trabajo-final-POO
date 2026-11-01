@@ -10,6 +10,7 @@ import vista.GestorVista;
  *  - Vista  -> Modelo: la vista informa qué pantalla muestra; el modelo decide si ahí suena música.
  *  - Modelo -> Vista:  cuando cambia el ON/OFF, el modelo avisa y la vista redibuja los botones.
  */
+
 public class ControladorAudio {
 
     private final GestorVista ui;
