@@ -11,9 +11,6 @@ import modelo.documentos.Documento;
 
 public abstract class Ingresante { // Añadi abstract porque al usar el metodo "public abstract String responderInterrogatorio()" y colocarlo en "Enemigo.java" es una condicion obligatoria aclarar que ahora la clase "ingreante.java" es abstracta. --07/09/26 , 20:48hs
     private String nombreDeclarado;
-    private int alturaVisual;
-    private int pesoEnBalanza;
-    private Double reputacion;
     private ArrayList<Documento> documentos;    
     private TipoIngresante tipo; 
     private TipoRaza raza;
@@ -22,24 +19,29 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     private String rutaImagen;
     private String motivoVisita;
 
-    public Ingresante(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen, String motivoVisita){
+    public Ingresante(String nombreDeclarado, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen, String motivoVisita){
         if (nombreDeclarado == null || nombreDeclarado.isEmpty()){
             throw new IllegalArgumentException("El nombre declarado no puede ser nulo ni vacio.");
         }
-        if (alturaVisual <= 0){
-            throw new IllegalArgumentException("La altura declarada no puede ser cero ni negativa.");
+        
+        if (tipo == null) {
+            throw new IllegalArgumentException("El tipo de ingresante no puede ser nulo.");
         }
-        if (pesoEnBalanza <= 0){
-            throw new IllegalArgumentException("El peso no puede ser cero ni negativo.");
+
+        if (raza == null) {
+            throw new IllegalArgumentException( "La raza del ingresante no puede ser nula.");
         }
-        if (reputacion <= 0) {
-            throw new IllegalArgumentException("La reputacion debe ser mayor a 0 para poder manejar de manera mas sencilla la gestion de esta.");
+
+        if (clan == null) {
+            throw new IllegalArgumentException("El clan del ingresante no puede ser nulo.");
         }
+
+        if (ciudad == null) {
+            throw new IllegalArgumentException("La ciudad del ingresante no puede ser nula.");
+        }
+
+
         this.nombreDeclarado = nombreDeclarado;
-        this.alturaVisual = alturaVisual;
-        this.pesoEnBalanza = pesoEnBalanza;
-        this.reputacion = reputacion;
-        //this.documentos = documentos;
         this.tipo = tipo;
         this.raza= raza;
         this.clan = clan;
@@ -58,14 +60,6 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     
     public String getNombreDeclarado(){
         return this.nombreDeclarado;
-    }
-
-    public int getAlturaVisual(){
-        return this.alturaVisual;
-    }
-
-    public int getPesoEnBalanza(){
-        return this.pesoEnBalanza;
     }
 
     public TipoIngresante getTipoIngresante(){
@@ -97,15 +91,6 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     }
     public abstract String darPresentacion();
     public abstract boolean esAmenaza();
-
-    //Se agrega a la clse abstracta tipodeIngresante como atrbuto, en el constructor y dentro de mostrarDetalle() 25/8/26 21:20pm.
-    
- // Métodos abstractos para la interacción, comentados porque dan problemas, necesito instanciarlos en clases hijas y no estan desarrollados todavia.
-
-//COMO APLICAR METODOS EN ESTE TIPO DE JUEGO?
-
- /*public abstract String darPresentacion();
-*/
 
 }
 

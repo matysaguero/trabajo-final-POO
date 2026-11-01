@@ -9,8 +9,6 @@ public class VistaConsola {
         System.out.println();
         System.out.println("===== NUEVO INGRESANTE =====");
         System.out.println("Nombre: " + ingresante.getNombreDeclarado());
-        System.out.println("Altura: " + ingresante.getAlturaVisual());
-        System.out.println("Peso: " + ingresante.getPesoEnBalanza());
         System.out.println("Tipo: " + ingresante.getTipoIngresante());
         System.out.println("Raza: " + ingresante.getRaza());
         System.out.println("Clan: " + ingresante.getClan());

@@ -12,8 +12,8 @@ public class Enemigo extends Ingresante{
 
     private boolean portaBomba;
 
-    public Enemigo(String nombreDeclarado, int alturaVisual, int pesoEnBalanza, double reputacion, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen, String motivoVisita, boolean portaBomba){
-        super(nombreDeclarado, alturaVisual, pesoEnBalanza, reputacion, documentos, tipo, raza, clan, ciudad, rutaImagen, motivoVisita);
+    public Enemigo(String nombreDeclarado, ArrayList<Documento> documentos, TipoIngresante tipo, TipoRaza raza, TipoClan clan, TipoCiudad ciudad, String rutaImagen, String motivoVisita, boolean portaBomba){
+        super(nombreDeclarado, documentos, tipo, raza, clan, ciudad, rutaImagen, motivoVisita);
         this.portaBomba = portaBomba;
     }
 
