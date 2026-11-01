@@ -25,6 +25,9 @@ public class Escenario {
 
     // Botón invisible para interrogar al ingresante
     private final BotonInvisible btnInterrogar;;
+
+    // NUEVO: botón de música ON/OFF
+    private final BotonMusica btnMusica;
     
 
     public Escenario(VistaMesaDocumentos vistaMesa, VistaVentanilla ventanilla, VistaContadorIngresantes contador) {
@@ -172,6 +175,10 @@ public class Escenario {
             (int) (tamanoPantalla.height * 0.07) // Alto);
         );
         panelFondo.add(relojMesa.getComponente());
+
+        // NUEVO: botón de música ON/OFF (solo vista; el controlador le registra el listener)
+        this.btnMusica = new BotonMusica();
+        panelFondo.add(this.btnMusica);
     }
 
     public void mostrar() {
@@ -208,5 +215,9 @@ public class Escenario {
 
     public JButton getBtnInterrogar() { 
         return this.btnInterrogar;
+    }
+
+    public BotonMusica getBtnMusica() {
+        return this.btnMusica;
     }
 }

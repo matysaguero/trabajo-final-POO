@@ -12,6 +12,8 @@ public class MenuPrincipal {
     private final JButton btnTutorial;
     private final JButton btnSalir;
     private final JButton btnPuntaje;
+    // NUEVO: botón de música ON/OFF
+    private final BotonMusica btnMusica;
 
     public MenuPrincipal() {
         this.ventana = new JFrame("Frontier - Menú Principal");
@@ -61,6 +63,10 @@ public class MenuPrincipal {
         panelFondo.add(this.btnSalir);
         panelFondo.add(this.btnPuntaje);
 
+        // NUEVO: botón de música ON/OFF (solo vista; el controlador le registra el listener)
+        this.btnMusica = new BotonMusica();
+        panelFondo.add(this.btnMusica);
+
         this.ventana.setContentPane(panelFondo);
     
     }
@@ -93,5 +99,6 @@ public class MenuPrincipal {
     public JButton getBtnTutorial() { return this.btnTutorial; }
     public JButton getBtnSalir() { return this.btnSalir;}
     public JButton getBtnPuntaje() { return this.btnPuntaje; }
+     public BotonMusica getBtnMusica() { return this.btnMusica; }
 
 }

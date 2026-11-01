@@ -5,6 +5,8 @@ import modelo.ResultadoDecision;
 import modelo.TipoClan;
 import modelo.TipoFinPartida;
 import modelo.Ingresantes.Ingresante;
+import modelo.audio.ObservadorAudio;
+import modelo.audio.PantallaJuego;
 import modelo.documentos.Documento;
 import modelo.politicas.ReglasDia;
 import java.awt.event.ActionListener;
@@ -14,8 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.util.List;
+import java.util.function.Consumer;
 
-public class GestorVista implements ObservadorPartida {
+public class GestorVista implements ObservadorPartida, ObservadorAudio {
     private final MenuPrincipal menu;
     private final VistaRanking vistaRanking;
     private final Escenario escenario;
@@ -36,6 +39,11 @@ public class GestorVista implements ObservadorPartida {
     private final VistaGuardarPuntaje vistaPuntaje;
     private final VistaMensajeExito vistaMensajeExito;
     private TipoFinPartida finPendiente = null; // es una bandera para retrasar la pantalla de Game Over hasta que se cierre el cartel
+    // NUEVO: los botones de música de las tres pantallas con música (se mantienen sincronizados)
+    private final List<BotonMusica> botonesMusica;
+    // NUEVO: quién quiere enterarse de cada cambio de pantalla (la vista no sabe que es el audio)
+    private Consumer<PantallaJuego> oyenteCambioPantalla = pantalla -> { };
+
 
     public GestorVista(MenuPrincipal menu, VistaRanking vistaRanking, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
         VistaFinPartida vistaFinPartida, VistaCartelReputacion cartelReputacion, VistaContadorIngresantes contador, 
@@ -60,11 +68,17 @@ public class GestorVista implements ObservadorPartida {
         this.libroReglas = new VistaLibroReglas(mesa.getPanelDocumentos(), this.fabricaReglas);
         this.vistaPuntaje = vistaPuntaje;
         this.vistaMensajeExito = vistaMensajeExito;
+        this.botonesMusica = List.of(menu.getBtnMusica(), vistaTutorial.getBtnMusica(), escenario.getBtnMusica());
     }
 
-    public void mostrarMenuPrincipal() { this.menu.mostrar(); }
+    public void mostrarMenuPrincipal() { this.menu.mostrar(); 
+                notificarPantalla(PantallaJuego.MENU_PRINCIPAL); // NUEVO
+    }
     public void ocultarMenuPrincipal() { this.menu.ocultar(); }
-    public void mostrarTutorial() { this.vistaTutorial.mostrar(); }
+   
+    public void mostrarTutorial() { this.vistaTutorial.mostrar(); 
+        notificarPantalla(PantallaJuego.TUTORIAL); // NUEVO
+    }
     public void ocultarTutorial() { this.vistaTutorial.ocultar(); }
     
     // Métodos de navegación del tutorial
@@ -77,6 +91,7 @@ public class GestorVista implements ObservadorPartida {
         this.ventanilla.limpiarVentanilla();
         ocultarDocumento();
         this.escenario.mostrar();
+        notificarPantalla(PantallaJuego.JUEGO); // NUEVO
     }
 
     public void mostrarVentanaDecision() { this.vistaDecision.mostrar(); }
@@ -107,6 +122,7 @@ public class GestorVista implements ObservadorPartida {
     public void volverAlMenuDesdeFinPartida() {
         this.vistaFinPartida.ocultar();
         this.menu.mostrar();
+        notificarPantalla(PantallaJuego.MENU_PRINCIPAL); // NUEVO
     }
 
     public void alternarLibroReglas(ReglasDia reglasActivas) {
@@ -168,6 +184,26 @@ public class GestorVista implements ObservadorPartida {
     public void alHacerClicEnVolverFinPartida(ActionListener listener) { this.vistaFinPartida.getBtnVolverMenu().addActionListener(listener); }
     public void alHacerClicEnGuardar(ActionListener listener) { this.vistaFinPartida.getBtnGuardarPuntaje().addActionListener(listener); }
     public void alHacerClicEnInterrogar(ActionListener listener) { this.escenario.getBtnInterrogar().addActionListener(listener); }
+    public void alHacerClicEnMusica(ActionListener listener) { // NUEVO: el mismo listener se registra en los tres botones de música (menú, tutorial y juego)
+        for (BotonMusica boton : this.botonesMusica) {
+            boton.addActionListener(listener);
+        }
+    }
+    // NUEVO: registra al interesado en los cambios de pantalla
+    public void alCambiarPantalla(Consumer<PantallaJuego> oyente) {
+        this.oyenteCambioPantalla = oyente;
+    }
+    private void notificarPantalla(PantallaJuego pantalla) {
+        this.oyenteCambioPantalla.accept(pantalla);
+    }
+    // NUEVO: ObservadorAudio. El modelo avisa que cambió el ON/OFF y la vista redibuja los botones.
+    @Override
+    public void actualizarEstadoMusica(boolean musicaActiva) {
+        for (BotonMusica boton : this.botonesMusica) {
+            boton.mostrarEstado(musicaActiva);
+        }
+    }
+
 
     public void mostrarDialogoInterrogatorio(String dialogo) {
         // 1. Apagamos (deshabilitamos) el botón para que no se pueda spamear
@@ -252,6 +288,7 @@ public class GestorVista implements ObservadorPartida {
         // En vez de cerrar todo y mostrar el fin de la partida instantáneamente, 
         // se guarda como pendiente. La pantalla se mostrará recién al cerrar el cartel.
         this.finPendiente = resultado;
+        notificarPantalla(PantallaJuego.FIN_PARTIDA); // NUEVO
     }
 
     @Override

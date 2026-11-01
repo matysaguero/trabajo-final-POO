@@ -10,6 +10,8 @@ public class VistaTutorial {
     private final JButton btnVolver;
     private final JButton btnAnterior;
     private final JButton btnSiguiente;
+    // NUEVO: botón de música ON/OFF
+    private final BotonMusica btnMusica;
     
     // Arreglo con las rutas de las 7 imágenes del tutorial
     private final String[] paginas = {
@@ -75,6 +77,10 @@ public class VistaTutorial {
         int posXSiguiente = anchoPantalla - anchoFlecha - (int) (anchoPantalla * 0.175);
         this.btnSiguiente = crearBotonConImagen("assets/imagenes/botones/flecha_siguiente_tutorial.png", posXSiguiente, posYFlechas, anchoFlecha, altoFlecha);
         this.panelFondo.add(this.btnSiguiente);
+
+        // NUEVO: botón de música ON/OFF (solo vista; el controlador le registra el listener)
+        this.btnMusica = new BotonMusica();
+        panelFondo.add(this.btnMusica);
 
         this.ventana.setContentPane(this.panelFondo);
     }
@@ -152,4 +158,5 @@ public class VistaTutorial {
     public JButton getBtnVolver() { return this.btnVolver; }
     public JButton getBtnAnterior() { return this.btnAnterior; }
     public JButton getBtnSiguiente() { return this.btnSiguiente; }
+    public BotonMusica getBtnMusica() { return this.btnMusica; }
 }

@@ -1,5 +1,6 @@
 package main;
 
+import controlador.ControladorAudio;
 import controlador.ControladorJuego;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.sql.Connection;
 
 import modelo.*;
 import modelo.Ingresantes.*;
+import modelo.audio.GestorAudio;
 import modelo.politicas.*;
 import vista.*;
 import persistencia.*;
@@ -62,8 +64,14 @@ public class Main {
                 GestorVista ui = new GestorVista(menu, vistaRanking, vistaPrincipal, vistaPopUp, vistaConsola, vistaMesa, ventanilla, 
                     fabricaVistaDocumento, vistaTutorial, vistaFinPartida, vistaCartel, vistaContador, vistaAnuncio, vistaInterrogatorio, vistaSello, vistaPuntaje, vistaMensajeExito);
                 
-                    // 3. CONTROLADOR
+                // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
+
+                // NUEVO: sistema de audio global (Singleton del Modelo) y su controlador
+                GestorAudio audio = GestorAudio.getInstancia();
+                ControladorAudio controladorAudio = new ControladorAudio(ui, audio);
+                // NUEVO: al cerrar la aplicación (por la cruz o por System.exit) se libera la línea de audio
+                Runtime.getRuntime().addShutdownHook(new Thread(audio::liberarRecursos, "cierre-audio"));
 
                 // 4. MOSTRAR MENÚ INICIAL
                 menu.mostrar();
