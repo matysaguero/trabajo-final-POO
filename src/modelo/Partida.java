@@ -18,21 +18,26 @@ public class Partida {
     private EstadoPartida estado; //State
     private ReglasDia reglasActuales;
     private PuntajeDAO puntajeDAO;
+    private final FabricaReglasDia fabricaReglas;
 
-    public Partida(GestorReputacion gestor, Resolutor resolutor, ReglasDia reglasActuales, PuntajeDAO puntajeDAO) {
+    public Partida(GestorReputacion gestor, Resolutor resolutor, ReglasDia reglasActuales, PuntajeDAO puntajeDAO, FabricaReglasDia fabricaReglas) {
         if (gestor == null || resolutor == null) {
             throw new IllegalArgumentException("El gestor y el resolutor son obligatorios");
         }
         if (reglasActuales == null) {
             throw new IllegalArgumentException("La partida no puede iniciar sin reglas.");
         }
-        if(puntajeDAO == null) {
+        if (puntajeDAO == null) {
             throw new IllegalArgumentException("La partida no puede iniciar sin puntaje.");
+        }
+        if (fabricaReglas == null) {
+            throw new IllegalArgumentException("La fabrica de reglas es obligatoria.");
         }
         this.gestor = gestor;
         this.resolutor = resolutor;
         this.reglasActuales = reglasActuales;
         this.puntajeDAO = puntajeDAO;
+        this.fabricaReglas = fabricaReglas;
         this.estado = new EstadoPartidaFinalizada();
     }
 
@@ -66,13 +71,8 @@ public class Partida {
         // Reincia la tReputacion
         this.gestor.reiniciar();
         
-        // Elegir aleatoriamente entre las 3 variaciones
-        int variacion = new Random().nextInt(3) + 1; // Genera 1, 2 o 3
-        switch (variacion) {
-            case 1 -> this.reglasActuales = new ReglasVariacion1();
-            case 2 -> this.reglasActuales = new ReglasVariacion2();
-            case 3 -> this.reglasActuales = new ReglasVariacion3();
-        }
+        this.reglasActuales = this.fabricaReglas.crearVariacionAleatoria();
+        
         //Se cargan todas las politicas y reglas que se tendran en cuenta durante el dia
         cargarPoliticasDelDia();
 
@@ -196,10 +196,10 @@ public class Partida {
         return this.ingresanteActual;
     }
 
-    public ReglasDia getReglasDia(){
+    public ReglasDia getReglasDia() {
         if (this.reglasActuales == null) {
-            return new ReglasVariacion1(); 
-        } 
+            return this.fabricaReglas.crearReglaBase();
+        }
         return this.reglasActuales;
     }
 
