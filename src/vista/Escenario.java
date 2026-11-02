@@ -92,12 +92,12 @@ public class Escenario {
         this.btnDocumentos.setBounds(
             (int) (tamanoPantalla.width * 0.073),
             (int) (tamanoPantalla.height * 0.720),
-            (int) (tamanoPantalla.width * 0.051),
+            (int) (tamanoPantalla.width * 0.078),
             (int) (tamanoPantalla.height * 0.100)
         );
 
         // Cargar el PNG.
-        ImageIcon icono = new ImageIcon("assets/imagenes/documentos de identidad/dorso_dni.png");
+        ImageIcon icono = new ImageIcon("assets/imagenes/botones/boton_documentos_ingresante.png");
 
         // Escalar la imagen al tamaño del botón.
         Image imagenEscalada = icono.getImage().getScaledInstance(this.btnDocumentos.getWidth(),this.btnDocumentos.getHeight(),Image.SCALE_REPLICATE);
