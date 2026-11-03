@@ -57,4 +57,10 @@ public class Permiso extends Documento {
         return "Permiso: " + getNombre() + ", Origen: " + getOrigen() + ", Válido: " + isValido() +
                ", DNI: " + dni + ", Ocupación: " + ocupacion + ", Número de Permiso: " + num_permiso + ", Fecha de Vencimiento: " + this.getFechaVencimiento() + ", Clan Emisor: " + clanEmisor;
     }
+
+    @Override
+    public void aportarEvidencias(ResumenDocumental resumen) {
+        resumen.acreditar(RequisitoDocumental.PERMISO);
+        resumen.registrarDniEnPermiso(dni);
+    }
 }

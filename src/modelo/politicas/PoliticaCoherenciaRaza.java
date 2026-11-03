@@ -1,37 +1,30 @@
 package modelo.politicas;
 
 import modelo.Ingresantes.Ingresante;
-import modelo.documentos.DNI;
-import modelo.documentos.Documento;
-import modelo.documentos.Pasaporte;
+//import modelo.documentos.DNI;
+//import modelo.documentos.Documento;
+//import modelo.documentos.Pasaporte;
 
 public class PoliticaCoherenciaRaza extends PoliticaFronteriza {
     private String motivoError = "La raza anatómica no coincide con los documentos";
 
     @Override
     public boolean esValido(Ingresante ingresante) {
+        motivoError ="La raza anatómica no coincide con los documentos";
         String razaReal = ingresante.getRaza().name();
 
-        for (Documento doc : ingresante.getDocumentos()) {
-            String razaDoc = null;
+        for (String razaDoc :ingresante.obtenerResumenDocumental().razasDeclaradas()) {
 
-            // Extraemos la raza según el tipo de documento usando polimorfismo/instanceof
-            if (doc instanceof DNI) {
-                razaDoc = ((DNI) doc).getRaza();
-            } else if (doc instanceof Pasaporte) {
-                razaDoc = ((Pasaporte) doc).getRaza();
-            }
-
-            // Si el documento tiene raza y no coincide con la real del ingresante
-            if (razaDoc != null && !razaDoc.equalsIgnoreCase(razaReal)) {
-                
-                // EASTER EGG: Si es un humano disfrazado de alien con papeles de alien (Caso Xylar)
+            if (!razaDoc.equalsIgnoreCase(razaReal)) {
                 if (razaReal.equals("HUMANO") && razaDoc.equalsIgnoreCase("ALIEN")) {
-                    this.motivoError = "No es humano (en realidad si pero el documento dice lo contrario, terrible boludin)";
-                } else if(razaReal.equals("ALIEN") && razaDoc.equalsIgnoreCase("HUMANO")) {
-                    this.motivoError = "No era un humano, ¿de donde habra sacado esos documentos?";}
-                else {
-                    this.motivoError = "Falsificación: La raza del ingresante no coincide con la registrada";
+
+                    motivoError = "No es humano (en realidad si pero el documento dice lo contrario, terrible boludin)";
+
+                } else if (razaReal.equals("ALIEN")  && razaDoc.equalsIgnoreCase("HUMANO")) {
+                    motivoError = "No era un humano, ¿de donde habra sacado esos documentos?";
+
+                } else {
+                    motivoError = "Falsificación: La raza del ingresante no coincide con la registrada";
                 }
                 return false;
             }
@@ -44,3 +37,14 @@ public class PoliticaCoherenciaRaza extends PoliticaFronteriza {
         return this.motivoError;
     }
 }
+
+/* 
+Explicación del cambio: se eliminan las referencias concretas a DNI y Pasaporte, 
+pero se conservan tus mensajes especiales de rechazo.
+
+Ahora la política pregunta cuáles son las razas declaradas, 
+en lugar de preguntar qué tipo de documento contiene cada una.
+
+Además, motivoError se reinicia al comenzar una evaluación, 
+evitando arrastrar un mensaje anterior si se reutiliza la misma instancia de la política.
+*/

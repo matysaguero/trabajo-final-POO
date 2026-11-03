@@ -2,39 +2,49 @@ package modelo.politicas;
 
 import modelo.Ingresantes.Ingresante;
 import modelo.TipoIngresante;
-import modelo.documentos.DNI;
-import modelo.documentos.Pasaporte;
-import modelo.documentos.Permiso;
+//import modelo.documentos.DNI;
+//import modelo.documentos.Pasaporte;
+//import modelo.documentos.Permiso;
+import modelo.documentos.RequisitoDocumental;
+import modelo.documentos.ResumenDocumental;
 
 public class PoliticaDocumentacionRequerida extends PoliticaFronteriza {
     
-    @Override
+   @Override
     public boolean esValido(Ingresante ingresante) {
-        boolean tieneDNI = false;
-        boolean tienePasaporte = false;
-        boolean tienePermiso = false;
         
-        // Verificamos qué papeles trajo a la mesa
-        for (var doc : ingresante.getDocumentos()) {
-            if (doc instanceof DNI) tieneDNI = true;
-            if (doc instanceof Pasaporte) tienePasaporte = true;
-            if (doc instanceof Permiso) tienePermiso = true;
-        }
-        
-        // Regla base: TODOS necesitan DNI
-        if (!tieneDNI) return false;
-        
-        // Regla extranjeros: Si NO es ciudadano de tu imperio, necesita Pasaporte
-        if (ingresante.getTipoIngresante() != TipoIngresante.CIUDADANO && !tienePasaporte) {
+        ResumenDocumental resumen = ingresante.obtenerResumenDocumental();
+
+        // Todos necesitan DNI.
+        if (!resumen.acredita(RequisitoDocumental.DNI)) {
             return false;
         }
-        
-        // Regla trabajadores: Si ES trabajador, necesita su permiso de trabajo.
-        if (ingresante.getTipoIngresante() == TipoIngresante.TRABAJADOR && !tienePermiso) { 
+
+        TipoIngresante tipo =
+            ingresante.getTipoIngresante();
+
+        // Los no ciudadanos necesitan pasaporte.
+        if (tipo != TipoIngresante.CIUDADANO && !resumen.acredita(RequisitoDocumental.PASAPORTE)) {
+
             return false;
         }
+
+        // Los trabajadores necesitan permiso.
+        if (tipo == TipoIngresante.TRABAJADOR && !resumen.acredita(RequisitoDocumental.PERMISO)) {
+            return false;
+        }
+
         return true;
     }
 
     @Override public String getMotivoRechazo() { return "Falta documentacion requerida"; }
 }
+
+/* 
+Explicación del cambio: reemplazamos la identificación de clases Java 
+por la comprobación de requisitos documentales.
+
+Los if que quedan expresan reglas del negocio, 
+por lo que no hace falta eliminarlos.
+
+*/

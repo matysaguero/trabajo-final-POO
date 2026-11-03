@@ -62,4 +62,12 @@ public class DNI extends Documento {
         return "DNI [Nro: " + nro_dni + ", Raza: " + raza +
                ", Nacimiento: " + this.getFechaNacimiento() + ", Vencimiento: " + this.getFechaVencimiento() + "]";
     }
+
+    @Override
+    public void aportarEvidencias(ResumenDocumental resumen) {
+        resumen.acreditar(RequisitoDocumental.DNI);
+        resumen.registrarNumeroDni(String.valueOf(nro_dni));
+        resumen.registrarRaza(raza);
+        resumen.registrarNacimiento(fecha_nacimiento);
+    }
 }

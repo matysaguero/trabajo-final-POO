@@ -1,6 +1,7 @@
 package modelo.documentos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class Documento {
     private String nombre;
@@ -33,5 +34,18 @@ public abstract class Documento {
     public LocalDate getFechaVencimiento() { return this.vencimiento; }
 
     public abstract String obtenerDetalles();
+
+    public boolean estaVencido(LocalDate fechaActual) {
+        return vencimiento.isBefore(Objects.requireNonNull(fechaActual));
+    }
+
+    public abstract void aportarEvidencias(
+        ResumenDocumental resumen
+    );
+    /* 
+    define un contrato abstracto polimórfico. 
+    Cada clase hija debe implementarlo porque los datos de 
+    DNI, Pasaporte y Permiso son diferentes.
+    */
 
 }

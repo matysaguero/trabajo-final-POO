@@ -262,6 +262,7 @@ public class Partida {
             this.resolutor.agregarPolitica(new PoliticaVencimiento(fechaActual));
             this.resolutor.agregarPolitica(new PoliticaNacimientoValido(fechaActual));
             this.resolutor.agregarPolitica(new PoliticaDocumentacionRequerida());
+            this.resolutor.agregarPolitica(new PoliticaIngresante());
             
             // Políticas dinámicas
             ReglasDia reglas = getReglasDia();

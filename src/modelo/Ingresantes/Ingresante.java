@@ -8,6 +8,7 @@ import modelo.TipoClan;
 import modelo.TipoIngresante;
 import modelo.TipoRaza;
 import modelo.documentos.Documento;
+import modelo.documentos.ResumenDocumental;
 
 public abstract class Ingresante { // Añadi abstract porque al usar el metodo "public abstract String responderInterrogatorio()" y colocarlo en "Enemigo.java" es una condicion obligatoria aclarar que ahora la clase "ingreante.java" es abstracta. --07/09/26 , 20:48hs
     private String nombreDeclarado;
@@ -89,6 +90,22 @@ public abstract class Ingresante { // Añadi abstract porque al usar el metodo "
     public String responderInterrogatorio(){
         return this.motivoVisita;
     }
+
+    public ResumenDocumental obtenerResumenDocumental() {
+    ResumenDocumental resumen = new ResumenDocumental();
+        for (Documento documento : documentos) {
+            documento.aportarEvidencias(resumen);
+        }
+    return resumen;
+    }
+    /* 
+    El ingresante crea un resumen vacío.
+    Recorre sus documentos como objetos de tipo Documento.
+    Invoca aportarEvidencias() en cada documento.
+    Java ejecuta automáticamente el método de la subclase correspondiente.
+    Devuelve el resumen para que lo utilicen las políticas
+    */
+
     public abstract String darPresentacion();
     public abstract boolean esAmenaza();
 

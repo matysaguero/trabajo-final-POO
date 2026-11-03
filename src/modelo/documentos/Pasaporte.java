@@ -62,6 +62,13 @@ public class Pasaporte extends Documento {
             + ", Fecha de Nacimiento: " + this.getFechaNacimiento() + ", Clan emisor: " + getClanEmisor()
                 + ", Vencimiento: " + getFechaVencimiento() + ", Válido: " + isValido();
     }
+
+    @Override
+    public void aportarEvidencias(ResumenDocumental resumen) {
+        resumen.acreditar(RequisitoDocumental.PASAPORTE);
+        resumen.registrarRaza(raza);
+        resumen.registrarNacimiento(fecha_nacimiento);
+    }
 }
 
  
