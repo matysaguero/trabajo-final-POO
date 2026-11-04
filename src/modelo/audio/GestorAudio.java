@@ -53,6 +53,7 @@ public final class GestorAudio {
             Clip nuevo = AudioSystem.getClip();
             nuevo.open(flujo); // carga todo el audio en memoria
             this.clip = nuevo;
+
         } catch (Exception e) {
             System.err.println("[Audio] Música deshabilitada: " + e.getMessage());
         }
