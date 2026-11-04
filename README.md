@@ -110,11 +110,13 @@ Se implementó este patrón creacional para gestionar la instanciación dinámic
 ### Patrón de Diseño Estructural (Facade)
 - Facade (ControladorJuego con GestorVista).
 <img width="719" height="604" alt="image" src="https://github.com/user-attachments/assets/4ea72759-d345-429a-8ce4-0ce6f8963d65" />
+
 GestorVista actúa como fachada para que ControladorJuego pueda gestionar la interfaz sin depender directamente de todas las vistas concretas.
 
--Observer (ObservadorPartida)
+- Observer (ObservadorPartida)
 <img width="557" height="479" alt="image" src="https://github.com/user-attachments/assets/7c16e5ed-0082-4af6-ab13-e3d65918d3d2" />
-- Partida mantiene una lista de observadores y notifica los cambios de la partida mediante ObservadorPartida. GestorVista implementa esa interfaz y actualiza las vistas sin que el modelo dependa directamente de ellas.
+
+Partida mantiene una lista de observadores y notifica los cambios de la partida mediante ObservadorPartida. GestorVista implementa esa interfaz y actualiza las vistas sin que el modelo dependa directamente de ellas.
 
 ### Diagramas de Diseño
 ### **Diagrama de Clases UML (General por tema de simplificacion)**
