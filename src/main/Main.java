@@ -75,7 +75,7 @@ public class Main {
                 Runtime.getRuntime().addShutdownHook(new Thread(audio::liberarRecursos, "cierre-audio"));
 
                 // 4. MOSTRAR MENÚ INICIAL
-                menu.mostrar();
+                ui.mostrarMenuPrincipal();
 
 
 

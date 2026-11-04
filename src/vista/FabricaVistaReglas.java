@@ -33,8 +33,7 @@ public class FabricaVistaReglas {
         creadores.put(ReglasVariacion1.class, (reglasDia, x, y) -> crearVistaGenerica(reglasDia, x, y));
         creadores.put(ReglasVariacion2.class, (reglasDia, x, y) -> crearVistaGenerica(reglasDia, x, y));
         creadores.put(ReglasVariacion3.class, (reglasDia, x, y) -> crearVistaGenerica(reglasDia, x, y));
-        
-        //creadores.put(Pasaporte.class, (doc, x, y) -> crearVistaPasaporte((Pasaporte) doc, x, y));
+    
     }
     public JPanel crearVista(ReglasDia reglasDia, int posX, int posY) {
         CreadorVista creador = creadores.get(reglasDia.getClass());
