@@ -68,10 +68,10 @@ public class Main {
                 // 3. CONTROLADOR
                 ControladorJuego controlador = new ControladorJuego(ui, partida);
 
-                // NUEVO: sistema de audio global (Singleton del Modelo) y su controlador
+                // sistema de audio global (Singleton del Modelo) y su controlador
                 GestorAudio audio = GestorAudio.getInstancia();
                 ControladorAudio controladorAudio = new ControladorAudio(ui, audio);
-                // NUEVO: al cerrar la aplicación (por la cruz o por System.exit) se libera la línea de audio
+                // al cerrar la aplicación (por la cruz o por System.exit) se libera la línea de audio
                 Runtime.getRuntime().addShutdownHook(new Thread(audio::liberarRecursos, "cierre-audio"));
 
                 // 4. MOSTRAR MENÚ INICIAL

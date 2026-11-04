@@ -39,10 +39,8 @@ public class GestorVista implements ObservadorPartida, ObservadorAudio {
     private final VistaGuardarPuntaje vistaPuntaje;
     private final VistaMensajeExito vistaMensajeExito;
     private TipoFinPartida finPendiente = null; // es una bandera para retrasar la pantalla de Game Over hasta que se cierre el cartel
-    // NUEVO: los botones de música de las tres pantallas con música (se mantienen sincronizados)
-    private final List<BotonMusica> botonesMusica;
-    // NUEVO: quién quiere enterarse de cada cambio de pantalla (la vista no sabe que es el audio)
-    private Consumer<PantallaJuego> oyenteCambioPantalla = pantalla -> { };
+    private final List<BotonMusica> botonesMusica; // NUEVO: los botones de música de las tres pantallas con música (se mantienen sincronizados)
+    private Consumer<PantallaJuego> oyenteCambioPantalla = pantalla -> { };     // NUEVO: quién quiere enterarse de cada cambio de pantalla (la vista no sabe que es el audio)
 
 
     public GestorVista(MenuPrincipal menu, VistaRanking vistaRanking, Escenario escenario, VistaDecision vistaDecision, VistaConsola consola, VistaMesaDocumentos mesa, VistaVentanilla ventanilla, FabricaVistaDocumento fabrica, VistaTutorial vistaTutorial, 
