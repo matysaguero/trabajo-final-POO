@@ -95,28 +95,31 @@ Desde la pantalla final se puede guardar el puntaje ingresando un nombre. `Punta
 ### Patrón de Diseño de Comporatmiento
 - Observer
 <img width="1441" height="1006" alt="Frontier - Patron Observer" src="https://github.com/user-attachments/assets/7a3810c4-02c1-48d1-96bb-d426fe2dfe4c" />
-Aplicamos observer a las notificaciones de los cambios del juego, conectando el Modelo con la Vista sin romper el encapsulamiento. Cuando el Resolutor evalúa un ingresante, o cuando avanza el reloj de la jornada, el Modelo notifica el cambio. La interfaz de Java Swing (que está "observando" esos datos) escucha el aviso y actualiza las barras de reputación, el dinero o el cronómetro automáticamente.
+- Aplicamos observer a las notificaciones de los cambios del juego, conectando el Modelo con la Vista sin romper el encapsulamiento. Cuando el Resolutor evalúa un ingresante, o cuando avanza el reloj de la jornada, el Modelo notifica el cambio. La interfaz de Java Swing (que está "observando" esos datos) escucha el aviso y actualiza las barras de reputación, el dinero o el cronómetro automáticamente.
 
 - State
 <img width="2015" height="921" alt="Frontier - jerarquia general de Patron State" src="https://github.com/user-attachments/assets/191c3f4c-770f-487f-b0ef-7aee4dc27b9c" />
-Usamos state porque el jugador siempre tiene los mismos controles disponibles: megáfono, pasaporte, sello y los botones Aceptar/Rechazar. Lo que cambia es qué debe pasar cuando los usa, según la fase de la atención. Sin state, partida o controladorjuego tendrían un if/switch sobre una bandera en cada acción, y cada fase nueva obligaría a tocar todos esos métodos. Con state, partida actúa como contexto y delega en estadopartida.
+- Usamos state porque el jugador siempre tiene los mismos controles disponibles: megáfono, pasaporte, sello y los botones Aceptar/Rechazar. Lo que cambia es qué debe pasar cuando los usa, según la fase de la atención. Sin state, partida o controladorjuego tendrían un if/switch sobre una bandera en cada acción, y cada fase nueva obligaría a tocar todos esos métodos. Con state, partida actúa como contexto y delega en estadopartida.
 
 ### Patrón de Diseño Creacionales
 - Simple Factory
-<img width="1704" height="1214" alt="Frontier Factory Fabrica Vista de Documentos" src="https://github.com/user-attachments/assets/b14a9d45-5a17-44cf-9e1f-1c97912b2fb3" />
-<img width="1740" height="1080" alt="Frontier - Factory Fabrica de Ingresantes" src="https://github.com/user-attachments/assets/4a8ce7d5-a354-44d1-91af-567894980fd4" />
-Se implementó este patrón creacional para gestionar la instanciación dinámica de los componentes visuales (Vistas) correspondientes a los Documentos y los Ingresantes. Dado que la variedad de personajes y papeles a renderizar varía constantemente en tiempo de ejecución durante cada turno, la fábrica centraliza la creación de los paneles de Java Swing.
+<img width="919" height="581" alt="image" src="https://github.com/user-attachments/assets/ed227d8e-826e-4ab5-90c7-f2bec62d026b" />
+- Centraliza la creación de los ingresantes y sus documentos, evitando que Partida tenga que construir cada personaje manualmente.
+
+<img width="1252" height="509" alt="image" src="https://github.com/user-attachments/assets/e90312ab-fe7d-42b6-845d-3af2624156a7" />
+- entraliza la construcción de las representaciones gráficas de los documentos, separando su visualización de los datos del modelo.
+  
+<img width="1364" height="567" alt="image" src="https://github.com/user-attachments/assets/1e8fd56d-a271-4240-b739-7e67d2b6a91c" />
+- centraliza la creación de la vista del libro de reglas, utilizando la información de las distintas variaciones de ReglasDia.
 
 ### Patrón de Diseño Estructural (Facade)
 - Facade (ControladorJuego con GestorVista).
 <img width="719" height="604" alt="image" src="https://github.com/user-attachments/assets/4ea72759-d345-429a-8ce4-0ce6f8963d65" />
-
-GestorVista actúa como fachada para que ControladorJuego pueda gestionar la interfaz sin depender directamente de todas las vistas concretas.
+- GestorVista actúa como fachada para que ControladorJuego pueda gestionar la interfaz sin depender directamente de todas las vistas concretas.
 
 - Observer (ObservadorPartida)
 <img width="557" height="479" alt="image" src="https://github.com/user-attachments/assets/7c16e5ed-0082-4af6-ab13-e3d65918d3d2" />
-
-Partida mantiene una lista de observadores y notifica los cambios de la partida mediante ObservadorPartida. GestorVista implementa esa interfaz y actualiza las vistas sin que el modelo dependa directamente de ellas.
+- Partida mantiene una lista de observadores y notifica los cambios de la partida mediante ObservadorPartida. GestorVista implementa esa interfaz y actualiza las vistas sin que el modelo dependa directamente de ellas.
 
 ### Diagramas de Diseño
 ### **Diagrama de Clases UML (General por tema de simplificacion)**
