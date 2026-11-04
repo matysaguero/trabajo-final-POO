@@ -24,7 +24,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsArthur.add(new Permiso( "Sir Arthur", "Husguiard", true,LocalDate.of(2165, 12, 12), "40123101","Comerciante",1001, TipoClan.PUERTO_UMBRAL));
         // PASAPORTE:
-        docsArthur.add(new Pasaporte("Sir Arthur","Hasgard",true,  LocalDate.of(2165, 12, 12), /*Vencimiento*/ LocalDate.of(1990, 5, 10),  /*Nacimiento*/ TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_caballero.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
+        docsArthur.add(new Pasaporte("Sir Arthur","Hasgard",true,  LocalDate.of(2165, 12, 12), /*Vencimiento*/ LocalDate.of(1990, 5, 10),  /*Nacimiento*/ TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_caballero.png",RUTA_PASAPORTE_PU));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Sir Arthur",  TipoIngresante.CIUDADANO, TipoRaza.HUMANO, TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.CABALLERO, docsArthur, false, false, "Vengo a la capital a visitar el mercado."));
 
@@ -35,7 +35,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsZorglub.add(new Permiso("Lázaro", "Lander", false, LocalDate.of(2160, 11, 5), "35890102", "Turista", 1002, TipoClan.PUERTO_UMBRAL));
         // PASAPORTE:
-        docsZorglub.add(new Pasaporte("Lázaro","Lander",false,LocalDate.of(2158, 11, 5),LocalDate.of(1985, 8, 22),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_5.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_viajero2.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
+        docsZorglub.add(new Pasaporte("Lázaro","Lander",false,LocalDate.of(2158, 11, 5),LocalDate.of(1985, 8, 22),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_5.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_viajero2.png",RUTA_PASAPORTE_PU));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Zorglub",  TipoIngresante.TURISTA, TipoRaza.ALIEN, TipoClan.TITAN_DIGITAL, TipoCiudad.LANDER, TipoAspecto.ALIEN, docsZorglub, true, true, "Eh... soy un humano normal haciendo cosas de humanos."));
 
@@ -46,7 +46,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsVance.add(new Permiso("Cmdte. Vance", "Bales", true, LocalDate.of(2160, 12, 7), "38440104", "Cmdte de estación", 1003, TipoClan.UNION_MAGICA));
         // PASAPORTE:
-        docsVance.add(new Pasaporte("Cmdte. Vance","Bales",true,LocalDate.of(2160, 12, 7),LocalDate.of(2040, 10, 30),TipoRaza.CYBORG.name(),"assets/imagenes/huellas/huella_2.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_astronauta.png","assets/imagenes/pasaportes/pasp_um.jpg"));
+        docsVance.add(new Pasaporte("Cmdte. Vance","Bales",true,LocalDate.of(2160, 12, 7),LocalDate.of(2040, 10, 30),TipoRaza.CYBORG.name(),"assets/imagenes/huellas/huella_2.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_astronauta.png",RUTA_PASAPORTE_UM));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Cmdte. Vance",  TipoIngresante.TRABAJADOR, TipoRaza.CYBORG, TipoClan.UNION_MAGICA, TipoCiudad.BALES, TipoAspecto.ASTRONAUTA, docsVance, false, false, "Fui reasignado a esta estación. Vengo por trabajo."));
 
@@ -57,7 +57,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsXylar.add(new Permiso("Xylar", "Lander", false, LocalDate.of(2160, 11, 1), "42110103", "Turista", 1004, TipoClan.TITAN_DIGITAL));
         // PASAPORTE:
-        docsXylar.add(new Pasaporte("Xylar","Lander",false,LocalDate.of(2160, 11, 1),LocalDate.of(1990, 1, 1),TipoRaza.ALIEN.name(),"assets/imagenes/huellas/huella_3.png",TipoClan.TITAN_DIGITAL,"assets/imagenes/foto_doc/carnet_alien_impostor.png","assets/imagenes/pasaportes/pasp_ca.jpg"));
+        docsXylar.add(new Pasaporte("Xylar","Lander",false,LocalDate.of(2160, 11, 1),LocalDate.of(1990, 1, 1),TipoRaza.ALIEN.name(),"assets/imagenes/huellas/huella_3.png",TipoClan.TITAN_DIGITAL,"assets/imagenes/foto_doc/carnet_alien_impostor.png",RUTA_PASAPORTE_CA));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje( "Xylar",  TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.ALIEN_PONELE, docsXylar, false, false, "¡Saludos humano! Digo... colega. Vengo de turismo galáctico."));
 
@@ -75,7 +75,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsAldebaran.add(new Permiso( "Aldebarán", "Hasgard", true, LocalDate.of(2165, 11, 15), "30112106", "Guardián mágico", 1006, TipoClan.UNION_MAGICA));
         // PASAPORTE:
-        docsAldebaran.add(new Pasaporte("Aldebarán","Hasgard",true,LocalDate.of(2165, 11, 15),LocalDate.of(2100, 12, 20),TipoRaza.GUARDIANES.name(), "assets/imagenes/huellas/huella_alien_2.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_2.png","assets/imagenes/pasaportes/pasp_um.jpg"));
+        docsAldebaran.add(new Pasaporte("Aldebarán","Hasgard",true,LocalDate.of(2165, 11, 15),LocalDate.of(2100, 12, 20),TipoRaza.GUARDIANES.name(), "assets/imagenes/huellas/huella_alien_2.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_2.png",RUTA_PASAPORTE_UM));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Aldebarán", TipoIngresante.CIUDADANO, TipoRaza.GUARDIANES, TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_2, docsAldebaran, false, false, "Asistiré a la conferencia anual de la Unión Mágica."));
 
@@ -86,7 +86,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA: 
         docsMalakor.add(new Permiso( "Malakor", "Namek", true, LocalDate.of(2162, 11, 27), "32998107", "Hechicero", 1007, TipoClan.UNION_MAGICA));
         // PASAPORTE:
-        docsMalakor.add(new Pasaporte("Malakor","Namek",true,LocalDate.of(2162, 11, 27),LocalDate.of(2070, 9, 12),TipoRaza.GUARDIANES.name(),"assets/imagenes/huellas/huella_alien_3.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_3.png","assets/imagenes/pasaportes/pasp_um.jpg"));
+        docsMalakor.add(new Pasaporte("Malakor","Namek",true,LocalDate.of(2162, 11, 27),LocalDate.of(2070, 9, 12),TipoRaza.GUARDIANES.name(),"assets/imagenes/huellas/huella_alien_3.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_3.png",RUTA_PASAPORTE_UM));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Malakor", TipoIngresante.TURISTA, TipoRaza.GUARDIANES,TipoClan.UNION_MAGICA, TipoCiudad.NAMEK, TipoAspecto.MAGO_CLAN_3,docsMalakor, true, true, "No tengo por qué darte explicaciones, oficial... pero si insistes, turismo.")); /*Papeles en regla, pero porta una bomba (Enemigo)*/ 
 
@@ -97,7 +97,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsLyra.add(new Permiso("Lyra", "Hasgard", true,LocalDate.of(2160, 12, 20),"44776108", "Prof. de magia", 1008, TipoClan.UNION_MAGICA));  
         // PASAPORTE:
-        docsLyra.add(new Pasaporte("Lyra","Hasgard",true,LocalDate.of(2160, 12, 20),LocalDate.of(2018, 9, 12),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_4.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_4.png","assets/imagenes/pasaportes/pasp_um.jpg"));     
+        docsLyra.add(new Pasaporte("Lyra","Hasgard",true,LocalDate.of(2160, 12, 20),LocalDate.of(2018, 9, 12),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_4.png",TipoClan.UNION_MAGICA,"assets/imagenes/foto_doc/carnet_mago_4.png",RUTA_PASAPORTE_UM));     
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Lyra", TipoIngresante.TRABAJADOR, TipoRaza.HUMANO,TipoClan.UNION_MAGICA, TipoCiudad.HASGARD, TipoAspecto.MAGO_CLAN_4,docsLyra, false, false, "Busco trabajo como profesora en la academia de magia."));
 
@@ -108,7 +108,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsMarco.add(new Permiso("Marco Polo", "Lander", true, LocalDate.of(2165, 3, 15), "37665109", "Explorador", 1009, TipoClan.PUERTO_UMBRAL));
         // PASAPORTE
-        docsMarco.add(new Pasaporte("Marco Polo","Lander",true,LocalDate.of(2165, 3, 15),LocalDate.of(2011, 6, 26),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_5.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_viajero.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
+        docsMarco.add(new Pasaporte("Marco Polo","Lander",true,LocalDate.of(2165, 3, 15),LocalDate.of(2011, 6, 26),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_5.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_viajero.png",RUTA_PASAPORTE_PU));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Marco Polo",  TipoIngresante.TURISTA, TipoRaza.HUMANO, TipoClan.PUERTO_UMBRAL, TipoCiudad.LANDER, TipoAspecto.VIAJERO, docsMarco, false, false, "Vengo a explorar estas tierras. ¡Soy un aventurero!"));
     
@@ -119,7 +119,7 @@ public class FabricaIngresantes {
         // PERMISO DE ENTRADA:
         docsRagnar.add(new Permiso("Ragnar", "Hasgard", true, LocalDate.of(2161, 1, 2), "29334110", "Guerrero", 1010, TipoClan.PUERTO_UMBRAL));
         // PASAPORTE:
-        docsRagnar.add(new Pasaporte("Ragnar","Hasgard",true,LocalDate.of(2161, 1, 2),LocalDate.of(2022, 12, 18),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_1.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_vikingo.png","assets/imagenes/pasaportes/pasp_pu.jpg"));
+        docsRagnar.add(new Pasaporte("Ragnar","Hasgard",true,LocalDate.of(2161, 1, 2),LocalDate.of(2022, 12, 18),TipoRaza.HUMANO.name(),"assets/imagenes/huellas/huella_1.png",TipoClan.PUERTO_UMBRAL,"assets/imagenes/foto_doc/carnet_vikingo.png",RUTA_PASAPORTE_PU));
         // PERSONAJE QUE CONTIENE ESOS DOCUMENTOS:
         plantel.add(crearPersonaje("Ragnar",  TipoIngresante.CIUDADANO, TipoRaza.HUMANO, TipoClan.PUERTO_UMBRAL, TipoCiudad.HASGARD, TipoAspecto.VIKINGO, docsRagnar, false, false, "Vuelvo a mi hogar después de una larga expedición."));
 
